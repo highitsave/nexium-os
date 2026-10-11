@@ -35,7 +35,7 @@ jobs:
           /tmp/dl/bin/python -c "import gdown; gdown.download(id='12vHscmgS7i9-QIgA-aqsGAtw0Mrhknze',output='work/orig.iso',quiet=False)"
           echo 'a6d1002b255ac06be36882e0eca38721ca75df1540e9d87756f6c8fda1e831b0  work/orig.iso' | sha256sum -c -
           test "$(stat -c %s work/orig.iso)" -eq 585717760
-          (cd patched && sha256sum -c SHA256SUMS)
+          (cd patched && sed 's|output/||' SHA256SUMS | sha256sum -c -)
           xorriso -osirrox on -indev patched/nexium-os-1.2-ungoogled-amd64.iso -extract /live/filesystem.squashfs work/new.squashfs
           iso=output/nexium-os-1.2-ungoogled-amd64.iso
           xorriso -indev work/orig.iso -outdev "$iso" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -commit -end
