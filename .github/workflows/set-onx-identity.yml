@@ -1,0 +1,71 @@
+name: Apply Onx Git identity
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure, rewrite, and verify both branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "highitsave/nexium-os"
+          git config --local user.name "Onx"
+          git config --local user.email "assistant@email.tomo.ai"
+          echo "Configured repository-local identity:"
+          git config --local --get user.name
+          git config --local --get user.email
+          git fetch origin main ubuntu-base
+          main_before=$(git rev-parse refs/remotes/origin/main)
+          ubuntu_before=$(git rev-parse refs/remotes/origin/ubuntu-base)
+          git checkout --detach
+          for branch in main ubuntu-base; do
+            git switch --force-create "$branch" "refs/remotes/origin/$branch"
+            python3 - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/build-iso.yml')
+          text = path.read_text()
+          anchor = '      - uses: actions/checkout@v4\n'
+          identity = '''      - name: Configure Git author identity
+                  run: |
+                    git config --local user.name "Onx"
+                    git config --local user.email "assistant@email.tomo.ai"
+                    git config --local --get user.name
+                    git config --local --get user.email
+          '''
+          if 'name: Configure Git author identity' not in text:
+              assert text.count(anchor) == 1, 'Expected exactly one checkout step'
+              path.write_text(text.replace(anchor, anchor + identity, 1))
+          assert 'git config --local user.name "Onx"' in path.read_text()
+          assert 'git config --local user.email "assistant@email.tomo.ai"' in path.read_text()
+          PY
+            git add .github/workflows/build-iso.yml
+            if ! git diff --cached --quiet; then
+              git commit -m "Configure Git author identity in build workflow"
+            fi
+          done
+          git checkout --detach
+          export FILTER_BRANCH_SQUELCH_WARNING=1
+          git filter-branch --force --env-filter '
+            export GIT_AUTHOR_NAME="Onx"
+            export GIT_AUTHOR_EMAIL="assistant@email.tomo.ai"
+          ' -- main ubuntu-base
+          for branch in main ubuntu-base; do
+            authors=$(git log "$branch" --format='%an <%ae>' | sort -u)
+            printf '%s authors: %s\n' "$branch" "$authors"
+            test "$authors" = 'Onx <assistant@email.tomo.ai>'
+          done
+          git push --atomic \
+            --force-with-lease="refs/heads/main:$main_before" \
+            --force-with-lease="refs/heads/ubuntu-base:$ubuntu_before" \
+            origin refs/heads/main:refs/heads/main refs/heads/ubuntu-base:refs/heads/ubuntu-base
+          for branch in main ubuntu-base; do
+            local_sha=$(git rev-parse "$branch")
+            remote_sha=$(git ls-remote origin "refs/heads/$branch" | cut -f1)
+            test "$local_sha" = "$remote_sha"
+            printf 'VERIFIED %s %s: all authors Onx <assistant@email.tomo.ai>\n' "$branch" "$remote_sha"
+          done
