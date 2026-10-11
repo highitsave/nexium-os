@@ -1,0 +1,54 @@
+name: Nexium Phase 2 desktop inspection
+on:
+  push:
+    paths:
+      - .github/workflows/phase2-desktop.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Inspect verified patched desktop
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso
+          mkdir -p work reports
+          iso=$(find source -name '*.iso' -print -quit)
+          echo '9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5  '"$iso" | sha256sum -c -
+          xorriso -osirrox on -indev "$iso" -extract /live/filesystem.squashfs work/source.squashfs
+          sudo unsquashfs -d work/root work/source.squashfs
+          sudo python3 - <<'PY' | tee reports/desktop-inspection.txt
+          import pathlib, re
+          r=pathlib.Path('work/root')
+          print('INSTALLED DESKTOP PACKAGES')
+          for b in (r/'var/lib/dpkg/status').read_text().split('\n\n'):
+              if 'Status: install ok installed' in b and re.search(r'^Package: (.*(?:xorg|xserver|xfce|lxde|lxqt|openbox|fluxbox|icewm|jwm|pcmanfm|thunar|terminal|xterm|tint2|plank|mate|gnome|python3|tk|nexium).*)$',b,re.M):
+                  print('\n'.join(x for x in b.splitlines() if x.startswith(('Package:','Version:'))))
+          for directory in ['usr/share/xsessions','etc/xdg/autostart','usr/share/applications','etc/skel','usr/local/bin','opt','etc/systemd/system']:
+              print('DIRECTORY',directory)
+              d=r/directory
+              if d.exists():
+                  for p in d.rglob('*'):
+                      if p.is_file() and p.stat().st_size<16000 and p.suffix in ['.desktop','.sh','.py','.service']:
+                          print('FILE',str(p.relative_to(r)));print(p.read_text(errors='replace'))
+          for name in ['etc/os-release','etc/X11/default-display-manager','etc/X11/Xsession','etc/skel/.xinitrc']:
+              p=r/name
+              if p.exists():print('FILE',name,p.read_text(errors='replace'))
+          PY
+          cat reports/desktop-inspection.txt >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-inspection
+          path: reports/
