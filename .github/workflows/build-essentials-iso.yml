@@ -13,13 +13,22 @@ jobs:
         run: |
           mkdir essentials
           set -o pipefail
-          docker run --rm -i --privileged -v "$GITHUB_WORKSPACE/essentials:/work" -v "$GITHUB_WORKSPACE/assets:/assets:ro" -w /work debian:bookworm bash -euo pipefail <<'BUILD' 2>&1 | tee build-essentials.log
+          docker run --rm -i --privileged -v "$GITHUB_WORKSPACE/essentials:/work" -v "$GITHUB_WORKSPACE/assets:/assets:ro" -v "$GITHUB_WORKSPACE/scripts:/scripts:ro" -w /work debian:bookworm bash -euo pipefail <<'BUILD' 2>&1 | tee build-essentials.log
           export DEBIAN_FRONTEND=noninteractive
           apt-get -o Acquire::Retries=5 update
-          apt-get -o Acquire::Retries=5 install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates gnupg xorriso squashfs-tools isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin dosfstools mtools imagemagick initramfs-tools-core
+          apt-get -o Acquire::Retries=5 install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates gnupg xorriso squashfs-tools isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin dosfstools mtools imagemagick initramfs-tools-core curl xz-utils
           lb config --mode debian --distribution bookworm --architectures amd64 --binary-images iso-hybrid --bootloaders syslinux,grub-efi --archive-areas 'main non-free-firmware' --apt-recommends false --firmware-chroot false --firmware-binary false --linux-flavours amd64 --linux-packages linux-image --initramfs live-boot --debootstrap-options '--variant=minbase' --mirror-bootstrap http://deb.debian.org/debian --mirror-chroot http://deb.debian.org/debian --mirror-chroot-security http://security.debian.org/debian-security --mirror-binary http://deb.debian.org/debian --mirror-binary-security http://security.debian.org/debian-security --bootappend-live 'boot=live components username=nexium hostname=nexium quiet splash loglevel=4 toram'
           printf 'LB_BOOTSTRAP_INCLUDE="gnupg,ca-certificates"\n' >> config/bootstrap
-          printf '%s\n' linux-image-amd64 live-boot live-config live-config-systemd systemd-sysv sudo network-manager wpasupplicant iproute2 iputils-ping ca-certificates gnupg apt plymouth plymouth-themes firmware-amd-graphics firmware-misc-nonfree chromium > config/package-lists/nexium-essentials.list.chroot
+          printf '%s\n' linux-image-amd64 live-boot live-config live-config-systemd systemd-sysv sudo network-manager wpasupplicant iproute2 iputils-ping ca-certificates gnupg apt plymouth plymouth-themes firmware-amd-graphics firmware-misc-nonfree > config/package-lists/nexium-essentials.list.chroot
+          # Reuse only the pinned portablelinux download, SHA256 check and local .deb
+          # packaging block from app-prep; do not install the full application set.
+          mkdir -p config/packages.chroot
+          awk '/^uc_version=/ {copy=1} copy {print} /^printf .*SOURCE ungoogled-chromium / {exit}' /scripts/prepare-apps.sh > prepare-essentials-browser.sh
+          grep -q '^uc_version=' prepare-essentials-browser.sh
+          grep -q '^dpkg-deb ' prepare-essentials-browser.sh
+          grep -q '^printf .*SOURCE ungoogled-chromium ' prepare-essentials-browser.sh
+          bash -euo pipefail prepare-essentials-browser.sh
+          test -s config/packages.chroot/ungoogled-chromium.deb
           mkdir -p config/includes.chroot/etc/apt/apt.conf.d config/includes.chroot/etc/systemd/system/multi-user.target.wants
           printf 'Acquire::Retries "5";\n' > config/includes.chroot/etc/apt/apt.conf.d/80nexium-retries
           ln -s /lib/systemd/system/NetworkManager.service config/includes.chroot/etc/systemd/system/multi-user.target.wants/NetworkManager.service
@@ -89,8 +98,15 @@ jobs:
           lb build
           echo 'NEXIUM: live-build passed'
           isos=(*.iso); test "${#isos[@]}" -eq 1
+          # Record the actual image size even if a subsequent validation fails.
+          stat -c 'ISO: %n; bytes: %s' "${isos[0]}" | tee iso-size.txt
+          awk -v bytes="$(stat -c '%s' "${isos[0]}")" 'BEGIN {printf "ISO size: %.6f MB; %.9f GB; %.6f MiB\n", bytes/1000000, bytes/1000000000, bytes/1048576}' | tee -a iso-size.txt
           xorriso -indev "${isos[0]}" -report_el_torito plain
-          chroot chroot dpkg-query -W linux-image-amd64 live-boot live-config systemd-sysv network-manager apt plymouth plymouth-themes
+          chroot chroot dpkg-query -W linux-image-amd64 live-boot live-config systemd-sysv network-manager apt plymouth plymouth-themes firmware-amd-graphics firmware-misc-nonfree ungoogled-chromium
+          if chroot chroot dpkg-query -W -f='${Status}\n' chromium 2>/dev/null | grep -q 'install ok installed'; then echo 'NEXIUM: unexpected plain Chromium installed'; exit 1; fi
+          chroot chroot ungoogled-chromium --version
+          chroot chroot ldd /opt/ungoogled-chromium/chrome | tee browser-libraries.txt
+          if grep -q 'not found' browser-libraries.txt; then echo 'NEXIUM: ungoogled-chromium has missing shared libraries'; exit 1; fi
           chroot chroot apt-get --version
           chroot chroot nmcli --version
           test -n "$(find chroot/boot -name 'vmlinuz-*' -print -quit)"
@@ -106,12 +122,16 @@ jobs:
           grep -R -E 'boot=live.*splash' binary --include='*.cfg'
           echo 'NEXIUM: Plymouth image, script, daemon, splash boot args and console target checks passed'
           sha256sum "${isos[0]}" > SHA256SUMS
-          stat -c 'ISO: %n; bytes: %s' "${isos[0]}" | tee iso-size.txt
-          if [ "$(stat -c '%s' "${isos[0]}")" -lt 1000000000 ]; then echo 'ISO under 1 GB: PASS' | tee -a iso-size.txt; else echo 'ISO exceeds 1 GB target' | tee -a iso-size.txt; fi
-          echo 'NEXIUM: package and boot-catalog checks passed (hardware boot not tested)'
+          if [ "$(stat -c '%s' "${isos[0]}")" -lt 1000000000 ]; then echo 'ISO under 1 GB: PASS' | tee -a iso-size.txt; else echo 'ISO exceeds 1 GB target: FAIL' | tee -a iso-size.txt; exit 1; fi
+          echo 'NEXIUM: ungoogled-chromium, package and boot-catalog checks passed (hardware boot not tested)'
           echo 'Splash starts in initramfs, not firmware/bootloader. Needs working DRM/framebuffer; missing GPU firmware can prevent graphics. Console boot remains the default; Escape shows details, or remove quiet splash in the boot menu to debug.' > SPLASH-NOTES.txt
           BUILD
-          cat essentials/iso-size.txt essentials/SPLASH-NOTES.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Report ISO size and splash notes
+        if: always()
+        run: |
+          for report in essentials/iso-size.txt essentials/SPLASH-NOTES.txt; do
+            if [ -f "$report" ]; then cat "$report" >> "$GITHUB_STEP_SUMMARY"; fi
+          done
       - name: Upload essentials ISO
         uses: actions/upload-artifact@v4
         with:
