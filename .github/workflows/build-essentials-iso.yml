@@ -1,0 +1,133 @@
+name: Build Nexium Essentials ISO
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg debian-archive-keyring python3-yaml
+      - name: Preserve diversion safety and guard markerless bootstrap cleanup
+        run: |
+          sudo python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import tempfile
+          import os
+          import yaml
+          # Reuse the full workflow's reviewed repair and safety tests verbatim.
+          full = yaml.safe_load(Path('.github/workflows/build-iso.yml').read_text())
+          repair = next(step['run'] for step in full['jobs']['build']['steps']
+                        if step.get('name') == 'Repair the live-build start-stop-daemon diversion')
+          subprocess.run(['bash', '-e', '-c', repair], check=True)
+          script = Path('/usr/lib/live/build/lb_chroot_dpkg')
+          original = script.read_text()
+          start = '\t\t# Restore only the recorded diversion; never delete its saved executable.\n'
+          end = '\n\t\t# Remove dpkg sync configuration'
+          if original.count(start) != 1 or original.count(end) != 1:
+              raise SystemExit('Unreviewed live-build restoration layout')
+          first, last = original.index(start), original.index(end)
+          normal = original[first:last]
+          # An untouched bootstrap chroot has no install marker or diversion.
+          # Do not exit early: the remaining dpkg cleanup must still execute.
+          markerless = '''\t\tssd="$(Chroot chroot dpkg-query -L dpkg | grep -xE '/(usr/)?sbin/start-stop-daemon')"
+          \t\tcase "$ssd" in
+          \t\t\t/sbin/start-stop-daemon|/usr/sbin/start-stop-daemon) ;;
+          \t\t\t*) Echo_error "Ambiguous start-stop-daemon package path"; exit 1 ;;
+          \t\tesac
+          \t\tif [ ! -f "chroot$ssd" ] || [ ! -x "chroot$ssd" ] || [ -L "chroot$ssd" ] ||
+          \t\t   [ -e "chroot$ssd.distrib" ] || [ -L "chroot$ssd.distrib" ] ||
+          \t\t   [ -n "$(Chroot chroot dpkg-divert --listpackage "$ssd")" ]
+          \t\tthen
+          \t\t\tEcho_error "Refusing markerless start-stop-daemon cleanup with unexpected state"
+          \t\t\texit 1
+          \t\tfi
+          \t\tEcho_message "Nexium bootstrap start-stop-daemon intact; no diversion to restore"
+          '''
+          guarded = ('\t\tif [ -e .build/start-stop-daemon.path ] || [ -L .build/start-stop-daemon.path ]; then\n'
+                     + normal + '\t\telse\n' + markerless + '\t\tfi\n')
+          patched = original[:first] + guarded + original[last:]
+          subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
+          wrapper = '''set -e
+          Chroot() {
+            root="$PWD/$1"; shift
+            command="$1"; shift
+            case "$command" in
+              dpkg-query) echo "$TEST_SSD" ;;
+              dpkg-divert) dpkg-divert --root="$root" "$@" ;;
+              *) exit 1 ;;
+            esac
+          }
+          Echo_error() { echo "$@" >&2; }
+          Echo_message() { echo "$@"; }
+          '''
+          for owned in ('/sbin/start-stop-daemon', '/usr/sbin/start-stop-daemon'):
+              with tempfile.TemporaryDirectory() as directory:
+                  work = Path(directory)
+                  root = work / 'chroot'
+                  (root / 'usr/sbin').mkdir(parents=True)
+                  (root / 'sbin').symlink_to('usr/sbin')
+                  (root / 'var/lib/dpkg').mkdir(parents=True)
+                  (root / 'var/lib/dpkg/status').touch()
+                  (work / '.build').mkdir()
+                  binary = root / 'usr/sbin/start-stop-daemon'
+                  binary.write_text('original executable\n')
+                  binary.chmod(0o755)
+                  env = dict(os.environ, TEST_SSD=owned)
+                  subprocess.run(['sh', '-c', wrapper + guarded], cwd=work, env=env, check=True)
+                  if binary.read_text() != 'original executable\n':
+                      raise SystemExit('Markerless cleanup modified the executable')
+                  subprocess.run(['dpkg-divert', '--root=' + str(root), '--rename', '--add', owned], check=True)
+                  binary.symlink_to('/bin/true')
+                  result = subprocess.run(['sh', '-c', wrapper + guarded], cwd=work, env=env)
+                  if result.returncode == 0 or not binary.is_symlink():
+                      raise SystemExit('Markerless cleanup accepted an unrecorded diversion')
+                  if (root / (owned.lstrip('/') + '.distrib')).read_text() != 'original executable\n':
+                      raise SystemExit('Markerless cleanup modified the saved executable')
+          script.write_text(patched)
+          print('Normal diversion repair preserved; markerless bootstrap safety tests passed.')
+          # Preserve the regular-file-only initrd chmod fix.
+          hacks = Path('/usr/lib/live/build/lb_chroot_hacks')
+          original = hacks.read_text()
+          needle = "find chroot/boot -name 'initrd*' -print0 | xargs -r -0 chmod go+r"
+          if original.count(needle) != 1:
+              raise SystemExit('Unreviewed live-build initramfs permissions layout')
+          patched = original.replace(needle, needle.replace(' -name ', ' -type f -name '))
+          subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
+          hacks.write_text(patched)
+          print('Initramfs permissions apply to regular files, not chroot symlinks.')
+          PY
+      - name: Configure isolated Debian bookworm essentials variant
+        run: |
+          mkdir essentials
+          cd essentials
+          lb config --mode debian --distribution bookworm --architectures amd64 --binary-images iso-hybrid --archive-areas main --linux-flavours amd64 --linux-packages linux-image --initramfs live-boot --apt-recommends false --debootstrap-options "--variant=minbase" --mirror-bootstrap http://deb.debian.org/debian --mirror-chroot http://deb.debian.org/debian --mirror-chroot-security http://security.debian.org/debian-security --mirror-binary http://deb.debian.org/debian --mirror-binary-security http://security.debian.org/debian-security --bootappend-live "boot=live components username=nexium hostname=nexium"
+          printf 'LB_BOOTSTRAP_INCLUDE="gnupg"\n' >> config/bootstrap
+          printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot
+          cat > config/package-lists/nexium-essentials.list.chroot <<'PACKAGES'
+          linux-image-amd64
+          live-boot
+          live-config
+          live-config-systemd
+          systemd-sysv
+          sudo
+          network-manager
+          iproute2
+          iputils-ping
+          ca-certificates
+          apt
+          PACKAGES
+          # Automatic wired DHCP; nmcli is available for manual network setup.
+          mkdir -p config/includes.chroot/etc/systemd/system/multi-user.target.wants
+          ln -s /lib/systemd/system/NetworkManager.service config/includes.chroot/etc/systemd/system/multi-user.target.wants/NetworkManager.service
+          # No copied app lists, hooks, local debs, or vendor archives from main.
+          test ! -e config/package-lists/nexium-apps.list.chroot
+      - name: Build FULL Debian bookworm essentials ISO
+        working-directory: essentials
+        run: sudo lb build
+      - name: Upload essentials ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-essentials-bookworm-iso
+          path: essentials/*.iso
+          if-no-files-found: error
