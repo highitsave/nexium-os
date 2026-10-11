@@ -1,4 +1,3 @@
- | tee reports/verification.txt
 import pathlib, hashlib, re, json, os, subprocess
 P=pathlib.Path
 a,b=P('work/original'),P('work/final')

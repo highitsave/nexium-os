@@ -49,17 +49,14 @@ sudo cp -a work/resolv.saved work/root/etc/resolv.conf
 if [ -e work/policy.saved ]; then sudo cp -a work/policy.saved work/root/usr/sbin/policy-rc.d; fi
 # Smoke test must not suppress first-run Welcome in the live image.
 sudo rm -rf work/root/home/nexium/.local/state/nexium work/root/home/nexium/.cache
-# Remove test side effects, but retain reproducible seeded configuration.
 sudo python3 desktop/phase2.py --install work/root > reports/reinstall.txt
 sudo find work/root -type f -path '*/.Xauthority' -delete
 sudo rm -f work/root/tmp/.X*-lock
 sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2
 out=output/nexium-os-1.2-ungoogled-amd64.iso
-# Same squashfs-patch / boot_image replay machinery as patch/repair.
 xorriso -indev work/orig.iso -outdev "$out" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -commit -end
 xorriso -indev "$out" -report_el_torito plain -report_system_area plain > reports/final-boot.txt 2>&1
 xorriso -osirrox on -indev "$out" -extract / work/final
-# Existing repair boot verifier uses these original/final tree names.
 python3 scripts/verify-phase2-boot.py | tee reports/boot-verification.txt
 sudo unsquashfs -d work/final-root work/final/live/filesystem.squashfs
 sudo python3 desktop/phase2.py --verify work/final-root | tee reports/desktop-verification.txt

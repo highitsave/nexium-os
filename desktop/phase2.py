@@ -409,6 +409,8 @@ def materialize():
     # the actual block containing schema, preserving all of its boot checks.
     blocks=source.split("<<'PY'")[1:]
     script=next(b.split('\nPY',1)[0].lstrip('\n') for b in blocks if 'def schema(text):' in b)
+    # Strip the shell pipeline from the copied heredoc header.
+    script = script.split('\n', 1)[1] if script.lstrip().startswith('|') else script
     # Retain everything through the boot verification; follow with Phase 2
     # content checks instead of the repair-only unchanged-squashfs checks.
     end=script.index("print('VALID ISO9660:")
