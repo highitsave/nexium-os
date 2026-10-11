@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y live-build
+      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg
       - name: Repair the live-build start-stop-daemon diversion
         run: |
           sudo python3 - <<'PY'
@@ -124,6 +124,31 @@ jobs:
       - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
       - name: Resolve and prepare the app set for Ubuntu jammy
         run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
+      - name: Prepare binary vendor keyrings and verify APT
+        run: |
+          sudo bash <<'SH'
+          set -euo pipefail
+          keydir=config/includes.chroot/etc/apt/keyrings
+          sources=reports/vendor-sources
+          install -d -m 755 "$keydir" "$sources"
+          for name in mozilla librewolf; do
+            gpg --batch --yes --dearmor -o "$keydir/nexium-$name.gpg" "config/archives/nexium-$name.key.chroot"
+            chmod 644 "$keydir/nexium-$name.gpg"
+            gpg --batch --show-keys "$keydir/nexium-$name.gpg"
+            for stage in chroot binary; do
+              list="config/archives/nexium-$name.list.$stage"
+              grep -qF '[arch=amd64]' "$list"
+              sed -i "s|\[arch=amd64\]|[arch=amd64 signed-by=/etc/apt/keyrings/nexium-$name.gpg]|" "$list"
+              # These keys are scoped by signed-by, not imported as global trust.
+              rm "config/archives/nexium-$name.key.$stage"
+            done
+            install -m 644 "config/archives/nexium-$name.list.chroot" "$sources/nexium-$name.list"
+          done
+          SH
+          docker run --rm \
+            -v "$PWD/config/includes.chroot/etc/apt/keyrings:/etc/apt/keyrings:ro" \
+            -v "$PWD/reports/vendor-sources:/etc/apt/sources.list.d:ro" \
+            ubuntu:22.04 bash -euc 'apt-get -o Dir::Etc::sourceparts=- update; apt-get -o Dir::Etc::sourceparts=- install -y --no-install-recommends ca-certificates; apt-get -o APT::Update::Error-Mode=any update'
       - name: Save package resolution report
         if: always()
         uses: actions/upload-artifact@v4
@@ -135,7 +160,12 @@ jobs:
           if-no-files-found: warn
       - name: Build ISO
         if: ${{ !inputs.validate_only }}
-        run: sudo lb build
+        run: |
+          sudo lb bootstrap
+          # Archives are configured before includes.chroot: seed the scoped keys now.
+          sudo install -d -m 755 chroot/etc/apt/keyrings
+          sudo install -m 644 config/includes.chroot/etc/apt/keyrings/nexium-{mozilla,librewolf}.gpg chroot/etc/apt/keyrings/
+          sudo lb build
       - uses: actions/upload-artifact@v4
         if: ${{ !inputs.validate_only }}
         with:
