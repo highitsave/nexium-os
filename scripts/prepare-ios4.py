@@ -19,10 +19,9 @@ rows=[
 manifest={'source':str(source),'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'source_size':im.size,'resampling':'Pillow LANCZOS','icons':{}}
 for row,names in enumerate(rows):
     for col,name in enumerate(names):
-        # 136x136 source pixels, no gutter or adjacent icon included.
         box=(xs[col],ys[row],xs[col]+136,ys[row]+136)
         crop=im.crop(box).convert('RGBA')
-        # Alpha cleanup follows the existing rounded silhouette; no artwork drawn.
+        # Alpha cleanup follows the existing rounded silhouette; no glyphs drawn.
         mask=Image.new('L',(136*4,136*4),0)
         ImageDraw.Draw(mask).rounded_rectangle((0,0,136*4-1,136*4-1),radius=24*4,fill=255)
         crop.putalpha(mask.resize((136,136),Image.Resampling.LANCZOS))
@@ -31,15 +30,16 @@ for row,names in enumerate(rows):
             dest=base/folder/(name+'.png');dest.parent.mkdir(parents=True,exist_ok=True)
             img=crop if size==136 else crop.resize((size,size),Image.Resampling.LANCZOS)
             img.save(dest)
+            with Image.open(dest) as check:
+                assert check.size==(size,size) and check.mode=='RGBA',dest
             hashes[folder]=hashlib.sha256(dest.read_bytes()).hexdigest()
         manifest['icons'][name]={'crop_box':box,'sha256':hashes}
 (base/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-
-# Applications absent from the sheet get a documented substitute, not invented art.
 apps=runpy.run_path('desktop/phase2.py')['APPS']
 def choose(key,name,cmd):
+    if key=='trash': return 'blank-gray'
     s=(key+' '+name+' '+cmd).lower()
-    for terms,icon in [(['browser','chromium','firefox'],'safari'),(['files','pcmanfm','file manager'],'utilities-folder'),(['terminal','xterm'],'linen'),(['messages','sms'],'messages'),(['calls','phone'],'phone'),(['settings','preferences'],'settings'),(['editor','mousepad'],'notes'),(['monitor','lxtask'],'stocks'),(['trash'],'blank-gray'),(['vault'],'cydia')]:
+    for terms,icon in [(['browser','chromium','firefox'],'safari'),(['files','pcmanfm','file manager'],'utilities-folder'),(['terminal','xterm'],'linen'),(['messages','sms'],'messages'),(['calls','phone'],'phone'),(['settings','preferences'],'settings'),(['editor','mousepad'],'notes'),(['monitor','lxtask'],'stocks'),(['vault'],'cydia')]:
         if any(t in s for t in terms): return icon
     raise ValueError('No explicit sheet mapping for '+repr((key,name,cmd)))
 mapping={k:choose(k,n,c) for k,n,c,i in apps}
@@ -56,13 +56,12 @@ for size in [64,128]:
 
 The source is `IMG-0875.jpeg`, supplied by Avery with explicit permission to crop it. This is not a vector reconstruction or a bespoke icon pack. Upstream artwork ownership is not claimed. JPEG compression remains in the original pixels.
 
-Run `python3 scripts/prepare-ios4.py` after `desktop/phase2.py --materialize` with Pillow installed. `manifest.json` records exact crop boxes and hashes. All 35 cells are cropped to 136x136, with rounded exterior alpha cleanup only, then resampled with LANCZOS to 128x128 and 64x64. No glyphs or new artwork are drawn.
+Run `python3 scripts/prepare-ios4.py` after `desktop/phase2.py --materialize` with Pillow installed. `manifest.json` records exact crop boxes and hashes. All 35 cells are cropped to 136x136, with rounded exterior alpha cleanup only, then resampled with LANCZOS to 128x128 and 64x64. No glyphs or new artwork are drawn. PNG dimensions and RGBA modes are checked after saving.
 
 Dock substitutions: Files uses Utilities-folder; Terminal uses the blank linen cell; Trash uses the blank gray cell. These are explicitly substitutes because this sheet contains no actual Files, terminal or Trash glyphs. Browser uses Safari, Calls Phone, Messages SMS, Settings gears, Text Editor Notes, System Monitor Stocks, Vault Cydia. Adwaita/hicolor supply any unmapped system icons. Messages, Calls and Vault remain honest coming-soon apps regardless of their icons.
 
 `theme/` installs as `NexiumIOS4`. The existing `branding/icons/supplied/` drop-in hook remains available for a later complete pack. The earlier Mac preview is not sliced or used. 128px exports are not extra detail beyond the source resolution.
 ''')
-# Update the installer idempotently; generated source stays in the repository.
 p=Path('desktop/phase2.py');s=p.read_text()
 marker='    # Install authorized iOS4 crops with manifest tracking.\n'
 if marker not in s:
@@ -97,13 +96,14 @@ new="""    icon_theme=(r/'etc/xdg/nexium/icon-theme').read_text().strip()
     else: print('ICON THEME fallback or supplied pack:',icon_theme)"""
 if old in s:s=s.replace(old,new)
 compile(s,str(p),'exec');p.write_text(s)
-# Wire generated .desktop source too (materialize resets these before this step).
 for k,n,c,i in apps:
     p=Path(f'desktop/dock/applications/nexium-{k}.desktop')
-    text=p.read_text()
-    lines=[('Icon=ios4-'+mapping[k]) if x.startswith('Icon=') else x for x in text.splitlines()]
+    lines=[('Icon=ios4-'+mapping[k]) if x.startswith('Icon=') else x for x in p.read_text().splitlines()]
     p.write_text('\n'.join(lines)+'\n')
-# Contact sheet is an audit aid, not an input to the installed icon theme.
+# Materialization regenerates the old reference-only documentation; update it.
+Path('branding/icons/README.md').write_text('# Nexium icon inputs\n\nThe user-authorized iOS4 sheet is cropped reproducibly under `ios4/`; see its README, mapping and manifest. The earlier Mac preview is not integrated. `supplied/` and `mapping.json` remain a future complete-theme drop-in hook. No ownership of upstream artwork is claimed.\n')
+doc=Path('desktop/README.md')
+doc.write_text(doc.read_text()+'\n\n## iOS4 sheet integration\n\nAfter materializing, run `python3 scripts/prepare-ios4.py` (Pillow required). The resulting `NexiumIOS4` theme uses the supplied JPEG crops at 64px/128px. See `branding/icons/ios4/README.md` for provenance and explicit Files/Terminal/Trash substitutes. These current details supersede earlier reference-only icon notes.\n')
 contact=Image.new('RGB',(8*160,5*172),(25,25,25));draw=ImageDraw.Draw(contact)
 for row,names in enumerate(rows):
     for col,name in enumerate(names):
