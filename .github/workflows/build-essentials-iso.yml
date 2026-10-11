@@ -1,1 +1,132 @@
-{"name":"Build Nexium Essentials ISO","on":{"workflow_dispatch":{}},"permissions":{"contents":"read"},"jobs":{"build":{"runs-on":"ubuntu-latest","timeout-minutes":60,"steps":[{"uses":"actions/checkout@v4"},{"name":"Build isolated essentials with native Debian bookworm tools","run":"mkdir essentials\nset -o pipefail\ndocker run --rm -i --privileged -v \"$GITHUB_WORKSPACE/essentials:/work\" -w /work debian:bookworm bash -euo pipefail <<'BUILD' 2>&1 | tee build-essentials.log\nexport DEBIAN_FRONTEND=noninteractive\napt-get -o Acquire::Retries=5 update\napt-get -o Acquire::Retries=5 install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates gnupg xorriso squashfs-tools isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin dosfstools mtools\nlb config --mode debian --distribution bookworm --architectures amd64 --binary-images iso-hybrid --bootloaders syslinux,grub-efi --archive-areas main --apt-recommends false --firmware-chroot false --firmware-binary false --linux-flavours amd64 --linux-packages linux-image --initramfs live-boot --debootstrap-options '--variant=minbase' --mirror-bootstrap http://deb.debian.org/debian --mirror-chroot http://deb.debian.org/debian --mirror-chroot-security http://security.debian.org/debian-security --mirror-binary http://deb.debian.org/debian --mirror-binary-security http://security.debian.org/debian-security --bootappend-live 'boot=live components username=nexium hostname=nexium'\nprintf 'LB_BOOTSTRAP_INCLUDE=\"gnupg,ca-certificates\"\\n' >> config/bootstrap\nprintf '%s\\n' linux-image-amd64 live-boot live-config live-config-systemd systemd-sysv sudo network-manager wpasupplicant iproute2 iputils-ping ca-certificates gnupg apt > config/package-lists/nexium-essentials.list.chroot\nmkdir -p config/includes.chroot/etc/apt/apt.conf.d config/includes.chroot/etc/systemd/system/multi-user.target.wants\nprintf 'Acquire::Retries \"5\";\\n' > config/includes.chroot/etc/apt/apt.conf.d/80nexium-retries\nln -s /lib/systemd/system/NetworkManager.service config/includes.chroot/etc/systemd/system/multi-user.target.wants/NetworkManager.service\ntest ! -e config/package-lists/nexium-apps.list.chroot\necho 'NEXIUM: configuration passed; optional firmware Contents lookups disabled'\nlb build\necho 'NEXIUM: live-build passed'\nisos=(*.iso); test \"${#isos[@]}\" -eq 1\nxorriso -indev \"${isos[0]}\" -report_el_torito plain\nchroot chroot dpkg-query -W linux-image-amd64 live-boot live-config systemd-sysv network-manager apt\nchroot chroot apt-get --version\nchroot chroot nmcli --version\ntest -n \"$(find chroot/boot -name 'vmlinuz-*' -print -quit)\"\ntest -n \"$(find chroot/boot -name 'initrd.img-*' -print -quit)\"\nsha256sum \"${isos[0]}\" > SHA256SUMS\nstat -c 'ISO: %n; bytes: %s' \"${isos[0]}\" | tee iso-size.txt\nif [ \"$(stat -c '%s' \"${isos[0]}\")\" -lt 1000000000 ]; then echo 'ISO under 1 GB: PASS' | tee -a iso-size.txt; else echo 'ISO exceeds 1 GB target' | tee -a iso-size.txt; fi\necho 'NEXIUM: package and boot-catalog checks passed (hardware boot not tested)'\nBUILD\ncat essentials/iso-size.txt >> \"$GITHUB_STEP_SUMMARY\""},{"name":"Upload essentials ISO","uses":"actions/upload-artifact@v4","with":{"name":"nexium-essentials-bookworm-iso","path":"essentials/*.iso\nessentials/SHA256SUMS\nessentials/iso-size.txt","compression-level":0,"if-no-files-found":"error"}},{"name":"Preserve build diagnostics","if":"always()","uses":"actions/upload-artifact@v4","with":{"name":"nexium-essentials-build-log","path":"build-essentials.log","if-no-files-found":"ignore"}}]}}}
+name: Build Nexium Essentials ISO
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build isolated essentials with native Debian bookworm tools
+        run: |
+          mkdir essentials
+          set -o pipefail
+          docker run --rm -i --privileged -v "$GITHUB_WORKSPACE/essentials:/work" -v "$GITHUB_WORKSPACE/assets:/assets:ro" -w /work debian:bookworm bash -euo pipefail <<'BUILD' 2>&1 | tee build-essentials.log
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get -o Acquire::Retries=5 update
+          apt-get -o Acquire::Retries=5 install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates gnupg xorriso squashfs-tools isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin dosfstools mtools imagemagick initramfs-tools-core
+          lb config --mode debian --distribution bookworm --architectures amd64 --binary-images iso-hybrid --bootloaders syslinux,grub-efi --archive-areas main --apt-recommends false --firmware-chroot false --firmware-binary false --linux-flavours amd64 --linux-packages linux-image --initramfs live-boot --debootstrap-options '--variant=minbase' --mirror-bootstrap http://deb.debian.org/debian --mirror-chroot http://deb.debian.org/debian --mirror-chroot-security http://security.debian.org/debian-security --mirror-binary http://deb.debian.org/debian --mirror-binary-security http://security.debian.org/debian-security --bootappend-live 'boot=live components username=nexium hostname=nexium quiet splash loglevel=4'
+          printf 'LB_BOOTSTRAP_INCLUDE="gnupg,ca-certificates"\n' >> config/bootstrap
+          printf '%s\n' linux-image-amd64 live-boot live-config live-config-systemd systemd-sysv sudo network-manager wpasupplicant iproute2 iputils-ping ca-certificates gnupg apt plymouth plymouth-themes > config/package-lists/nexium-essentials.list.chroot
+          mkdir -p config/includes.chroot/etc/apt/apt.conf.d config/includes.chroot/etc/systemd/system/multi-user.target.wants
+          printf 'Acquire::Retries "5";\n' > config/includes.chroot/etc/apt/apt.conf.d/80nexium-retries
+          ln -s /lib/systemd/system/NetworkManager.service config/includes.chroot/etc/systemd/system/multi-user.target.wants/NetworkManager.service
+          # Keep the existing console boot. Plymouth is cosmetic, not a boot dependency.
+          ln -s /lib/systemd/system/multi-user.target config/includes.chroot/etc/systemd/system/default.target
+          theme=config/includes.chroot/usr/share/plymouth/themes/nexium
+          mkdir -p "$theme" config/includes.chroot/etc/initramfs-tools/conf.d config/includes.chroot/etc/initramfs-tools/hooks config/hooks/normal
+          # Preserve the supplied artwork; fit without cropping or distorting its text.
+          convert /assets/A-polished-realistic-boot.jpeg -auto-orient -resize 1920x1080 -background '#f5edd7' -gravity center -extent 1920x1080 "PNG24:$theme/boot-splash.png"
+          identify "$theme/boot-splash.png"
+          cat > "$theme/nexium.plymouth" <<'THEME'
+          [Plymouth Theme]
+          Name=Nexium
+          Description=Nexium heavenly boot splash
+          ModuleName=script
+          [script]
+          ImageDir=/usr/share/plymouth/themes/nexium
+          ScriptFile=/usr/share/plymouth/themes/nexium/nexium.script
+          THEME
+          cat > "$theme/nexium.script" <<'SCRIPT'
+          Window.SetBackgroundTopColor(0.961, 0.929, 0.843);
+          Window.SetBackgroundBottomColor(0.961, 0.929, 0.843);
+          splash_image = Image("boot-splash.png");
+          splash_sprite = Sprite();
+          fun refresh_callback () {
+              screen_width = Window.GetWidth();
+              screen_height = Window.GetHeight();
+              scale_x = screen_width / splash_image.GetWidth();
+              scale_y = screen_height / splash_image.GetHeight();
+              scale = scale_x;
+              if (scale_y < scale) scale = scale_y;
+              scaled_image = splash_image.Scale(splash_image.GetWidth() * scale, splash_image.GetHeight() * scale);
+              splash_sprite.SetImage(scaled_image);
+              splash_sprite.SetX((screen_width - scaled_image.GetWidth()) / 2);
+              splash_sprite.SetY((screen_height - scaled_image.GetHeight()) / 2);
+          }
+          Plymouth.SetRefreshFunction(refresh_callback);
+          SCRIPT
+          printf 'FRAMEBUFFER=y\n' > config/includes.chroot/etc/initramfs-tools/conf.d/nexium-splash
+          # Include available KMS drivers, but never force-load a missing driver or use nomodeset.
+          # Firmware remains optional as in the existing essentials build. Hardware may fall back to console.
+          cat > config/includes.chroot/etc/initramfs-tools/hooks/nexium-kms <<'KMS'
+          #!/bin/sh
+          set -e
+          case "${1:-}" in prereqs) exit 0 ;; esac
+          . /usr/share/initramfs-tools/hook-functions
+          for module in simpledrm efifb vesafb bochs virtio_gpu qxl i915 amdgpu radeon nouveau; do
+              if modinfo -k "$version" "$module" >/dev/null 2>&1; then
+                  manual_add_modules "$module"
+              fi
+          done
+          KMS
+          chmod +x config/includes.chroot/etc/initramfs-tools/hooks/nexium-kms
+          cat > config/hooks/normal/0900-nexium-plymouth.hook.chroot <<'HOOK'
+          #!/bin/sh
+          set -eu
+          plymouth-set-default-theme nexium
+          update-initramfs -u -k all
+          test "$(plymouth-set-default-theme)" = nexium
+          test -s /usr/share/plymouth/themes/nexium/boot-splash.png
+          test -n "$(find /usr/lib -path '*/plymouth/script.so' -print -quit)"
+          echo 'NEXIUM: Plymouth default theme and initramfs regeneration passed'
+          HOOK
+          chmod +x config/hooks/normal/0900-nexium-plymouth.hook.chroot
+          test ! -e config/package-lists/nexium-apps.list.chroot
+          echo 'NEXIUM: configuration passed; optional firmware Contents lookups disabled'
+          lb build
+          echo 'NEXIUM: live-build passed'
+          isos=(*.iso); test "${#isos[@]}" -eq 1
+          xorriso -indev "${isos[0]}" -report_el_torito plain
+          chroot chroot dpkg-query -W linux-image-amd64 live-boot live-config systemd-sysv network-manager apt plymouth plymouth-themes
+          chroot chroot apt-get --version
+          chroot chroot nmcli --version
+          test -n "$(find chroot/boot -name 'vmlinuz-*' -print -quit)"
+          test -n "$(find chroot/boot -name 'initrd.img-*' -print -quit)"
+          test "$(chroot chroot plymouth-set-default-theme)" = nexium
+          test "$(readlink chroot/etc/systemd/system/default.target)" = /lib/systemd/system/multi-user.target
+          for initrd in chroot/boot/initrd.img-*; do
+              lsinitramfs "$initrd" > initramfs-files.txt
+              grep 'usr/share/plymouth/themes/nexium/boot-splash.png' initramfs-files.txt
+              grep 'usr/share/plymouth/themes/nexium/nexium.script' initramfs-files.txt
+              grep -E '(^|/)(usr/)?sbin/plymouthd$' initramfs-files.txt
+          done
+          grep -R -E 'boot=live.*splash' binary --include='*.cfg'
+          echo 'NEXIUM: Plymouth image, script, daemon, splash boot args and console target checks passed'
+          sha256sum "${isos[0]}" > SHA256SUMS
+          stat -c 'ISO: %n; bytes: %s' "${isos[0]}" | tee iso-size.txt
+          if [ "$(stat -c '%s' "${isos[0]}")" -lt 1000000000 ]; then echo 'ISO under 1 GB: PASS' | tee -a iso-size.txt; else echo 'ISO exceeds 1 GB target' | tee -a iso-size.txt; fi
+          echo 'NEXIUM: package and boot-catalog checks passed (hardware boot not tested)'
+          echo 'Splash starts in initramfs, not firmware/bootloader. Needs working DRM/framebuffer; missing GPU firmware can prevent graphics. Console boot remains the default; Escape shows details, or remove quiet splash in the boot menu to debug.' > SPLASH-NOTES.txt
+          BUILD
+          cat essentials/iso-size.txt essentials/SPLASH-NOTES.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload essentials ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-essentials-bookworm-iso
+          path: |
+            essentials/*.iso
+            essentials/SHA256SUMS
+            essentials/iso-size.txt
+            essentials/SPLASH-NOTES.txt
+          compression-level: 0
+          if-no-files-found: error
+      - name: Preserve build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-essentials-build-log
+          path: build-essentials.log
+          if-no-files-found: ignore
