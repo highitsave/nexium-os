@@ -124,7 +124,7 @@ jobs:
       - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
       - name: Resolve and prepare the app set for Ubuntu jammy
         run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
-      - name: Prepare binary vendor keyrings and verify APT
+      - name: Prepare binary vendor keyrings for the build chroot
         run: |
           sudo bash <<'SH'
           set -euo pipefail
@@ -145,10 +145,6 @@ jobs:
             install -m 644 "config/archives/nexium-$name.list.chroot" "$sources/nexium-$name.list"
           done
           SH
-          docker run --rm \
-            -v "$PWD/config/includes.chroot/etc/apt/keyrings:/etc/apt/keyrings:ro" \
-            -v "$PWD/reports/vendor-sources:/etc/apt/sources.list.d:ro" \
-            ubuntu:22.04 bash -euc 'apt-get -o Dir::Etc::sourceparts=- update; apt-get -o Dir::Etc::sourceparts=- install -y --no-install-recommends ca-certificates; apt-get -o APT::Update::Error-Mode=any update'
       - name: Save package resolution report
         if: always()
         uses: actions/upload-artifact@v4
@@ -161,10 +157,38 @@ jobs:
       - name: Build ISO
         if: ${{ !inputs.validate_only }}
         run: |
-          sudo lb bootstrap
-          # Archives are configured before includes.chroot: seed the scoped keys now.
-          sudo install -d -m 755 chroot/etc/apt/keyrings
-          sudo install -m 644 config/includes.chroot/etc/apt/keyrings/nexium-{mozilla,librewolf}.gpg chroot/etc/apt/keyrings/
+          sudo python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          # Cache restoration precedes archives; seed from config at actual APT time.
+          script = Path('/usr/lib/live/build/lb_chroot_archives')
+          original = script.read_text()
+          needle = 'Apt chroot update'
+          if sum(line.strip() == needle for line in original.splitlines()) != 4:
+              raise SystemExit('Unreviewed live-build archives update layout')
+          seed = '''install -d -m 755 chroot/etc/apt/keyrings chroot/etc/apt/sources.list.d || exit 1
+          for vendor in mozilla librewolf; do
+            install -m 644 "config/includes.chroot/etc/apt/keyrings/nexium-$vendor.gpg" "chroot/etc/apt/keyrings/nexium-$vendor.gpg" || exit 1
+            install -m 644 "config/archives/nexium-$vendor.list.chroot" "chroot/etc/apt/sources.list.d/nexium-$vendor.list" || exit 1
+            gpg --batch --show-keys "chroot/etc/apt/keyrings/nexium-$vendor.gpg" || exit 1
+          done
+          Chroot chroot "ls -l /etc/apt/keyrings/nexium-mozilla.gpg /etc/apt/keyrings/nexium-librewolf.gpg" || exit 1
+          Chroot chroot "od -An -tx1 -N16 /etc/apt/keyrings/nexium-mozilla.gpg; od -An -tx1 -N16 /etc/apt/keyrings/nexium-librewolf.gpg" || exit 1
+          Chroot chroot "cat /etc/apt/sources.list.d/nexium-mozilla.list /etc/apt/sources.list.d/nexium-librewolf.list" || exit 1
+          Chroot chroot "apt-get -o APT::Update::Error-Mode=any update" || exit 1
+          Echo_message "Nexium vendor APT verified inside build chroot"
+          '''
+          patched = ''
+          for line in original.splitlines(keepends=True):
+              if line.strip() == needle:
+                  indent = line[:len(line) - len(line.lstrip())]
+                  patched += ''.join(indent + part + '\n' for part in seed.splitlines())
+              else:
+                  patched += line
+          subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
+          script.write_text(patched)
+          print('Archives keyring installation guarded at all four in-chroot APT updates.')
+          PY
           sudo lb build
       - uses: actions/upload-artifact@v4
         if: ${{ !inputs.validate_only }}
