@@ -1,0 +1,466 @@
+{
+  "source": "branding/icons/ios4/IMG-0875.jpeg",
+  "source_sha256": "e605261fa7bc18fb252c81da0eab26dd514c1e58ada019708d10b32f19bce8b8",
+  "source_size": [
+    1131,
+    707
+  ],
+  "resampling": "Pillow LANCZOS",
+  "icons": {
+    "app-store": {
+      "crop_box": [
+        2,
+        0,
+        138,
+        136
+      ],
+      "sha256": {
+        "original": "7cc8ce55a6126d8c841c4ccc30e947d23c9dc1d736bd65c3fb792dc91434e33b",
+        "128x128": "80ee3305afdbda27ce8d62bd2479a53d19ffb81703b216bc62124f1179d16c25",
+        "64x64": "d8d4c8a714087d447aa75c29de42c5ceeaf4a3582ab3ee0ce1b2be4f50c57b9d"
+      }
+    },
+    "blank-gray": {
+      "crop_box": [
+        144,
+        0,
+        280,
+        136
+      ],
+      "sha256": {
+        "original": "9f2e73bb8826dbb1e1d0a753feff45b12548662457e2a5087c0fc4811a53f96e",
+        "128x128": "23a4a9856e8b3350673094af03d0d29863b01186e81cb564200bf837a28a3b0e",
+        "64x64": "c69600d500bf4db1a5832bf6b9444ff838efe354787962a57779dfc5155d3a18"
+      }
+    },
+    "calculator": {
+      "crop_box": [
+        285,
+        0,
+        421,
+        136
+      ],
+      "sha256": {
+        "original": "7d46d958ad429307b40389d3d5a8e5579ada9ff122f7b18ea3ff85ce80174462",
+        "128x128": "5fb1975174d4c3115c4eeb515030a1fe45cf925ede1a1141428129c2bbc90f2e",
+        "64x64": "39517147a05e2233f8f24f178fdc933528c33c5830cb93648e51e805a97d3494"
+      }
+    },
+    "calendar": {
+      "crop_box": [
+        427,
+        0,
+        563,
+        136
+      ],
+      "sha256": {
+        "original": "82c2327b383146edf7bad459977f5f3f21255e25220fa4b050703a95a770431b",
+        "128x128": "d6543e8a8083da1810a05dd4d2f2eb7b629d657e92e97a21f9a17552a07917ac",
+        "64x64": "10e7c5294d4aaa903da874ffbe40b42a91c673b2437e485bb8af193fbdc612fb"
+      }
+    },
+    "camera": {
+      "crop_box": [
+        568,
+        0,
+        704,
+        136
+      ],
+      "sha256": {
+        "original": "63324cd936e9e2566b467db04b6ed2af45722925d8ec691784569c35dccd8426",
+        "128x128": "a0d5ee2308a976af653cd99e1d7ef37aafdd284488b7774151cf0394a28412d8",
+        "64x64": "25c24b9652b258441a2b4d40b48f2c72c87e45318fa1b9cbb0e607e95a858051"
+      }
+    },
+    "clock": {
+      "crop_box": [
+        710,
+        0,
+        846,
+        136
+      ],
+      "sha256": {
+        "original": "cf2805f586358a9745e1d2a0195b6272969e0bacf2a6a6d92bf59ca5b947b2d1",
+        "128x128": "ffe708210e594ea5adbe48bea1959474cd0c35a3c0d0ce75ee7dd4fe0860c986",
+        "64x64": "04ad32c340f1f2be6d52802aea78ba4bd5b8d29545719d3ae28c3984838f764f"
+      }
+    },
+    "compass": {
+      "crop_box": [
+        851,
+        0,
+        987,
+        136
+      ],
+      "sha256": {
+        "original": "06ccdfae8bc7975aae6e96379a8b677d454d884fc493eb710fa3ae3e2ad2ed75",
+        "128x128": "67b6ce248ed6c5d6f3b20d817c08ff89045a147823e88fa0d79deaeab8cc4460",
+        "64x64": "6c4ccd2b75925a603c9730dc6f314513541ba5ea37a7673d5d49e25524231859"
+      }
+    },
+    "contacts": {
+      "crop_box": [
+        992,
+        0,
+        1128,
+        136
+      ],
+      "sha256": {
+        "original": "4348dc016dd76969a71e5a87359f2a01454cfc717a7e5ee319902c18e781e142",
+        "128x128": "4e5edef9f97fa48005ab9db6f35f227da2edb99d632a7f9bd4fa2c1d48d15198",
+        "64x64": "d87ed501a883832038ad16c2b0a9a107441964ecfbd2e68f9f9f2ae725b4d2c1"
+      }
+    },
+    "cydia": {
+      "crop_box": [
+        2,
+        142,
+        138,
+        278
+      ],
+      "sha256": {
+        "original": "5446bf28874defd7dd5edaba220fb9a41f969969234cc3c7520be391fb3c3ef5",
+        "128x128": "cdf1509dab1caf02ca81849a8cc68f0497180dcf12a6507eed3f0b26bd6998d2",
+        "64x64": "e14f6dc7ad48ad8e19f78e1831ca790756d592ad5d7ff17a04b5af74ae602d8f"
+      }
+    },
+    "facetime": {
+      "crop_box": [
+        144,
+        142,
+        280,
+        278
+      ],
+      "sha256": {
+        "original": "6af44b13be50fc61abf3d45e7c7593b3f65d70cc0b07e7861bcc4d899152c964",
+        "128x128": "4dc23ba21f7676af41747a5da7445ae78aeb9296eb181c2f00292e33f14284e7",
+        "64x64": "374cb6a46dba3c4b0da33def29c7100c0e8d37243e48ad97170d2d314fa333dc"
+      }
+    },
+    "camera-video": {
+      "crop_box": [
+        285,
+        142,
+        421,
+        278
+      ],
+      "sha256": {
+        "original": "d4f7349d07efc44e5adc1508882398f8479649898ac867bda6f5a434ca9c4239",
+        "128x128": "dbd7d05f2c50e77024e3fd6511be84a82c73b2c308aeb965d39342fdf20ed8be",
+        "64x64": "5de93e99f3836ef78309bd5ee4ea5fa56175544c7ce29633a37c6e7dc3abae18"
+      }
+    },
+    "linen": {
+      "crop_box": [
+        427,
+        142,
+        563,
+        278
+      ],
+      "sha256": {
+        "original": "87cbbbfc85ff0c90efe9f9dbb388ff9978739e50599b151fd765086ec780a1ba",
+        "128x128": "b47b956d2830ff65e49c8624d392cd9cf8c208a173dfe94a1e82256442d1d44e",
+        "64x64": "075c5a4081ecadf586d88763e3ab929d8a7e7cdf7799aa0ce79ff27039bef2cc"
+      }
+    },
+    "game-center": {
+      "crop_box": [
+        568,
+        142,
+        704,
+        278
+      ],
+      "sha256": {
+        "original": "1c6066789f710f308f04e6dc5de78aeaf434087aed8cc0e2883bacd7bf689491",
+        "128x128": "9df2c7bf8f1b88d7d13fb125d3e948ea2d9a6b68f3972f3942071a87bc5b9d50",
+        "64x64": "e2f9d534b462e5a675c73275cca1d5f10cd2c178d6de5de3e0b44580303e8dfc"
+      }
+    },
+    "ipod": {
+      "crop_box": [
+        710,
+        142,
+        846,
+        278
+      ],
+      "sha256": {
+        "original": "c65453305ea1dd2869fc0713ccb11d789c5fee5874bab32ffa17a7284ed11c26",
+        "128x128": "2937503be252e374b590a84e567716a0a2b821e0dc71823669b5c6bf20b5c793",
+        "64x64": "3830417b53533564932174c44b97259ab2cf65b7feafd161be174ebcf18fe0a4"
+      }
+    },
+    "itunes": {
+      "crop_box": [
+        851,
+        142,
+        987,
+        278
+      ],
+      "sha256": {
+        "original": "568cba0381d15a6fe22ef06054be84eb98fbd032ef4832ddf17d2da116b6c0ac",
+        "128x128": "558bd632f87e9590a32115c7f4c89e485b20796b7004cf365a049875b284fa55",
+        "64x64": "9fb6fcd737b30cb1cd1c4d061be43a71061dee0df56f7aba6ae0e0cfd3a0cbaf"
+      }
+    },
+    "mail": {
+      "crop_box": [
+        992,
+        142,
+        1128,
+        278
+      ],
+      "sha256": {
+        "original": "71253aca43bf5e01535dd97d4b491d545865eebbcc4ddf67565664c6afcf2faf",
+        "128x128": "8c50aad519b31248257c412cbb24857e640e9308e6c8297757743bafe3fde247",
+        "64x64": "c6391d4b96b2d96d425cff3a59ffdf35963d931a7fc6bfa22552eb33317a4e37"
+      }
+    },
+    "maps": {
+      "crop_box": [
+        2,
+        283,
+        138,
+        419
+      ],
+      "sha256": {
+        "original": "c3401afdba66263a20436008893297bd4cd447d78f6d87ec9d0e6ce4ddfc6403",
+        "128x128": "2b82595be442497baff50de95013691947374809528bb0dcf23c5b463632ab6d",
+        "64x64": "153d099a13f90f4dcb7fbc9ec7326c29dc44f3d8be79367296a7d7aa5de6c5ca"
+      }
+    },
+    "messages": {
+      "crop_box": [
+        144,
+        283,
+        280,
+        419
+      ],
+      "sha256": {
+        "original": "42c205ddcdec245aa999c874ef5a75913b684df83d5a424ccc62ee9601777373",
+        "128x128": "e4dcd48f7cec18dc3df94663827962c39467df61506a71926732080bc07d6aff",
+        "64x64": "8ee550b4c5cc027e06718c7c7db18ba62a4853a071fef5413a442768ec1377bc"
+      }
+    },
+    "music": {
+      "crop_box": [
+        285,
+        283,
+        421,
+        419
+      ],
+      "sha256": {
+        "original": "3696cba20eb1570f539ddb0e320c4022e39cc1be0ff93afdb52c301f9e613a79",
+        "128x128": "fd1afcb85c8502f3ce99c623f82fce39f7377b55df92a1785cfafb8c47d77492",
+        "64x64": "74a36d6330e04b1535f9d8c22af5626a393ba6c34c63f81366ec4f464ab7be10"
+      }
+    },
+    "nike-ipod": {
+      "crop_box": [
+        427,
+        283,
+        563,
+        419
+      ],
+      "sha256": {
+        "original": "84b770e5fbf63a1bc53e71464d40f2a1ba9740e2b2791082059b8c48cb4362ce",
+        "128x128": "a08fbd632763a87bf7cd32f814e366f339d74a32b42554316fae8faf8969e894",
+        "64x64": "d7a1950a43c2525127d46edcaa79d30424ac7de54352318994d0d42e547a917b"
+      }
+    },
+    "notes": {
+      "crop_box": [
+        568,
+        283,
+        704,
+        419
+      ],
+      "sha256": {
+        "original": "76c9fba42f9afacc1a5d2fb6d994daf03d8113e1af05397ab675f3cbdd6a0d81",
+        "128x128": "50a1127d1ba75632beaae6aecb56683d3048925a9e042b1de71407680395d60f",
+        "64x64": "10ff2591bd34c07c3613eeeb357b22b1fb6c0720ee321e0b194eb9ad541a453c"
+      }
+    },
+    "phone": {
+      "crop_box": [
+        710,
+        283,
+        846,
+        419
+      ],
+      "sha256": {
+        "original": "93417030f8b644425e259a0c590df22d8a5c039fc257311685286764d7256cc7",
+        "128x128": "fcf65a338aae4c56a21ca558551977202bc72648719d3de0272e3422dff3f935",
+        "64x64": "5014dc38929eece1e56198e6f41fc241248be68118633654cb1c7dbce8ae000d"
+      }
+    },
+    "photos": {
+      "crop_box": [
+        851,
+        283,
+        987,
+        419
+      ],
+      "sha256": {
+        "original": "053d4140bdd8ca8d95296450476fac5d67418e350a04a800ff00d1cf46a3acd2",
+        "128x128": "1ef5208b78d0000fc0051132098c03c02c2f275ac7721cc5333e1861b0d6f8a6",
+        "64x64": "ce49a5a3bc6453168822b443c81004aad1e127a8abc3339e5ef08d8b83172a50"
+      }
+    },
+    "safari": {
+      "crop_box": [
+        992,
+        283,
+        1128,
+        419
+      ],
+      "sha256": {
+        "original": "dfa43d3b87e319173d3db95bfdf4482a17cd86e908bcb9afde2e02ac29a07856",
+        "128x128": "c7cd4c41692542ede991142f57d231ac9d5b24c2eb328994fdb1c2c899ef660c",
+        "64x64": "a40ac3793e99b23c4374a9cf8773ce0b4c9789fb2aa1ad245bce7af127a38807"
+      }
+    },
+    "settings": {
+      "crop_box": [
+        2,
+        425,
+        138,
+        561
+      ],
+      "sha256": {
+        "original": "777bd3c611da3267d0f5031c94b29bfc7bef35bdc5e6a16f114a99da6250ca16",
+        "128x128": "3acfed7a11c464a030b0cc67b0f573d5840e06dfe7094732d3ae22d68a32410d",
+        "64x64": "8275fe2d47695c9d6fff7c1ca35d3f027bb829b5a026c5e4de3abf44ba397529"
+      }
+    },
+    "stocks": {
+      "crop_box": [
+        144,
+        425,
+        280,
+        561
+      ],
+      "sha256": {
+        "original": "cbd48228677d211151609fa85ca567afc528dbc6b283e88509e1319014d5ba31",
+        "128x128": "48cddfc126c6d05bc42bda17f222b87c8c6082f0114bda34c49f956547b04091",
+        "64x64": "d1184708e50c1f6177f596cd4b41abd3b5a63bdf40eabef717730c0258264f8a"
+      }
+    },
+    "utilities-folder": {
+      "crop_box": [
+        285,
+        425,
+        421,
+        561
+      ],
+      "sha256": {
+        "original": "79d9f38d10ee76f93f702a287d29dd0c338614bb0322ec12c7e70025de681ea5",
+        "128x128": "f1fe750f72c3d894b3460d9e4bbf3393080bab769e64cfacb1caea9cfa8b353e",
+        "64x64": "2ea2fe7ea8c4f8284888eabd89ec21518449f60a0d3e7cb4b66d9bcddca7ebcf"
+      }
+    },
+    "tools-folder": {
+      "crop_box": [
+        427,
+        425,
+        563,
+        561
+      ],
+      "sha256": {
+        "original": "e54d2596312039190aa3f178604d1bd2a562626af469bbc9582e2b3cc7d5e271",
+        "128x128": "f785e400572aece74509b4c8a1c5c4db89c799b3747a2705ae62ae226f7362f3",
+        "64x64": "a9bd3bb7ffbed74783ac2abee18b358b6663db869ce1089a24ebe6f9fcf0a39e"
+      }
+    },
+    "videos": {
+      "crop_box": [
+        568,
+        425,
+        704,
+        561
+      ],
+      "sha256": {
+        "original": "83bf543f34608ac0c68ae1aa32b26df676d5fa8c262b855e1d7e4f0e6fb95c3b",
+        "128x128": "6299daaef10622344715f00384371cce4fd7d377ef6ed53cc6f3d99ae3fda131",
+        "64x64": "6520ca2bcb384788db85e73cc23f2b34cb130d928210409a46e968bb33f2ea2e"
+      }
+    },
+    "voice-memos": {
+      "crop_box": [
+        710,
+        425,
+        846,
+        561
+      ],
+      "sha256": {
+        "original": "379b658c804f08e84caf4a9a31fedd88db4b52f536dbdfe45cca5ce0e8038408",
+        "128x128": "6c368b62b7327f2d14915a3d65f7e8fadd282b86fce35c8d32c1cf9355f6c817",
+        "64x64": "7e087006acb7a2afd4b494abdeec4b4dbb26ca00abbd6bd68ec2b606ff895528"
+      }
+    },
+    "voice-control": {
+      "crop_box": [
+        851,
+        425,
+        987,
+        561
+      ],
+      "sha256": {
+        "original": "1e2ad4a332d1f3dec549fed0d93476c417ca46aeb30f115203efd617a74eb02f",
+        "128x128": "f6aa561bf77c3f188f730bbd1d492e4f7cc1ec239c800dbe1871d46546ce9f3b",
+        "64x64": "54b9d53d6aad9c69adb701e2149a992d64d2f1a508ac491c478d84e2e17d97e2"
+      }
+    },
+    "weather-celsius": {
+      "crop_box": [
+        992,
+        425,
+        1128,
+        561
+      ],
+      "sha256": {
+        "original": "dbceb70fb99bc8b2ac4ae29be3a0dc5ffa5445deb26d2d268e5bcf54723f6fdf",
+        "128x128": "4763df32093b1d623c7cde45a8d7051d1c8458072013361f2c8e63a586f48199",
+        "64x64": "4327aacfd7ab6ecf24a4e6a1166c04663aa0e1bf9e068975be6fca84c0781feb"
+      }
+    },
+    "weather-fahrenheit": {
+      "crop_box": [
+        2,
+        567,
+        138,
+        703
+      ],
+      "sha256": {
+        "original": "247b84d266cb87244cb656be8062546d4cef26b6d8560202ae217e60d87ffa75",
+        "128x128": "2d6a2b0dc27df2066647ce2603ca8272dbb82ceb76be13c3288b2ee4f00ca0c2",
+        "64x64": "1f1f143d2a808ae7b86bc1c6c94ee4f50b1c03a280b41c1da9694435607eb4c9"
+      }
+    },
+    "snow": {
+      "crop_box": [
+        144,
+        567,
+        280,
+        703
+      ],
+      "sha256": {
+        "original": "c6d398ea04db478753d84821f66ea7c4713d1306de9bd618abc0f42c5447e7b0",
+        "128x128": "08ef1d36739d69bf3a03176255973d5d46f6bd7169e5c7881cb64d938b94bda5",
+        "64x64": "0eaa3c48f4c6f4df25af0af25833bab20344e5e778638d603083afe150ecda2c"
+      }
+    },
+    "tv": {
+      "crop_box": [
+        285,
+        567,
+        421,
+        703
+      ],
+      "sha256": {
+        "original": "62694db684f192b798833aa7303393a3f33316c17a6d021931ae9d2661d74a80",
+        "128x128": "b09a66fe19313e0716fddd18a8ce1a9b72eaca6dcce50ba796313eb12bcc631a",
+        "64x64": "79da88f725d98620fb5cc10f7a6a39cd10afd4bc82b705da5655f55d4307a3b1"
+      }
+    }
+  }
+}

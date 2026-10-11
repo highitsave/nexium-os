@@ -2,7 +2,7 @@
 Type=Application
 Name=Settings
 Exec=/usr/local/bin/nexium-settings
-Icon=preferences-system
+Icon=ios4-settings
 Terminal=false
 Categories=Utility;
 StartupNotify=true

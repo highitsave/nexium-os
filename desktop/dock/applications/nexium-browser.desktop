@@ -2,7 +2,7 @@
 Type=Application
 Name=Browser
 Exec=/usr/bin/chromium
-Icon=web-browser
+Icon=ios4-safari
 Terminal=false
 Categories=Utility;
 StartupNotify=true

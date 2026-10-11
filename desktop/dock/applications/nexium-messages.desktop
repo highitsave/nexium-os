@@ -2,7 +2,7 @@
 Type=Application
 Name=Nexium Messages (Coming soon)
 Exec=/usr/local/bin/nexium-coming-soon Messages
-Icon=mail-message-new
+Icon=ios4-messages
 Terminal=false
 Categories=Utility;
 StartupNotify=true

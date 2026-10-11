@@ -2,7 +2,7 @@
 Type=Application
 Name=Trash
 Exec=/usr/bin/pcmanfm trash:///
-Icon=user-trash
+Icon=ios4-blank-gray
 Terminal=false
 Categories=Utility;
 StartupNotify=true

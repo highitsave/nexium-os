@@ -2,7 +2,7 @@
 Type=Application
 Name=System Monitor
 Exec=/usr/bin/lxtask
-Icon=utilities-system-monitor
+Icon=ios4-stocks
 Terminal=false
 Categories=Utility;
 StartupNotify=true

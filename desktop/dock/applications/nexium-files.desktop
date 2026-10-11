@@ -2,7 +2,7 @@
 Type=Application
 Name=Files
 Exec=/usr/bin/pcmanfm
-Icon=system-file-manager
+Icon=ios4-utilities-folder
 Terminal=false
 Categories=Utility;
 StartupNotify=true

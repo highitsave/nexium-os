@@ -1,0 +1,12 @@
+{
+  "files": "utilities-folder",
+  "browser": "safari",
+  "terminal": "linen",
+  "messages": "messages",
+  "calls": "phone",
+  "settings": "settings",
+  "vault": "cydia",
+  "editor": "notes",
+  "monitor": "stocks",
+  "trash": "blank-gray"
+}

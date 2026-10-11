@@ -2,7 +2,7 @@
 Type=Application
 Name=NEXIUM VAULT (Coming soon)
 Exec=/usr/local/bin/nexium-coming-soon Vault
-Icon=system-software-install
+Icon=ios4-cydia
 Terminal=false
 Categories=Utility;
 StartupNotify=true

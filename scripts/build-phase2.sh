@@ -70,4 +70,4 @@ print('ISO:',size,'bytes')
 print('ISO:',size/1000000,'MB (decimal)')
 print('Under 1,000,000,000 bytes:',size<1000000000)
 PY
-{ echo '## Nexium Phase 2 native desktop'; cat reports/source-commit.txt reports/size.txt reports/iso-sha256.txt reports/boot-verification.txt reports/desktop-verification.txt reports/native-app-windows.txt; echo 'Xvfb native desktop smoke test, not a physical or virtual ISO boot test.'; } >> "$GITHUB_STEP_SUMMARY"
+{ echo '## Nexium Phase 2 native desktop with user-authorized iOS4 crops'; cat reports/source-commit.txt reports/ios4-icons.txt reports/size.txt reports/iso-sha256.txt reports/boot-verification.txt reports/desktop-verification.txt reports/native-app-windows.txt; echo 'Xvfb native desktop smoke test, not a physical or virtual ISO boot test.'; } >> "$GITHUB_STEP_SUMMARY"

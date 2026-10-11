@@ -34,3 +34,8 @@ message delivery, calls or software-install claims. They are NOT implemented.
 System Information reads actual kernel/memory/package data. The Settings hub
 opens appearance, window, network and audio tools, or system information.
 Boot splash changes are staged only; see branding/boot/README.md.
+
+
+## iOS4 sheet integration
+
+After materializing, run `python3 scripts/prepare-ios4.py` (Pillow required). The resulting `NexiumIOS4` theme uses the supplied JPEG crops at 64px/128px. See `branding/icons/ios4/README.md` for provenance and explicit Files/Terminal/Trash substitutes. These current details supersede earlier reference-only icon notes.

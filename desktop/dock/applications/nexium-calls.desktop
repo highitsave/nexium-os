@@ -2,7 +2,7 @@
 Type=Application
 Name=Nexium Calls (Coming soon)
 Exec=/usr/local/bin/nexium-coming-soon Calls
-Icon=call-start
+Icon=ios4-phone
 Terminal=false
 Categories=Utility;
 StartupNotify=true

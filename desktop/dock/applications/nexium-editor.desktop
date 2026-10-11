@@ -2,7 +2,7 @@
 Type=Application
 Name=Text Editor
 Exec=/usr/bin/mousepad
-Icon=accessories-text-editor
+Icon=ios4-notes
 Terminal=false
 Categories=Utility;
 StartupNotify=true

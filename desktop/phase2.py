@@ -436,6 +436,17 @@ def install(root):
     for p in P('branding/boot').glob('nexium-gold.*'):put(p,'usr/share/plymouth/themes/nexium-gold/'+p.name)
     put('branding/wallpaper/golden-gate.png','usr/share/plymouth/themes/nexium-gold/golden-gate.png')
     icon_theme='Adwaita'
+    # Install authorized iOS4 crops with manifest tracking.
+    ios4=P('branding/icons/ios4/theme')
+    if (ios4/'index.theme').exists():
+        for p in ios4.rglob('*'):
+            if p.is_file():put(p,'usr/share/icons/NexiumIOS4/'+str(p.relative_to(ios4)))
+        icon_theme='NexiumIOS4'
+        icon_map=json.loads(P('branding/icons/ios4/mapping.json').read_text())
+        for k,n,c,i in APPS:
+            p=r/f'usr/share/applications/nexium-{k}.desktop'
+            text=p.read_text().replace('Icon='+i,'Icon=ios4-'+icon_map[k]);p.write_text(text)
+            manifest['/'+str(p.relative_to(r))]=hashlib.sha256(p.read_bytes()).hexdigest()
     supplied=P('branding/icons/supplied')
     if (supplied/'index.theme').exists():
         mapping=json.loads(P('branding/icons/mapping.json').read_text())
@@ -483,7 +494,19 @@ def verify(root):
     assert 'User=nexium' in (r/'etc/systemd/system/nexium-kiosk.service').read_text()
     assert (r/'usr/share/backgrounds/nexium/golden-gate.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
     print('Output desktop: Openbox / Plank / Tint2 / PCManFM / Xterm; Plymouth retained')
-    print('Mac icons: reference preview only; Adwaita fallback; pack NOT integrated')
+    icon_theme=(r/'etc/xdg/nexium/icon-theme').read_text().strip()
+    print('ICON THEME:',icon_theme)
+    if icon_theme=='NexiumIOS4':
+        icon_map=json.loads(P('branding/icons/ios4/mapping.json').read_text())
+        for k,n,c,i in APPS:
+            desktop=r/f'usr/share/applications/nexium-{k}.desktop'
+            icon='ios4-'+icon_map[k]
+            assert 'Icon='+icon in desktop.read_text(),k
+            for size in [64,128]:
+                assert (r/f'usr/share/icons/NexiumIOS4/{size}x{size}/apps/{icon}.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+            print('ICON',k,'=>',icon,'64px and 128px PNG verified')
+        print('iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita')
+    else: print('ICON THEME fallback or supplied pack:',icon_theme)
     print('Boot-theme source staged only; preserved initrd theme is unchanged')
     print('No physical boot/hardware test performed; launcher resolution is not full hardware verification')
 

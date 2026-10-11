@@ -2,7 +2,7 @@
 Type=Application
 Name=Terminal
 Exec=/usr/bin/xterm
-Icon=utilities-terminal
+Icon=ios4-linen
 Terminal=false
 Categories=Utility;
 StartupNotify=true
