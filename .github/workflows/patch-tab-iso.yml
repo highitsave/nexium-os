@@ -67,13 +67,13 @@ jobs:
           lines = Path('work/prepare-apps-validated.sh').read_text().splitlines()
           start = next(i for i,s in enumerate(lines) if s.startswith('uc_version='))
           end = next(i for i,s in enumerate(lines[start:], start) if s.startswith('dpkg-deb --root-owner-group'))
-          out = ['set -eu', 'tmp=$(mktemp -d)', 'mkdir -p config/packages.chroot']
+          out = ['set -eux', 'work=$(mktemp -d)', 'mkdir -p config/packages.chroot']
           changed = 0
           for s in lines[start:end+1]:
               if 'ungoogled.tar.xz' in s and s.startswith(('curl ', 'printf ', 'tar ')):
                   changed += 1
                   if s.startswith('tar '):
-                      out.append('mkdir -p "$tmp/uc/opt/ungoogled-chromium"; cp -a work/donor-root/opt/ungoogled-chromium/. "$tmp/uc/opt/ungoogled-chromium/"')
+                      out.append('mkdir -p "$work/pkg/opt/ungoogled-chromium"; cp -a work/donor-root/opt/ungoogled-chromium/. "$work/pkg/opt/ungoogled-chromium/"')
                   continue
               out.append(s)
           assert changed == 3, f'Unexpected packaging block: replaced {changed} acquisition lines'
