@@ -173,7 +173,8 @@ jobs:
             gpg --batch --show-keys "chroot/etc/apt/keyrings/nexium-$vendor.gpg" || exit 1
           done
           Chroot chroot "ls -l /etc/apt/keyrings/nexium-mozilla.gpg /etc/apt/keyrings/nexium-librewolf.gpg" || exit 1
-          Chroot chroot "od -An -tx1 -N16 /etc/apt/keyrings/nexium-mozilla.gpg; od -An -tx1 -N16 /etc/apt/keyrings/nexium-librewolf.gpg" || exit 1
+          Chroot chroot "od -An -tx1 -N16 /etc/apt/keyrings/nexium-mozilla.gpg" || exit 1
+          Chroot chroot "od -An -tx1 -N16 /etc/apt/keyrings/nexium-librewolf.gpg" || exit 1
           Chroot chroot "cat /etc/apt/sources.list.d/nexium-mozilla.list /etc/apt/sources.list.d/nexium-librewolf.list" || exit 1
           Chroot chroot "apt-get -o APT::Update::Error-Mode=any update" || exit 1
           Echo_message "Nexium vendor APT verified inside build chroot"
