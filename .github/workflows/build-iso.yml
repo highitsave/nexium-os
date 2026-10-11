@@ -7,5 +7,17 @@ jobs:
 build:
 runs-on: ubuntu-latest
 steps:
-- uses: actions/
-checkout@v4
+- uses: actions/checkout@v4
+- name: Install live-build
+run: sudo apt-get update && sudo apt-get install -y live-build
+- name: Configure live-build
+run: |
+lb config --distribution bookworm --architectures amd64 --binary-images iso-hybrid --debian-installer none --archive-areas "main"
+- name: Build ISO
+run: sudo lb build
+- name: Upload ISO
+uses: actions/upload-artifact@v4
+with:
+name: nexium-iso
+path: "*.iso"
+if-no-files-found: warn
