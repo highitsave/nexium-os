@@ -67,7 +67,7 @@ jobs:
           lines = Path('work/prepare-apps-validated.sh').read_text().splitlines()
           start = next(i for i,s in enumerate(lines) if s.startswith('uc_version='))
           end = next(i for i,s in enumerate(lines[start:], start) if s.startswith('dpkg-deb --root-owner-group'))
-          out = ['set -eu', 'mkdir -p config/packages.chroot']
+          out = ['set -eu', 'tmp=$(mktemp -d)', 'mkdir -p config/packages.chroot']
           changed = 0
           for s in lines[start:end+1]:
               if 'ungoogled.tar.xz' in s and s.startswith(('curl ', 'printf ', 'tar ')):
