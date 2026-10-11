@@ -29,6 +29,31 @@ jobs:
           grep -q '^printf .*SOURCE ungoogled-chromium ' prepare-essentials-browser.sh
           bash -euo pipefail prepare-essentials-browser.sh
           test -s config/packages.chroot/ungoogled-chromium.deb
+          # Explicitly install the local artifact after includes are copied, before squashfs.
+          # APT resolves its declared dependencies from Debian, not the browser package name.
+          mkdir -p config/includes.chroot/tmp config/hooks/normal
+          mv config/packages.chroot/ungoogled-chromium.deb config/includes.chroot/tmp/nexium-ungoogled-chromium.deb
+          cat > config/hooks/normal/0800-nexium-browser.hook.chroot <<'BROWSER'
+          #!/bin/sh
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          test -s /tmp/nexium-ungoogled-chromium.deb
+          apt-get -o Acquire::Retries=5 update
+          apt-get -o Acquire::Retries=5 install -y --no-install-recommends /tmp/nexium-ungoogled-chromium.deb
+          test "$(dpkg-query -W -f='${Status}' ungoogled-chromium)" = 'install ok installed'
+          test "$(dpkg-query -W -f='${Version}' ungoogled-chromium)" = '155.0.8059.39-1+nexium1'
+          test -x /usr/bin/ungoogled-chromium
+          test -x /opt/ungoogled-chromium/chrome
+          ungoogled-chromium --version
+          ldd /opt/ungoogled-chromium/chrome > /tmp/nexium-browser-libraries.txt
+          cat /tmp/nexium-browser-libraries.txt
+          if grep -q 'not found' /tmp/nexium-browser-libraries.txt; then echo 'NEXIUM: ungoogled-chromium has missing shared libraries'; exit 1; fi
+          if dpkg-query -W -f='${Status}\n' chromium 2>/dev/null | grep -q 'install ok installed'; then echo 'NEXIUM: unexpected plain Chromium installed'; exit 1; fi
+          rm -f /tmp/nexium-ungoogled-chromium.deb /tmp/nexium-browser-libraries.txt
+          apt-get clean
+          echo 'NEXIUM: local ungoogled-chromium 155.0.8059.39 installed and verified before squashfs'
+          BROWSER
+          chmod +x config/hooks/normal/0800-nexium-browser.hook.chroot
           mkdir -p config/includes.chroot/etc/apt/apt.conf.d config/includes.chroot/etc/systemd/system/multi-user.target.wants
           printf 'Acquire::Retries "5";\n' > config/includes.chroot/etc/apt/apt.conf.d/80nexium-retries
           ln -s /lib/systemd/system/NetworkManager.service config/includes.chroot/etc/systemd/system/multi-user.target.wants/NetworkManager.service
@@ -107,6 +132,15 @@ jobs:
           chroot chroot ungoogled-chromium --version
           chroot chroot ldd /opt/ungoogled-chromium/chrome | tee browser-libraries.txt
           if grep -q 'not found' browser-libraries.txt; then echo 'NEXIUM: ungoogled-chromium has missing shared libraries'; exit 1; fi
+          # Verify the filesystem embedded in the ISO, not just the build chroot.
+          xorriso -osirrox on -indev "${isos[0]}" -extract /live/filesystem.squashfs iso-filesystem.squashfs
+          unsquashfs -d iso-browser-check iso-filesystem.squashfs var/lib/dpkg/status usr/bin/ungoogled-chromium opt/ungoogled-chromium/chrome
+          test "$(dpkg-query --admindir=iso-browser-check/var/lib/dpkg -W -f='${Status}' ungoogled-chromium)" = 'install ok installed'
+          test "$(dpkg-query --admindir=iso-browser-check/var/lib/dpkg -W -f='${Version}' ungoogled-chromium)" = '155.0.8059.39-1+nexium1'
+          test -x iso-browser-check/usr/bin/ungoogled-chromium
+          test -x iso-browser-check/opt/ungoogled-chromium/chrome
+          echo 'NEXIUM: ISO embedded filesystem verified: ungoogled-chromium 155.0.8059.39 present' | tee -a iso-size.txt
+          rm -rf iso-browser-check iso-filesystem.squashfs
           chroot chroot apt-get --version
           chroot chroot nmcli --version
           test -n "$(find chroot/boot -name 'vmlinuz-*' -print -quit)"
