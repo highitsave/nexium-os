@@ -1,20 +1,14 @@
-name: Build Nexium ISO (Ubuntu base)
+name: Build Nexium ISO
 on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configure Git author identity
-        run: |
-          git config --local user.name "Onx"
-          git config --local user.email "assistant@email.tomo.ai"
-          git config --local --get user.name
-          git config --local --get user.email
       - run: sudo apt-get update && sudo apt-get install -y live-build
-      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --debian-installer none --archive-areas main --security false --linux-flavours amd64 --linux-packages "linux-generic" --initramfs casper
+      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas main --linux-flavours generic --linux-packages "linux-image" --initramfs casper
       - run: sudo lb build
       - uses: actions/upload-artifact@v4
         with:
-          name: nexium-iso-ubuntu
+          name: nexium-iso
           path: "*.iso"
