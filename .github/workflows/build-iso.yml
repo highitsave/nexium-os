@@ -1,14 +1,35 @@
 name: Build Nexium ISO
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      validate_only:
+        description: Resolve app packages only; do not build an ISO
+        type: boolean
+        default: false
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y live-build
-      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas main --linux-flavours generic --linux-packages "linux-image" --initramfs casper
-      - run: sudo lb build
+      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
+      - name: Resolve and prepare the app set for Ubuntu jammy
+        run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
+      - name: Save package resolution report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-app-resolution
+          path: |
+            reports/
+            config/package-lists/nexium-apps.list.chroot
+          if-no-files-found: warn
+      - name: Build ISO
+        if: ${{ !inputs.validate_only }}
+        run: sudo lb build
       - uses: actions/upload-artifact@v4
+        if: ${{ !inputs.validate_only }}
         with:
           name: nexium-iso
           path: "*.iso"
+          if-no-files-found: error
