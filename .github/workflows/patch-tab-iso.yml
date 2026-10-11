@@ -73,7 +73,7 @@ jobs:
               if 'ungoogled.tar.xz' in s and s.startswith(('curl ', 'printf ', 'tar ')):
                   changed += 1
                   if s.startswith('tar '):
-                      out.append('cp -a work/donor-root/opt/ungoogled-chromium/. "$tmp/uc/opt/ungoogled-chromium/"')
+                      out.append('mkdir -p "$tmp/uc/opt/ungoogled-chromium"; cp -a work/donor-root/opt/ungoogled-chromium/. "$tmp/uc/opt/ungoogled-chromium/"')
                   continue
               out.append(s)
           assert changed == 3, f'Unexpected packaging block: replaced {changed} acquisition lines'
