@@ -21,9 +21,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml xvfb x11-utils xdotool
           mkdir -p reports output work
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('desktop/phase2.py')
+          s=p.read_text()
+          marker='    # Strip the shell pipeline from the copied heredoc header.\n'
+          if marker not in s:
+              old='    # Retain everything through the boot verification;'
+              assert old in s
+              s=s.replace(old,marker+"    script = script.split('\\n', 1)[1] if script.lstrip().startswith('|') else script\n"+old,1)
+              p.write_text(s)
+          compile(s,str(p),'exec')
+          PY
           python3 desktop/phase2.py --materialize | tee reports/source.txt
           python3 - <<'PY'
           import yaml,pathlib
+          p=pathlib.Path('scripts/verify-phase2-boot.py')
+          compile(p.read_text(),str(p),'exec')
           d=yaml.safe_load(pathlib.Path('.github/workflows/phase2-build.yml').read_text())
           s=next(s['run'] for s in d['jobs']['build']['steps'] if s.get('name')=='Patch and verify native desktop ISO')
           pathlib.Path('scripts/build-phase2.sh').write_text('#!/bin/bash\n'+s)
@@ -32,7 +46,7 @@ jobs:
           git config user.email assistant@email.tomo.ai
           git add desktop/ branding/ scripts/verify-phase2-boot.py scripts/build-phase2.sh
           if ! git diff --cached --quiet; then
-            git commit -m 'Materialize Nexium Golden Gate native desktop and branding source'
+            git commit -m 'Fix copied heredoc verifier header and materialize Phase 2 source'
             git push origin HEAD:main
           fi
           git rev-parse HEAD | tee reports/source-commit.txt
@@ -95,17 +109,14 @@ jobs:
           if [ -e work/policy.saved ]; then sudo cp -a work/policy.saved work/root/usr/sbin/policy-rc.d; fi
           # Smoke test must not suppress first-run Welcome in the live image.
           sudo rm -rf work/root/home/nexium/.local/state/nexium work/root/home/nexium/.cache
-          # Remove test side effects, but retain reproducible seeded configuration.
           sudo python3 desktop/phase2.py --install work/root > reports/reinstall.txt
           sudo find work/root -type f -path '*/.Xauthority' -delete
           sudo rm -f work/root/tmp/.X*-lock
           sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2
           out=output/nexium-os-1.2-ungoogled-amd64.iso
-          # Same squashfs-patch / boot_image replay machinery as patch/repair.
           xorriso -indev work/orig.iso -outdev "$out" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -commit -end
           xorriso -indev "$out" -report_el_torito plain -report_system_area plain > reports/final-boot.txt 2>&1
           xorriso -osirrox on -indev "$out" -extract / work/final
-          # Existing repair boot verifier uses these original/final tree names.
           python3 scripts/verify-phase2-boot.py | tee reports/boot-verification.txt
           sudo unsquashfs -d work/final-root work/final/live/filesystem.squashfs
           sudo python3 desktop/phase2.py --verify work/final-root | tee reports/desktop-verification.txt
