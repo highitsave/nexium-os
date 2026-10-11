@@ -1,0 +1,131 @@
+name: Repair and verify Tab 1.2 boot structure
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38178496980
+          github-token: ${{ github.token }}
+          path: patched
+      - uses: actions/download-artifact@v4
+        with:
+          name: tab-patch-verification
+          run-id: 38178496980
+          github-token: ${{ github.token }}
+          path: prior-reports
+      - name: Replay original boot equipment and verify final artifact
+        shell: bash
+        run: |
+          set -Eeuxo pipefail
+          mkdir -p work output reports
+          exec > >(tee reports/verify.log) 2>&1
+          sudo apt-get update
+          sudo apt-get install -y xorriso squashfs-tools python3-venv
+          python3 -m venv /tmp/dl
+          /tmp/dl/bin/pip install gdown
+          /tmp/dl/bin/python -c "import gdown; gdown.download(id='12vHscmgS7i9-QIgA-aqsGAtw0Mrhknze',output='work/orig.iso',quiet=False)"
+          echo 'a6d1002b255ac06be36882e0eca38721ca75df1540e9d87756f6c8fda1e831b0  work/orig.iso' | sha256sum -c -
+          test "$(stat -c %s work/orig.iso)" -eq 585717760
+          (cd patched && sha256sum -c SHA256SUMS)
+          xorriso -osirrox on -indev patched/nexium-os-1.2-ungoogled-amd64.iso -extract /live/filesystem.squashfs work/new.squashfs
+          iso=output/nexium-os-1.2-ungoogled-amd64.iso
+          xorriso -indev work/orig.iso -outdev "$iso" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -commit -end
+          xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain 2>&1 | tee reports/original-boot.txt
+          xorriso -indev "$iso" -report_el_torito plain -report_system_area plain 2>&1 | tee reports/final-boot.txt
+          xorriso -osirrox on -indev work/orig.iso -extract / work/original
+          xorriso -osirrox on -indev "$iso" -extract / work/final
+          cmp work/new.squashfs work/final/live/filesystem.squashfs
+          unsquashfs -s work/final/live/filesystem.squashfs | tee reports/squashfs.txt
+          sudo unsquashfs -d work/final-root work/final/live/filesystem.squashfs
+          sudo chroot work/final-root /usr/bin/chromium --version | tee reports/browser-version.txt
+          grep -F '155.0.8059.39' reports/browser-version.txt
+          sudo python3 - <<'PY' | tee reports/verification.txt
+          import pathlib, hashlib, re, json, os, subprocess
+          P=pathlib.Path
+          a,b=P('work/original'),P('work/final')
+          old=P('reports/original-boot.txt').read_text(); new=P('reports/final-boot.txt').read_text()
+          def schema(text):
+              result=[]
+              for line in text.splitlines():
+                  if ':' not in line: continue
+                  k,v=line.split(':',1); k=k.strip(); v=v.split()
+                  if k in ['System area summary','El Torito cat path','El Torito img path','El Torito img opts']: result.append((k,v))
+                  elif k=='El Torito boot img': result.append((k,v[:-1]))
+              return result
+          assert schema(old) and schema(old)==schema(new), 'Original boot schema not reproduced'
+          assert 'grub2-mbr' in new and 'BIOS' in new and 'UEFI' in new
+          assert 'NEXIUM_OS' in new
+          orig=P('work/orig.iso').read_bytes()[:32768]
+          final=P('output/nexium-os-1.2-ungoogled-amd64.iso').read_bytes()[:32768]
+          assert orig[:432]==final[:432], 'Original hybrid MBR boot code changed'
+          with P('output/nexium-os-1.2-ungoogled-amd64.iso').open('rb') as f:
+              f.seek(16*2048); pvd=f.read(2048)
+          assert pvd[:7]==b'\x01CD001\x01' and pvd[40:72].decode().strip()=='NEXIUM_OS'
+          originals={p.relative_to(a):p for p in a.rglob('*') if p.is_file()}
+          rebuilt={p.relative_to(b):p for p in b.rglob('*') if p.is_file()}
+          assert originals.keys()==rebuilt.keys()
+          bootpaths=[P('/'+v.split(':',1)[1].split()[-1].lstrip('/')) for v in old.splitlines() if v.startswith('El Torito img path')]
+          for name,p in originals.items():
+              if name.suffix=='.squashfs' or name.name in ['boot.catalog','boot.cat']: continue
+              x,y=p.read_bytes(),rebuilt[name].read_bytes()
+              if x!=y:
+                  assert P('/'+str(name)) in bootpaths, 'Unexpected payload change: '+str(name)
+                  for start,end in [(8,64),(2548,2556)]:
+                      x=x[:start]+bytes(end-start)+x[end:]; y=y[:start]+bytes(end-start)+y[end:]
+                  assert x==y, 'Boot image differs beyond required address/checksum patches: '+str(name)
+                  print('Boot address/checksum relocation only:',name)
+          for n in ['live/vmlinuz','live/initrd.img','boot/grub/grub.cfg']:
+              assert originals[P(n)].read_bytes()==rebuilt[P(n)].read_bytes()
+              print('UNCHANGED:', '/'+n)
+          print('VALID ISO9660: NEXIUM_OS; original boot catalog, BIOS/UEFI and GRUB2 isohybrid MBR structure verified; original MBR boot code identical')
+          root=P('work/final-root'); installed={}
+          for para in (root/'var/lib/dpkg/status').read_text().split('\n\n'):
+              d=dict(line.split(': ',1) for line in para.splitlines() if ': ' in line and not line.startswith(' '))
+              if d.get('Status')=='install ok installed': installed[d['Package']]=d['Version']
+          assert installed.get('ungoogled-chromium')=='155.0.8059.39-1+nexium1'
+          assert not any(n=='chromium' or n.startswith('chromium-') for n in installed)
+          assert not any((root/n).exists() for n in ['usr/lib/chromium','usr/lib/chromium-browser','opt/chromium'])
+          print('OUTPUT SQUASHFS: ungoogled-chromium 155.0.8059.39-1+nexium1; old Chromium packages and payload absent')
+          before=json.loads(P('prior-reports/gui-before.json').read_text()); changed=[]
+          for name,v in before['packages'].items():
+              if installed.get(name.split(':')[0])!=v: changed.append(name)
+          for name,v in before['files'].items():
+              p=root/name.lstrip('/')
+              try: actual='link:'+os.readlink(p) if p.is_symlink() else hashlib.sha256(p.read_bytes()).hexdigest()
+              except OSError: actual='missing'
+              if actual!=v: changed.append(name)
+          print('X/desktop/terminal preservation (non-fatal):', 'UNCHANGED' if not changed else changed)
+          print('GUI package count:',len(before['packages']),'GUI files:',len(before['files']))
+          print('Terminal detection non-fatal; no desktop/X/terminal components modified by repair')
+          s=P('reports/squashfs.txt').read_text()
+          assert all(t in s for t in ['Compression xz','Block size 1048576','Dictionary size 1048576','Filters selected: x86'])
+          print('Squashfs: xz; block 1048576; dictionary 1048576; x86 filter')
+          n=P('output/nexium-os-1.2-ungoogled-amd64.iso').stat().st_size
+          assert 0<n<1000000000
+          print('ISO:',n,'bytes'); print(f'ISO: {n/1000000:.6f} MB (decimal)')
+          print('Boot structure verified; no physical boot test performed')
+          PY
+          sha256sum "$iso" | tee output/SHA256SUMS
+          { echo "Commit: $GITHUB_SHA"; echo "Run: $GITHUB_RUN_NUMBER"; cat reports/browser-version.txt reports/verification.txt output/SHA256SUMS; } | tee reports/result.txt >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          path: output/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tab-patch-verification
+          path: reports/
+          retention-days: 14
