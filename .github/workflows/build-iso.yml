@@ -1,18 +1,14 @@
-name: Build Nexium ISO
+name: Build Nexium ISO (Ubuntu base)
 on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y live-build debian-archive-keyring
-      - run: |
-          find /usr/lib/live -name 'lb_chroot_linux-image'
-          sudo sed -i 's#/dists/${LB_PARENT_DISTRIBUTION}/Contents-#/dists/${LB_PARENT_DISTRIBUTION}/main/Contents-#g; s#/dists/${LB_DISTRIBUTION}/Contents-#/dists/${LB_DISTRIBUTION}/main/Contents-#g' /usr/lib/live/build/lb_chroot_linux-image
-          sudo grep -c '/main/Contents-' /usr/lib/live/build/lb_chroot_linux-image
-      - run: lb config --mode debian --distribution bookworm --architectures amd64 --binary-images iso-hybrid --debian-installer none --archive-areas main --security false --keyring-packages debian-archive-keyring --linux-flavours amd64 --linux-packages "linux-image" --initramfs live-boot --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-chroot "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/"
+      - run: sudo apt-get update && sudo apt-get install -y live-build
+      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --debian-installer none --archive-areas main --security false --linux-flavours amd64 --linux-packages "linux-generic" --initramfs casper
       - run: sudo lb build
       - uses: actions/upload-artifact@v4
         with:
-          name: nexium-iso
+          name: nexium-iso-ubuntu
           path: "*.iso"
