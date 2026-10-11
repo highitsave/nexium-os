@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       validate_only:
-        description: Resolve app packages only; do not build an ISO
+        description: Validate bootstrap and all chroot stages; skip ISO assembly
         type: boolean
         default: false
 jobs:
@@ -122,6 +122,8 @@ jobs:
           print('Diversion repair applied; shell syntax and merged-/usr safety tests passed.')
           PY
       - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
+      - name: Keep signature tooling installed inside the build chroot
+        run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot
       - name: Resolve and prepare the app set for Ubuntu jammy
         run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
       - name: Prepare binary vendor keyrings for the build chroot
@@ -154,8 +156,7 @@ jobs:
             reports/
             config/package-lists/nexium-apps.list.chroot
           if-no-files-found: warn
-      - name: Build ISO
-        if: ${{ !inputs.validate_only }}
+      - name: Build and validate chroot stages
         run: |
           sudo python3 - <<'PY'
           from pathlib import Path
@@ -200,7 +201,15 @@ jobs:
           hacks.write_text(patched)
           print('Initramfs permissions apply to regular files, not chroot symlinks.')
           PY
-          sudo lb build
+          if [ "${{ inputs.validate_only }}" = "true" ]; then
+            sudo lb bootstrap
+            sudo lb chroot
+            sudo chroot chroot gpg --version
+            test ! -e .build/start-stop-daemon.path
+            echo 'Nexium chroot validation passed: archives install, hacks, archives remove, dpkg remove.'
+          else
+            sudo lb build
+          fi
       - uses: actions/upload-artifact@v4
         if: ${{ !inputs.validate_only }}
         with:
