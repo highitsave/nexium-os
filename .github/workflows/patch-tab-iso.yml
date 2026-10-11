@@ -1,0 +1,205 @@
+name: Patch Tab Nexium 1.2 ISO
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install patch tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso python3-venv
+          python3 -m venv /tmp/drive-download
+          /tmp/drive-download/bin/pip install gdown
+      - name: Reuse verified ungoogled payload from essentials run 10
+        uses: actions/download-artifact@v4
+        with:
+          name: nexium-essentials-bookworm-iso
+          run-id: 38172456716
+          github-token: ${{ github.token }}
+          path: donor-artifact
+      - name: Patch only the browser and verify the rebuilt ISO
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p work output reports
+          exec > >(tee reports/patch.log) 2>&1
+          trap 'echo "Patch failed at line $LINENO" >> "$GITHUB_STEP_SUMMARY"' ERR
+          /tmp/drive-download/bin/python - <<'PY'
+          import gdown
+          gdown.download(id='12vHscmgS7i9-QIgA-aqsGAtw0Mrhknze', output='work/orig.iso', quiet=False)
+          PY
+          echo 'a6d1002b255ac06be36882e0eca38721ca75df1540e9d87756f6c8fda1e831b0  work/orig.iso' | sha256sum -c -
+          test "$(stat -c %s work/orig.iso)" -eq 585717760
+          xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain 2>&1 | tee reports/original-boot.txt
+          xorriso -osirrox on -indev work/orig.iso -extract / work/tree
+          sq=$(find work/tree -type f -iname '*.squashfs' -print -quit)
+          test -n "$sq"
+          sqpath="/${sq#work/tree/}"
+          echo "Original live filesystem: $sqpath"
+          unsquashfs -s "$sq" | tee reports/squashfs-options.txt
+          sudo unsquashfs -d work/root "$sq"
+          donor=$(find donor-artifact -type f -iname '*.iso' -print -quit)
+          test -n "$donor"
+          xorriso -osirrox on -indev "$donor" -extract /live/filesystem.squashfs work/donor.squashfs
+          sudo unsquashfs -d work/donor-root work/donor.squashfs opt/ungoogled-chromium var/lib/dpkg/status
+          test -x work/donor-root/opt/ungoogled-chromium/chrome
+          rm -rf donor-artifact work/donor.squashfs
+          # Reuse exact packaging block validated in #17; input comes from #10.
+          # No release tarball is downloaded by this workflow.
+          git show 81688111e3eb16a7cd65710c66131b94ce9cde73:scripts/prepare-apps.sh > work/prepare-apps-validated.sh
+          python3 - <<'PY'
+          from pathlib import Path
+          lines = Path('work/prepare-apps-validated.sh').read_text().splitlines()
+          start = next(i for i,s in enumerate(lines) if s.startswith('uc_version='))
+          end = next(i for i,s in enumerate(lines[start:], start) if s.startswith('dpkg-deb --root-owner-group'))
+          out = ['set -eu', 'mkdir -p config/packages.chroot']
+          changed = 0
+          for s in lines[start:end+1]:
+              if 'ungoogled.tar.xz' in s and s.startswith(('curl ', 'printf ', 'tar ')):
+                  changed += 1
+                  if s.startswith('tar '):
+                      out.append('cp -a work/donor-root/opt/ungoogled-chromium/. "$tmp/uc/opt/ungoogled-chromium/"')
+                  continue
+              out.append(s)
+          assert changed == 3, f'Unexpected packaging block: replaced {changed} acquisition lines'
+          Path('work/package-reused-payload.sh').write_text('\n'.join(out)+'\n')
+          PY
+          sudo bash work/package-reused-payload.sh
+          dpkg-deb -I config/packages.chroot/ungoogled-chromium.deb | tee reports/deb-control.txt
+          sudo cp config/packages.chroot/ungoogled-chromium.deb work/root/tmp/ungoogled-chromium.deb
+          cat > work/gui-manifest.py <<'PY'
+          import subprocess, re, pathlib, hashlib, json, os, sys
+          root = pathlib.Path('work/root')
+          q = subprocess.check_output(['sudo','chroot',str(root),'dpkg-query','-W','-f=${binary:Package}\t${Version}\t${db:Status-Status}\n'],text=True)
+          pattern = r'^(xorg|xserver|x11-|xfce|libxfce|lxde|lxqt|openbox|fluxbox|blackbox|icewm|jwm|pcmanfm|thunar|gnome|mate-|cinnamon|budgie|lightdm|sddm|gdm|slim|xterm|lxterminal|qterminal|sakura|rxvt|urxvt|konsole|tilix|alacritty|terminator|kitty|tint2|rofi|dwm|i3|bspwm|awesome|enlightenment)'
+          packages = {p:v for p,v,status in (s.split('\t') for s in q.splitlines()) if status == 'installed' and re.search(pattern,p)}
+          assert packages, 'No graphical desktop/terminal packages identified'
+          assert any((root/p).exists() for p in ['usr/lib/xorg/Xorg','usr/bin/Xorg']), 'Xorg missing'
+          assert any((root/'usr/bin'/p).exists() for p in ['xterm','lxterminal','xfce4-terminal','qterminal','sakura','rxvt','urxvt','gnome-terminal','mate-terminal','konsole','tilix','alacritty','terminator','kitty']), 'Terminal missing'
+          files = {}
+          for package in packages:
+              listing = subprocess.check_output(['sudo','chroot',str(root),'dpkg-query','-L',package],text=True)
+              for name in listing.splitlines():
+                  if not name.startswith('/'): continue
+                  p = root/name.lstrip('/')
+                  if p.is_symlink(): files[name] = 'link:'+os.readlink(p)
+                  elif p.is_file(): files[name] = hashlib.sha256(p.read_bytes()).hexdigest()
+          data = {'packages':packages, 'files':files}
+          target = pathlib.Path('reports/gui-before.json')
+          if sys.argv[1] == 'before': target.write_text(json.dumps(data,sort_keys=True))
+          else:
+              original = json.loads(target.read_text())
+              assert original == data, 'X/desktop/terminal package versions or files changed'
+              print('PRESERVED: all '+str(len(packages))+' X/desktop/terminal packages and '+str(len(files))+' package files unchanged')
+              print('GUI packages: '+', '.join(packages))
+          PY
+          sudo python3 work/gui-manifest.py before
+          sudo mkdir -p work/menu-backup
+          sudo find work/root/usr/share/applications -maxdepth 1 -iname '*chromium*.desktop' -exec cp -a {} work/menu-backup/ \;
+          sudo chroot work/root dpkg-query -W '-f=${binary:Package}\t${Version}\t${db:Status-Status}\n' | tee reports/packages-before.txt
+          sudo cp -a work/root/etc/resolv.conf work/resolv.original
+          sudo rm -f work/root/etc/resolv.conf
+          sudo cp -L /etc/resolv.conf work/root/etc/resolv.conf
+          if test -e work/root/usr/sbin/policy-rc.d; then sudo cp -a work/root/usr/sbin/policy-rc.d work/policy.original; fi
+          printf '#!/bin/sh\nexit 101\n' | sudo tee work/root/usr/sbin/policy-rc.d >/dev/null
+          sudo chmod +x work/root/usr/sbin/policy-rc.d
+          sudo mount --rbind /dev work/root/dev
+          sudo mount --make-rslave work/root/dev
+          sudo mount -t proc proc work/root/proc
+          sudo mount -t sysfs sysfs work/root/sys
+          cleanup() {
+            sudo umount -R work/root/dev || true
+            sudo umount work/root/proc work/root/sys || true
+          }
+          trap cleanup EXIT
+          old=$(sudo chroot work/root dpkg-query -W '-f=${binary:Package} ${db:Status-Status}\n' | awk '$1 ~ /^chromium($|-)/ && $2 == "installed" {print $1}')
+          if test -n "$old"; then sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get purge -y --no-auto-remove $old; fi
+          sudo rm -rf work/root/usr/lib/chromium work/root/usr/lib/chromium-browser work/root/opt/chromium
+          sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get update
+          sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends /tmp/ungoogled-chromium.deb
+          sudo ln -sfn /usr/bin/ungoogled-chromium work/root/usr/bin/chromium
+          sudo cp -a work/menu-backup/. work/root/usr/share/applications/
+          sudo chroot work/root dpkg -l | grep -i chromium | tee reports/chromium-packages.txt
+          sudo chroot work/root dpkg-query -W '-f=${binary:Package}\t${Version}\t${db:Status-Status}\n' | tee reports/packages-after.txt
+          ! awk -F '\t' '$1 ~ /^chromium($|-)/ && $3 == "installed" {found=1} END {exit !found}' reports/packages-after.txt
+          sudo chroot work/root dpkg-query -W '-f=${Status}\n' ungoogled-chromium | grep -Fx 'install ok installed'
+          sudo chroot work/root /usr/bin/chromium --version | tee reports/browser-version.txt
+          sudo python3 work/gui-manifest.py after | tee reports/gui-verification.txt
+          cleanup
+          trap - EXIT
+          sudo rm -f work/root/etc/resolv.conf work/root/usr/sbin/policy-rc.d work/root/tmp/ungoogled-chromium.deb
+          sudo mv work/resolv.original work/root/etc/resolv.conf
+          if test -e work/policy.original; then sudo mv work/policy.original work/root/usr/sbin/policy-rc.d; fi
+          sudo chroot work/root apt-get clean
+          sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1M -Xdict-size 1M -Xbcj x86 -processors 2
+          iso=output/nexium-os-1.2-ungoogled-amd64.iso
+          xorriso -indev work/orig.iso -outdev "$iso" -map work/new.squashfs "$sqpath" -boot_image any keep -commit -end
+          xorriso -indev "$iso" -report_el_torito plain -report_system_area plain 2>&1 | tee reports/rebuilt-boot.txt
+          xorriso -osirrox on -indev "$iso" -extract / work/verify-tree
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          a,b = Path('work/tree'),Path('work/verify-tree')
+          original = {p.relative_to(a):p for p in a.rglob('*') if p.is_file()}
+          rebuilt = {p.relative_to(b):p for p in b.rglob('*') if p.is_file()}
+          assert original.keys() == rebuilt.keys(), 'ISO file list changed'
+          count=0
+          for name,p in original.items():
+              if p.suffix.lower() == '.squashfs': continue
+              if p.name.lower() in ('boot.catalog','boot.cat'): continue
+              assert hashlib.sha256(p.read_bytes()).digest() == hashlib.sha256(rebuilt[name].read_bytes()).digest(), f'ISO file changed: {name}'
+              count+=1
+          print(f'PRESERVED: {count} original ISO payload files byte-identical, including kernel, initrd, GRUB and EFI assets')
+          PY
+          verify_sq=$(find work/verify-tree -type f -iname '*.squashfs' -print -quit)
+          cmp work/new.squashfs "$verify_sq"
+          unsquashfs -s "$verify_sq" | tee reports/rebuilt-squashfs-options.txt
+          sudo unsquashfs -d work/final-root "$verify_sq" var/lib/dpkg/status usr/bin/chromium usr/bin/ungoogled-chromium opt/ungoogled-chromium
+          python3 - <<'PY'
+          from pathlib import Path
+          status = Path('work/final-root/var/lib/dpkg/status').read_text()
+          packages={}
+          for paragraph in status.split('\n\n'):
+              fields={line.split(': ',1)[0]:line.split(': ',1)[1] for line in paragraph.splitlines() if ': ' in line and not line.startswith(' ')}
+              if fields.get('Status') == 'install ok installed': packages[fields['Package']]=fields['Version']
+          assert 'ungoogled-chromium' in packages
+          assert not any(p == 'chromium' or p.startswith('chromium-') for p in packages)
+          print('FINAL ISO: ungoogled-chromium '+packages['ungoogled-chromium']+' installed; old Chromium absent')
+          PY
+          bytes=$(stat -c %s "$iso")
+          test "$bytes" -lt 1000000000
+          sha256sum "$iso" | tee output/SHA256SUMS
+          {
+            echo '## Tab 1.2 browser-only patch verified'
+            echo "Commit: $GITHUB_SHA"
+            echo "Run: $GITHUB_RUN_NUMBER"
+            echo "ISO: $bytes bytes"
+            awk -v n="$bytes" 'BEGIN {printf "ISO: %.6f MB (decimal)\n",n/1000000}'
+            cat reports/browser-version.txt reports/chromium-packages.txt reports/gui-verification.txt
+            echo 'Old Chromium: absent (dpkg database checked again from output ISO)'
+            echo 'Kernel, initrd, GRUB configuration and EFI payload: byte-identical'
+            echo 'Volume label: NEXIUM_OS; original boot catalog/system area retained by xorriso'
+            echo 'Squashfs: xz, 1 MiB block, 1 MiB dictionary, x86 filter'
+            echo 'Boot structure verified; no physical boot test performed'
+          } | tee reports/result.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload patched ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          path: output/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+      - name: Upload verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tab-patch-verification
+          path: reports/
+          retention-days: 14
