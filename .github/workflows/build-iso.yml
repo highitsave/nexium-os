@@ -12,6 +12,115 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y live-build
+      - name: Repair the live-build start-stop-daemon diversion
+        run: |
+          sudo python3 - <<'PY'
+          from pathlib import Path
+          import os
+          import subprocess
+          import tempfile
+
+          # Ubuntu's dual alias diversions collide on Jammy's merged /usr.
+          # Use the path recorded by dpkg, not a second filesystem alias.
+          version = subprocess.check_output(
+              ['dpkg-query', '-W', '-f=${Version}', 'live-build'], text=True)
+          if version != '3.0~a57-1ubuntu49.1':
+              raise SystemExit('Unreviewed live-build version: ' + version)
+          script = Path('/usr/lib/live/build/lb_chroot_dpkg')
+          original = script.read_text()
+          install = '''\t\t# Use one package-owned diversion path for setup and restoration.
+          \t\tssd="$(Chroot chroot dpkg-query -L dpkg | grep -xE '/(usr/)?sbin/start-stop-daemon')"
+          \t\tcase "$ssd" in
+          \t\t\t/sbin/start-stop-daemon|/usr/sbin/start-stop-daemon) ;;
+          \t\t\t*) Echo_error "Ambiguous start-stop-daemon package path"; exit 1 ;;
+          \t\tesac
+          \t\tif [ ! -f "chroot$ssd" ] || [ ! -x "chroot$ssd" ] || [ -L "chroot$ssd" ] ||
+          \t\t   [ -n "$(Chroot chroot dpkg-divert --listpackage "$ssd")" ]
+          \t\tthen
+          \t\t\tEcho_error "Refusing an unexpected start-stop-daemon or diversion"
+          \t\t\texit 1
+          \t\tfi
+          \t\tChroot chroot dpkg-divert --rename --quiet --add "$ssd"
+          \t\tln -s /bin/true "chroot$ssd"
+          \t\techo "$ssd" > .build/start-stop-daemon.path
+          '''
+          remove = '''\t\t# Restore only the recorded diversion; never delete its saved executable.
+          \t\tssd="$(cat .build/start-stop-daemon.path)"
+          \t\tcase "$ssd" in
+          \t\t\t/sbin/start-stop-daemon|/usr/sbin/start-stop-daemon) ;;
+          \t\t\t*) Echo_error "Invalid saved start-stop-daemon path"; exit 1 ;;
+          \t\tesac
+          \t\tif [ ! -L "chroot$ssd" ] || [ "$(readlink "chroot$ssd")" != /bin/true ] ||
+          \t\t   [ ! -f "chroot$ssd.distrib" ] || [ ! -x "chroot$ssd.distrib" ] ||
+          \t\t   [ -L "chroot$ssd.distrib" ] ||
+          \t\t   [ "$(Chroot chroot dpkg-divert --listpackage "$ssd")" != LOCAL ]
+          \t\tthen
+          \t\t\tEcho_error "Refusing to remove an unverified start-stop-daemon shim"
+          \t\t\texit 1
+          \t\tfi
+          \t\trm "chroot$ssd"
+          \t\tChroot chroot dpkg-divert --rename --quiet --remove "$ssd"
+          \t\trm .build/start-stop-daemon.path
+          '''
+          patched = original
+          for start, end, replacement, expected in (
+              ('\t\t# Create custom start-stop-daemon program\n',
+               '\n\t\t# Disable dpkg syncing', install,
+               '--add --divert /sbin/start-stop-daemon.distrib.usr-is-merged /sbin/start-stop-daemon'),
+              ('\t\t# Remove custom start-stop-daemon program\n',
+               '\n\t\t# Remove dpkg sync configuration', remove,
+               '--remove /usr/sbin/start-stop-daemon'),
+          ):
+              if patched.count(start) != 1 or patched.count(end) != 1:
+                  raise SystemExit('Unreviewed live-build source layout')
+              first, last = patched.index(start), patched.index(end)
+              if patched[first:last].count(expected) != 1:
+                  raise SystemExit('Unreviewed live-build diversion code')
+              patched = patched[:first] + replacement + patched[last:]
+          subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
+
+          # Test real dpkg-divert restoration through both merged-/usr aliases.
+          wrapper = '''set -e
+          Chroot() {
+            root="$PWD/$1"; shift
+            command="$1"; shift
+            case "$command" in
+              dpkg-query) echo "$TEST_SSD" ;;
+              dpkg-divert) dpkg-divert --root="$root" "$@" ;;
+              *) exit 1 ;;
+            esac
+          }
+          Echo_error() { echo "$@" >&2; }
+          '''
+          for owned in ('/sbin/start-stop-daemon', '/usr/sbin/start-stop-daemon'):
+              for changed in (False, True):
+                  with tempfile.TemporaryDirectory() as directory:
+                      work = Path(directory)
+                      root = work / 'chroot'
+                      (root / 'usr/sbin').mkdir(parents=True)
+                      (root / 'sbin').symlink_to('usr/sbin')
+                      (root / 'var/lib/dpkg').mkdir(parents=True)
+                      (root / 'var/lib/dpkg/status').touch()
+                      (work / '.build').mkdir()
+                      binary = root / 'usr/sbin/start-stop-daemon'
+                      binary.write_text('original executable\n')
+                      binary.chmod(0o755)
+                      env = dict(os.environ, TEST_SSD=owned)
+                      subprocess.run(['sh', '-c', wrapper + install], cwd=work, env=env, check=True)
+                      if changed:
+                          binary.unlink()
+                          binary.write_text('not the temporary shim\n')
+                      result = subprocess.run(['sh', '-c', wrapper + remove], cwd=work, env=env)
+                      if changed:
+                          if result.returncode == 0 or binary.read_text() != 'not the temporary shim\n':
+                              raise SystemExit('Unsafe cleanup regression')
+                          if (root / (owned.lstrip('/') + '.distrib')).read_text() != 'original executable\n':
+                              raise SystemExit('Saved executable was modified')
+                      elif result.returncode != 0 or binary.read_text() != 'original executable\n':
+                          raise SystemExit('Diversion restoration regression')
+          script.write_text(patched)
+          print('Diversion repair applied; shell syntax and merged-/usr safety tests passed.')
+          PY
       - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
       - name: Resolve and prepare the app set for Ubuntu jammy
         run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
