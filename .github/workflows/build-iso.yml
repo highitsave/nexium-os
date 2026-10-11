@@ -189,6 +189,16 @@ jobs:
           subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
           script.write_text(patched)
           print('Archives keyring installation guarded at all four in-chroot APT updates.')
+          # Host chmod must not follow absolute /boot links outside the chroot.
+          hacks = Path('/usr/lib/live/build/lb_chroot_hacks')
+          original = hacks.read_text()
+          needle = "find chroot/boot -name 'initrd*' -print0 | xargs -r -0 chmod go+r"
+          if original.count(needle) != 1:
+              raise SystemExit('Unreviewed live-build initramfs permissions layout')
+          patched = original.replace(needle, needle.replace(' -name ', ' -type f -name '))
+          subprocess.run(['sh', '-n'], input=patched, text=True, check=True)
+          hacks.write_text(patched)
+          print('Initramfs permissions apply to regular files, not chroot symlinks.')
           PY
           sudo lb build
       - uses: actions/upload-artifact@v4
