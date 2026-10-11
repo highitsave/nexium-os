@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Nexium OS — System Information
+Exec=/usr/local/bin/nexium-info
+Icon=computer
+Terminal=false
+Categories=Utility;

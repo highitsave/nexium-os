@@ -1,0 +1,14 @@
+#!/bin/sh
+state="${XDG_STATE_HOME:-$HOME/.local/state}/nexium"
+[ "$1" = --force ] || [ ! -f "$state/welcome-seen" ] || exit 0
+if zenity --info --title="Welcome to Nexium OS" --width=540 --text="Welcome to Nexium OS — Golden Gate desktop.
+
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files; standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal administration still requires care.
+
+Use System Information in the top panel for actual system details."; then
+ mkdir -p "$state"; touch "$state/welcome-seen"
+fi

@@ -1,0 +1,16 @@
+openbox
+plank
+tint2
+pcmanfm
+xterm
+mousepad
+lxtask
+lxappearance
+obconf
+feh
+zenity
+picom
+network-manager-gnome
+pavucontrol
+adwaita-icon-theme
+dbus-x11

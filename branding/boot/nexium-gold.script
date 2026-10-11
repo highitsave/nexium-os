@@ -1,0 +1,4 @@
+image = Image("golden-gate.png");
+image = image.Scale(Window.GetWidth(), Window.GetHeight());
+sprite = Sprite(image);
+sprite.SetX(0); sprite.SetY(0); sprite.SetZ(-100);

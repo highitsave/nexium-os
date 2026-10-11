@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Nexium Calls (Coming soon)
+Exec=/usr/local/bin/nexium-coming-soon Calls
+Icon=call-start
+Terminal=false
+Categories=Utility;
+StartupNotify=true

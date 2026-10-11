@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome to Nexium OS
+Exec=/usr/local/bin/nexium-welcome --force
+Icon=dialog-information
+Terminal=false
+Categories=Utility;

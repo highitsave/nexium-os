@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=NEXIUM VAULT (Coming soon)
+Exec=/usr/local/bin/nexium-coming-soon Vault
+Icon=system-software-install
+Terminal=false
+Categories=Utility;
+StartupNotify=true

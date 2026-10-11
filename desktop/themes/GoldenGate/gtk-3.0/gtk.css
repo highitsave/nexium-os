@@ -1,0 +1,12 @@
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained.css");
+@define-color theme_bg_color #fff8e7;
+@define-color theme_fg_color #463a2c;
+@define-color theme_base_color #fffdf5;
+@define-color theme_selected_bg_color #d4b46a;
+@define-color theme_selected_fg_color #302515;
+window, dialog, .background { background-color: #fff8e7; color: #463a2c; }
+headerbar, .titlebar { background-image: linear-gradient(to bottom, #fff7dd, #ecd8a6); border-radius: 12px 12px 0 0; }
+button { border-radius: 8px; }
+entry, textview, list { background-color: #fffdf5; color: #463a2c; border-radius: 7px; }
+selection, *:selected { background-color: #d4b46a; color: #302515; }
+decoration { border-radius: 12px 12px 0 0; }

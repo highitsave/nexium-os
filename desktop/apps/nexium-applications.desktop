@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Applications
+Exec=/usr/local/bin/nexium-applications
+Icon=start-here
+Terminal=false
+Categories=Utility;

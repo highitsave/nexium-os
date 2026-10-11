@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=System Monitor
+Exec=/usr/bin/lxtask
+Icon=utilities-system-monitor
+Terminal=false
+Categories=Utility;
+StartupNotify=true

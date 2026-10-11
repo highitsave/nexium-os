@@ -1,0 +1,8 @@
+#!/bin/sh
+case "$1" in
+ Messages) text="Nexium Messages — coming soon. No messaging backend or persistent conversation client is implemented in Phase 2. Nothing is sent.";;
+ Calls) text="Nexium Calls — coming soon. Signaling, accounts and audio calling are not implemented. No call is placed.";;
+ Vault) text="NEXIUM VAULT — coming soon. The application center is not implemented. No packages are installed by this placeholder.";;
+ *) exit 2;;
+esac
+exec zenity --info --title="Nexium OS — $1" --width=480 --text="$text"

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Native session under Xinit as the existing unprivileged nexium user.
+export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24
+xset s off -dpms s noblank 2>/dev/null || true
+exec dbus-run-session -- openbox-session

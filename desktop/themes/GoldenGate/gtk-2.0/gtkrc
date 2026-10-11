@@ -1,0 +1,9 @@
+include "/usr/share/themes/Adwaita/gtk-2.0/gtkrc"
+style "nexium-gold" {
+  bg[NORMAL] = "#fff8e7"
+  fg[NORMAL] = "#463a2c"
+  base[NORMAL] = "#fffdf5"
+  bg[SELECTED] = "#d4b46a"
+  fg[SELECTED] = "#302515"
+}
+class "*" style "nexium-gold"

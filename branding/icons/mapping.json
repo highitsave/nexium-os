@@ -1,0 +1,12 @@
+{
+  "files": "system-file-manager",
+  "browser": "web-browser",
+  "terminal": "utilities-terminal",
+  "messages": "mail-message-new",
+  "calls": "call-start",
+  "settings": "preferences-system",
+  "vault": "system-software-install",
+  "editor": "accessories-text-editor",
+  "monitor": "utilities-system-monitor",
+  "trash": "user-trash"
+}

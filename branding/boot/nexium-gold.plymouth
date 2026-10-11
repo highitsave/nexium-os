@@ -1,0 +1,7 @@
+[Plymouth Theme]
+Name=Nexium OS Golden Gate (staged)
+Description=Optional future Golden Gate boot wallpaper; not enabled in preserved initrd
+ModuleName=script
+[script]
+ImageDir=/usr/share/plymouth/themes/nexium-gold
+ScriptFile=/usr/share/plymouth/themes/nexium-gold/nexium-gold.script

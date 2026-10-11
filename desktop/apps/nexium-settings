@@ -1,0 +1,9 @@
+#!/bin/sh
+choice=$(zenity --list --title="Nexium OS — Settings" --column=Setting --height=310 --width=360 Appearance Windows Network Audio 'System Information') || exit 0
+case "$choice" in
+ Appearance) exec lxappearance;;
+ Windows) exec obconf;;
+ Network) exec nm-connection-editor;;
+ Audio) exec pavucontrol;;
+ 'System Information') exec nexium-info;;
+esac

@@ -1,0 +1,14 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill /usr/share/backgrounds/nexium/golden-gate.png &
+picom --config /etc/xdg/nexium/picom.conf &
+tint2 -c /etc/xdg/nexium/tint2rc &
+nm-applet &
+gsettings set org.gnome.desktop.interface gtk-theme GoldenGate 2>/dev/null || true
+gsettings set org.gnome.desktop.interface icon-theme "$(cat /etc/xdg/nexium/icon-theme)" 2>/dev/null || true
+schema=net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/
+gsettings set "$schema" position bottom 2>/dev/null || true
+gsettings set "$schema" alignment center 2>/dev/null || true
+gsettings set "$schema" icon-size 48 2>/dev/null || true
+gsettings set "$schema" hide-mode intelligent 2>/dev/null || true
+plank &
+nexium-welcome &

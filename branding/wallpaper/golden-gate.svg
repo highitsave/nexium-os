@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#fff6dc"/><stop offset="1" stop-color="#ddb569"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#99b7bc"/><stop offset="1" stop-color="#425e70"/></linearGradient></defs>
+<rect width="1920" height="1080" fill="url(#sky)"/><circle cx="1370" cy="290" r="120" fill="#fff9df" opacity=".8"/>
+<path d="M0 540 Q250 270 600 540 Q850 410 1100 560 L1920 590 L1920 790 L0 790Z" fill="#bda778"/>
+<path d="M1100 600 Q1500 350 1920 510 L1920 820 L1050 820Z" fill="#998c72"/>
+<rect y="660" width="1920" height="420" fill="url(#water)"/>
+<path d="M0 734 Q850 684 1920 717 M0 850 Q990 790 1920 837 M0 970 Q900 925 1920 952" fill="none" stroke="#e9dcc0" stroke-width="4" opacity=".3"/>
+<g fill="none" stroke="#ae633e"><path d="M0 658 L1920 658" stroke-width="24"/><path d="M620 682 V338 M665 682 V338 M1320 682 V338 M1365 682 V338" stroke-width="18"/><path d="M610 360 H675 M610 416 H675 M1310 360 H1375 M1310 416 H1375" stroke-width="16"/>
+<path d="M0 618 Q315 630 640 350 Q990 760 1340 350 Q1640 630 1920 618" stroke-width="7"/>
+<path d="M100 633 V658 M200 630 V658 M300 602 V658 M400 553 V658 M500 484 V658 M740 457 V658 M840 536 V658 M940 593 V658 M1040 609 V658 M1140 567 V658 M1240 473 V658 M1440 489 V658 M1540 553 V658 M1640 592 V658 M1740 618 V658 M1840 629 V658" stroke-width="3"/></g>
+<text x="110" y="970" font-family="sans-serif" font-size="52" fill="#fff7df" letter-spacing="8">NEXIUM OS</text><text x="112" y="1010" font-family="sans-serif" font-size="20" fill="#e9dcc0" letter-spacing="5">GOLDEN GATE</text></svg>
