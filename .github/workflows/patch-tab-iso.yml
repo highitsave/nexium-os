@@ -10,6 +10,14 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure historical packaging commit is available
+        shell: bash
+        run: |
+          set -x
+          git fetch --unshallow || true
+          git cat-file -e 81688111e3eb16a7cd65710c66131b94ce9cde73 || git fetch origin 81688111e3eb16a7cd65710c66131b94ce9cde73
       - name: Install patch tools
         run: |
           sudo apt-get update
@@ -26,6 +34,7 @@ jobs:
       - name: Patch only the browser and verify the rebuilt ISO
         shell: bash
         run: |
+          set -x
           set -Eeuo pipefail
           mkdir -p work output reports
           exec > >(tee reports/patch.log) 2>&1
