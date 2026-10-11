@@ -122,6 +122,7 @@ jobs:
           print('Diversion repair applied; shell syntax and merged-/usr safety tests passed.')
           PY
       - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false
+      - run: printf 'LB_BOOTSTRAP_INCLUDE="gnupg"\n' >> config/bootstrap
       - name: Keep signature tooling installed inside the build chroot
         run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot
       - name: Resolve and prepare the app set for Ubuntu jammy
