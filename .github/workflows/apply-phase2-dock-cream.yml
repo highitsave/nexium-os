@@ -1,0 +1,303 @@
+name: Apply and verify Phase 2 X11 dock and cream splash
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/apply-phase2-dock-cream.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply and commit reproducible authorized source
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml python3-pil xvfb x11-utils xdotool initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core
+          mkdir -p reports output work
+          cat > /tmp/apply.py <<'PY'
+          from pathlib import Path as P
+          import yaml
+          p=P('desktop/phase2.py');s=p.read_text()
+          old='export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24'
+          new='export XDG_SESSION_TYPE=x11\nexport XDG_CURRENT_DESKTOP=Openbox XDG_SESSION_DESKTOP=Openbox DESKTOP_SESSION=openbox\n'+old
+          if 'export XDG_SESSION_TYPE=x11' not in s:
+              assert s.count(old)==1;s=s.replace(old,new,1)
+          if '\nlibglib2.0-bin\n' not in s:
+              assert '\ndbus-x11\n' in s;s=s.replace('\ndbus-x11\n','\ndbus-x11\nlibglib2.0-bin\n',1)
+          # Modify the generator rather than just its materialized files.
+          def filevalue(key,text):
+              global s
+              start=s.index("FILES["+repr(key)+"] = '''")
+              end=s.index("'''",start+len("FILES["+repr(key)+"] = '''"))+3
+              s=s[:start]+"FILES["+repr(key)+"] = '''"+text+"'''"+s[end:]
+          filevalue('branding/boot/README.md','''# Golden Gate cream boot branding
+          User-authorized active Plymouth theme: nexium-gold.
+          Cream/pale-gold background and exact attribution: made by TOMO!
+          Attribution PNG is reproducibly rendered from this committed generator.
+          The selected config and all theme assets are embedded by update-initramfs.
+          This pass intentionally regenerates /live/initrd.img; unchanged-initrd
+          verification is replaced with source/config/theme verification in initrd.
+          Kernel, grub.cfg, GRUB2 isohybrid boot structure and NEXIUM_OS stay preserved.
+          ''')
+          filevalue('branding/boot/nexium-gold.plymouth','''[Plymouth Theme]
+          Name=Nexium OS Golden Gate Cream
+          Description=Cream and pale-gold boot splash: made by TOMO!
+          ModuleName=script
+          [script]
+          ImageDir=/usr/share/plymouth/themes/nexium-gold
+          ScriptFile=/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
+          ''')
+          filevalue('branding/boot/nexium-gold.script','''Window.SetBackgroundTopColor(0.9804, 0.9569, 0.8784);
+          Window.SetBackgroundBottomColor(0.9412, 0.8863, 0.7373);
+          attribution = Image("attribution.png");
+          attribution_sprite = Sprite(attribution);
+          attribution_sprite.SetX((Window.GetWidth() - attribution.GetWidth()) / 2);
+          attribution_sprite.SetY((Window.GetHeight() - attribution.GetHeight()) / 2);
+          attribution_sprite.SetZ(100);
+          ''')
+          s=s.replace('Boot splash changes are staged only; see branding/boot/README.md.','Active cream made by TOMO! splash uses a regenerated initrd; see branding/boot/README.md.')
+          s=s.replace("print('Boot-theme source staged only; preserved initrd theme is unchanged')","print('Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately')")
+          marker='    # Reuse, do not reinvent, the exact verifier from repair-tab-boot.yml.'
+          if 'def render_cream_attribution(' not in s:
+              helper='''def render_cream_attribution():
+              from PIL import Image, ImageDraw, ImageFont
+              image=Image.new('RGBA',(640,180),(0,0,0,0))
+              draw=ImageDraw.Draw(image)
+              regular=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',26)
+              bold=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',44)
+              draw.text((320,35),'Nexium OS',font=regular,fill=(126,92,51,255),anchor='mm')
+              draw.text((320,98),'made by TOMO!',font=bold,fill=(93,61,31,255),anchor='mm')
+              draw.line((190,148,450,148),fill=(196,153,83,255),width=3)
+              image.save('branding/boot/attribution.png')
+          
+          '''
+              s=s.replace('def materialize():',helper+'def materialize():',1)
+              assert marker in s;s=s.replace(marker,'    render_cream_attribution()\n'+marker,1)
+          installmarker="    icon_theme='Adwaita'"
+          if "put('branding/boot/attribution.png'" not in s:
+              insert="""    put('branding/boot/attribution.png','usr/share/plymouth/themes/nexium-gold/attribution.png')
+              put('branding/boot/plymouthd.conf','etc/plymouth/plymouthd.conf')
+          """
+              assert installmarker in s;s=s.replace(installmarker,insert+installmarker,1)
+              filemarker="FILES['branding/boot/nexium-gold.plymouth']"
+              s=s.replace(filemarker,"FILES['branding/boot/plymouthd.conf'] = '''[Daemon]\nTheme=nexium-gold\nShowDelay=0\nDeviceTimeout=8\n'''\n"+filemarker,1)
+          # Keep all boot preservation logic, exempt ONLY the newly authorized initrd.
+          original="    P('scripts/verify-phase2-boot.py').write_text(script[:end]+'\\n')"
+          if 'INITRD_CREAM_VERIFICATION' not in s:
+              check=r'''
+          # INITRD_CREAM_VERIFICATION: user-authorized regenerated initrd.
+          import shutil
+          target=P('work/final-initrd')
+          if target.exists(): shutil.rmtree(target)
+          subprocess.run(['unmkinitramfs',str(b/'live/initrd.img'),str(target)],check=True)
+          def unpacked(path):
+              matches=[p for p in target.rglob(P(path).name) if p.is_file() and str(p).endswith(path)]
+              assert len(matches)==1, (path,matches)
+              return matches[0]
+          config=unpacked('etc/plymouth/plymouthd.conf')
+          assert 'Theme=nexium-gold' in config.read_text()
+          assert config.read_bytes()==P('branding/boot/plymouthd.conf').read_bytes()
+          for name in ['nexium-gold.plymouth','nexium-gold.script','attribution.png']:
+              packed=unpacked('usr/share/plymouth/themes/nexium-gold/'+name)
+              assert packed.read_bytes()==P('branding/boot',name).read_bytes(),name
+              print('INITRD SOURCE SHA256 MATCH:',name,hashlib.sha256(packed.read_bytes()).hexdigest())
+          assert originals[P('live/initrd.img')].read_bytes()!=rebuilt[P('live/initrd.img')].read_bytes()
+          print('PASS REGENERATED INITRD: selected Theme=nexium-gold; cream script and made by TOMO! attribution PNG match committed branding source')
+          print('INITRD SHA256:',hashlib.sha256((b/'live/initrd.img').read_bytes()).hexdigest())
+          '''
+              replacement="""    # INITRD_CREAM_VERIFICATION replaces obsolete unchanged-initrd checks only.
+              script=script[:end]
+              assert "name.suffix=='.squashfs'" in script
+              script=script.replace("name.suffix=='.squashfs'", "name==P('live/initrd.img') or name.suffix=='.squashfs'",1)
+              script=script.replace("['live/vmlinuz','live/initrd.img','boot/grub/grub.cfg']", "['live/vmlinuz','boot/grub/grub.cfg']",1)
+              P('scripts/verify-phase2-boot.py').write_text(script+'\\n'+"""+repr(check)+")"
+              assert original in s;s=s.replace(original,replacement,1)
+          p.write_text(s);compile(s,str(p),'exec')
+          d=yaml.safe_load(P('.github/workflows/phase2-build.yml').read_text())
+          steps=d['jobs']['build']['steps']
+          build=next(x for x in steps if x.get('name')=='Patch and verify native desktop ISO')
+          run=build['run']
+          if 'Regenerate the user-authorized cream-theme initrd' not in run:
+              needle='sudo chroot work/root dpkg-query -W > reports/installed-packages.tsv'
+              addition='''
+          # Regenerate the user-authorized cream-theme initrd; original kernel stays.
+          sudo chroot work/root plymouth-set-default-theme nexium-gold
+          test "$(sudo cat work/root/etc/plymouth/plymouthd.conf | grep '^Theme=')" = 'Theme=nexium-gold'
+          mapfile -t kernels < <(sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\\n')
+          printf '%s\\n' "${kernels[@]}" | tee reports/initrd-kernels.txt
+          test "${#kernels[@]}" = 1
+          sudo mkdir -p work/root/tmp/nexium-initrd
+          sudo chroot work/root update-initramfs -c -k "${kernels[0]}" -b /tmp/nexium-initrd 2>&1 | tee reports/initrd-regeneration.txt
+          sudo cp "work/root/tmp/nexium-initrd/initrd.img-${kernels[0]}" work/new.initrd
+          sudo rm -rf work/root/tmp/nexium-initrd
+          '''
+              assert needle in run;run=run.replace(needle,needle+addition,1)
+              needle='-map work/new.squashfs /live/filesystem.squashfs -commit'
+              assert needle in run;run=run.replace(needle,'-map work/new.squashfs /live/filesystem.squashfs -map work/new.initrd /live/initrd.img -commit',1)
+              build['run']=run
+              setup=next(x for x in steps if x.get('name')=='Materialize and commit reproducible source')
+              setup['run']=setup['run'].replace('x11-utils xdotool','x11-utils xdotool initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core')
+          P('.github/workflows/phase2-build.yml').write_text(yaml.safe_dump({('on' if k is True else k):v for k,v in d.items()},sort_keys=False,width=100000))
+          P('scripts/build-phase2.sh').write_text('#!/bin/bash\n'+run)
+          PY
+          python3 /tmp/apply.py
+          python3 desktop/phase2.py --materialize | tee reports/source.txt
+          python3 scripts/prepare-ios4.py | tee reports/ios4-extraction.txt
+          python3 -m py_compile desktop/phase2.py scripts/verify-phase2-boot.py
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add desktop/ branding/ scripts/build-phase2.sh scripts/verify-phase2-boot.py .github/workflows/phase2-build.yml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fix X11 Plank session and activate cream made by TOMO Plymouth with regenerated initrd'
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Rebuild and verify authorized Phase 2 ISO
+        shell: bash
+        run: bash scripts/build-phase2.sh
+      - name: Capture BIOS boot and prove live Plank process
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p reports/boot/frames
+          cat > scripts/capture-dock-cream.py <<'PY'
+          import pathlib,subprocess,json,time,socket,threading,http.server,hashlib,os
+          from PIL import Image,ImageDraw
+          O=pathlib.Path('reports/boot').resolve();F=O/'frames';start=time.monotonic()
+          probe=r'''import os,subprocess,json,urllib.request
+          def command(c):
+              p=subprocess.run(c,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=15)
+              return {'command':c,'exit':p.returncode,'output':p.stdout}
+          data={'environment':{k:os.environ.get(k) for k in ['DISPLAY','XDG_SESSION_TYPE','XDG_CURRENT_DESKTOP','XDG_SESSION_DESKTOP','DESKTOP_SESSION']}}
+          commands=['pgrep -a -x plank','ps -ef | grep -E "plank|openbox|tint2|picom"','command -v gsettings; dpkg-query -W libglib2.0-bin','gsettings get org.gnome.desktop.interface gtk-theme','gsettings get org.gnome.desktop.interface icon-theme','gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/']
+          data['commands']=[command(c) for c in commands]
+          data['plank_running']=data['commands'][0]['exit']==0 and bool(data['commands'][0]['output'].strip())
+          data['pass']=data['plank_running'] and data['environment']['XDG_SESSION_TYPE']=='x11' and data['commands'][2]['exit']==0 and 'GoldenGate' in data['commands'][3]['output'] and 'NexiumIOS4' in data['commands'][4]['output']
+          urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
+          '''
+          class Handler(http.server.BaseHTTPRequestHandler):
+              def do_GET(self):
+                  self.send_response(200);self.end_headers();self.wfile.write(probe.encode())
+              def do_POST(self):
+                  (O/'live-session.json').write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
+                  self.send_response(200);self.end_headers();self.wfile.write(b'OK')
+          server=http.server.HTTPServer(('0.0.0.0',8888),Handler)
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          iso=str(pathlib.Path('output/nexium-os-1.2-ungoogled-amd64.iso').resolve())
+          cmd=['qemu-system-x86_64','-name','Nexium headless BIOS dock and cream verification','-machine','pc','-accel','tcg,thread=multi','-cpu','max','-smp','2','-m','3072','-boot','order=d,menu=on','-cdrom',iso,'-vga','std','-display','none','-nic','user,model=e1000','-qmp','unix:/tmp/dock-qmp.sock,server=on,wait=off','-serial','file:'+str(O/'serial.log'),'-no-reboot','-rtc','base=utc']
+          (O/'qemu-invocation.json').write_text(json.dumps(cmd,indent=2))
+          p=subprocess.Popen(cmd,stderr=(O/'qemu-stderr.log').open('w'))
+          sock=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
+          for _ in range(60):
+              try:sock.connect('/tmp/dock-qmp.sock');break
+              except OSError:time.sleep(1)
+          stream=sock.makefile('rwb',buffering=0);stream.readline()
+          def qmp(ex,args=None):
+              stream.write((json.dumps({'execute':ex,'arguments':args or {}})+'\n').encode())
+              while True:
+                  r=json.loads(stream.readline())
+                  if 'return' in r or 'error' in r:return r
+          qmp('qmp_capabilities')
+          def key(*codes):
+              qmp('send-key',{'keys':[{'type':'qcode','data':c} for c in codes],'hold-time':30});time.sleep(.10)
+          entries=[];ready=None;sent=False
+          for n in range(300):
+              deadline=start+n*2
+              time.sleep(max(0,deadline-time.monotonic()))
+              if time.monotonic()-start>=12 and not sent:key('ret');sent=True
+              qmp('screendump',{'filename':'/tmp/dock-frame.ppm'})
+              elapsed=time.monotonic()-start
+              im=Image.open('/tmp/dock-frame.ppm').convert('RGB')
+              out=Image.new('RGB',(im.width,im.height+42),(20,20,20));out.paste(im)
+              ImageDraw.Draw(out).text((12,im.height+12),f'HEADLESS BIOS QEMU - NOT HARDWARE | frame {n:03d} | elapsed {elapsed:.2f}s',fill='white')
+              out.save(F/f'bios-{n:03d}.png')
+              text=subprocess.run(['tesseract','/tmp/dock-frame.ppm','stdout'],capture_output=True,text=True).stdout
+              (F/f'bios-{n:03d}.txt').write_text(text)
+              entries.append({'frame':n,'elapsed_seconds':round(elapsed,3),'sha256':hashlib.sha256(im.tobytes()).hexdigest(),'ocr':text})
+              if 'Welcome to Nexium OS' in text and ready is None:ready=n
+              if ready is not None and n>=ready+15:break
+          (O/'frames.json').write_text(json.dumps(entries,indent=2))
+          (O/'before-probe.png').write_bytes((F/f'bios-{len(entries)-1:03d}.png').read_bytes())
+          splash=[e for e in entries if 'TOMO' in e['ocr'].upper()]
+          if splash:(O/'cream-splash.png').write_bytes((F/f"bios-{splash[0]['frame']:03d}.png").read_bytes())
+          print('BIOS_FRAMES',len(entries),'DESKTOP_READY_FRAME',ready,'TOMO_OCR_FRAMES',[e['frame'] for e in splash],flush=True)
+          if ready is not None:
+              key('meta_l','t');time.sleep(8)
+              command="python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/probe.py\").read())'"
+              chars={' ':'spc','-':'minus','.':'dot',"'":'apostrophe','/':'slash',';':'semicolon',':':('shift','semicolon'),'(':('shift','9'),')':('shift','0'),'"':('shift','apostrophe')}
+              for c in command:
+                  mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
+              key('ret')
+              for _ in range(60):
+                  if (O/'live-session.json').exists():break
+                  time.sleep(2)
+              qmp('screendump',{'filename':'/tmp/dock-live.ppm'});Image.open('/tmp/dock-live.ppm').save(O/'live-probe.png')
+          status=qmp('query-status');qmp('quit');p.wait(timeout=30)
+          receipt={'frames':len(entries),'sample_interval_seconds':2,'wall_elapsed_seconds':round(time.monotonic()-start,3),'desktop_ready_frame':ready,'cream_text_ocr_frames':[e['frame'] for e in splash],'vm_before_stop':status,'termination':'desktop capture completed then VM explicitly stopped' if ready is not None else '600s timeout then VM explicitly stopped','iso_bytes':pathlib.Path(iso).stat().st_size,'iso_sha256':hashlib.sha256(pathlib.Path(iso).read_bytes()).hexdigest()}
+          (O/'receipt.json').write_text(json.dumps(receipt,indent=2))
+          # All chronological frames, not selected-frame-only evidence.
+          for offset in range(0,len(entries),20):
+              sheet=Image.new('RGB',(1600,1100),(240,240,240))
+              for j,e in enumerate(entries[offset:offset+20]):
+                  image=Image.open(F/f"bios-{e['frame']:03d}.png");image.thumbnail((400,220))
+                  sheet.paste(image,((j%4)*400,(j//4)*220))
+              sheet.save(O/f'bios-all-{offset:03d}-{min(offset+19,len(entries)-1):03d}.jpg',quality=92)
+          subprocess.run(['ffmpeg','-y','-framerate','12','-i',str(F/'bios-%03d.png'),'-c:v','libx264','-pix_fmt','yuv420p','-crf','23',str(O/'nexium-dock-cream-bios.mp4')],check=True)
+          subprocess.run(['ffmpeg','-y','-framerate','12','-i',str(F/'bios-%03d.png'),'-vf','scale=640:-1',str(O/'nexium-dock-cream-bios.gif')],check=True)
+          live=json.loads((O/'live-session.json').read_text()) if (O/'live-session.json').exists() else {}
+          print(json.dumps(receipt,indent=2));print(json.dumps(live,indent=2))
+          assert ready is not None,'FAIL: desktop never reached'
+          assert splash,'FAIL: made by TOMO! text not observed in BIOS frames'
+          assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'
+          print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
+          PY
+          python3 scripts/capture-dock-cream.py | tee reports/boot-capture.txt
+      - name: Publish boot evidence and capture source (no release)
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          dest=tests/dock-cream-evidence/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          if [ -d reports/boot ]; then
+            cp reports/boot/*.png reports/boot/*.jpg reports/boot/*.json "$dest/" 2>/dev/null || true
+            cp reports/boot-capture.txt "$dest/" 2>/dev/null || true
+          fi
+          cp reports/boot-verification.txt reports/desktop-verification.txt reports/iso-sha256.txt reports/size.txt reports/source-commit.txt "$dest/" 2>/dev/null || true
+          git add "$dest" scripts/capture-dock-cream.py 2>/dev/null || git add "$dest"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record BIOS cream splash, live Plank and preservation evidence for run ${GITHUB_RUN_ID}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Upload Phase 2 ISO (no release)
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          path: output/
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload verification and full BIOS capture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-dock-cream-verification
+          path: reports/
+          if-no-files-found: error
