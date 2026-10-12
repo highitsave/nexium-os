@@ -1,0 +1,100 @@
+name: Review every captured Phase 2 boot frame
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/review-phase2-frames.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-headless-boot-frames
+          run-id: 38300321414
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: captured
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-headless-boot-video
+          run-id: 38300321414
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: receipts
+      - name: Generate complete chronological visual sheets without booting again
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y python3-pil tesseract-ocr
+          mkdir -p tests/boot-review/38300321414
+          cat > /tmp/review.py <<'PY'
+          import pathlib, json, hashlib, subprocess, csv, collections
+          from PIL import Image, ImageDraw, ImageChops, ImageStat
+          O=pathlib.Path('tests/boot-review/38300321414')
+          for mode,count in [('bios',240),('uefi',90)]:
+              files=sorted(pathlib.Path('captured').glob(mode+'/frames/*.png'))
+              if not files:
+                  files=sorted(pathlib.Path('captured').glob(mode+'/*.png'))
+              print('MODE',mode,'COUNT',len(files),'FILES',files[:2],flush=True)
+              assert len(files)==count,(mode,len(files),count)
+              timeline_files=list(pathlib.Path('receipts').rglob(mode+'/timeline.json'))
+              assert len(timeline_files)==1, timeline_files
+              timeline=json.loads(timeline_files[0].read_text())
+              records=[]; unique={}; previous=None
+              with (O/(mode+'-all-frame-ocr.txt')).open('w') as ocr:
+                  for n,f in enumerate(files):
+                      with Image.open(f) as source:
+                          im=source.convert('RGB')
+                      guest=im.crop((0,42,im.width,im.height))
+                      digest=hashlib.sha256(guest.tobytes()).hexdigest()
+                      thumb=guest.resize((160,100))
+                      difference=None if previous is None else round(sum(ImageStat.Stat(ImageChops.difference(previous,thumb)).mean)/3,3)
+                      previous=thumb
+                      txt=subprocess.run(['tesseract',str(f),'stdout'],capture_output=True,text=True).stdout.strip()
+                      ocr.write('\n--- '+mode+' FRAME '+str(n)+' ELAPSED '+str(timeline[n]['elapsed_seconds'])+'s ---\n'+txt+'\n')
+                      if digest not in unique:
+                          unique[digest]=n
+                          im.save(O/(mode+'-unique-'+str(n).zfill(5)+'.png'))
+                      records.append({'frame':n,'elapsed_seconds':timeline[n]['elapsed_seconds'],'width':im.width,'height':im.height,'guest_sha256':digest,'identical_to_frame':unique[digest],'mean_thumbnail_difference':difference,'ocr':txt})
+              (O/(mode+'-manifest.json')).write_text(json.dumps(records,indent=2))
+              with (O/(mode+'-index.csv')).open('w') as out:
+                  w=csv.DictWriter(out,fieldnames=['frame','elapsed_seconds','width','height','guest_sha256','identical_to_frame','mean_thumbnail_difference'])
+                  w.writeheader()
+                  for r in records: w.writerow({k:r[k] for k in w.fieldnames})
+              for first in range(0,count,20):
+                  rows=(min(20,count-first)+4)//5
+                  sheet=Image.new('RGB',(5*400,rows*300),'#202020')
+                  for j,f in enumerate(files[first:first+20]):
+                      with Image.open(f) as source: thumb=source.convert('RGB')
+                      thumb.thumbnail((400,272))
+                      x=(j%5)*400; y=(j//5)*300
+                      sheet.paste(thumb,(x,y+28))
+                      ImageDraw.Draw(sheet).text((x+8,y+7),f'{mode.upper()} FRAME {first+j:03d} / {timeline[first+j]["elapsed_seconds"]:.3f}s',fill='white')
+                  sheet.save(O/(mode+'-all-'+str(first).zfill(3)+'-'+str(min(first+19,count-1)).zfill(3)+'.jpg'),quality=95)
+              print(mode,'frames',count,'exact unique guest images',len(unique),flush=True)
+          for f in pathlib.Path('receipts').rglob('*'):
+              if f.is_file() and f.name in ['serial.log','qemu-stderr.log','invocation.txt','capture.json','grub.cfg']:
+                  mode=f.parent.name
+                  dest=O/(mode+'-'+f.name)
+                  dest.write_bytes(f.read_bytes())
+          (O/'README.md').write_text('# Complete existing Phase 2 frame review\n\nAll 240 BIOS and 90 UEFI frames from run 38300321414 are included on chronological contact sheets. No ISO was rebuilt or rebooted. Full-resolution representatives are saved for every exactly unique guest framebuffer after removing only the 42-pixel capture-label bar for hashing. Manifest maps every frame to its exact representative, capture time, dimensions, and OCR; OCR is supplementary, not a visual verdict. No missing splash or dock has been fabricated.\n')
+          PY
+          python3 /tmp/review.py
+      - name: Publish all-frame visual evidence
+        run: |
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add tests/boot-review/38300321414
+          git commit -m "Publish complete existing BIOS and UEFI frame review evidence"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-all-frame-review
+          path: tests/boot-review/38300321414
+          if-no-files-found: error
