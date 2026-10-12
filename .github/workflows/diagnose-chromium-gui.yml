@@ -1,0 +1,100 @@
+name: Diagnose Chromium GUI on exact failed Phase 2 ISO
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/diagnose-chromium-gui.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host diagnostic tools only
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso python3-pil qemu-system-x86 ffmpeg tesseract-ocr
+          mkdir -p output work reports/boot/frames
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          run-id: 38319747620
+          github-token: ${{ github.token }}
+          path: output
+      - name: Verify unchanged failing ISO and loader evidence
+        run: |
+          set -euxo pipefail
+          iso=output/nexium-os-1.2-ungoogled-amd64.iso
+          test "$(stat -c%s "$iso")" = 764084224
+          echo 'd1aa733d1b5accad2330e83cbc4ee3c5d52e62b3cd31673f5b1173acfbb63d4e  '"$iso" | sha256sum -c -
+          xorriso -osirrox on -indev "$iso" -extract /live/filesystem.squashfs work/failed.squashfs
+          sudo unsquashfs -d work/failed-root work/failed.squashfs
+          { sudo chroot work/failed-root /usr/bin/ldd /opt/ungoogled-chromium/chrome; sudo cat work/failed-root/usr/bin/ungoogled-chromium; sudo chroot work/failed-root /usr/bin/chromium --version; } 2>&1 | tee reports/chromium-loader.txt
+      - name: Real live X11 direct wrapper and safe-flags diagnosis with exit codes
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path as P
+          s=P('scripts/capture-dock-cream.py').read_text()
+          start=s.index("browser_log=open('/tmp/nexium-browser.log','w')")
+          end=s.index("data['commands']=[command(c) for c in commands]",start)
+          diagnosis=r'''import time,stat,signal
+          data['runtime_environment']={k:os.environ.get(k) for k in ['HOME','USER','DISPLAY','XDG_RUNTIME_DIR','DBUS_SESSION_BUS_ADDRESS']}
+          data['runtime_paths']=[]
+          for path in [os.environ.get('HOME',''),os.environ.get('XDG_RUNTIME_DIR',''),'/dev/shm','/tmp']:
+              try:
+                  st=os.stat(path);data['runtime_paths'].append({'path':path,'uid':st.st_uid,'mode':oct(stat.S_IMODE(st.st_mode)),'writable':os.access(path,os.W_OK)})
+              except OSError as e:data['runtime_paths'].append({'path':path,'error':str(e)})
+          data['loader']=command('ldd /opt/ungoogled-chromium/chrome')
+          data['sandbox']=command('id; ls -l /opt/ungoogled-chromium/chrome*; cat /proc/sys/kernel/unprivileged_userns_clone; df -h /dev/shm; mount | grep shm')
+          data['browser_trials']=[]
+          data['browser_processes']=[]
+          trials=[('direct',['/opt/ungoogled-chromium/chrome','--no-proxy-server','about:blank']),('dock',['/usr/bin/chromium']),('safe',['/opt/ungoogled-chromium/chrome','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--user-data-dir=/tmp/cr-test','about:blank'])]
+          for label,argv in trials:
+              path='/tmp/chromium-'+label+'.log'
+              log=open(path,'w');p=subprocess.Popen(argv,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+              started=time.monotonic()
+              while time.monotonic()-started<60 and p.poll() is None:time.sleep(1)
+              log.flush();rc=p.poll()
+              trial={'label':label,'argv':argv,'pid':p.pid,'elapsed_seconds':round(time.monotonic()-started,2),'exit_code':rc,'state':'running' if rc is None else 'exited','stdout_stderr':open(path).read(),'windows':command('xwininfo -root -tree'),'processes':command('ps -ef | grep -E "chrome|chromium"')}
+              data['browser_trials'].append(trial)
+              print('CHROMIUM DIAGNOSTIC',json.dumps(trial,indent=2),flush=True)
+              if label!='safe' and p.poll() is None:
+                  os.killpg(p.pid,signal.SIGTERM)
+                  try:p.wait(timeout=10)
+                  except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);p.wait()
+              if label=='safe' and rc is None:data['browser_processes'].append({'pid':p.pid,'argv':argv})
+              log.close()
+          data['browser_log']=command('cat /tmp/chromium-direct.log /tmp/chromium-dock.log /tmp/chromium-safe.log')
+          '''
+          s=s[:start]+diagnosis+s[end:]
+          # Diagnostic tests can each run for a full minute; preserve all normal capture checks.
+          s=s.replace('for _ in range(60):\n        if (O/', 'for _ in range(180):\n        if (O/',1)
+          compile(s,'scripts/diagnose-chromium-boot.py','exec')
+          P('scripts/diagnose-chromium-boot.py').write_text(s)
+          PY
+          python3 scripts/diagnose-chromium-boot.py | tee reports/chromium-diagnosis.txt
+      - name: Commit exact diagnostic evidence only
+        if: always()
+        run: |
+          set -euxo pipefail
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          dest=tests/chromium-diagnosis/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/chromium-*.txt "$dest/" 2>/dev/null || true
+          cp reports/boot/*.png reports/boot/*.json "$dest/" 2>/dev/null || true
+          git add "$dest" scripts/diagnose-chromium-boot.py
+          if ! git diff --cached --quiet; then
+            git commit -m "Record exact failed ISO Chromium loader runtime exit and GUI diagnostics ${GITHUB_RUN_ID}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chromium-exact-iso-diagnosis
+          path: reports/
