@@ -1,0 +1,266 @@
+name: Record exact Phase 2 ISO boot in headless QEMU
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/boot-phase2-video.yml']
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: phase2-boot-video
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the exact successful Phase 2 ISO
+        uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          run-id: 38298752858
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: source
+      - name: Verify ISO and install capture tools
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p footage reports
+          ISO=$(find source -type f -name '*.iso' -print -quit)
+          test -n "$ISO"
+          test "$(stat -c %s "$ISO")" = 758710272
+          echo "b310fe81418c4d484984784cb2219e37dd56cd8e96cac1c67df49138e509cc2e  $ISO" | sha256sum -c -
+          realpath "$ISO" > reports/iso-path.txt
+          stat -c '%n %s bytes' "$ISO" | tee reports/iso-bytes.txt
+          sha256sum "$ISO" | tee reports/iso-sha256.txt
+          sudo apt-get update
+          sudo apt-get install -y qemu-system-x86 ovmf ffmpeg python3-pil tesseract-ocr xorriso
+          qemu-system-x86_64 --version | tee reports/qemu-version.txt
+          xorriso -osirrox on -indev "$ISO" -extract /boot/grub/grub.cfg reports/grub.cfg
+      - name: Capture real BIOS boot for eight minutes; UEFI quick check
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat > reports/capture.py <<'PY'
+          import json, os, pathlib, shlex, socket, subprocess, time
+          from PIL import Image, ImageDraw
+          ROOT = pathlib.Path.cwd()
+          ISO = pathlib.Path('reports/iso-path.txt').read_text().strip()
+          F = pathlib.Path('footage')
+          R = pathlib.Path('reports')
+          E = pathlib.Path('tests/boot-evidence') / os.environ['GITHUB_RUN_ID']
+          E.mkdir(parents=True, exist_ok=True)
+          accel = 'kvm' if os.access('/dev/kvm', os.R_OK | os.W_OK) else 'tcg,thread=multi'
+          print('Selected accelerator:', accel, flush=True)
+          def capture(mode, duration, firmware=None):
+              frames = F / mode / 'frames'
+              frames.mkdir(parents=True, exist_ok=True)
+              reports = R / mode
+              reports.mkdir(parents=True, exist_ok=True)
+              sockpath = ROOT / ('qmp-' + mode + '.sock')
+              sockpath.unlink(missing_ok=True)
+              cmd = ['qemu-system-x86_64', '-name', 'Nexium Phase 2 headless ' + mode,
+                     '-machine', 'pc', '-accel', accel, '-cpu', 'max', '-smp', '2',
+                     '-m', '3072', '-boot', 'order=d,menu=on', '-cdrom', ISO,
+                     '-vga', 'std', '-display', 'none', '-nic', 'user,model=e1000',
+                     '-qmp', 'unix:' + str(sockpath) + ',server=on,wait=off',
+                     '-serial', 'file:' + str(ROOT / reports / 'serial.log'),
+                     '-no-reboot', '-rtc', 'base=utc']
+              if firmware:
+                  cmd.extend(['-drive', 'if=pflash,format=raw,readonly=on,file=' + firmware[0],
+                              '-drive', 'if=pflash,format=raw,file=' + firmware[1]])
+              (reports / 'invocation.txt').write_text(shlex.join(cmd) + '\n')
+              print('INVOCATION:', shlex.join(cmd), flush=True)
+              err = (reports / 'qemu-stderr.log').open('w')
+              p = subprocess.Popen(cmd, stdout=err, stderr=err)
+              s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+              s.settimeout(15)
+              started = time.monotonic()
+              connection = False
+              for _ in range(100):
+                  if p.poll() is not None:
+                      break
+                  if sockpath.exists():
+                      s.connect(str(sockpath)); connection = True; break
+                  time.sleep(0.1)
+              if not connection:
+                  err.close()
+                  print('QEMU start failed:', (reports / 'qemu-stderr.log').read_text(), flush=True)
+                  raise RuntimeError('QEMU failed before QMP was available: ' + mode)
+              stream = s.makefile('rb')
+              greeting = json.loads(stream.readline())
+              (reports / 'qmp-greeting.json').write_text(json.dumps(greeting, indent=2))
+              seq = 0
+              def qmp(command, args=None):
+                  nonlocal seq
+                  seq += 1
+                  req = {'execute': command, 'id': seq}
+                  if args is not None: req['arguments'] = args
+                  s.sendall((json.dumps(req) + '\n').encode())
+                  while True:
+                      raw = stream.readline()
+                      if not raw: raise RuntimeError('QMP connection closed')
+                      response = json.loads(raw)
+                      if response.get('id') == seq:
+                          if 'error' in response: raise RuntimeError(str(response['error']))
+                          return response.get('return')
+              qmp('qmp_capabilities')
+              timeline = []
+              failure = None
+              for i in range(duration // 2):
+                  target = started + i * 2
+                  time.sleep(max(0, target - time.monotonic()))
+                  if p.poll() is not None:
+                      failure = 'QEMU exited with status ' + str(p.returncode)
+                      print(failure, flush=True); break
+                  elapsed = time.monotonic() - started
+                  if i == 6:
+                      qmp('send-key', {'keys': [{'type': 'qcode', 'data': 'ret'}], 'hold-time': 100})
+                      (reports / 'input-events.txt').write_text('At approximately 12s: Enter to accept the unchanged default boot menu entry. No kernel arguments modified.\n')
+                  ppm = ROOT / reports / 'screen.ppm'
+                  qmp('screendump', {'filename': str(ppm)})
+                  with Image.open(ppm) as im:
+                      shot = im.convert('RGB')
+                  ppm.unlink()
+                  canvas = Image.new('RGB', (shot.width, shot.height + 42), '#111111')
+                  canvas.paste(shot, (0, 42))
+                  label = f'Headless QEMU VM | {mode.upper()} | {elapsed:.1f}s elapsed | 2s sampling / 12fps (24x) | NOT physical hardware'
+                  ImageDraw.Draw(canvas).text((8, 12), label, fill='white')
+                  png = frames / f'{i:05d}.png'
+                  canvas.save(png)
+                  timeline.append({'frame': str(png), 'elapsed_seconds': round(elapsed, 3)})
+                  if i % 10 == 0 or i < 15 or i == duration // 2 - 1:
+                      txt = subprocess.run(['tesseract', str(png), 'stdout'], capture_output=True, text=True).stdout
+                      with (reports / 'screen-ocr.txt').open('a') as out:
+                          out.write(f'\n--- FRAME {i} ELAPSED {elapsed:.1f}s ---\n' + txt)
+                      print(f'FRAME {mode} {i} elapsed={elapsed:.1f}s: ' + txt.replace('\n', ' ')[:220], flush=True)
+              status = qmp('query-status') if p.poll() is None else {'exit': p.returncode}
+              try:
+                  qmp('quit')
+              except Exception:
+                  pass
+              try:
+                  p.wait(timeout=15)
+              except subprocess.TimeoutExpired:
+                  p.kill(); p.wait()
+              stream.close(); s.close(); err.close()
+              (reports / 'timeline.json').write_text(json.dumps(timeline, indent=2))
+              metadata = {'mode': mode, 'invocation': cmd, 'accelerator': accel, 'ram_mib': 3072,
+                          'frames': len(timeline), 'sample_interval_seconds': 2, 'playback_fps': 12,
+                          'wall_elapsed_seconds': round(time.monotonic() - started, 3),
+                          'termination': failure or 'capture timeout; VM then explicitly stopped', 'qmp_status_before_stop': status,
+                          'note': 'Actual sampled guest framebuffer. OCR is supplementary, not a boot-success assertion. No physical hardware tested.'}
+              (reports / 'capture.json').write_text(json.dumps(metadata, indent=2))
+              if not timeline: raise RuntimeError('No guest framebuffer captured')
+              picked = sorted(set([min(n, len(timeline)-1) for n in [0, 3, 6, 12, 20, 30, 45, 60, 90, 120, 150, 180, 210, len(timeline)-1]]))
+              thumbs = []
+              for n in picked:
+                  with Image.open(timeline[n]['frame']) as im:
+                      thumb = im.copy(); thumb.thumbnail((480, 400))
+                      thumbs.append(thumb)
+                  if n in [0, 6, 30, 60, 120, 180, len(timeline)-1]:
+                      with Image.open(timeline[n]['frame']) as im:
+                          im.save(E / f'{mode}-{n:05d}.png')
+              sheet = Image.new('RGB', (4 * 480, ((len(thumbs)+3)//4) * 400), '#222222')
+              for j, thumb in enumerate(thumbs): sheet.paste(thumb, ((j % 4)*480, (j//4)*400))
+              sheet.save(E / f'{mode}-contact.jpg', quality=90)
+              with Image.open(timeline[-1]['frame']) as im: im.save(E / f'{mode}-final.png')
+              print('CAPTURE METADATA:', json.dumps(metadata), flush=True)
+          capture('bios', 480)
+          code = pathlib.Path('/usr/share/OVMF/OVMF_CODE_4M.fd')
+          variables = pathlib.Path('/usr/share/OVMF/OVMF_VARS_4M.fd')
+          if code.exists() and variables.exists():
+              import shutil
+              dest = ROOT / R / 'OVMF_VARS_4M.fd'
+              shutil.copyfile(variables, dest)
+              capture('uefi', 180, (str(code), str(dest)))
+          else:
+              (R / 'uefi-not-attempted.txt').write_text('OVMF 4M firmware not installed at expected paths. BIOS capture remains the primary test.\n')
+          PY
+          python3 reports/capture.py
+      - name: Encode MP4 and GIF without replacing any guest graphics
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          for mode in bios uefi; do
+            test -f "footage/$mode/frames/00000.png" || continue
+            ffmpeg -y -framerate 12 -i "footage/$mode/frames/%05d.png" -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -c:v libx264 -preset fast -crf 21 -pix_fmt yuv420p "footage/nexium-phase2-headless-$mode.mp4"
+            ffmpeg -y -framerate 12 -i "footage/$mode/frames/%05d.png" -vf 'scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer' -loop 0 "footage/nexium-phase2-headless-$mode.gif"
+            for ext in mp4 gif; do
+              file="footage/nexium-phase2-headless-$mode.$ext"
+              stat -c '%n: %s bytes' "$file" | tee -a reports/video-files.txt
+              ffprobe -v error -show_entries format=filename,size,duration -of json "$file" | tee "reports/$mode-$ext.json"
+              sha256sum "$file" | tee -a reports/video-sha256.txt
+            done
+          done
+      - name: Publish compact real-frame evidence for review
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          EVIDENCE="tests/boot-evidence/$GITHUB_RUN_ID"
+          test -d "$EVIDENCE" || exit 0
+          cp reports/iso-sha256.txt "$EVIDENCE/iso-sha256.txt"
+          cp reports/video-files.txt "$EVIDENCE/video-files.txt" || true
+          for mode in bios uefi; do
+            for file in invocation.txt capture.json screen-ocr.txt serial.log qemu-stderr.log; do
+              test ! -f "reports/$mode/$file" || cp "reports/$mode/$file" "$EVIDENCE/$mode-$file"
+            done
+          done
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$EVIDENCE"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record actual Phase 2 headless VM boot evidence"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Upload boot videos and reports
+        id: video
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-headless-boot-video
+          path: |
+            footage/*.mp4
+            footage/*.gif
+            reports/
+            tests/boot-evidence/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload all real boot frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-headless-boot-frames
+          path: footage/*/frames/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Record verifiable capture receipts
+        if: always()
+        shell: bash
+        env:
+          VIDEO_URL: ${{ steps.video.outputs.artifact-url }}
+        run: |
+          {
+            echo '# Exact Phase 2 ISO: real headless QEMU boot capture'
+            echo 'Not physical hardware; no claim about Lenovo compatibility. Guest graphics have not been replaced or fabricated. MP4/GIF playback is a 24x time-lapse of frames captured every 2 seconds, encoded at 12fps.'
+            echo "Video/report artifact: $VIDEO_URL"
+            for file in reports/iso-bytes.txt reports/iso-sha256.txt reports/qemu-version.txt reports/video-files.txt reports/video-sha256.txt reports/bios/invocation.txt reports/bios/capture.json reports/bios-mp4.json reports/bios-gif.json reports/uefi/invocation.txt reports/uefi/capture.json reports/uefi-mp4.json reports/uefi-gif.json reports/bios/serial.log reports/bios/qemu-stderr.log reports/uefi/serial.log reports/uefi/qemu-stderr.log; do
+              if test -f "$file"; then
+                echo "## $file"; echo '```text'; cat "$file"; echo '```'
+              fi
+            done
+            for mode in bios uefi; do
+              echo "## $mode real guest frames"
+              echo "![Real $mode sampled contact sheet](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/tests/boot-evidence/$GITHUB_RUN_ID/$mode-contact.jpg)"
+              echo "![Real $mode final frame](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/tests/boot-evidence/$GITHUB_RUN_ID/$mode-final.png)"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
