@@ -33,7 +33,7 @@ Messages/Calls/Vault show explicit coming-soon dialogs, with no network,
 message delivery, calls or software-install claims. They are NOT implemented.
 System Information reads actual kernel/memory/package data. The Settings hub
 opens appearance, window, network and audio tools, or system information.
-Boot splash changes are staged only; see branding/boot/README.md.
+Active cream made by TOMO! splash uses a regenerated initrd; see branding/boot/README.md.
 
 
 ## iOS4 sheet integration

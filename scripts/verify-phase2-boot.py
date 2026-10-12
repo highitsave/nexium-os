@@ -50,7 +50,7 @@ rebuilt={p.relative_to(b):p for p in b.rglob('*') if p.is_file()}
 assert originals.keys()==rebuilt.keys()
 bootpaths=[P('/'+v.split(':',1)[1].split()[-1].lstrip('/')) for v in old.splitlines() if v.startswith('El Torito img path')]
 for name,p in originals.items():
-    if name.suffix=='.squashfs' or name.name in ['boot.catalog','boot.cat']: continue
+    if name==P('live/initrd.img') or name.suffix=='.squashfs' or name.name in ['boot.catalog','boot.cat']: continue
     x,y=p.read_bytes(),rebuilt[name].read_bytes()
     if x!=y:
         assert P('/'+str(name)) in bootpaths, 'Unexpected payload change: '+str(name)
@@ -58,7 +58,27 @@ for name,p in originals.items():
             x=x[:start]+bytes(end-start)+x[end:]; y=y[:start]+bytes(end-start)+y[end:]
         assert x==y, 'Boot image differs beyond required address/checksum patches: '+str(name)
         print('Boot address/checksum relocation only:',name)
-for n in ['live/vmlinuz','live/initrd.img','boot/grub/grub.cfg']:
+for n in ['live/vmlinuz','boot/grub/grub.cfg']:
     assert originals[P(n)].read_bytes()==rebuilt[P(n)].read_bytes()
     print('UNCHANGED:', '/'+n)
 print('VALID ISO9660: NEXIUM_OS; original boot catalog, BIOS/UEFI and GRUB2 isohybrid MBR structure verified; original MBR boot code identical')
+
+# INITRD_CREAM_VERIFICATION: user-authorized regenerated initrd.
+import shutil
+target=P('work/final-initrd')
+if target.exists(): shutil.rmtree(target)
+subprocess.run(['unmkinitramfs',str(b/'live/initrd.img'),str(target)],check=True)
+def unpacked(path):
+    matches=[p for p in target.rglob(P(path).name) if p.is_file() and str(p).endswith(path)]
+    assert len(matches)==1, (path,matches)
+    return matches[0]
+config=unpacked('etc/plymouth/plymouthd.conf')
+assert 'Theme=nexium-gold' in config.read_text()
+assert config.read_bytes()==P('branding/boot/plymouthd.conf').read_bytes()
+for name in ['nexium-gold.plymouth','nexium-gold.script','attribution.png']:
+    packed=unpacked('usr/share/plymouth/themes/nexium-gold/'+name)
+    assert packed.read_bytes()==P('branding/boot',name).read_bytes(),name
+    print('INITRD SOURCE SHA256 MATCH:',name,hashlib.sha256(packed.read_bytes()).hexdigest())
+assert originals[P('live/initrd.img')].read_bytes()!=rebuilt[P('live/initrd.img')].read_bytes()
+print('PASS REGENERATED INITRD: selected Theme=nexium-gold; cream script and made by TOMO! attribution PNG match committed branding source')
+print('INITRD SHA256:',hashlib.sha256((b/'live/initrd.img').read_bytes()).hexdigest())

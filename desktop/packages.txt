@@ -14,3 +14,4 @@ network-manager-gnome
 pavucontrol
 adwaita-icon-theme
 dbus-x11
+libglib2.0-bin

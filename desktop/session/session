@@ -1,5 +1,7 @@
 #!/bin/sh
 # Native session under Xinit as the existing unprivileged nexium user.
+export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=Openbox XDG_SESSION_DESKTOP=Openbox DESKTOP_SESSION=openbox
 export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24
 xset s off -dpms s noblank 2>/dev/null || true
 exec dbus-run-session -- openbox-session

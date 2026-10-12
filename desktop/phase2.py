@@ -40,7 +40,7 @@ Messages/Calls/Vault show explicit coming-soon dialogs, with no network,
 message delivery, calls or software-install claims. They are NOT implemented.
 System Information reads actual kernel/memory/package data. The Settings hub
 opens appearance, window, network and audio tools, or system information.
-Boot splash changes are staged only; see branding/boot/README.md.
+Active cream made by TOMO! splash uses a regenerated initrd; see branding/boot/README.md.
 '''
 FILES['desktop/packages.txt'] = '''openbox
 plank
@@ -58,6 +58,7 @@ network-manager-gnome
 pavucontrol
 adwaita-icon-theme
 dbus-x11
+libglib2.0-bin
 '''
 FILES['desktop/dock/README.md'] = '''# Provisional native dock
 Plank, bottom centered, 10 ordered pins, standard Adwaita fallback icons.
@@ -258,6 +259,8 @@ from xml.sax.saxutils import escape
 FILES['desktop/session/menu.xml'] = '<?xml version="1.0"?><openbox_menu xmlns="http://openbox.org/3.4/menu"><menu id="root-menu" label="Nexium OS">' + ''.join(f'<item label="{escape(n)}"><action name="Execute"><command>{escape(c)}</command></action></item>' for k,n,c,ic in APPS) + '''<separator/><item label="Welcome"><action name="Execute"><command>nexium-welcome --force</command></action></item><item label="System Information"><action name="Execute"><command>nexium-info</command></action></item><separator/><item label="Log out"><action name="Exit"/></item></menu></openbox_menu>\n'''
 FILES['desktop/session/session'] = '''#!/bin/sh
 # Native session under Xinit as the existing unprivileged nexium user.
+export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=Openbox XDG_SESSION_DESKTOP=Openbox DESKTOP_SESSION=openbox
 export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24
 xset s off -dpms s noblank 2>/dev/null || true
 exec dbus-run-session -- openbox-session
@@ -373,32 +376,53 @@ Rasterized reproducibly with rsvg-convert to golden-gate.png, installed at
 /usr/share/backgrounds/nexium/golden-gate.png and selected by session feh.
 SVG and PNG are committed; neither claims to be an official macOS wallpaper.
 '''
-FILES['branding/boot/README.md'] = '''# Boot branding, preservation first
-The source has Plymouth and Nexium-branded boot assets already. This build
-keeps /live/vmlinuz, /live/initrd.img and /boot/grub/grub.cfg byte-identical.
-A future Golden Gate Plymouth theme is staged in the rootfs, NOT activated
-in the preserved initrd. No claim is made that the staged theme shows at boot.
-Do not run update-initramfs in Phase 2; that would violate preservation.
-Boot menu label remains NEXIUM_OS. See the reused repair boot verification.
+FILES['branding/boot/README.md'] = '''# Golden Gate cream boot branding
+User-authorized active Plymouth theme: nexium-gold.
+Cream/pale-gold background and exact attribution: made by TOMO!
+Attribution PNG is reproducibly rendered from this committed generator.
+The selected config and all theme assets are embedded by update-initramfs.
+This pass intentionally regenerates /live/initrd.img; unchanged-initrd
+verification is replaced with source/config/theme verification in initrd.
+Kernel, grub.cfg, GRUB2 isohybrid boot structure and NEXIUM_OS stay preserved.
+'''
+FILES['branding/boot/plymouthd.conf'] = '''[Daemon]
+Theme=nexium-gold
+ShowDelay=0
+DeviceTimeout=8
 '''
 FILES['branding/boot/nexium-gold.plymouth'] = '''[Plymouth Theme]
-Name=Nexium OS Golden Gate (staged)
-Description=Optional future Golden Gate boot wallpaper; not enabled in preserved initrd
+Name=Nexium OS Golden Gate Cream
+Description=Cream and pale-gold boot splash: made by TOMO!
 ModuleName=script
 [script]
 ImageDir=/usr/share/plymouth/themes/nexium-gold
 ScriptFile=/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
 '''
-FILES['branding/boot/nexium-gold.script'] = '''image = Image("golden-gate.png");
-image = image.Scale(Window.GetWidth(), Window.GetHeight());
-sprite = Sprite(image);
-sprite.SetX(0); sprite.SetY(0); sprite.SetZ(-100);
+FILES['branding/boot/nexium-gold.script'] = '''Window.SetBackgroundTopColor(0.9804, 0.9569, 0.8784);
+Window.SetBackgroundBottomColor(0.9412, 0.8863, 0.7373);
+attribution = Image("attribution.png");
+attribution_sprite = Sprite(attribution);
+attribution_sprite.SetX((Window.GetWidth() - attribution.GetWidth()) / 2);
+attribution_sprite.SetY((Window.GetHeight() - attribution.GetHeight()) / 2);
+attribution_sprite.SetZ(100);
 '''
+
+def render_cream_attribution():
+    from PIL import Image, ImageDraw, ImageFont
+    image=Image.new('RGBA',(640,180),(0,0,0,0))
+    draw=ImageDraw.Draw(image)
+    regular=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',26)
+    bold=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',44)
+    draw.text((320,35),'Nexium OS',font=regular,fill=(126,92,51,255),anchor='mm')
+    draw.text((320,98),'made by TOMO!',font=bold,fill=(93,61,31,255),anchor='mm')
+    draw.line((190,148,450,148),fill=(196,153,83,255),width=3)
+    image.save('branding/boot/attribution.png')
 
 def materialize():
     for name,text in FILES.items():
         p=P(name);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
     subprocess.run(['rsvg-convert','-o','branding/wallpaper/golden-gate.png','branding/wallpaper/golden-gate.svg'],check=True)
+    render_cream_attribution()
     # Reuse, do not reinvent, the exact verifier from repair-tab-boot.yml.
     import yaml
     workflow=yaml.safe_load(P('.github/workflows/repair-tab-boot.yml').read_text())
@@ -415,7 +439,12 @@ def materialize():
     # content checks instead of the repair-only unchanged-squashfs checks.
     end=script.index("print('VALID ISO9660:")
     end=script.index('\n',end)
-    P('scripts/verify-phase2-boot.py').write_text(script[:end]+'\n')
+    # INITRD_CREAM_VERIFICATION replaces obsolete unchanged-initrd checks only.
+    script=script[:end]
+    assert "name.suffix=='.squashfs'" in script
+    script=script.replace("name.suffix=='.squashfs'", "name==P('live/initrd.img') or name.suffix=='.squashfs'",1)
+    script=script.replace("['live/vmlinuz','live/initrd.img','boot/grub/grub.cfg']", "['live/vmlinuz','boot/grub/grub.cfg']",1)
+    P('scripts/verify-phase2-boot.py').write_text(script+'\n'+"\n# INITRD_CREAM_VERIFICATION: user-authorized regenerated initrd.\nimport shutil\ntarget=P('work/final-initrd')\nif target.exists(): shutil.rmtree(target)\nsubprocess.run(['unmkinitramfs',str(b/'live/initrd.img'),str(target)],check=True)\ndef unpacked(path):\n    matches=[p for p in target.rglob(P(path).name) if p.is_file() and str(p).endswith(path)]\n    assert len(matches)==1, (path,matches)\n    return matches[0]\nconfig=unpacked('etc/plymouth/plymouthd.conf')\nassert 'Theme=nexium-gold' in config.read_text()\nassert config.read_bytes()==P('branding/boot/plymouthd.conf').read_bytes()\nfor name in ['nexium-gold.plymouth','nexium-gold.script','attribution.png']:\n    packed=unpacked('usr/share/plymouth/themes/nexium-gold/'+name)\n    assert packed.read_bytes()==P('branding/boot',name).read_bytes(),name\n    print('INITRD SOURCE SHA256 MATCH:',name,hashlib.sha256(packed.read_bytes()).hexdigest())\nassert originals[P('live/initrd.img')].read_bytes()!=rebuilt[P('live/initrd.img')].read_bytes()\nprint('PASS REGENERATED INITRD: selected Theme=nexium-gold; cream script and made by TOMO! attribution PNG match committed branding source')\nprint('INITRD SHA256:',hashlib.sha256((b/'live/initrd.img').read_bytes()).hexdigest())\n")
     print('Materialized',len(FILES),'source files and wallpaper PNG; reused repair boot verifier')
 
 def install(root):
@@ -435,6 +464,8 @@ def install(root):
     put('branding/wallpaper/golden-gate.png','usr/share/backgrounds/nexium/golden-gate.png')
     for p in P('branding/boot').glob('nexium-gold.*'):put(p,'usr/share/plymouth/themes/nexium-gold/'+p.name)
     put('branding/wallpaper/golden-gate.png','usr/share/plymouth/themes/nexium-gold/golden-gate.png')
+    put('branding/boot/attribution.png','usr/share/plymouth/themes/nexium-gold/attribution.png')
+    put('branding/boot/plymouthd.conf','etc/plymouth/plymouthd.conf')
     icon_theme='Adwaita'
     # Install authorized iOS4 crops with manifest tracking.
     ios4=P('branding/icons/ios4/theme')
@@ -529,7 +560,7 @@ def verify(root):
             print('ICON',k,'=>',icon,'64px and 128px PNG verified')
         print('iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita')
     else: print('ICON THEME fallback or supplied pack:',icon_theme)
-    print('Boot-theme source staged only; preserved initrd theme is unchanged')
+    print('Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately')
     print('No physical boot/hardware test performed; launcher resolution is not full hardware verification')
 
 if __name__=='__main__':

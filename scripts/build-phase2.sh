@@ -27,6 +27,17 @@ sudo chroot work/root apt-get clean
 sudo python3 desktop/phase2.py --install work/root | tee reports/install.txt
 sudo python3 desktop/phase2.py --verify work/root | tee reports/preflight-desktop.txt
 sudo chroot work/root dpkg-query -W > reports/installed-packages.tsv
+# Regenerate the user-authorized cream-theme initrd; original kernel stays.
+sudo chroot work/root plymouth-set-default-theme nexium-gold
+test "$(sudo cat work/root/etc/plymouth/plymouthd.conf | grep '^Theme=')" = 'Theme=nexium-gold'
+mapfile -t kernels < <(sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
+printf '%s\n' "${kernels[@]}" | tee reports/initrd-kernels.txt
+test "${#kernels[@]}" = 1
+sudo mkdir -p work/root/tmp/nexium-initrd
+sudo chroot work/root update-initramfs -c -k "${kernels[0]}" -b /tmp/nexium-initrd 2>&1 | tee reports/initrd-regeneration.txt
+sudo cp "work/root/tmp/nexium-initrd/initrd.img-${kernels[0]}" work/new.initrd
+sudo rm -rf work/root/tmp/nexium-initrd
+
 # Native application/Xorg smoke test only; not an ISO boot test.
 Xvfb :99 -screen 0 1280x800x24 -ac > reports/xvfb.log 2>&1 &
 sleep 2
@@ -55,7 +66,7 @@ sudo find work/root -type f -path '*/.Xauthority' -delete
 sudo rm -f work/root/tmp/.X*-lock
 sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2
 out=output/nexium-os-1.2-ungoogled-amd64.iso
-xorriso -indev work/orig.iso -outdev "$out" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -commit -end
+xorriso -indev work/orig.iso -outdev "$out" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -map work/new.initrd /live/initrd.img -commit -end
 xorriso -indev "$out" -report_el_torito plain -report_system_area plain > reports/final-boot.txt 2>&1
 xorriso -osirrox on -indev "$out" -extract / work/final
 python3 scripts/verify-phase2-boot.py | tee reports/boot-verification.txt

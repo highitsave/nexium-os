@@ -1,4 +1,7 @@
-image = Image("golden-gate.png");
-image = image.Scale(Window.GetWidth(), Window.GetHeight());
-sprite = Sprite(image);
-sprite.SetX(0); sprite.SetY(0); sprite.SetZ(-100);
+Window.SetBackgroundTopColor(0.9804, 0.9569, 0.8784);
+Window.SetBackgroundBottomColor(0.9412, 0.8863, 0.7373);
+attribution = Image("attribution.png");
+attribution_sprite = Sprite(attribution);
+attribution_sprite.SetX((Window.GetWidth() - attribution.GetWidth()) / 2);
+attribution_sprite.SetY((Window.GetHeight() - attribution.GetHeight()) / 2);
+attribution_sprite.SetZ(100);

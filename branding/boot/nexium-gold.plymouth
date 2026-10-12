@@ -1,6 +1,6 @@
 [Plymouth Theme]
-Name=Nexium OS Golden Gate (staged)
-Description=Optional future Golden Gate boot wallpaper; not enabled in preserved initrd
+Name=Nexium OS Golden Gate Cream
+Description=Cream and pale-gold boot splash: made by TOMO!
 ModuleName=script
 [script]
 ImageDir=/usr/share/plymouth/themes/nexium-gold
