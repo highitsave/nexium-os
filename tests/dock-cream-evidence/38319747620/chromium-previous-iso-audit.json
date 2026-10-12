@@ -1,0 +1,3076 @@
+[
+  {
+    "file": "/etc/chromium/policies/managed/nexium-os.json",
+    "kind": "policy/preferences",
+    "sha256": "d08fdb145d3190438c9a1325ab17282f1f34e96aa1142f03bb607a5200cdc0a5",
+    "lines": [
+      {
+        "line": 9,
+        "text": "  \"http://localhost\","
+      },
+      {
+        "line": 10,
+        "text": "  \"http://127.0.0.1\","
+      },
+      {
+        "line": 41,
+        "text": " \"HomepageLocation\": \"http://localhost:8088/\","
+      },
+      {
+        "line": 42,
+        "text": " \"NewTabPageLocation\": \"http://localhost:8088/\","
+      }
+    ]
+  },
+  {
+    "file": "/etc/chromium/policies/managed/nexium-themes.json",
+    "kind": "policy/preferences",
+    "sha256": "7e5a8bc8827a6630a1c823a62b2e8ece48de506b93b089ce2ea625cd3a31ac70",
+    "lines": []
+  },
+  {
+    "file": "/etc/xdg/tint2/tint2rc",
+    "kind": "launcher/environment",
+    "sha256": "ed47250624b8fba3613f499f34665e73c96808eb15e6eb83a97536b27b4b18d3",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/chrome-wrapper",
+    "kind": "launcher/environment",
+    "sha256": "24c1cfddcd206a86281008e7eed38109344ef34cd88d61902a9befd520a5571c",
+    "lines": [
+      {
+        "line": 61,
+        "text": "Exec=$CHROME_WRAPPER %U"
+      },
+      {
+        "line": 145,
+        "text": "        exec man \"$HERE/../../chrome/app/resources/manpage.1.in\" ;;"
+      },
+      {
+        "line": 153,
+        "text": "exec $CMD_PREFIX \"$HERE/chrome\" \"$@\""
+      }
+    ]
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/af_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/am_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ar_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/as_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/az_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/be_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bg_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bn_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/bs_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ca_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cs_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/cy_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/da_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/de_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/el_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-GB_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/en-US_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es-419_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/es_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/et_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/eu_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fa_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fi_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fil_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr-CA_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/fr_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gl_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/gu_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/he_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hi_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hr_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hu_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/hy_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/id_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/is_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/it_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ja_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ka_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kk_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/km_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/kn_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ko_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ky_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lo_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lt_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/lv_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mk_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ml_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mn_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/mr_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ms_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/my_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nb_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ne_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/nl_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/or_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pa_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pl_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-BR_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/pt-PT_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ro_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ru_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/si_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sk_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sl_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sq_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr-Latn_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sr_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sv_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/sw_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ta_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/te_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/th_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/tr_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uk_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/ur_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/uz_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/vi_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-CN_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-HK_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zh-TW_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_FEMININE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_FEMININE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_MASCULINE.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_MASCULINE.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_NEUTER.pak",
+    "kind": "launcher/environment",
+    "sha256": "ca73097bd968b363b7145e86b64f3c595e533808b0763dc8863a27fc363cfa51",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/locales/zu_NEUTER.pak.info",
+    "kind": "launcher/environment",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": []
+  },
+  {
+    "file": "/opt/ungoogled-chromium/vk_swiftshader_icd.json",
+    "kind": "launcher/environment",
+    "sha256": "c9eef28b6b984fec220ef0abfecc40b502d46946706e47bfe97707027cb818bd",
+    "lines": []
+  },
+  {
+    "file": "/usr/bin/ungoogled-chromium",
+    "kind": "launcher/environment",
+    "sha256": "aef8a820ade1727986a2d87c2cfb4724a7ff7e6f7201c3671e0b5a28273bc299",
+    "lines": [
+      {
+        "line": 2,
+        "text": "exec /opt/ungoogled-chromium/chrome \"$@\""
+      }
+    ]
+  },
+  {
+    "file": "/usr/lib/udev/hwdb.d/60-autosuspend-chromiumos.hwdb",
+    "kind": "launcher/environment",
+    "sha256": "542079cdbe6f66b16570c12e6126a0622cdc81ab5bcc011dde3fe708a9da307b",
+    "lines": []
+  },
+  {
+    "file": "/usr/local/bin/nexium-info",
+    "kind": "launcher/environment",
+    "sha256": "07588225f25b12167a2c3091554c4770b5bd97a34fb2e94e1d1c0c4a56cab6ed",
+    "lines": []
+  },
+  {
+    "file": "/usr/share/applications/chromium.desktop",
+    "kind": "launcher/environment",
+    "sha256": "f036123698f12f74525cc843ef51e8de62bbf61c1b06d385ff50c9ce88eb5b21",
+    "lines": [
+      {
+        "line": 131,
+        "text": "Exec=/usr/bin/chromium %U"
+      }
+    ]
+  },
+  {
+    "file": "/usr/share/applications/nexium-browser.desktop",
+    "kind": "launcher/environment",
+    "sha256": "72a28a8a63c889dbf822751996edf93b7fb7a0f470836e6327810eff45498486",
+    "lines": [
+      {
+        "line": 4,
+        "text": "Exec=/usr/bin/chromium"
+      }
+    ]
+  },
+  {
+    "file": "/usr/share/applications/ungoogled-chromium.desktop",
+    "kind": "launcher/environment",
+    "sha256": "b51c4f42187fb2daa78661f3c287a1278e5c1b0c4f733667f003573a0cfb548e",
+    "lines": [
+      {
+        "line": 4,
+        "text": "Exec=ungoogled-chromium %U"
+      }
+    ]
+  },
+  {
+    "file": "/usr/share/chromium/extensions/maapenhkifcapeladkindnehimmlcilc.json",
+    "kind": "launcher/environment",
+    "sha256": "c9681f9a2777c2644f1dab9f00aa7e1ee31eba1d954a657ac8919309f01c5af2",
+    "lines": []
+  }
+]

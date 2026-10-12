@@ -1,0 +1,11 @@
+EFI payload: byte-identical; 6291456 bytes; SHA256 ee34513e431dfd903dd98b9bb47aec40988fe880f27e7c73a64e0e3698ebccb6
+El Torito catalog: identical except required BIOS/UEFI LBA relocation
+System area: MBR grub2-mbr cyl-align-off; original system-area options and MBR partition flags/types unchanged
+UNCHANGED: /live/vmlinuz
+UNCHANGED: /boot/grub/grub.cfg
+VALID ISO9660: NEXIUM_OS; original boot catalog, BIOS/UEFI and GRUB2 isohybrid MBR structure verified; original MBR boot code identical
+INITRD SOURCE SHA256 MATCH: nexium-gold.plymouth a99b147d27045ddb4915dff59de01a2d11d5ff1b1b45d3894f59d39d8c8250cf
+INITRD SOURCE SHA256 MATCH: nexium-gold.script 363d2b4d3a20bdcd1666f3731b22689e5ff6e9d8aaed5b4ed0504c425cd48de4
+INITRD SOURCE SHA256 MATCH: attribution.png 87a755f7b8c517ff9a940084b67b0b4c77757f159bb38f1b35623b7c0e648b14
+PASS REGENERATED INITRD: selected Theme=nexium-gold; cream script and made by TOMO! attribution PNG match committed branding source
+INITRD SHA256: 8f411d9c1fecd551423dada1fa1584e18270f5f869021905065ea07842635593

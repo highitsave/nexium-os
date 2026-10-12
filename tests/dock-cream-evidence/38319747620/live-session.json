@@ -1,0 +1,64 @@
+{
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "x11",
+    "XDG_CURRENT_DESKTOP": "Openbox",
+    "XDG_SESSION_DESKTOP": "Openbox",
+    "DESKTOP_SESSION": "openbox"
+  },
+  "sudo_noninteractive": {
+    "command": "/usr/bin/sudo -n true; rc=$?; echo SUDO_EXIT=$rc; exit $rc",
+    "exit": 0,
+    "output": "SUDO_EXIT=0\n"
+  },
+  "network": {
+    "command": "/usr/local/bin/nexium-network-diagnostics",
+    "exit": 0,
+    "output": "Hardware adapter and firmware diagnostics; no saved Wi-Fi secrets\n00:00.0 Host bridge [0600]: Intel Corporation 440FX - 82441FX PMC [Natoma] [8086:1237] (rev 02)\n\tSubsystem: Red Hat, Inc. Qemu virtual machine [1af4:1100]\n00:01.0 ISA bridge [0601]: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II] [8086:7000]\n\tSubsystem: Red Hat, Inc. Qemu virtual machine [1af4:1100]\n00:01.1 IDE interface [0101]: Intel Corporation 82371SB PIIX3 IDE [Natoma/Triton II] [8086:7010]\n\tSubsystem: Red Hat, Inc. Qemu virtual machine [1af4:1100]\n\tKernel driver in use: ata_piix\n\tKernel modules: ata_piix, ata_generic\n00:01.3 Bridge [0680]: Intel Corporation 82371AB/EB/MB PIIX4 ACPI [8086:7113] (rev 03)\n\tSubsystem: Red Hat, Inc. Qemu virtual machine [1af4:1100]\n\tKernel driver in use: piix4_smbus\n\tKernel modules: i2c_piix4\n00:02.0 VGA compatible controller [0300]: Device [1234:1111] (rev 02)\n\tSubsystem: Red Hat, Inc. Device [1af4:1100]\n\tKernel driver in use: bochs-drm\n\tKernel modules: bochs\n00:03.0 Ethernet controller [0200]: Intel Corporation 82540EM Gigabit Ethernet Controller [8086:100e] (rev 03)\n\tSubsystem: Red Hat, Inc. QEMU Virtual Machine [1af4:1100]\n\tKernel driver in use: e1000\n\tKernel modules: e1000\n/usr/local/bin/nexium-network-diagnostics: 5: ip: not found\nSTATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN    \nconnected  full          missing  enabled  missing  enabled \nDEVICE  TYPE      STATE                   CONNECTION         \nens3    ethernet  connected               Wired connection 1 \nlo      loopback  connected (externally)  lo                 \nWIFI-HW  WIFI     WWAN-HW  WWAN    \nmissing  enabled  missing  enabled \n[   18.786152] systemd[1]: Started systemd-ask-password-wall.path - Forward Password Requests to Wall Directory Watch.\n"
+  },
+  "network_manager": {
+    "command": "systemctl is-active NetworkManager",
+    "exit": 0,
+    "output": "active\n"
+  },
+  "browser_processes": [],
+  "browser_log": {
+    "command": "cat /tmp/nexium-browser.log",
+    "exit": 0,
+    "output": ""
+  },
+  "commands": [
+    {
+      "command": "pgrep -a -x plank",
+      "exit": 0,
+      "output": "557 plank\n"
+    },
+    {
+      "command": "ps -ef | grep -E \"plank|openbox|tint2|picom\"",
+      "exit": 0,
+      "output": "nexium       496     447  0 23:10 tty1     00:00:00 dbus-run-session -- openbox-session\nnexium       499     496 10 23:10 tty1     00:00:09 /usr/bin/openbox --startup /usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX\nnexium       518       1  2 23:10 tty1     00:00:02 picom --config /etc/xdg/nexium/picom.conf\nnexium       519       1  2 23:10 tty1     00:00:01 tint2 -c /etc/xdg/nexium/tint2rc\nnexium       557       1  8 23:10 tty1     00:00:06 plank\nnexium       670     614  7 23:12 pts/0    00:00:00 /bin/sh -c ps -ef | grep -E \"plank|openbox|tint2|picom\"\nnexium       672     670 27 23:12 pts/0    00:00:00 grep -E plank|openbox|tint2|picom\n"
+    },
+    {
+      "command": "command -v gsettings; dpkg-query -W libglib2.0-bin",
+      "exit": 0,
+      "output": "/usr/bin/gsettings\nlibglib2.0-bin\t2.74.6-2+deb12u9\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface gtk-theme",
+      "exit": 0,
+      "output": "'GoldenGate'\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface icon-theme",
+      "exit": 0,
+      "output": "'NexiumIOS4'\n"
+    },
+    {
+      "command": "gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/",
+      "exit": 0,
+      "output": "net.launchpad.plank.dock.settings alignment 'center'\nnet.launchpad.plank.dock.settings auto-pinning true\nnet.launchpad.plank.dock.settings current-workspace-only false\nnet.launchpad.plank.dock.settings dock-items ['02-browser.dockitem', '07-vault.dockitem', '01-files.dockitem', '09-monitor.dockitem', '04-messages.dockitem', '08-editor.dockitem', '10-trash.dockitem', '03-terminal.dockitem', '05-calls.dockitem', '06-settings.dockitem']\nnet.launchpad.plank.dock.settings hide-delay 0\nnet.launchpad.plank.dock.settings hide-mode 'intelligent'\nnet.launchpad.plank.dock.settings icon-size 48\nnet.launchpad.plank.dock.settings items-alignment 'center'\nnet.launchpad.plank.dock.settings lock-items false\nnet.launchpad.plank.dock.settings monitor ''\nnet.launchpad.plank.dock.settings offset 0\nnet.launchpad.plank.dock.settings pinned-only false\nnet.launchpad.plank.dock.settings position 'bottom'\nnet.launchpad.plank.dock.settings pressure-reveal false\nnet.launchpad.plank.dock.settings show-dock-item false\nnet.launchpad.plank.dock.settings theme 'Default'\nnet.launchpad.plank.dock.settings tooltips-enabled true\nnet.launchpad.plank.dock.settings unhide-delay 0\nnet.launchpad.plank.dock.settings zoom-enabled false\nnet.launchpad.plank.dock.settings zoom-percent 150\n"
+    }
+  ],
+  "plank_running": true,
+  "pass": true
+}

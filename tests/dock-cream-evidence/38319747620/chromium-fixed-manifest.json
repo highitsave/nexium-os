@@ -1,0 +1,8 @@
+{
+  "binary_sha256": "64fcb6e541d06980dca15286fb19e438c4b3ddbc8c3079358364431d3217c331",
+  "files": {
+    "/etc/skel/.config/chromium/Default/Preferences": "cfad85c62e92d2efaf22da1fad06ab343d26f08a32a4dadfe617ee565611a856",
+    "/home/nexium/.config/chromium/Default/Preferences": "cfad85c62e92d2efaf22da1fad06ab343d26f08a32a4dadfe617ee565611a856",
+    "/usr/bin/ungoogled-chromium": "78ea09142fb28b37f9e3fb1667652d9ee0e736f451ad19b8b47db29877ba830e"
+  }
+}
