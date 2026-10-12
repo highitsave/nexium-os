@@ -1,0 +1,4 @@
+EXACT FAILED ISO DIAGNOSIS direct 60.13 None ''
+EXACT FAILED ISO DIAGNOSIS dock 60.05 None ''
+EXACT FAILED ISO DIAGNOSIS safe 60.04 None ''
+PASS authorized source repair; original policy guards and other source preserved

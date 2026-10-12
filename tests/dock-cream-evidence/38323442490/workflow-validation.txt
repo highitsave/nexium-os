@@ -1,0 +1,14 @@
+PASS YAML .github/workflows/apply-phase2-browser-fix.yml
+PASS YAML .github/workflows/apply-phase2-dock-cream.yml
+PASS YAML .github/workflows/boot-phase2-video.yml
+PASS YAML .github/workflows/build-essentials-iso.yml
+PASS YAML .github/workflows/build-iso.yml
+PASS YAML .github/workflows/chromium-gui-rebuild.yml
+PASS YAML .github/workflows/diagnose-chromium-gui.yml
+PASS YAML .github/workflows/diagnose-phase2-runtime.yml
+PASS YAML .github/workflows/patch-tab-iso.yml
+PASS YAML .github/workflows/phase2-build.yml
+PASS YAML .github/workflows/phase2-desktop.yml
+PASS YAML .github/workflows/repair-tab-boot.yml
+PASS YAML .github/workflows/review-phase2-frames.yml
+PASS YAML .github/workflows/set-onx-identity.yml

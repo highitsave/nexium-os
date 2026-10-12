@@ -1,0 +1,19 @@
+Found a valid SQUASHFS 4:0 superblock on work/final/live/filesystem.squashfs.
+Creation or last append time Mon Oct 12 23:52:17 2026
+Filesystem size 674623791 bytes (658812.30 Kbytes / 643.37 Mbytes)
+Compression xz
+	Dictionary size 1048576
+	Filters selected: x86
+Block size 1048576
+Filesystem is exportable via NFS
+Inodes are compressed
+Data is compressed
+Uids/Gids (Id table) are compressed
+Fragments are compressed
+Always-use-fragments option is not specified
+Xattrs are compressed
+Duplicates are removed
+Number of fragments 1010
+Number of inodes 35827
+Number of ids 10
+Number of xattr ids 1
