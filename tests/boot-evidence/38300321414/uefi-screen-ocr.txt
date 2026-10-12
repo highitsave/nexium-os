@@ -1,0 +1,179 @@
+
+--- FRAME 0 ELAPSED 0.1s ---
+Headless QEMU VM | UEFI|0.1selapsed | 2ssampling /12fps (24) | NOT physical hardware
+
+Guest has not initialized the display (yet).
+
+--- FRAME 1 ELAPSED 2.0s ---
+Headless QEMU VM | UEFI| 20selapsed | 2ssampling 12fps (24x) | NOT physical hardware
+
+Start boot option
+
+--- FRAME 2 ELAPSED 4.0s ---
+Headless QEMU VM | UEFI| 40selapsed | 2ssampling /12fps (24x) | NOT physical hardware
+
+
+--- FRAME 3 ELAPSED 6.0s ---
+Headless QEMU VM | UEFI| 6 0selapsed | 2ssampling /12fps (24x) | NOT physical hardware
+
+GNU GRUB version 2.06-13+deb12u2
+
+Nexiun OS
+Nexium 0S (safe graphics, for older computers)
+Shut doun
+
+Use the 4 and ¥ keys to select uhich entry is highlighted.
+Press enter to boot the selected 0S, ‘e’ to edit the conmands before booting or “c’ for
+a conmand-1 ine.
+
+The highlighted entry will be executed automatically in 3s.
+
+--- FRAME 4 ELAPSED 8.0s ---
+Headless QEMU VM | UEFI| 8 0selapsed | 2ssampling /12fps (24) | NOT physical hardware
+
+GNU GRUB version 2.06-13+deb12u2
+
+Nexiun OS
+Nexium 0S (safe graphics, for older computers)
+Shut doun
+
+Use the 4 and ¥ keys to select uhich entry is highlighted.
+Press enter to boot the selected 0S, ‘e’ to edit the conmands before booting or “c’ for
+a conmand-1 ine.
+
+The highlighted entry will be executed automatically in 1s.
+
+--- FRAME 5 ELAPSED 10.0s ---
+Headless QEMU VM | UEFI| 10.0selapoed | 2ssampling /12fes(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- FRAME 6 ELAPSED 12.0s ---
+Headless QEMU VM | UEFI| 12.0selapeed | 2ssampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 7 ELAPSED 14.0s ---
+Headless QEMU VM | UEFI| 140selapoed | sampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 8 ELAPSED 16.0s ---
+Headless QEMU VM | UEFI| 16 0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 9 ELAPSED 18.0s ---
+Headless QEMU VM | UEFI| 18 0selapoed | sampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 10 ELAPSED 20.5s ---
+Headless QEMU VM | UEFI| 20.5selapoed | 2ssampling /12fps (24x) | NOT physical hardware
+
+--- FRAME 11 ELAPSED 22.3s ---
+Headless QEMU VM | UEFI|22<3selapoed | sampling /12fps (24x) | NOT physical hardware
+
+--- FRAME 12 ELAPSED 26.0s ---
+Headless QEMU VM | UEFI| 26 0selapoed | sampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 13 ELAPSED 26.1s ---
+Headless QEMU VM | UEFI|26.1selapeed | 2ssampling /12fps (24x) | NOT physical hardware
+
+--- FRAME 14 ELAPSED 28.0s ---
+Headless QEMU VM | UEFI| 28 0selapoed | sampling /12fes (24x) | NOT physical hardware
+
+exium OS
+
+--- FRAME 20 ELAPSED 40.0s ---
+Headless QEMU VM | UEFI| 40.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- FRAME 30 ELAPSED 60.0s ---
+Headless QEMU VM | UEFI| 60.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 40 ELAPSED 80.0s ---
+Headless QEMU VM | UEFI| 80.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+--- FRAME 50 ELAPSED 100.0s ---
+Mon 12 Oct 20:01
+
+GOLDEN GATE
+
+
+--- FRAME 60 ELAPSED 120.0s ---
+Mon 12 Oct 20:01
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+
+--- FRAME 70 ELAPSED 140.0s ---
+Mon 12 Oct 20:02
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+
+--- FRAME 80 ELAPSED 160.0s ---
+Mon 12 Oct 20:02
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+
+--- FRAME 89 ELAPSED 178.0s ---
+Mon 12 Oct 20:02
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+

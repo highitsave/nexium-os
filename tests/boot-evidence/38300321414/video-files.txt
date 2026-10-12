@@ -1,0 +1,4 @@
+footage/nexium-phase2-headless-bios.mp4: 116298 bytes
+footage/nexium-phase2-headless-bios.gif: 23592619 bytes
+footage/nexium-phase2-headless-uefi.mp4: 90390 bytes
+footage/nexium-phase2-headless-uefi.gif: 6832626 bytes
