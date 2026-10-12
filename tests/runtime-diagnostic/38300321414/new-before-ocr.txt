@@ -1,0 +1,22 @@
+‘Welcome to Nexium OS Mon 12 Oct 20:18
+
+AA oa N
+
+Welcome to Nexium 0S — Golden Gate desktop.
+
+4 Welcome to Nexium oS
+
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+

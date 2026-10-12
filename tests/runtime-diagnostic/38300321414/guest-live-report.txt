@@ -1,0 +1,527 @@
+NEW DIAGNOSTIC BOOT OF EXACT UNCHANGED ISO; NOT ORIGINAL CAPTURE JOURNAL
+
+$ id; printf "DISPLAY=%s XDG_SESSION_TYPE=%s\n" "$DISPLAY" "$XDG_SESSION_TYPE"; ps -ef
+uid=1000(nexium) gid=1000(nexium) groups=1000(nexium),29(audio),44(video),101(input),106(netdev)
+DISPLAY=:0 XDG_SESSION_TYPE=tty
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  8 20:17 ?        00:00:07 /sbin/init splash nopersistence noswap
+root           2       0  0 20:17 ?        00:00:00 [kthreadd]
+root           3       2  0 20:17 ?        00:00:00 [rcu_gp]
+root           4       2  0 20:17 ?        00:00:00 [rcu_par_gp]
+root           5       2  0 20:17 ?        00:00:00 [slub_flushwq]
+root           6       2  0 20:17 ?        00:00:00 [netns]
+root           7       2  0 20:17 ?        00:00:00 [kworker/0:0-events]
+root           8       2  0 20:17 ?        00:00:00 [kworker/0:0H-events_highpri]
+root           9       2  0 20:17 ?        00:00:00 [kworker/u4:0-events_unbound]
+root          10       2  0 20:17 ?        00:00:00 [mm_percpu_wq]
+root          11       2  0 20:17 ?        00:00:00 [rcu_tasks_kthread]
+root          12       2  0 20:17 ?        00:00:00 [rcu_tasks_rude_kthread]
+root          13       2  0 20:17 ?        00:00:00 [rcu_tasks_trace_kthread]
+root          14       2  0 20:17 ?        00:00:00 [ksoftirqd/0]
+root          15       2  0 20:17 ?        00:00:00 [rcu_preempt]
+root          16       2  0 20:17 ?        00:00:00 [migration/0]
+root          17       2  0 20:17 ?        00:00:00 [kworker/0:1-cgroup_release]
+root          18       2  0 20:17 ?        00:00:00 [cpuhp/0]
+root          19       2  0 20:17 ?        00:00:00 [cpuhp/1]
+root          20       2  0 20:17 ?        00:00:00 [migration/1]
+root          21       2  0 20:17 ?        00:00:00 [ksoftirqd/1]
+root          22       2  0 20:17 ?        00:00:00 [kworker/1:0-cgroup_free]
+root          23       2  0 20:17 ?        00:00:00 [kworker/1:0H-events_highpri]
+root          25       2  7 20:17 ?        00:00:06 [kworker/u4:1-events_unbound]
+root          26       2  0 20:17 ?        00:00:00 [kdevtmpfs]
+root          27       2  0 20:17 ?        00:00:00 [inet_frag_wq]
+root          28       2  0 20:17 ?        00:00:00 [kauditd]
+root          29       2  0 20:17 ?        00:00:00 [khungtaskd]
+root          30       2  0 20:17 ?        00:00:00 [oom_reaper]
+root          31       2  0 20:17 ?        00:00:00 [kworker/u4:2-events_unbound]
+root          32       2  0 20:17 ?        00:00:00 [writeback]
+root          33       2  0 20:17 ?        00:00:00 [kcompactd0]
+root          34       2  0 20:17 ?        00:00:00 [ksmd]
+root          35       2  0 20:17 ?        00:00:00 [kworker/1:1-events]
+root          36       2  0 20:17 ?        00:00:00 [khugepaged]
+root          37       2  0 20:17 ?        00:00:00 [kintegrityd]
+root          38       2  0 20:17 ?        00:00:00 [kblockd]
+root          39       2  0 20:17 ?        00:00:00 [blkcg_punt_bio]
+root          40       2  0 20:17 ?        00:00:00 [tpm_dev_wq]
+root          41       2  0 20:17 ?        00:00:00 [edac-poller]
+root          42       2  0 20:17 ?        00:00:00 [devfreq_wq]
+root          43       2  0 20:17 ?        00:00:00 [quota_events_un]
+root          44       2  0 20:17 ?        00:00:00 [kworker/0:1H-kblockd]
+root          45       2  0 20:17 ?        00:00:00 [kswapd0]
+root          47       2  0 20:17 ?        00:00:00 [kworker/u4:3-loop0]
+root          52       2  0 20:17 ?        00:00:00 [kthrotld]
+root          54       2  0 20:17 ?        00:00:00 [acpi_thermal_pm]
+root          55       2  0 20:17 ?        00:00:00 [kworker/0:2-mm_percpu_wq]
+root          56       2  0 20:17 ?        00:00:00 [mld]
+root          57       2  0 20:17 ?        00:00:00 [kworker/1:1H-kblockd]
+root          58       2  0 20:17 ?        00:00:00 [ipv6_addrconf]
+root          63       2  0 20:17 ?        00:00:00 [kstrp]
+root          68       2  0 20:17 ?        00:00:00 [zswap-shrink]
+root          69       2  0 20:17 ?        00:00:00 [kworker/u5:0]
+root         124       2  0 20:17 ?        00:00:00 [kworker/1:2-cgroup_release]
+root         131       2  0 20:17 ?        00:00:00 [ata_sff]
+root         132       2  0 20:17 ?        00:00:00 [kworker/0:3-cgroup_release]
+root         133       2  0 20:17 ?        00:00:00 [scsi_eh_0]
+root         134       2  0 20:17 ?        00:00:00 [scsi_tmf_0]
+root         135       2  0 20:17 ?        00:00:00 [scsi_eh_1]
+root         136       2  0 20:17 ?        00:00:00 [scsi_tmf_1]
+root         298       1  1 20:17 ?        00:00:00 /lib/systemd/systemd-journald
+root         312       2  0 20:17 ?        00:00:00 [kworker/0:4-cgroup_free]
+root         313       2  0 20:17 ?        00:00:00 [kworker/0:5-ata_sff]
+root         316       1  1 20:17 ?        00:00:00 /lib/systemd/systemd-udevd
+root         324       2  0 20:17 ?        00:00:00 [kworker/1:3-ata_sff]
+root         354       2  0 20:17 ?        00:00:00 [cryptd]
+root         369       2  0 20:17 ?        00:00:00 [kworker/u4:4-events_unbound]
+message+     371       1  1 20:17 ?        00:00:01 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         378       1  0 20:17 ?        00:00:00 /lib/systemd/systemd-logind
+root         394       1  4 20:17 ?        00:00:03 /usr/sbin/NetworkManager --no-daemon
+root         395       1  0 20:17 ?        00:00:00 /sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+nexium       451       1  4 20:17 tty1     00:00:03 /usr/bin/xinit /usr/local/lib/nexium/session -- :0 vt1 -nolisten tcp -keeptty -background none
+nexium       468       1  1 20:17 ?        00:00:00 /lib/systemd/systemd --user
+nexium       470     468  0 20:17 ?        00:00:00 (sd-pam)
+nexium       486     468  3 20:17 ?        00:00:02 /usr/bin/pulseaudio --daemonize=no --log-target=journal
+nexium       487     451  0 20:17 tty1     00:00:00 (sd-pam)
+nexium       489     468  0 20:17 ?        00:00:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         490     451 30 20:17 tty1     00:00:17 /usr/lib/xorg/Xorg :0 vt1 -nolisten tcp -keeptty -background none
+nexium       498     451  0 20:18 tty1     00:00:00 dbus-run-session -- openbox-session
+nexium       500     498  0 20:18 tty1     00:00:00 dbus-daemon --nofork --print-address 4 --session
+nexium       501     498 19 20:18 tty1     00:00:07 /usr/bin/openbox --startup /usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX
+nexium       522       1  3 20:18 tty1     00:00:01 picom --config /etc/xdg/nexium/picom.conf
+nexium       523       1  4 20:18 tty1     00:00:01 tint2 -c /etc/xdg/nexium/tint2rc
+nexium       524       1  7 20:18 tty1     00:00:02 nm-applet
+nexium       527       1  0 20:18 tty1     00:00:00 /bin/sh /usr/local/bin/nexium-welcome
+nexium       529     527 19 20:18 tty1     00:00:06 zenity --info --title=Welcome to Nexium OS --width=540 --text=Welcome to Nexium OS — Golden Gate desktop.  Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.  Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files; standard fallbacks are in use.  This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal administration still requires care.  Use System Information in the top panel for actual system details.
+nexium       555     501  2 20:18 tty1     00:00:00 xterm
+nexium       557     555  0 20:18 pts/0    00:00:00 sh
+nexium       558     557 86 20:18 pts/0    00:00:02 python3 -c import urllib.request;exec(urllib.request.urlopen("http://10.0.2.2:8888/probe.py").read())
+nexium       559     558  3 20:18 pts/0    00:00:00 /bin/sh -c id; printf "DISPLAY=%s XDG_SESSION_TYPE=%s\n" "$DISPLAY" "$XDG_SESSION_TYPE"; ps -ef
+nexium       561     559 99 20:18 pts/0    00:00:00 ps -ef
+
+exit=0
+
+$ systemctl status nexium-kiosk.service --no-pager -l; journalctl -b -u nexium-kiosk.service --no-pager -o short-monotonic
+● nexium-kiosk.service - Nexium OS native desktop (Openbox, Plank, Tint2)
+     Loaded: loaded (/etc/systemd/system/nexium-kiosk.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-10-12 20:17:34 EDT; 1min 7s ago
+    Process: 449 ExecStartPre=/bin/plymouth quit --retain-splash (code=exited, status=0/SUCCESS)
+   Main PID: 451 (xinit)
+      Tasks: 0 (limit: 3485)
+     Memory: 2.1M
+        CPU: 509ms
+     CGroup: /system.slice/nexium-kiosk.service
+             ‣ 451 /usr/bin/xinit /usr/local/lib/nexium/session -- :0 vt1 -nolisten tcp -keeptty -background none
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+No journal files were opened due to insufficient permissions.
+
+exit=1
+
+$ sudo -n journalctl -b -u nexium-kiosk.service --no-pager -o short-monotonic
+/bin/sh: 1: sudo: not found
+
+exit=127
+
+$ stat -c "%A %U:%G %n" /usr/bin/plank /usr/local/lib/nexium/session /home/nexium/.config/openbox/autostart; cat /home/nexium/.config/openbox/autostart; find /home/nexium/.config/plank -ls
+-rwxr-xr-x root:root /usr/bin/plank
+-rwxr-xr-x root:root /usr/local/lib/nexium/session
+-rwxr-xr-x nexium:nexium /home/nexium/.config/openbox/autostart
+#!/bin/sh
+feh --no-fehbg --bg-fill /usr/share/backgrounds/nexium/golden-gate.png &
+picom --config /etc/xdg/nexium/picom.conf &
+tint2 -c /etc/xdg/nexium/tint2rc &
+nm-applet &
+gsettings set org.gnome.desktop.interface gtk-theme GoldenGate 2>/dev/null || true
+gsettings set org.gnome.desktop.interface icon-theme "$(cat /etc/xdg/nexium/icon-theme)" 2>/dev/null || true
+schema=net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/
+gsettings set "$schema" position bottom 2>/dev/null || true
+gsettings set "$schema" alignment center 2>/dev/null || true
+gsettings set "$schema" icon-size 48 2>/dev/null || true
+gsettings set "$schema" hide-mode intelligent 2>/dev/null || true
+plank &
+nexium-welcome &
+      499      0 drwxr-xr-x   3 nexium   nexium         28 Oct 12 15:37 /home/nexium/.config/plank
+      500      0 drwxr-xr-x   3 nexium   nexium         32 Oct 12 15:37 /home/nexium/.config/plank/dock1
+      501      0 drwxr-xr-x   2 nexium   nexium        279 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers
+      929      1 -rw-r--r--   1 nexium   nexium         88 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/01-files.dockitem
+      930      1 -rw-r--r--   1 nexium   nexium         90 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/02-browser.dockitem
+      931      1 -rw-r--r--   1 nexium   nexium         91 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/03-terminal.dockitem
+      932      1 -rw-r--r--   1 nexium   nexium         91 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/04-messages.dockitem
+      933      1 -rw-r--r--   1 nexium   nexium         88 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/05-calls.dockitem
+      934      1 -rw-r--r--   1 nexium   nexium         91 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/06-settings.dockitem
+      935      1 -rw-r--r--   1 nexium   nexium         88 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/07-vault.dockitem
+      936      1 -rw-r--r--   1 nexium   nexium         89 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/08-editor.dockitem
+      937      1 -rw-r--r--   1 nexium   nexium         90 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/09-monitor.dockitem
+      938      1 -rw-r--r--   1 nexium   nexium         88 Oct 12 15:37 /home/nexium/.config/plank/dock1/launchers/10-trash.dockitem
+
+exit=0
+
+$ ls -la /home/nexium/.xsession-errors /home/nexium/.local/share/xorg /var/log/Xorg* /var/log/matchbox*; cat /home/nexium/.xsession-errors /home/nexium/.local/share/xorg/Xorg.0.log /var/log/Xorg.0.log
+ls: cannot access '/home/nexium/.xsession-errors': No such file or directory
+ls: cannot access '/home/nexium/.local/share/xorg': No such file or directory
+ls: cannot access '/var/log/matchbox*': No such file or directory
+-rw-r--r-- 1 root root 19695 Oct 12 20:18 /var/log/Xorg.0.log
+cat: /home/nexium/.xsession-errors: No such file or directory
+cat: /home/nexium/.local/share/xorg/Xorg.0.log: No such file or directory
+[    47.388] 
+X.Org X Server 1.21.1.7
+X Protocol Version 11, Revision 0
+[    47.390] Current Operating System: Linux nexium-os 6.1.0-53-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.187-1 (2026-09-07) x86_64
+[    47.390] Kernel command line: BOOT_IMAGE=/live/vmlinuz boot=live live-media=/dev/disk/by-label/NEXIUM_OS quiet splash loglevel=3 rd.udev.log_level=3 systemd.show_status=false vt.global_cursor_default=0 systemd.gpt_auto=0 nopersistence noswap
+[    47.390] xorg-server 2:21.1.7-3+deb12u13 (https://www.debian.org/support) 
+[    47.390] Current version of pixman: 0.42.2
+[    47.390] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[    47.390] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[    47.397] (==) Log file: "/var/log/Xorg.0.log", Time: Mon Oct 12 20:17:54 2026
+[    47.416] (==) Using config directory: "/etc/X11/xorg.conf.d"
+[    47.416] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[    47.554] (==) No Layout section.  Using the first Screen section.
+[    47.554] (==) No screen section available. Using defaults.
+[    47.555] (**) |-->Screen "Default Screen Section" (0)
+[    47.555] (**) |   |-->Monitor "<default monitor>"
+[    47.557] (==) No monitor specified for screen "Default Screen Section".
+	Using a default monitor configuration.
+[    47.557] (**) Option "DontVTSwitch" "true"
+[    47.558] (**) Option "DontZap" "true"
+[    47.558] (==) Automatically adding devices
+[    47.558] (==) Automatically enabling devices
+[    47.558] (==) Automatically adding GPU devices
+[    47.558] (==) Automatically binding GPU devices
+[    47.558] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[    47.578] (WW) The directory "/usr/share/fonts/X11/misc" does not exist.
+[    47.578] 	Entry deleted from font path.
+[    47.579] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[    47.579] 	Entry deleted from font path.
+[    47.579] (WW) The directory "/usr/share/fonts/X11/100dpi/" does not exist.
+[    47.579] 	Entry deleted from font path.
+[    47.579] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[    47.579] 	Entry deleted from font path.
+[    47.591] (WW) The directory "/usr/share/fonts/X11/100dpi" does not exist.
+[    47.591] 	Entry deleted from font path.
+[    47.591] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[    47.591] 	Entry deleted from font path.
+[    47.591] (==) FontPath set to:
+	/usr/share/fonts/X11/Type1,
+	built-ins
+[    47.591] (==) ModulePath set to "/usr/lib/xorg/modules"
+[    47.591] (II) The server relies on udev to provide the list of input devices.
+	If no devices become available, reconfigure udev or disable AutoAddDevices.
+[    47.591] (II) Loader magic: 0x56038a1fff00
+[    47.591] (II) Module ABI versions:
+[    47.591] 	X.Org ANSI C Emulation: 0.4
+[    47.591] 	X.Org Video Driver: 25.2
+[    47.591] 	X.Org XInput driver : 24.4
+[    47.592] 	X.Org Server Extension : 10.0
+[    47.627] (++) using VT number 1
+
+[    47.653] (II) systemd-logind: took control of session /org/freedesktop/login1/session/_31
+[    47.669] (II) xfree86: Adding drm device (/dev/dri/card0)
+[    47.669] (II) Platform probe for /sys/devices/pci0000:00/0000:00:02.0/drm/card0
+[    47.689] (II) systemd-logind: got fd for /dev/dri/card0 226:0 fd 13 paused 0
+[    47.704] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebb0000/4096, BIOS @ 0x????????/131072
+[    47.704] (II) LoadModule: "glx"
+[    47.717] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[    47.912] (II) Module glx: vendor="X.Org Foundation"
+[    47.912] 	compiled for 1.21.1.7, module version = 1.0.0
+[    47.912] 	ABI class: X.Org Server Extension, version 10.0
+[    47.913] (==) Matched modesetting as autoconfigured driver 0
+[    47.913] (==) Matched fbdev as autoconfigured driver 1
+[    47.913] (==) Matched vesa as autoconfigured driver 2
+[    47.913] (==) Assigned the driver to the xf86ConfigLayout
+[    47.913] (II) LoadModule: "modesetting"
+[    47.914] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    47.956] (II) Module modesetting: vendor="X.Org Foundation"
+[    47.956] 	compiled for 1.21.1.7, module version = 1.21.1
+[    47.956] 	Module class: X.Org Video Driver
+[    47.956] 	ABI class: X.Org Video Driver, version 25.2
+[    47.956] (II) LoadModule: "fbdev"
+[    47.956] (II) Loading /usr/lib/xorg/modules/drivers/fbdev_drv.so
+[    47.959] (II) Module fbdev: vendor="X.Org Foundation"
+[    47.959] 	compiled for 1.21.1.3, module version = 0.5.0
+[    47.959] 	Module class: X.Org Video Driver
+[    47.959] 	ABI class: X.Org Video Driver, version 25.2
+[    47.959] (II) LoadModule: "vesa"
+[    47.960] (II) Loading /usr/lib/xorg/modules/drivers/vesa_drv.so
+[    48.010] (II) Module vesa: vendor="X.Org Foundation"
+[    48.010] 	compiled for 1.21.1.3, module version = 2.5.0
+[    48.010] 	Module class: X.Org Video Driver
+[    48.010] 	ABI class: X.Org Video Driver, version 25.2
+[    48.010] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    48.010] (II) FBDEV: driver for framebuffer: fbdev
+[    48.010] (II) VESA: driver for VESA chipsets: vesa
+[    48.013] (II) modeset(0): using drv /dev/dri/card0
+[    48.014] (WW) Falling back to old probe method for fbdev
+[    48.014] (II) Loading sub module "fbdevhw"
+[    48.014] (II) LoadModule: "fbdevhw"
+[    48.015] (II) Loading /usr/lib/xorg/modules/libfbdevhw.so
+[    48.060] (II) Module fbdevhw: vendor="X.Org Foundation"
+[    48.060] 	compiled for 1.21.1.7, module version = 0.0.2
+[    48.060] 	ABI class: X.Org Video Driver, version 25.2
+[    48.063] (II) modeset(0): Creating default Display subsection in Screen section
+	"Default Screen Section" for depth/fbbpp 24/32
+[    48.064] (==) modeset(0): Depth 24, (==) framebuffer bpp 32
+[    48.064] (==) modeset(0): RGB weight 888
+[    48.064] (==) modeset(0): Default visual is TrueColor
+[    48.064] (II) Loading sub module "glamoregl"
+[    48.064] (II) LoadModule: "glamoregl"
+[    48.065] (II) Loading /usr/lib/xorg/modules/libglamoregl.so
+[    48.337] (II) Module glamoregl: vendor="X.Org Foundation"
+[    48.337] 	compiled for 1.21.1.7, module version = 1.0.1
+[    48.337] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[    54.389] (II) modeset(0): Refusing to try glamor on llvmpipe
+[    54.399] (II) modeset(0): glamor initialization failed
+[    54.399] (II) modeset(0): ShadowFB: preferred NO, enabled NO
+[    54.401] (II) modeset(0): Output Virtual-1 has no monitor section
+[    54.405] (II) modeset(0): EDID for output Virtual-1
+[    54.405] (II) modeset(0): Manufacturer: RHT  Model: 1234  Serial#: 0
+[    54.405] (II) modeset(0): Year: 2014  Week: 42
+[    54.405] (II) modeset(0): EDID Version: 1.4
+[    54.405] (II) modeset(0): Digital Display Input
+[    54.405] (II) modeset(0): 8 bits per channel
+[    54.405] (II) modeset(0): Digital interface is DisplayPort
+[    54.405] (II) modeset(0): Max Image Size [cm]: horiz.: 32  vert.: 20
+[    54.405] (II) modeset(0): Gamma: 2.20
+[    54.405] (II) modeset(0): No DPMS capabilities specified
+[    54.405] (II) modeset(0): Supported color encodings: RGB 4:4:4 
+[    54.405] (II) modeset(0): Default color space is primary color space
+[    54.405] (II) modeset(0): First detailed timing is preferred mode
+[    54.405] (II) modeset(0): Preferred mode is native pixel format and refresh rate
+[    54.405] (II) modeset(0): redX: 0.640 redY: 0.330   greenX: 0.300 greenY: 0.600
+[    54.405] (II) modeset(0): blueX: 0.150 blueY: 0.060   whiteX: 0.312 whiteY: 0.329
+[    54.405] (II) modeset(0): Supported established timings:
+[    54.405] (II) modeset(0): 640x480@60Hz
+[    54.405] (II) modeset(0): 800x600@60Hz
+[    54.406] (II) modeset(0): 1024x768@60Hz
+[    54.406] (II) modeset(0): Manufacturer's mask: 0
+[    54.406] (II) modeset(0): Supported standard timings:
+[    54.406] (II) modeset(0): #0: hsize: 2048  vsize 1152  refresh: 60  vid: 49377
+[    54.406] (II) modeset(0): #1: hsize: 1920  vsize 1080  refresh: 60  vid: 49361
+[    54.406] (II) modeset(0): #2: hsize: 1920  vsize 1200  refresh: 60  vid: 209
+[    54.406] (II) modeset(0): #3: hsize: 1600  vsize 1200  refresh: 60  vid: 16553
+[    54.406] (II) modeset(0): #4: hsize: 1680  vsize 1050  refresh: 60  vid: 179
+[    54.406] (II) modeset(0): #5: hsize: 1440  vsize 900  refresh: 60  vid: 149
+[    54.406] (II) modeset(0): #6: hsize: 1280  vsize 1024  refresh: 60  vid: 32897
+[    54.406] (II) modeset(0): #7: hsize: 1280  vsize 960  refresh: 60  vid: 16513
+[    54.406] (II) modeset(0): Supported detailed timing:
+[    54.406] (II) modeset(0): clock: 107.3 MHz   Image Size:  325 x 203 mm
+[    54.406] (II) modeset(0): h_active: 1280  h_sync: 1600  h_sync_end 1638 h_blank_end 1728 h_border: 0
+[    54.406] (II) modeset(0): v_active: 800  v_sync: 804  v_sync_end 808 v_blanking: 828 v_border: 0
+[    54.406] (II) modeset(0): Established timings III: (not decoded)
+[    54.406] (II) modeset(0): Ranges: V min: 50 V max: 125 Hz, H min: 30 H max: 160 kHz,
+[    54.406] (II) modeset(0): Monitor name: QEMU Monitor
+[    54.406] (II) modeset(0): Number of EDID sections to follow: 1
+[    54.406] (II) modeset(0): EDID (in hex):
+[    54.406] (II) modeset(0): 	00ffffffffffff004914341200000000
+[    54.406] (II) modeset(0): 	2a180104a520147806ee91a3544c9926
+[    54.406] (II) modeset(0): 	0f5054210800e1c0d1c0d100a940b300
+[    54.406] (II) modeset(0): 	950081808140ea2900c051201c304026
+[    54.406] (II) modeset(0): 	444045cb10000018000000f7000a0040
+[    54.406] (II) modeset(0): 	82002820000000000000000000fd0032
+[    54.406] (II) modeset(0): 	7d1ea0ff010a202020202020000000fc
+[    54.406] (II) modeset(0): 	0051454d55204d6f6e69746f720a013a
+[    54.407] (II) modeset(0): 	02030b00467d6560591f610000001000
+[    54.407] (II) modeset(0): 	00000000000000000000000000000000
+[    54.407] (II) modeset(0): 	10000000000000000000000000000000
+[    54.407] (II) modeset(0): 	00001000000000000000000000000000
+[    54.407] (II) modeset(0): 	00000000100000000000000000000000
+[    54.407] (II) modeset(0): 	00000000000010000000000000000000
+[    54.407] (II) modeset(0): 	00000000000000001000000000000000
+[    54.407] (II) modeset(0): 	0000000000000000000000000000002f
+[    54.408] (II) modeset(0): Printing probed modes for output Virtual-1
+[    54.408] (II) modeset(0): Modeline "1280x800"x75.0  107.30  1280 1600 1638 1728  800 804 808 828 -hsync -vsync (62.1 kHz eP)
+[    54.408] (II) modeset(0): Modeline "1920x1080"x60.0  148.50  1920 2008 2052 2200  1080 1084 1089 1125 -hsync -vsync (67.5 kHz e)
+[    54.408] (II) modeset(0): Modeline "1920x1080"x50.0  148.50  1920 2448 2492 2640  1080 1084 1089 1125 +hsync +vsync (56.2 kHz e)
+[    54.408] (II) modeset(0): Modeline "1600x1200"x60.0  162.00  1600 1664 1856 2160  1200 1201 1204 1250 +hsync +vsync (75.0 kHz e)
+[    54.408] (II) modeset(0): Modeline "1680x1050"x60.0  146.25  1680 1784 1960 2240  1050 1053 1059 1089 -hsync +vsync (65.3 kHz e)
+[    54.408] (II) modeset(0): Modeline "1400x1050"x60.0  121.75  1400 1488 1632 1864  1050 1053 1057 1089 -hsync +vsync (65.3 kHz e)
+[    54.408] (II) modeset(0): Modeline "1280x1024"x60.0  108.00  1280 1328 1440 1688  1024 1025 1028 1066 +hsync +vsync (64.0 kHz e)
+[    54.408] (II) modeset(0): Modeline "1440x900"x59.9  106.50  1440 1520 1672 1904  900 903 909 934 -hsync +vsync (55.9 kHz e)
+[    54.408] (II) modeset(0): Modeline "1280x960"x60.0  108.00  1280 1376 1488 1800  960 961 964 1000 +hsync +vsync (60.0 kHz e)
+[    54.408] (II) modeset(0): Modeline "1360x768"x60.0   85.50  1360 1424 1536 1792  768 771 777 795 +hsync +vsync (47.7 kHz e)
+[    54.408] (II) modeset(0): Modeline "1280x768"x59.9   79.50  1280 1344 1472 1664  768 771 778 798 -hsync +vsync (47.8 kHz e)
+[    54.408] (II) modeset(0): Modeline "1024x768"x60.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)
+[    54.409] (II) modeset(0): Modeline "800x600"x60.3   40.00  800 840 968 1056  600 601 605 628 +hsync +vsync (37.9 kHz e)
+[    54.409] (II) modeset(0): Modeline "640x480"x60.0   25.20  640 656 752 800  480 490 492 525 -hsync -vsync (31.5 kHz e)
+[    54.409] (II) modeset(0): Modeline "640x480"x59.9   25.18  640 656 752 800  480 490 492 525 -hsync -vsync (31.5 kHz e)
+[    54.409] (II) modeset(0): Output Virtual-1 connected
+[    54.409] (II) modeset(0): Using exact sizes for initial modes
+[    54.409] (II) modeset(0): Output Virtual-1 using initial mode 1280x800 +0+0
+[    54.410] (==) modeset(0): Using gamma correction (1.0, 1.0, 1.0)
+[    54.410] (==) modeset(0): DPI set to (96, 96)
+[    54.410] (II) Loading sub module "fb"
+[    54.410] (II) LoadModule: "fb"
+[    54.410] (II) Module "fb" already built-in
+[    54.410] (II) UnloadModule: "fbdev"
+[    54.410] (II) Unloading fbdev
+[    54.411] (II) UnloadSubModule: "fbdevhw"
+[    54.411] (II) Unloading fbdevhw
+[    54.412] (II) UnloadModule: "vesa"
+[    54.412] (II) Unloading vesa
+[    54.416] (==) modeset(0): Backing store enabled
+[    54.416] (==) modeset(0): Silken mouse enabled
+[    54.420] (II) modeset(0): Initializing kms color map for depth 24, 8 bpc.
+[    54.422] (==) modeset(0): DPMS enabled
+[    54.423] (II) Initializing extension Generic Event Extension
+[    54.423] (II) Initializing extension SHAPE
+[    54.424] (II) Initializing extension MIT-SHM
+[    54.425] (II) Initializing extension XInputExtension
+[    54.426] (II) Initializing extension XTEST
+[    54.427] (II) Initializing extension BIG-REQUESTS
+[    54.428] (II) Initializing extension SYNC
+[    54.429] (II) Initializing extension XKEYBOARD
+[    54.429] (II) Initializing extension XC-MISC
+[    54.430] (II) Initializing extension SECURITY
+[    54.431] (II) Initializing extension XFIXES
+[    54.431] (II) Initializing extension RENDER
+[    54.432] (II) Initializing extension RANDR
+[    54.433] (II) Initializing extension COMPOSITE
+[    54.435] (II) Initializing extension DAMAGE
+[    54.435] (II) Initializing extension MIT-SCREEN-SAVER
+[    54.436] (II) Initializing extension DOUBLE-BUFFER
+[    54.437] (II) Initializing extension RECORD
+[    54.437] (II) Initializing extension DPMS
+[    54.438] (II) Initializing extension Present
+[    54.439] (II) Initializing extension DRI3
+[    54.439] (II) Initializing extension X-Resource
+[    54.439] (II) Initializing extension XVideo
+[    54.440] (II) Initializing extension XVideo-MotionCompensation
+[    54.440] (II) Initializing extension SELinux
+[    54.440] (II) SELinux: Disabled on system
+[    54.440] (II) Initializing extension GLX
+[    54.441] (II) AIGLX: Screen 0 is not DRI2 capable
+[    54.461] (II) IGLX: Loaded and initialized swrast
+[    54.461] (II) GLX: Initialized DRISWRAST GL provider for screen 0
+[    54.462] (II) Initializing extension XFree86-VidModeExtension
+[    54.462] (II) Initializing extension XFree86-DGA
+[    54.463] (II) Initializing extension XFree86-DRI
+[    54.463] (II) Initializing extension DRI2
+[    54.467] (II) modeset(0): Damage tracking initialized
+[    54.467] (II) modeset(0): Setting screen physical size to 338 x 211
+[    55.090] (II) config/udev: Adding input device Power Button (/dev/input/event1)
+[    55.090] (**) Power Button: Applying InputClass "libinput keyboard catchall"
+[    55.091] (II) LoadModule: "libinput"
+[    55.091] (II) Loading /usr/lib/xorg/modules/input/libinput_drv.so
+[    55.269] (II) Module libinput: vendor="X.Org Foundation"
+[    55.270] 	compiled for 1.21.1.3, module version = 1.2.1
+[    55.270] 	Module class: X.Org XInput Driver
+[    55.270] 	ABI class: X.Org XInput driver, version 24.4
+[    55.270] (II) Using input driver 'libinput' for 'Power Button'
+[    55.277] (II) systemd-logind: got fd for /dev/input/event1 13:65 fd 24 paused 0
+[    55.278] (**) Power Button: always reports core events
+[    55.278] (**) Option "Device" "/dev/input/event1"
+[    55.435] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[    55.436] (II) event1  - Power Button: device is a keyboard
+[    55.437] (II) event1  - Power Button: device removed
+[    55.438] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXPWRBN:00/input/input2/event1"
+[    55.439] (II) XINPUT: Adding extended input device "Power Button" (type: KEYBOARD, id 6)
+[    55.439] (**) Option "xkb_model" "pc105"
+[    55.439] (**) Option "xkb_layout" "us"
+[    55.445] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[    55.445] (II) event1  - Power Button: device is a keyboard
+[    55.450] (II) config/udev: Adding input device AT Translated Set 2 keyboard (/dev/input/event0)
+[    55.450] (**) AT Translated Set 2 keyboard: Applying InputClass "libinput keyboard catchall"
+[    55.450] (II) Using input driver 'libinput' for 'AT Translated Set 2 keyboard'
+[    55.457] (II) systemd-logind: got fd for /dev/input/event0 13:64 fd 27 paused 0
+[    55.457] (**) AT Translated Set 2 keyboard: always reports core events
+[    55.457] (**) Option "Device" "/dev/input/event0"
+[    55.462] (II) event0  - AT Translated Set 2 keyboard: is tagged by udev as: Keyboard
+[    55.463] (II) event0  - AT Translated Set 2 keyboard: device is a keyboard
+[    55.464] (II) event0  - AT Translated Set 2 keyboard: device removed
+[    55.464] (**) Option "config_info" "udev:/sys/devices/platform/i8042/serio0/input/input0/event0"
+[    55.465] (II) XINPUT: Adding extended input device "AT Translated Set 2 keyboard" (type: KEYBOARD, id 7)
+[    55.465] (**) Option "xkb_model" "pc105"
+[    55.465] (**) Option "xkb_layout" "us"
+[    55.469] (II) event0  - AT Translated Set 2 keyboard: is tagged by udev as: Keyboard
+[    55.470] (II) event0  - AT Translated Set 2 keyboard: device is a keyboard
+[    55.473] (II) config/udev: Adding input device ImExPS/2 Generic Explorer Mouse (/dev/input/event2)
+[    55.474] (**) ImExPS/2 Generic Explorer Mouse: Applying InputClass "libinput pointer catchall"
+[    55.474] (II) Using input driver 'libinput' for 'ImExPS/2 Generic Explorer Mouse'
+[    55.481] (II) systemd-logind: got fd for /dev/input/event2 13:66 fd 28 paused 0
+[    55.481] (**) ImExPS/2 Generic Explorer Mouse: always reports core events
+[    55.481] (**) Option "Device" "/dev/input/event2"
+[    55.486] (II) event2  - ImExPS/2 Generic Explorer Mouse: is tagged by udev as: Mouse
+[    55.487] (II) event2  - ImExPS/2 Generic Explorer Mouse: device is a pointer
+[    55.488] (II) event2  - ImExPS/2 Generic Explorer Mouse: device removed
+[    55.489] (**) Option "config_info" "udev:/sys/devices/platform/i8042/serio1/input/input3/event2"
+[    55.489] (II) XINPUT: Adding extended input device "ImExPS/2 Generic Explorer Mouse" (type: MOUSE, id 8)
+[    55.492] (**) Option "AccelerationScheme" "none"
+[    55.492] (**) ImExPS/2 Generic Explorer Mouse: (accel) selected scheme none/0
+[    55.492] (**) ImExPS/2 Generic Explorer Mouse: (accel) acceleration factor: 2.000
+[    55.492] (**) ImExPS/2 Generic Explorer Mouse: (accel) acceleration threshold: 4
+[    55.496] (II) event2  - ImExPS/2 Generic Explorer Mouse: is tagged by udev as: Mouse
+[    55.497] (II) event2  - ImExPS/2 Generic Explorer Mouse: device is a pointer
+[    55.500] (II) config/udev: Adding input device ImExPS/2 Generic Explorer Mouse (/dev/input/mouse0)
+[    55.500] (II) No input driver specified, ignoring this device.
+[    55.500] (II) This device may have been added with another device file.
+[    55.502] (II) config/udev: Adding input device PC Speaker (/dev/input/event3)
+[    55.502] (II) No input driver specified, ignoring this device.
+[    55.502] (II) This device may have been added with another device file.
+[    58.293] (II) modeset(0): Disabling kernel dirty updates, not required.
+
+exit=1
+
+$ env | sort; gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/; dpkg-query -W plank openbox python3-xdg
+DBUS_SESSION_BUS_ADDRESS=unix:path=/tmp/dbus-eVRVwpOGLt,guid=bb773e9a4a2c30f907f54cbb6acd78ba
+DISPLAY=:0
+HOME=/home/nexium
+INVOCATION_ID=06bcac458d4848928cc15e622ad9934f
+JOURNAL_STREAM=8:11999
+LANG=C.UTF-8
+LOGNAME=nexium
+MAIL=/var/mail/nexium
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/home/nexium
+SYSTEMD_EXEC_PID=451
+TERM=xterm
+USER=nexium
+WINDOWID=16777246
+WINDOWPATH=1
+XCURSOR_SIZE=24
+XCURSOR_THEME=Adwaita
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SEAT=seat0
+XDG_SESSION_CLASS=user
+XDG_SESSION_ID=1
+XDG_SESSION_TYPE=tty
+XDG_VTNR=1
+XTERM_LOCALE=C.UTF-8
+XTERM_SHELL=/bin/sh
+XTERM_VERSION=XTerm(379)
+/bin/sh: 1: gsettings: not found
+dpkg-query: no packages found matching python3-xdg
+openbox	3.6.1-10
+plank	0.11.89-4+b1
+
+exit=1
+
+$ timeout 8s plank --debug
+[92m[DEBUG 20:18:42.816007][0m [GLib-GIO] Using cross-namespace EXTERNAL authentication (this will deadlock if server is GDBus < 2.73.3)
+[93m[WARN 20:18:43.141429][0m [dbind] AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[92m[DEBUG 20:18:43.142755][0m [GLib] unsetenv() is not thread-safe and should not be used after threads are created
+[94m[INFO 20:18:43.163009][0m [AbstractMain:229] Plank version: 0.11.89
+[94m[INFO 20:18:43.163140][0m [AbstractMain:230] Kernel version: 6.1.0-53-amd64
+[94m[INFO 20:18:43.163259][0m [AbstractMain:231] GLib version: 2.74.6 (2.73.3)
+[94m[INFO 20:18:43.163370][0m [AbstractMain:234] GTK+ version: 3.24.38 (3.24.34)
+[94m[INFO 20:18:43.163471][0m [AbstractMain:237] Wnck version: 43.0.0
+[94m[INFO 20:18:43.163600][0m [AbstractMain:238] Cairo version: 1.16.0
+[94m[INFO 20:18:43.163710][0m [AbstractMain:239] Pango version: 1.50.12
+[94m[INFO 20:18:43.163804][0m [AbstractMain:240] + Cairo/Gtk+ HiDPI support enabled
+[94m[INFO 20:18:43.163898][0m [AbstractMain:242] + Dynamic Quicklists support enabled
+[94m[INFO 20:18:43.163971][0m [AbstractMain:245] + XInput Barriers support enabled
+[93m[WARN 20:18:43.164498][0m [Environment:183] Neither of XDG_SESSION_DESKTOP, XDG_CURRENT_DESKTOP or DESKTOP_SESSION is set in this environment!
+[91m[CRITICAL 20:18:43.164658][0m [AbstractMain:255] Only X11 environments are supported.
+
+exit=0
+
+$ ps -ef | grep -E "plank|openbox|tint2|matchbox|picom"
+nexium       498     451  0 20:18 tty1     00:00:00 dbus-run-session -- openbox-session
+nexium       501     498 18 20:18 tty1     00:00:07 /usr/bin/openbox --startup /usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX
+nexium       522       1  3 20:18 tty1     00:00:01 picom --config /etc/xdg/nexium/picom.conf
+nexium       523       1  3 20:18 tty1     00:00:01 tint2 -c /etc/xdg/nexium/tint2rc
+nexium       583     558 16 20:18 pts/0    00:00:00 /bin/sh -c ps -ef | grep -E "plank|openbox|tint2|matchbox|picom"
+nexium       585     583 50 20:18 pts/0    00:00:00 grep -E plank|openbox|tint2|matchbox|picom
+
+exit=0

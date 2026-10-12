@@ -1,0 +1,501 @@
++ echo '=== OUTPUT SQUASHFS EXECUTABLES AND SESSION ==='
+=== OUTPUT SQUASHFS EXECUTABLES AND SESSION ===
++ sudo stat -c '%A %U:%G %n' root/usr/bin/plank root/usr/bin/openbox-session root/usr/local/lib/nexium/session root/home/nexium/.config/openbox/autostart
+-rwxr-xr-x root:root root/usr/bin/plank
+-rwxr-xr-x root:root root/usr/bin/openbox-session
+-rwxr-xr-x root:root root/usr/local/lib/nexium/session
+-rwxr-xr-x packer:packer root/home/nexium/.config/openbox/autostart
++ sudo cat root/usr/local/lib/nexium/session root/home/nexium/.config/openbox/autostart root/etc/systemd/system/nexium-kiosk.service root/usr/bin/openbox-session root/usr/lib/x86_64-linux-gnu/openbox-autostart
+#!/bin/sh
+# Native session under Xinit as the existing unprivileged nexium user.
+export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24
+xset s off -dpms s noblank 2>/dev/null || true
+exec dbus-run-session -- openbox-session
+#!/bin/sh
+feh --no-fehbg --bg-fill /usr/share/backgrounds/nexium/golden-gate.png &
+picom --config /etc/xdg/nexium/picom.conf &
+tint2 -c /etc/xdg/nexium/tint2rc &
+nm-applet &
+gsettings set org.gnome.desktop.interface gtk-theme GoldenGate 2>/dev/null || true
+gsettings set org.gnome.desktop.interface icon-theme "$(cat /etc/xdg/nexium/icon-theme)" 2>/dev/null || true
+schema=net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/
+gsettings set "$schema" position bottom 2>/dev/null || true
+gsettings set "$schema" alignment center 2>/dev/null || true
+gsettings set "$schema" icon-size 48 2>/dev/null || true
+gsettings set "$schema" hide-mode intelligent 2>/dev/null || true
+plank &
+nexium-welcome &
+[Unit]
+Description=Nexium OS native desktop (Openbox, Plank, Tint2)
+After=systemd-user-sessions.service NetworkManager.service plymouth-start.service
+Conflicts=getty@tty1.service
+[Service]
+User=nexium
+PAMName=login
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+StandardInput=tty
+StandardOutput=journal
+UtmpIdentifier=tty1
+UtmpMode=user
+ExecStartPre=+-/bin/plymouth quit --retain-splash
+ExecStart=/usr/bin/xinit /usr/local/lib/nexium/session -- :0 vt1 -nolisten tcp -keeptty -background none
+Restart=always
+RestartSec=1
+[Install]
+WantedBy=graphical.target
+#!/bin/sh
+
+if test -n "$1"; then
+    echo "Syntax: openbox-session"
+    echo
+    echo "See the openbox-session(1) manpage for help."
+  exit
+fi
+
+# Clean up after GDM
+xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
+      -remove _NET_DESKTOP_NAMES \
+      -remove _NET_CURRENT_DESKTOP 2> /dev/null
+
+# Set up the environment
+A="/etc/xdg/openbox/environment"
+test -r $A && . $A
+A="${XDG_CONFIG_HOME:-"$HOME/.config"}/openbox/environment"
+test -r $A && . $A
+
+# Run Openbox, and have it run the autostart stuff
+exec /usr/bin/openbox --startup "/usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX" "$@"
+#!/bin/sh
+
+# Set a background color
+BG=""
+if which hsetroot >/dev/null 2>/dev/null; then
+  BG=hsetroot
+elif which esetroot >/dev/null 2>/dev/null; then
+  BG=esetroot
+elif which xsetroot >/dev/null 2>/dev/null; then
+  BG=xsetroot
+fi
+#test -z $BG || $BG -solid "#303030"
+
+GLOBALAUTOSTART="/etc/xdg/openbox/autostart"
+AUTOSTART="${XDG_CONFIG_HOME:-"$HOME/.config"}/openbox/autostart"
+
+# Run the global openbox autostart script
+if test -f $GLOBALAUTOSTART; then
+    sh $GLOBALAUTOSTART
+elif test -f $GLOBALAUTOSTART.sh; then
+    sh $GLOBALAUTOSTART.sh
+fi
+
+# Run the user openbox autostart script
+if test -f $AUTOSTART; then
+    sh $AUTOSTART
+elif test -f $AUTOSTART.sh; then
+    sh $AUTOSTART.sh
+fi
+
+# Run the XDG autostart stuff.  These are found in /etc/xdg/autostart and
+# in $HOME/.config/autostart.  This requires PyXDG to be installed.
+# See openbox-xdg-autostart --help for more details.
+if which xdg-autostart >/dev/null 2>/dev/null; then
+   CMD=xdg-autostart
+else
+   CMD=/usr/lib/x86_64-linux-gnu/openbox-xdg-autostart
+fi
+exec $CMD "$@"
++ echo '=== DOCK PINS OWNERSHIP ==='
+=== DOCK PINS OWNERSHIP ===
++ sudo find root/home/nexium/.config/plank -printf '%M %u:%g %p\n'
+drwxr-xr-x packer:packer root/home/nexium/.config/plank
+drwxr-xr-x packer:packer root/home/nexium/.config/plank/dock1
+drwxr-xr-x packer:packer root/home/nexium/.config/plank/dock1/launchers
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/04-messages.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/07-vault.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/01-files.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/10-trash.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/02-browser.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/05-calls.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/08-editor.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/06-settings.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/09-monitor.dockitem
+-rw-r--r-- packer:packer root/home/nexium/.config/plank/dock1/launchers/03-terminal.dockitem
++ echo '=== ROOTFS PLYMOUTH ==='
+=== ROOTFS PLYMOUTH ===
++ sudo find root/usr/share/plymouth root/etc/plymouth root/etc/alternatives -iname '*plymouth*' -o -iname '*nexium*' -o -iname default.plymouth
+root/usr/share/plymouth
+root/usr/share/plymouth/plymouthd.defaults
+root/usr/share/plymouth/themes/nexium
+root/usr/share/plymouth/themes/nexium/nexium.script
+root/usr/share/plymouth/themes/nexium/nexium.plymouth
+root/usr/share/plymouth/themes/details/details.plymouth
+root/usr/share/plymouth/themes/nexium-gold
+root/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
+root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth
+root/usr/share/plymouth/themes/tribar/tribar.plymouth
+root/usr/share/plymouth/themes/text/text.plymouth
+root/etc/plymouth
+root/etc/plymouth/plymouthd.conf
++ sudo ls -l root/usr/share/plymouth/themes/default.plymouth root/etc/alternatives/default.plymouth
+ls: cannot access 'root/usr/share/plymouth/themes/default.plymouth': No such file or directory
+ls: cannot access 'root/etc/alternatives/default.plymouth': No such file or directory
++ true
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/etc/plymouth/plymouthd.conf
++ echo '=== root/etc/plymouth/plymouthd.conf ==='
+=== root/etc/plymouth/plymouthd.conf ===
++ sudo cat root/etc/plymouth/plymouthd.conf
+[Daemon]
+Theme=nexium
+ShowDelay=0
+DeviceTimeout=8
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/details/details.plymouth
++ echo '=== root/usr/share/plymouth/themes/details/details.plymouth ==='
+=== root/usr/share/plymouth/themes/details/details.plymouth ===
++ sudo cat root/usr/share/plymouth/themes/details/details.plymouth
+[Plymouth Theme]
+Name=Details
+Description=Verbose fallback theme
+ModuleName=details
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth
++ echo '=== root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth ==='
+=== root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth ===
++ sudo cat root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth
+[Plymouth Theme]
+Name=Nexium OS Golden Gate (staged)
+Description=Optional future Golden Gate boot wallpaper; not enabled in preserved initrd
+ModuleName=script
+[script]
+ImageDir=/usr/share/plymouth/themes/nexium-gold
+ScriptFile=/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/nexium/nexium.plymouth
++ echo '=== root/usr/share/plymouth/themes/nexium/nexium.plymouth ==='
+=== root/usr/share/plymouth/themes/nexium/nexium.plymouth ===
++ sudo cat root/usr/share/plymouth/themes/nexium/nexium.plymouth
+[Plymouth Theme]
+Name=Nexium OS
+Description=Nexium OS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/nexium
+ScriptFile=/usr/share/plymouth/themes/nexium/nexium.script
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/text/text.plymouth
++ echo '=== root/usr/share/plymouth/themes/text/text.plymouth ==='
+=== root/usr/share/plymouth/themes/text/text.plymouth ===
++ sudo cat root/usr/share/plymouth/themes/text/text.plymouth
+[Plymouth Theme]
+Name=Text
+Description=Text mode theme with a 3 box countdown
+ModuleName=text
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/tribar/tribar.plymouth
++ echo '=== root/usr/share/plymouth/themes/tribar/tribar.plymouth ==='
+=== root/usr/share/plymouth/themes/tribar/tribar.plymouth ===
++ sudo cat root/usr/share/plymouth/themes/tribar/tribar.plymouth
+[Plymouth Theme]
+Name=Tribar
+Description=Text mode theme with tricolor progress bar
+ModuleName=tribar
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
++ echo '=== root/usr/share/plymouth/themes/nexium-gold/nexium-gold.script ==='
+=== root/usr/share/plymouth/themes/nexium-gold/nexium-gold.script ===
++ sudo cat root/usr/share/plymouth/themes/nexium-gold/nexium-gold.script
+image = Image("golden-gate.png");
+image = image.Scale(Window.GetWidth(), Window.GetHeight());
+sprite = Sprite(image);
+sprite.SetX(0); sprite.SetY(0); sprite.SetZ(-100);
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/usr/share/plymouth/themes/nexium/nexium.script
++ echo '=== root/usr/share/plymouth/themes/nexium/nexium.script ==='
+=== root/usr/share/plymouth/themes/nexium/nexium.script ===
++ sudo cat root/usr/share/plymouth/themes/nexium/nexium.script
+# Nexium OS 1.2 boot animation (Plymouth script)
+Window.SetBackgroundTopColor(0.20, 0.05, 0.17);
+Window.SetBackgroundBottomColor(0.04, 0.01, 0.05);
+
+sw = Window.GetWidth();
+sh = Window.GetHeight();
+wx = Window.GetX();
+wy = Window.GetY();
+
+u = 1;
+if (sh < 760) u = sh / 760;
+if (sw < 700) u = Math.Min(u, sw / 700);
+
+petals = Image("petals.png");
+glow = Image("glow.png");
+word = Image("word.png");
+if (u < 1) {
+  petals = petals.Scale(petals.GetWidth() * u, petals.GetHeight() * u);
+  glow = glow.Scale(glow.GetWidth() * u, glow.GetHeight() * u);
+  word = word.Scale(word.GetWidth() * u, word.GetHeight() * u);
+}
+
+cx = wx + sw / 2;
+cy = wy + sh / 2 - sh * 0.07;
+
+glow_s = Sprite(glow);
+glow_s.SetPosition(cx - glow.GetWidth() / 2, cy - glow.GetHeight() / 2, 1);
+glow_s.SetOpacity(0);
+
+logo_s = Sprite(petals);
+logo_s.SetPosition(cx - petals.GetWidth() / 2, cy - petals.GetHeight() / 2, 2);
+logo_s.SetOpacity(0);
+
+word_y = cy + petals.GetHeight() / 2 + 6 * u;
+word_s = Sprite(word);
+word_s.SetPosition(cx - word.GetWidth() / 2, word_y + 24 * u, 3);
+word_s.SetOpacity(0);
+
+dot_img[0] = Image("d0.png");
+dot_img[1] = Image("d1.png");
+dot_img[2] = Image("d2.png");
+dot_y = word_y + word.GetHeight() + 26 * u;
+for (i = 0; i < 5; i++) {
+  dots[i] = Sprite(dot_img[i % 3]);
+  dots[i].SetPosition(cx - 2 * 26 + i * 26 - 7, dot_y, 3);
+  dots[i].SetOpacity(0);
+}
+
+t = 0;
+cycle = 110;
+third = Math.Pi * 2 / 3;
+
+fun ease(p) {
+  if (p < 0.5) return 4 * p * p * p;
+  q = -2 * p + 2;
+  return 1 - q * q * q / 2;
+}
+
+fun refresh() {
+  t++;
+  # spin-and-settle: one third of a turn per cycle (the logo has 3 petals)
+  n = Math.Int(t / cycle);
+  p = (t - n * cycle) / cycle;
+  logo_s.SetImage(petals.Rotate((n + ease(p)) * third));
+
+  intro = Math.Min(t / 40, 1);
+  logo_s.SetOpacity(intro);
+  glow_s.SetOpacity(intro * (0.55 + 0.35 * Math.Sin(t / 18)));
+
+  if (t > 18) {
+    k = Math.Min((t - 18) / 45, 1);
+    e = 1 - (1 - k) * (1 - k);
+    word_s.SetOpacity(e);
+    word_s.SetY(word_y + 24 * u * (1 - e));
+  }
+
+  if (t > 40) {
+    for (i = 0; i < 5; i++) {
+      a = Math.Sin((t / 7) - i * 0.8);
+      if (a < 0) a = 0;
+      dots[i].SetOpacity(Math.Min((t - 40) / 30, 1) * (0.18 + 0.82 * a));
+      dots[i].SetY(dot_y - 6 * u * a);
+    }
+  }
+}
+Plymouth.SetRefreshFunction(refresh);
+
+# messages (e.g. disk checks) stay readable but small
+msg_s = Sprite();
+fun message_cb(text) {
+  img = Image.Text(text, 0.85, 0.75, 0.85);
+  msg_s.SetImage(img);
+  msg_s.SetPosition(cx - img.GetWidth() / 2, wy + sh - 50, 4);
+}
+Plymouth.SetMessageFunction(message_cb);
++ for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth
++ test -f root/var/lib/dpkg/alternatives/default.plymouth
++ echo '=== INITRD PLYMOUTH ==='
+=== INITRD PLYMOUTH ===
++ find initrd -path '*plymouth*' -printf '%M %p -> %l\n'
+drwxr-xr-x initrd/etc/plymouth -> 
+-rw-r--r-- initrd/etc/plymouth/plymouthd.conf -> 
+drwxr-xr-x initrd/usr/share/plymouth -> 
+-rw-r--r-- initrd/usr/share/plymouth/plymouthd.defaults -> 
+drwxr-xr-x initrd/usr/share/plymouth/themes -> 
+drwxr-xr-x initrd/usr/share/plymouth/themes/nexium -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/d1.png -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/petals.png -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/nexium.script -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/d0.png -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/nexium.plymouth -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/word.png -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/d2.png -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/nexium/glow.png -> 
+drwxr-xr-x initrd/usr/share/plymouth/themes/details -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/details/details.plymouth -> 
+drwxr-xr-x initrd/usr/share/plymouth/themes/text -> 
+-rw-r--r-- initrd/usr/share/plymouth/themes/text/text.plymouth -> 
+-rw-r--r-- initrd/usr/share/plymouth/debian-logo.png -> 
+drwxr-xr-x initrd/usr/lib/x86_64-linux-gnu/plymouth -> 
+-rw-r--r-- initrd/usr/lib/x86_64-linux-gnu/plymouth/text.so -> 
+drwxr-xr-x initrd/usr/lib/x86_64-linux-gnu/plymouth/renderers -> 
+-rw-r--r-- initrd/usr/lib/x86_64-linux-gnu/plymouth/renderers/frame-buffer.so -> 
+-rw-r--r-- initrd/usr/lib/x86_64-linux-gnu/plymouth/renderers/drm.so -> 
+-rw-r--r-- initrd/usr/lib/x86_64-linux-gnu/plymouth/script.so -> 
+-rw-r--r-- initrd/usr/lib/x86_64-linux-gnu/plymouth/details.so -> 
+drwxr-xr-x initrd/usr/libexec/plymouth -> 
+-rwxr-xr-x initrd/usr/libexec/plymouth/plymouthd-fd-escrow -> 
+-rwxr-xr-x initrd/usr/sbin/plymouthd -> 
+-rwxr-xr-x initrd/usr/bin/plymouth -> 
+-rwxr-xr-x initrd/scripts/init-bottom/plymouth -> 
+-rwxr-xr-x initrd/scripts/init-premount/plymouth -> 
+-rwxr-xr-x initrd/scripts/panic/plymouth -> 
++ find initrd -type f '(' -name '*.plymouth' -o -name '*.script' -o -name plymouthd.conf -o -name plymouthd.defaults ')' -print -exec cat '{}' ';'
+initrd/etc/plymouth/plymouthd.conf
+[Daemon]
+Theme=nexium
+ShowDelay=0
+DeviceTimeout=8
+initrd/usr/share/plymouth/plymouthd.defaults
+# Distribution defaults. Changes to this file will get overwritten during
+# upgrades.
+[Daemon]
+Theme=emerald
+ShowDelay=0
+DeviceTimeout=8
+initrd/usr/share/plymouth/themes/nexium/nexium.script
+# Nexium OS 1.2 boot animation (Plymouth script)
+Window.SetBackgroundTopColor(0.20, 0.05, 0.17);
+Window.SetBackgroundBottomColor(0.04, 0.01, 0.05);
+
+sw = Window.GetWidth();
+sh = Window.GetHeight();
+wx = Window.GetX();
+wy = Window.GetY();
+
+u = 1;
+if (sh < 760) u = sh / 760;
+if (sw < 700) u = Math.Min(u, sw / 700);
+
+petals = Image("petals.png");
+glow = Image("glow.png");
+word = Image("word.png");
+if (u < 1) {
+  petals = petals.Scale(petals.GetWidth() * u, petals.GetHeight() * u);
+  glow = glow.Scale(glow.GetWidth() * u, glow.GetHeight() * u);
+  word = word.Scale(word.GetWidth() * u, word.GetHeight() * u);
+}
+
+cx = wx + sw / 2;
+cy = wy + sh / 2 - sh * 0.07;
+
+glow_s = Sprite(glow);
+glow_s.SetPosition(cx - glow.GetWidth() / 2, cy - glow.GetHeight() / 2, 1);
+glow_s.SetOpacity(0);
+
+logo_s = Sprite(petals);
+logo_s.SetPosition(cx - petals.GetWidth() / 2, cy - petals.GetHeight() / 2, 2);
+logo_s.SetOpacity(0);
+
+word_y = cy + petals.GetHeight() / 2 + 6 * u;
+word_s = Sprite(word);
+word_s.SetPosition(cx - word.GetWidth() / 2, word_y + 24 * u, 3);
+word_s.SetOpacity(0);
+
+dot_img[0] = Image("d0.png");
+dot_img[1] = Image("d1.png");
+dot_img[2] = Image("d2.png");
+dot_y = word_y + word.GetHeight() + 26 * u;
+for (i = 0; i < 5; i++) {
+  dots[i] = Sprite(dot_img[i % 3]);
+  dots[i].SetPosition(cx - 2 * 26 + i * 26 - 7, dot_y, 3);
+  dots[i].SetOpacity(0);
+}
+
+t = 0;
+cycle = 110;
+third = Math.Pi * 2 / 3;
+
+fun ease(p) {
+  if (p < 0.5) return 4 * p * p * p;
+  q = -2 * p + 2;
+  return 1 - q * q * q / 2;
+}
+
+fun refresh() {
+  t++;
+  # spin-and-settle: one third of a turn per cycle (the logo has 3 petals)
+  n = Math.Int(t / cycle);
+  p = (t - n * cycle) / cycle;
+  logo_s.SetImage(petals.Rotate((n + ease(p)) * third));
+
+  intro = Math.Min(t / 40, 1);
+  logo_s.SetOpacity(intro);
+  glow_s.SetOpacity(intro * (0.55 + 0.35 * Math.Sin(t / 18)));
+
+  if (t > 18) {
+    k = Math.Min((t - 18) / 45, 1);
+    e = 1 - (1 - k) * (1 - k);
+    word_s.SetOpacity(e);
+    word_s.SetY(word_y + 24 * u * (1 - e));
+  }
+
+  if (t > 40) {
+    for (i = 0; i < 5; i++) {
+      a = Math.Sin((t / 7) - i * 0.8);
+      if (a < 0) a = 0;
+      dots[i].SetOpacity(Math.Min((t - 40) / 30, 1) * (0.18 + 0.82 * a));
+      dots[i].SetY(dot_y - 6 * u * a);
+    }
+  }
+}
+Plymouth.SetRefreshFunction(refresh);
+
+# messages (e.g. disk checks) stay readable but small
+msg_s = Sprite();
+fun message_cb(text) {
+  img = Image.Text(text, 0.85, 0.75, 0.85);
+  msg_s.SetImage(img);
+  msg_s.SetPosition(cx - img.GetWidth() / 2, wy + sh - 50, 4);
+}
+Plymouth.SetMessageFunction(message_cb);
+initrd/usr/share/plymouth/themes/nexium/nexium.plymouth
+[Plymouth Theme]
+Name=Nexium OS
+Description=Nexium OS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/nexium
+ScriptFile=/usr/share/plymouth/themes/nexium/nexium.script
+initrd/usr/share/plymouth/themes/details/details.plymouth
+[Plymouth Theme]
+Name=Details
+Description=Verbose fallback theme
+ModuleName=details
+initrd/usr/share/plymouth/themes/text/text.plymouth
+[Plymouth Theme]
+Name=Text
+Description=Text mode theme with a 3 box countdown
+ModuleName=text
++ echo '=== GRUB ==='
+=== GRUB ===
++ cat iso/grub.cfg
+set superusers="admin"
+password_pbkdf2 admin grub.pbkdf2.sha512.10000.F2AEBE132757600E6B097AAC4ED4493911E1552DABC474B4961CEF2BD9CD26F6CCD3233157D5F17EBDE39B36026A97B2321459621228DD75B0E0D5AE1F46463A.2621B8B58CC3E5305A728348860B6118564B3862AA27E5EEBF68B72C53333E573E1DBE61F2E194530040E9977CF77FFC210071E7125294C58EB84119265748F4
+set timeout=3
+set timeout_style=menu
+set default=0
+set menu_color_normal=light-gray/black
+set menu_color_highlight=black/light-gray
+menuentry "Nexium OS" --unrestricted {
+  linux /live/vmlinuz boot=live live-media=/dev/disk/by-label/NEXIUM_OS quiet splash loglevel=3 rd.udev.log_level=3 systemd.show_status=false vt.global_cursor_default=0 systemd.gpt_auto=0 nopersistence noswap
+  initrd /live/initrd.img
+}
+menuentry "Nexium OS (safe graphics, for older computers)" --unrestricted {
+  linux /live/vmlinuz boot=live live-media=/dev/disk/by-label/NEXIUM_OS quiet splash loglevel=3 rd.udev.log_level=3 systemd.show_status=false vt.global_cursor_default=0 systemd.gpt_auto=0 nopersistence noswap nomodeset
+  initrd /live/initrd.img
+}
+menuentry "Shut down" --unrestricted {
+  halt
+}
