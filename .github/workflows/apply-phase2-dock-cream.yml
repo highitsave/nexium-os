@@ -155,7 +155,7 @@ jobs:
           python3 -m py_compile desktop/phase2.py scripts/verify-phase2-boot.py
           git config user.name Onx
           git config user.email assistant@email.tomo.ai
-          git add desktop/ branding/ scripts/build-phase2.sh scripts/verify-phase2-boot.py .github/workflows/phase2-build.yml
+          rm -rf desktop/__pycache__ scripts/__pycache__; git add desktop/ branding/ scripts/build-phase2.sh scripts/verify-phase2-boot.py
           if ! git diff --cached --quiet; then
             git commit -m 'Fix X11 Plank session and activate cream made by TOMO Plymouth with regenerated initrd'
             git push origin HEAD:main
