@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+import json, os, subprocess, urllib.request, urllib.error
+from pathlib import Path
+PAGE = 'https://github.com/highitsave/nexium-os-releases'
+API = 'https://api.github.com/repos/highitsave/nexium-os-releases/releases/latest'
+def compare(local, release):
+    tag = (release.get('tag_name') or release.get('name')) if release else None
+    return {'status': 'no_releases' if not tag else 'current' if tag == local else 'update_available', 'current_version': local, 'latest_tag': tag, 'page': PAGE}
+def main():
+    try:
+        local = Path('/etc/nexium-version').read_text().strip()
+        request = urllib.request.Request(API, headers={'Accept': 'application/vnd.github+json', 'User-Agent': 'Nexium-public-update-check'})
+        try:
+            with urllib.request.urlopen(request, timeout=12) as r:
+                release = json.load(r)
+        except urllib.error.HTTPError as e:
+            if e.code != 404:
+                raise
+            release = None
+        result = compare(local, release)
+    except (OSError, ValueError, urllib.error.URLError) as e:
+        result = {'status': 'unavailable', 'error': str(e), 'page': PAGE}
+    print(json.dumps(result, indent=2), flush=True)
+    if result['status'] == 'update_available' and '--notify' in __import__('sys').argv and os.environ.get('DISPLAY'):
+        text = 'Nexium update available: ' + result['latest_tag'] + chr(10) + PAGE
+        try:
+            subprocess.run(['/usr/bin/zenity', '--info', '--title=Nexium update available', '--text=' + text, '--timeout=30'], timeout=35)
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+if __name__ == '__main__':
+    main()

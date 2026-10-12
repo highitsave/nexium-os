@@ -58,7 +58,7 @@ def clean(data,path=''):
                 if isinstance(v,dict):result[k]={'mode':'direct'}
                 elif k.lower() in ['proxymode','proxy_mode']:result[k]='direct'
             elif BAD.search(json.dumps(v)) and re.search(r'homepage|startup|restoreonstartup|urls_to_restore|newtab',context,re.I):
-                result[k]=['about:blank'] if isinstance(v,list) else 'about:blank' if isinstance(v,str) else clean(v,context)
+                result[k]=['https://github.com/highitsave/nexium-os-releases'] if isinstance(v,list) else 'https://github.com/highitsave/nexium-os-releases' if isinstance(v,str) else clean(v,context)
             else:result[k]=clean(v,context)
         return result
     if isinstance(data,list):return [clean(v,path) for v in data]
@@ -84,7 +84,7 @@ def fix(root):
                 original=line
                 if BAD.search(line) and BROWSER.search(line):
                     line=re.sub(r'--proxy-server(?:=|\s+)(?:"[^"]*"|\x27[^\x27]*\x27|[^\s;]+)',lambda m:'' if BAD.search(m.group()) else m.group(),line)
-                    line=re.sub(r'https?://(?:localhost|127\.0\.0\.1)(?::\d+)?[^\s"\x27;]*','about:blank',line,flags=re.I)
+                    line=re.sub(r'https?://(?:localhost|127\.0\.0\.1)(?::\d+)?[^\s"\x27;]*','https://github.com/highitsave/nexium-os-releases',line,flags=re.I)
                     if 'host-resolver-rules' in line and BAD.search(line):raise AssertionError('Inspect resolver rule '+str(p)+':'+str(n)+': '+line)
                 if BAD.search(line) and re.search(r'(?i)(https?|all)_proxy\s*=',line):
                     print('REMOVED LOCAL PROXY ENV:','/'+str(p.relative_to(root))+':'+str(n),line,flush=True);continue
@@ -96,27 +96,47 @@ def fix(root):
     assert text.startswith('#!') and '/opt/ungoogled-chromium/chrome' in text,'Unexpected wrapper; inspect before changing'
     if '# NEXIUM_DIRECT_BROWSER' not in text:
         assert text.count('exec /opt/ungoogled-chromium/chrome')==1,text
-        text=text.replace('exec /opt/ungoogled-chromium/chrome','# NEXIUM_DIRECT_BROWSER\nunset http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY\nif [ "$#" -eq 0 ]; then set -- about:blank; fi\nexec /opt/ungoogled-chromium/chrome --no-proxy-server',1)
+        text=text.replace('exec /opt/ungoogled-chromium/chrome','# NEXIUM_DIRECT_BROWSER\nunset http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY\nif [ "$#" -eq 0 ]; then set -- https://github.com/highitsave/nexium-os-releases; fi\nexec /opt/ungoogled-chromium/chrome',1)
         wrapper.write_text(text);wrapper.chmod(0o755)
     # User preferences, NOT managed enterprise policies.
     for base in ['etc/skel','home/nexium']:
         p=root/base/'.config/chromium/Default/Preferences';p.parent.mkdir(parents=True,exist_ok=True)
         data=json.loads(p.read_text()) if p.exists() else {}
-        data['homepage']='about:blank';data['homepage_is_newtabpage']=False
-        data['session']={**data.get('session',{}),'restore_on_startup':4,'startup_urls':['about:blank']};data['proxy']={'mode':'direct'}
+        data['homepage']='https://github.com/highitsave/nexium-os-releases';data['homepage_is_newtabpage']=False
+        data['session']={**data.get('session',{}),'restore_on_startup':4,'startup_urls':['https://github.com/highitsave/nexium-os-releases']};data['proxy']={'mode':'direct'}
         p.write_text(json.dumps(data,indent=2)+'\n')
     assert hashlib.sha256(binary.read_bytes()).hexdigest()==digest,'Ungoogled ELF changed'
+
+    # Public-only updater; no credential or enterprise policy.
+    update = root/'usr/local/bin/nexium-update-check'
+    update.parent.mkdir(parents=True, exist_ok=True)
+    update.write_bytes(P('scripts/nexium-update-check').read_bytes())
+    update.chmod(0o755)
+    (root/'etc/nexium-version').write_text('1.2-golden-gate-phase2' + chr(10))
+    for name in ['etc/xdg/autostart/nexium-update-check.desktop', 'usr/share/applications/nexium-update-check.desktop']:
+        entry = root/name
+        entry.parent.mkdir(parents=True, exist_ok=True)
+        entry.write_text('[Desktop Entry]\nType=Application\nName=Check Nexium Updates\nExec=/usr/local/bin/nexium-update-check --notify\nIcon=system-software-update\nTerminal=false\nCategories=System;\n')
     guard(root)
     tracked={'/'+str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p,kind in files(root).items() if kind=='policy/preferences' or p==wrapper}
     P('reports/chromium-fixed-manifest.json').write_text(json.dumps({'binary_sha256':digest,'files':tracked},indent=2)+'\n')
     print('PASS UNGOOGLED ELF UNCHANGED:',digest,flush=True)
 def verify(root):
+    assert (root/'usr/local/bin/nexium-update-check').read_bytes() == P('scripts/nexium-update-check').read_bytes()
+    assert (root/'etc/nexium-version').read_text().strip() == '1.2-golden-gate-phase2'
+    for name in ['etc/xdg/autostart/nexium-update-check.desktop', 'usr/share/applications/nexium-update-check.desktop']:
+        assert 'Exec=/usr/local/bin/nexium-update-check --notify' in (root/name).read_text()
+    for base in ['etc/skel', 'home/nexium']:
+        prefs = json.loads((root/base/'.config/chromium/Default/Preferences').read_text())
+        assert prefs['homepage'] == 'https://github.com/highitsave/nexium-os-releases'
+        assert prefs['session']['startup_urls'] == ['https://github.com/highitsave/nexium-os-releases']
+    print('PASS public update checker/version/autostart/startup; no credentials', flush=True)
     guard(root);expected=json.loads(P('reports/chromium-fixed-manifest.json').read_text())
     for name,digest in expected['files'].items():assert hashlib.sha256((root/name.lstrip('/')).read_bytes()).hexdigest()==digest,name
     assert hashlib.sha256((root/'opt/ungoogled-chromium/chrome').read_bytes()).hexdigest()==expected['binary_sha256']
     assert (root/'usr/bin/chromium').is_symlink() and os.readlink(root/'usr/bin/chromium')=='/usr/bin/ungoogled-chromium'
-    text=(root/'usr/bin/ungoogled-chromium').read_text();assert '--no-proxy-server' in text and 'set -- about:blank' in text
-    print('PASS FINAL CHROMIUM: no managed policies; direct about:blank default; preference hashes and original ungoogled ELF',flush=True)
+    text=(root/'usr/bin/ungoogled-chromium').read_text();assert 'set -- https://github.com/highitsave/nexium-os-releases' in text and '--no-sandbox' not in text and '--no-proxy-server' not in text
+    print('PASS FINAL CHROMIUM: no managed policies; direct https://github.com/highitsave/nexium-os-releases default; preference hashes and original ungoogled ELF',flush=True)
 if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('mode',choices=['audit','fix','verify','guard']);a.add_argument('root');a.add_argument('--report');args=a.parse_args();root=P(args.root).resolve()
     if args.mode=='audit':

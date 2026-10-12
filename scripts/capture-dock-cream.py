@@ -10,18 +10,54 @@ commands=['pgrep -a -x plank','ps -ef | grep -E "plank|openbox|tint2|picom"','co
 data['sudo_noninteractive']=command('/usr/bin/sudo -n true; rc=$?; echo SUDO_EXIT=$rc; exit $rc')
 data['network']=command('/usr/local/bin/nexium-network-diagnostics')
 data['network_manager']=command('systemctl is-active NetworkManager')
-browser_log=open('/tmp/nexium-browser.log','w')
-subprocess.Popen(['/usr/bin/chromium'],stdout=browser_log,stderr=subprocess.STDOUT)
-import time
-time.sleep(12)
-data['browser_processes']=[]
-for pid in os.listdir('/proc'):
-    if not pid.isdigit():continue
-    try:
-        with open('/proc/'+pid+'/cmdline','rb') as f:argv=f.read().decode().split('\0')
-    except (OSError,UnicodeError):continue
-    if argv and argv[0]=='/opt/ungoogled-chromium/chrome' and '--no-proxy-server' in argv and 'about:blank' in argv:data['browser_processes'].append({'pid':pid,'argv':argv})
-data['browser_log']=command('cat /tmp/nexium-browser.log')
+import time, re, shlex
+data['browser_runtime'] = {k: os.environ.get(k) for k in ['HOME','DISPLAY','XDG_RUNTIME_DIR']}
+data['browser_ldd'] = command('ldd /opt/ungoogled-chromium/chrome')
+data['browser_paths'] = command('ls -ld "$HOME" "$XDG_RUNTIME_DIR" /dev/shm; df -h /dev/shm')
+text = open('/usr/share/applications/nexium-browser.desktop').read()
+argv = shlex.split(next(line[5:] for line in text.splitlines() if line.startswith('Exec=')))
+log_path = '/tmp/nexium-browser.log'
+browser_log = open(log_path, 'w')
+browser = subprocess.Popen(argv, stdout=browser_log, stderr=subprocess.STDOUT)
+began = time.monotonic()
+data['browser_timeline'] = []
+data['browser_processes'] = []
+data['browser_windows'] = []
+while time.monotonic() - began < 150:
+    processes = []
+    for pid in os.listdir('/proc'):
+        if not pid.isdigit():
+            continue
+        try:
+            cmd = [part.decode() for part in open('/proc/'+pid+'/cmdline','rb').read().split(bytes([0])) if part]
+        except (OSError, UnicodeError):
+            continue
+        if cmd and cmd[0] == '/opt/ungoogled-chromium/chrome' and not any(c.startswith('--type=') for c in cmd):
+            processes.append({'pid':pid, 'argv':cmd})
+    tree = command('xwininfo -root -tree')
+    windows = []
+    for line in tree['output'].splitlines():
+        m = re.search(r'(0x[0-9a-f]+) "([^"]*)": .*?(\d+)x(\d+)', line)
+        if not m or 'Chromium' not in m[2] or int(m[3]) < 100 or int(m[4]) < 100:
+            continue
+        view = command('xwininfo -id ' + m[1])
+        if view['exit'] == 0 and 'Map State: IsViewable' in view['output']:
+            windows.append({'id':m[1], 'title':m[2], 'view':view})
+    rc = browser.poll()
+    data['browser_timeline'].append({'seconds':round(time.monotonic()-began,3),'exit':rc,'processes':processes,'windows':len(windows)})
+    data['browser_processes'] = processes
+    data['browser_windows'] = windows
+    data['browser_window_tree'] = tree
+    if (processes and windows) or rc is not None:
+        break
+    time.sleep(2)
+browser_log.flush()
+data['browser_launch'] = {'dock_exec':argv,'pid':browser.pid,'exit_code':browser.poll(),'seconds':round(time.monotonic()-began,3),'stdout_stderr':open(log_path).read()}
+data['browser_gui_pass'] = bool(data['browser_processes'] and data['browser_windows']) and browser.poll() is None and 'not found' not in data['browser_ldd']['output']
+data['browser_log'] = command('cat ' + log_path)
+data['update_check'] = command('/usr/local/bin/nexium-update-check')
+data['image_version'] = command('cat /etc/nexium-version')
+print('REAL CHROMIUM GUI', json.dumps({k:v for k,v in data.items() if k.startswith('browser_')}, indent=2), flush=True)
 data['commands']=[command(c) for c in commands]
 data['plank_running']=data['commands'][0]['exit']==0 and bool(data['commands'][0]['output'].strip())
 data['pass']=data['plank_running'] and data['environment']['XDG_SESSION_TYPE']=='x11' and data['commands'][2]['exit']==0 and 'GoldenGate' in data['commands'][3]['output'] and 'NexiumIOS4' in data['commands'][4]['output']
@@ -80,7 +116,7 @@ if ready is not None:
     for c in command:
         mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
     key('ret')
-    for _ in range(60):
+    for _ in range(180):
         if (O/'live-session.json').exists():break
         time.sleep(2)
     qmp('screendump',{'filename':'/tmp/dock-live.ppm'});Image.open('/tmp/dock-live.ppm').save(O/'live-probe.png')
@@ -103,5 +139,5 @@ assert splash,'FAIL: made by TOMO! text not observed in BIOS frames'
 assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'
 assert live.get('sudo_noninteractive',{}).get('exit')==0,'FAIL: sudo -n true failed in live desktop'
 assert live.get('network_manager',{}).get('exit')==0,'FAIL: NetworkManager not active in live guest'
-assert live.get('browser_processes'),'FAIL: normal-user direct about:blank Chromium process not observed'
+assert live.get('browser_gui_pass'),'FAIL: dock Chromium GUI; exit/stdout/stderr/loader/window timeline printed above'
 print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
