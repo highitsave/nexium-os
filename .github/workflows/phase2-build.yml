@@ -30,16 +30,14 @@ jobs:
               old='    # Retain everything through the boot verification;'
               assert old in s
               s=s.replace(old,marker+"    script = script.split('\\n', 1)[1] if script.lstrip().startswith('|') else script\n"+old,1)
-          # Persist a root-aware verifier; host exists()/access() misread absolute ISO symlinks.
+          # Resolve absolute symlinks in the image, never against the runner host.
           if 'def output_executable(' not in s:
               helper='''def output_executable(root, target):
-              import subprocess
               subprocess.run(['chroot',str(root),'/usr/bin/test','-f',target],check=True)
               subprocess.run(['chroot',str(root),'/usr/bin/test','-x',target],check=True)
           
           def verify_ungoogled(root):
-              import subprocess
-              r=Path(root)
+              r=P(root)
               entry=r/'usr/bin/chromium'
               print('CHROMIUM ENTRY:', 'symlink -> '+os.readlink(entry) if entry.is_symlink() else 'regular file/wrapper')
               resolved=subprocess.check_output(['chroot',str(r),'/usr/bin/readlink','-f','/usr/bin/chromium'],text=True).strip()
@@ -57,16 +55,13 @@ jobs:
               print('UNGOOGLED BINARY:',binary,'exists, executable, ELF; browser --version:',version)
           
           '''
+              old1="target=c.split()[0];assert (r/target.lstrip('/')).exists(),target"
+              old2="assert os.access(r/target.lstrip('/'),os.X_OK),target"
+              assert s.count(old1)==1 and s.count(old2)==1,'Unexpected original verifier source'
+              s=s.replace(old1,"target=c.split()[0];output_executable(r,target)",1)
+              s=s.replace('        '+old2+'\n','',1)
               assert 'def verify(root):\n' in s
               s=s.replace('def verify(root):\n',helper+'def verify(root):\n    verify_ungoogled(root)\n',1)
-              lines=s.splitlines()
-              changed=0
-              for i,line in enumerate(lines):
-                  if line.strip().startswith("assert (r/target.lstrip('/'))"):
-                      lines[i]='        output_executable(r,target)'
-                      changed+=1
-              assert changed==2, f'Unexpected executable assertion count: {changed}'
-              s='\n'.join(lines)+'\n'
           p.write_text(s)
           compile(s,str(p),'exec')
           PY
@@ -86,7 +81,7 @@ jobs:
           git config user.email assistant@email.tomo.ai
           git add desktop/ branding/ scripts/verify-phase2-boot.py scripts/build-phase2.sh scripts/prepare-ios4.py
           if ! git diff --cached --quiet; then
-            git commit -m 'Fix output-root executable verification and retain iOS4 desktop assets'
+            git commit -m 'Correct in-root Chromium and dock executable verification'
             git push origin HEAD:main
           fi
           git rev-parse HEAD | tee reports/source-commit.txt
