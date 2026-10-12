@@ -479,13 +479,35 @@ def install(root):
     P('reports/phase2-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('Installed native layer:',len(manifest),'SHA256-tracked files; icon theme:',icon_theme)
 
+def output_executable(root, target):
+    subprocess.run(['chroot',str(root),'/usr/bin/test','-f',target],check=True)
+    subprocess.run(['chroot',str(root),'/usr/bin/test','-x',target],check=True)
+
+def verify_ungoogled(root):
+    r=P(root)
+    entry=r/'usr/bin/chromium'
+    print('CHROMIUM ENTRY:', 'symlink -> '+os.readlink(entry) if entry.is_symlink() else 'regular file/wrapper')
+    resolved=subprocess.check_output(['chroot',str(r),'/usr/bin/readlink','-f','/usr/bin/chromium'],text=True).strip()
+    print('CHROMIUM RESOLVES TO:',resolved)
+    binary='/opt/ungoogled-chromium/chrome'
+    output_executable(r,binary)
+    assert (r/binary.lstrip('/')).read_bytes()[:4]==b'\x7fELF','Ungoogled payload is not ELF'
+    if resolved!=binary:
+        wrapper=(r/resolved.lstrip('/')).read_text()
+        print('CHROMIUM WRAPPER:',wrapper.strip())
+        assert wrapper.startswith('#!') and binary in wrapper,'Wrapper does not invoke ungoogled binary'
+    output_executable(r,'/usr/bin/chromium')
+    version=subprocess.check_output(['chroot',str(r),'/usr/bin/chromium','--version'],text=True).strip()
+    assert 'Chromium' in version,version
+    print('UNGOOGLED BINARY:',binary,'exists, executable, ELF; browser --version:',version)
+
 def verify(root):
+    verify_ungoogled(root)
     r=P(root);manifest=json.loads(P('reports/phase2-manifest.json').read_text())
     for name,digest in manifest.items():assert hashlib.sha256((r/name.lstrip('/')).read_bytes()).hexdigest()==digest,name
     print('OUTPUT SQUASHFS: all',len(manifest),'desktop/branding overlay files present and SHA256-identical')
     for k,n,c,i in APPS:
-        target=c.split()[0];assert (r/target.lstrip('/')).exists(),target
-        assert os.access(r/target.lstrip('/'),os.X_OK),target
+        target=c.split()[0];output_executable(r,target)
         if k in ['settings','messages','calls','vault']:assert (r/'usr/bin/zenity').exists()
         print('DOCK',k,'=>',c, '(honest coming-soon placeholder)' if k in ['messages','calls','vault'] else '(real application)')
     pins=list((r/'home/nexium/.config/plank/dock1/launchers').glob('*.dockitem'))

@@ -25,6 +25,7 @@ packages=$(grep -v '^#' desktop/packages.txt | xargs)
 sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $packages gnome-themes-extra
 sudo chroot work/root apt-get clean
 sudo python3 desktop/phase2.py --install work/root | tee reports/install.txt
+sudo python3 desktop/phase2.py --verify work/root | tee reports/preflight-desktop.txt
 sudo chroot work/root dpkg-query -W > reports/installed-packages.tsv
 # Native application/Xorg smoke test only; not an ISO boot test.
 Xvfb :99 -screen 0 1280x800x24 -ac > reports/xvfb.log 2>&1 &
