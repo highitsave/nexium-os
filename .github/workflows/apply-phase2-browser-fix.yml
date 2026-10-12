@@ -1,0 +1,356 @@
+name: Rebuild Phase 2 dock cream unmanaged Chromium sudo Wi-Fi
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/apply-phase2-browser-fix.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit reproducible queued fixes and assertions
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml python3-pil xvfb x11-utils xdotool initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core
+          mkdir -p reports output work
+          cat > scripts/chromium-localhost.py <<'PY'
+          #!/usr/bin/env python3
+          import argparse, hashlib, json, os, re, shutil, subprocess
+          from pathlib import Path as P
+          BAD=re.compile(r'localhost|127\.0\.0\.1',re.I)
+          BROWSER=re.compile(r'chromium|chrome',re.I)
+          PREFS={'preferences','secure preferences','local state','master_preferences','initial_preferences'}
+          INITIAL={'master_preferences','initial_preferences'}
+          def paths(root):
+              for scope in ['etc','home','root','opt','usr']:
+                  base=root/scope
+                  if base.exists():yield from base.rglob('*')
+          def enterprise(root):
+              return [p for p in paths(root) if p.name.lower() in INITIAL or BROWSER.search(str(p.relative_to(root))) and 'policies' in [q.lower() for q in p.relative_to(root).parts]]
+          def files(root):
+              result={}
+              for p in paths(root):
+                  if p.is_symlink() or not p.is_file():continue
+                  rel=str(p.relative_to(root));name=p.name.lower();ischrome=bool(BROWSER.search(rel))
+                  if name in INITIAL or ischrome and (name in PREFS or '/policies/' in rel.lower()):result[p]='policy/preferences';continue
+                  if p.stat().st_size>1000000:continue
+                  candidate=(ischrome or p.suffix in ['.desktop','.sh','.service'] or rel.startswith(('usr/local/','etc/xdg/','etc/environment')) or name in ['.profile','.bashrc'])
+                  if not candidate:continue
+                  try:text=p.read_text()
+                  except (UnicodeError,OSError):continue
+                  if BROWSER.search(text) or ischrome or re.search(r'(?i)(https?|all)_proxy',text):result[p]='launcher/environment'
+              return result
+          def audit(root):
+              items=[]
+              for p,kind in sorted(files(root).items()):
+                  try:text=p.read_text()
+                  except UnicodeError:raise AssertionError('Non-text browser configuration: '+str(p))
+                  matches=[{'line':n,'text':line} for n,line in enumerate(text.splitlines(),1) if BAD.search(line) or kind=='launcher/environment' and re.search(r'proxy-server|host-resolver-rules|Exec=|exec .*chrome',line)]
+                  item={'file':'/'+str(p.relative_to(root)),'kind':kind,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'lines':matches}
+                  items.append(item)
+                  if matches:print('CHROMIUM AUDIT',json.dumps(item),flush=True)
+              print('ENTERPRISE PATHS:',json.dumps(['/'+str(p.relative_to(root)) for p in enterprise(root)]),flush=True)
+              entry=root/'usr/bin/chromium';print('CHROMIUM ENTRY:',os.readlink(entry) if entry.is_symlink() else 'regular file',flush=True)
+              output=subprocess.run(['chroot',str(root),'/usr/bin/readlink','-f','/usr/bin/chromium'],capture_output=True,text=True)
+              print('CHROMIUM RESOLVED:',output.stdout.strip(),flush=True)
+              return items
+          def guard(root):
+              forbidden=enterprise(root)
+              assert not forbidden,'FAIL Chromium enterprise policy directory/file or initial/master preferences: '+str([str(p.relative_to(root)) for p in forbidden])
+              prefs=[p for p,kind in files(root).items() if kind=='policy/preferences']
+              assert prefs,'No browser preferences found; guard cannot pass vacuously'
+              bad=[]
+              for p in prefs:
+                  for n,line in enumerate(p.read_text().splitlines(),1):
+                      if BAD.search(line):bad.append('/'+str(p.relative_to(root))+':'+str(n)+': '+line)
+              assert not bad,'FAIL Chromium localhost preference guard:\n'+'\n'.join(bad)
+              print('PASS CHROMIUM GUARD:',len(prefs),'preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences',flush=True)
+          def clean(data,path=''):
+              if isinstance(data,dict):
+                  result={};local_proxy=any('proxy' in k.lower() and BAD.search(json.dumps(v)) for k,v in data.items())
+                  for k,v in data.items():
+                      context=path+'.'+k
+                      if local_proxy and 'proxy' in k.lower():
+                          if isinstance(v,dict):result[k]={'mode':'direct'}
+                          elif k.lower() in ['proxymode','proxy_mode']:result[k]='direct'
+                      elif BAD.search(json.dumps(v)) and re.search(r'homepage|startup|restoreonstartup|urls_to_restore|newtab',context,re.I):
+                          result[k]=['about:blank'] if isinstance(v,list) else 'about:blank' if isinstance(v,str) else clean(v,context)
+                      else:result[k]=clean(v,context)
+                  return result
+              if isinstance(data,list):return [clean(v,path) for v in data]
+              if isinstance(data,str) and BAD.search(data):raise AssertionError('Unrecognized localhost preference '+path+': '+data+'; inspect audit, do not blindly delete')
+              return data
+          def fix(root):
+              before_report=P('reports/chromium-before-fix.json')
+              items=audit(root)
+              if not before_report.exists():before_report.write_text(json.dumps(items,indent=2)+'\n')
+              binary=root/'opt/ungoogled-chromium/chrome';digest=hashlib.sha256(binary.read_bytes()).hexdigest()
+              for p in sorted(enterprise(root),key=lambda p:len(p.parts)):
+                  if not p.exists() and not p.is_symlink():continue
+                  print('REMOVED ENTERPRISE CONFIG:','/'+str(p.relative_to(root)),flush=True)
+                  if p.is_dir() and not p.is_symlink():shutil.rmtree(p)
+                  else:p.unlink()
+              for p,kind in files(root).items():
+                  text=p.read_text()
+                  if kind=='policy/preferences' and BAD.search(text):
+                      p.write_text(json.dumps(clean(json.loads(text)),indent=2)+'\n');print('FIXED BROWSER CONFIG:','/'+str(p.relative_to(root)),flush=True)
+                  elif kind=='launcher/environment' and BAD.search(text):
+                      lines=[]
+                      for n,line in enumerate(text.splitlines(),1):
+                          original=line
+                          if BAD.search(line) and BROWSER.search(line):
+                              line=re.sub(r'--proxy-server(?:=|\s+)(?:"[^"]*"|\x27[^\x27]*\x27|[^\s;]+)',lambda m:'' if BAD.search(m.group()) else m.group(),line)
+                              line=re.sub(r'https?://(?:localhost|127\.0\.0\.1)(?::\d+)?[^\s"\x27;]*','about:blank',line,flags=re.I)
+                              if 'host-resolver-rules' in line and BAD.search(line):raise AssertionError('Inspect resolver rule '+str(p)+':'+str(n)+': '+line)
+                          if BAD.search(line) and re.search(r'(?i)(https?|all)_proxy\s*=',line):
+                              print('REMOVED LOCAL PROXY ENV:','/'+str(p.relative_to(root))+':'+str(n),line,flush=True);continue
+                          if original!=line:print('FIXED LAUNCH LINE:','/'+str(p.relative_to(root))+':'+str(n),line,flush=True)
+                          lines.append(line)
+                      changed='\n'.join(lines)+'\n'
+                      if changed!=text:p.write_text(changed)
+              wrapper=root/'usr/bin/ungoogled-chromium';text=wrapper.read_text()
+              assert text.startswith('#!') and '/opt/ungoogled-chromium/chrome' in text,'Unexpected wrapper; inspect before changing'
+              if '# NEXIUM_DIRECT_BROWSER' not in text:
+                  assert text.count('exec /opt/ungoogled-chromium/chrome')==1,text
+                  text=text.replace('exec /opt/ungoogled-chromium/chrome','# NEXIUM_DIRECT_BROWSER\nunset http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY\nif [ "$#" -eq 0 ]; then set -- about:blank; fi\nexec /opt/ungoogled-chromium/chrome --no-proxy-server',1)
+                  wrapper.write_text(text);wrapper.chmod(0o755)
+              # User preferences, NOT managed enterprise policies.
+              for base in ['etc/skel','home/nexium']:
+                  p=root/base/'.config/chromium/Default/Preferences';p.parent.mkdir(parents=True,exist_ok=True)
+                  data=json.loads(p.read_text()) if p.exists() else {}
+                  data['homepage']='about:blank';data['homepage_is_newtabpage']=False
+                  data['session']={**data.get('session',{}),'restore_on_startup':4,'startup_urls':['about:blank']};data['proxy']={'mode':'direct'}
+                  p.write_text(json.dumps(data,indent=2)+'\n')
+              assert hashlib.sha256(binary.read_bytes()).hexdigest()==digest,'Ungoogled ELF changed'
+              guard(root)
+              tracked={'/'+str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p,kind in files(root).items() if kind=='policy/preferences' or p==wrapper}
+              P('reports/chromium-fixed-manifest.json').write_text(json.dumps({'binary_sha256':digest,'files':tracked},indent=2)+'\n')
+              print('PASS UNGOOGLED ELF UNCHANGED:',digest,flush=True)
+          def verify(root):
+              guard(root);expected=json.loads(P('reports/chromium-fixed-manifest.json').read_text())
+              for name,digest in expected['files'].items():assert hashlib.sha256((root/name.lstrip('/')).read_bytes()).hexdigest()==digest,name
+              assert hashlib.sha256((root/'opt/ungoogled-chromium/chrome').read_bytes()).hexdigest()==expected['binary_sha256']
+              assert (root/'usr/bin/chromium').is_symlink() and os.readlink(root/'usr/bin/chromium')=='/usr/bin/ungoogled-chromium'
+              text=(root/'usr/bin/ungoogled-chromium').read_text();assert '--no-proxy-server' in text and 'set -- about:blank' in text
+              print('PASS FINAL CHROMIUM: no managed policies; direct about:blank default; preference hashes and original ungoogled ELF',flush=True)
+          if __name__=='__main__':
+              a=argparse.ArgumentParser();a.add_argument('mode',choices=['audit','fix','verify','guard']);a.add_argument('root');a.add_argument('--report');args=a.parse_args();root=P(args.root).resolve()
+              if args.mode=='audit':
+                  items=audit(root)
+                  if args.report:P(args.report).write_text(json.dumps(items,indent=2)+'\n')
+              else:globals()[args.mode](root)
+          PY
+          cat > scripts/live-admin-network.py <<'PY'
+          #!/usr/bin/env python3
+          import argparse,os,subprocess,json
+          from pathlib import Path as P
+          PACKAGES=['sudo','network-manager','network-manager-gnome','wpasupplicant','iw','rfkill','pciutils','usbutils','wireless-regdb','firmware-linux-nonfree','firmware-realtek','firmware-iwlwifi','firmware-atheros','firmware-brcm80211','firmware-libertas','firmware-misc-nonfree']
+          def run(root,*args):return subprocess.check_output(['chroot',str(root),*args],text=True).strip()
+          def users(root):
+              result=[]
+              for line in (root/'etc/passwd').read_text().splitlines():
+                  fields=line.split(':');name=fields[0];uid=int(fields[2])
+                  if name=='nexium' or (1000<=uid<65534 and fields[6] not in ['/usr/sbin/nologin','/bin/false']):result.append(name)
+              assert 'nexium' in result,'Desktop service user missing'
+              return sorted(set(result))
+          def sources(root):
+              for p in [root/'etc/apt/sources.list',*(root/'etc/apt/sources.list.d').glob('*.list')]:
+                  if not p.exists():continue
+                  lines=[]
+                  for line in p.read_text().splitlines():
+                      if line.lstrip().startswith(('deb ','deb-src ')) and 'debian' in line and ' main' in line:
+                          for component in ['contrib','non-free','non-free-firmware']:
+                              if component not in line.split():line+=' '+component
+                      lines.append(line)
+                  p.write_text('\n'.join(lines)+'\n')
+              for p in (root/'etc/apt/sources.list.d').glob('*.sources'):
+                  text=p.read_text();lines=[]
+                  for line in text.splitlines():
+                      if line.startswith('Components:'):
+                          for component in ['contrib','non-free','non-free-firmware']:
+                              if component not in line.split():line+=' '+component
+                      lines.append(line)
+                  p.write_text('\n'.join(lines)+'\n')
+              print('APT firmware components enabled before package install',flush=True)
+          def install(root):
+              selected=users(root);p=root/'etc/sudoers.d/90-nexium-live-admin';p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_text('# Intentionally passwordless admin in the authorized live desktop image.\n'+''.join(name+' ALL=(ALL:ALL) NOPASSWD: ALL\n' for name in selected));p.chmod(0o440)
+              for name in selected:run(root,'/usr/sbin/usermod','-aG','sudo',name)
+              run(root,'/usr/sbin/visudo','-cf','/etc/sudoers.d/90-nexium-live-admin');run(root,'/usr/sbin/visudo','-cf','/etc/sudoers')
+              p=root/'etc/NetworkManager/conf.d/10-nexium-live.conf';p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_text('[main]\nplugins=ifupdown,keyfile\n[ifupdown]\nmanaged=true\n')
+              print(run(root,'/usr/bin/systemctl','enable','NetworkManager.service'),flush=True)
+              p=root/'usr/local/bin/nexium-network-diagnostics';p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_text('#!/bin/sh\necho "Hardware adapter and firmware diagnostics; no saved Wi-Fi secrets"\nlspci -nnk\nlsusb\nip -brief link\nrfkill list\nnmcli general status\nnmcli device status\nnmcli radio\nsudo -n dmesg | grep -iE "firmware|wlan|wifi|iwlwifi|rtl|ath|brcm" || true\n');p.chmod(0o755)
+              tracked={str(p.relative_to(root)):p.read_text() for p in [root/'etc/sudoers.d/90-nexium-live-admin',root/'etc/NetworkManager/conf.d/10-nexium-live.conf',root/'usr/local/bin/nexium-network-diagnostics']}
+              P('reports/admin-network-manifest.json').write_text(json.dumps({'users':selected,'files':tracked},indent=2)+'\n')
+              verify(root)
+          def verify(root):
+              assert (root/'usr/bin/sudo').is_file(),'merged-/usr sudo missing'
+              p=root/'etc/sudoers.d/90-nexium-live-admin';assert p.stat().st_mode&0o777==0o440 and 'NOPASSWD: ALL' in p.read_text()
+              print(run(root,'/usr/sbin/visudo','-cf','/etc/sudoers.d/90-nexium-live-admin'),flush=True);print(run(root,'/usr/sbin/visudo','-cf','/etc/sudoers'),flush=True)
+              for name in users(root):
+                  assert 'sudo' in run(root,'/usr/bin/id','-nG',name).split()
+                  run(root,'/usr/sbin/runuser','-u',name,'--','/usr/bin/sudo','-n','true')
+                  print('PASS ADMIN:',name,'/usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in',flush=True)
+              for package in PACKAGES:
+                  assert run(root,'/usr/bin/dpkg-query','-W','-f=${Status}',package)=='install ok installed',package
+              assert list((root/'usr/lib/firmware').rglob('*')) or list((root/'lib/firmware').rglob('*')),'firmware absent'
+              assert (root/'etc/systemd/system/multi-user.target.wants/NetworkManager.service').is_symlink(),'NetworkManager not enabled'
+              expected=json.loads(P('reports/admin-network-manifest.json').read_text())
+              for path,text in expected['files'].items():assert (root/path).read_text()==text,path
+              print('PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.',flush=True)
+          if __name__=='__main__':
+              a=argparse.ArgumentParser();a.add_argument('mode',choices=['sources','install','verify']);a.add_argument('root');args=a.parse_args();globals()[args.mode](P(args.root).resolve())
+          PY
+          python3 - <<'PY'
+          from pathlib import Path as P
+          import importlib.util,tempfile,json
+          spec=importlib.util.spec_from_file_location('guard','scripts/chromium-localhost.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          for host in ['localhost','127.0.0.1']:
+              with tempfile.TemporaryDirectory() as d:
+                  root=P(d);p=root/'home/nexium/.config/chromium/Default/Preferences';p.parent.mkdir(parents=True);p.write_text(json.dumps({'homepage':'http://'+host}))
+                  try:m.guard(root)
+                  except AssertionError as e:print('PASS NEGATIVE LOCALHOST TEST:',host,str(e))
+                  else:raise AssertionError('Guard allowed '+host)
+          for path in ['etc/chromium/policies/managed','etc/opt/chrome/policies/recommended','opt/ungoogled-chromium/initial_preferences','usr/lib/chromium/master_preferences']:
+              with tempfile.TemporaryDirectory() as d:
+                  root=P(d);p=root/path;p.parent.mkdir(parents=True,exist_ok=True)
+                  if 'preferences' in p.name:p.write_text('{}')
+                  else:p.mkdir()
+                  try:m.guard(root)
+                  except AssertionError as e:print('PASS NEGATIVE ENTERPRISE TEST:',path,str(e))
+                  else:raise AssertionError('Guard allowed enterprise path '+path)
+          p=P('desktop/phase2.py');s=p.read_text()
+          if '# QUEUED_LIVE_FIXES' not in s:
+              needle='def install(root):\n';assert s.count(needle)==1
+              s=s.replace(needle,needle+"    # QUEUED_LIVE_FIXES: source hooks before ownership and overlay manifest.\n    subprocess.run(['python3','scripts/chromium-localhost.py','fix',str(root)],check=True)\n    subprocess.run(['python3','scripts/live-admin-network.py','install',str(root)],check=True)\n",1)
+              needle='def verify(root):\n';assert s.count(needle)==1
+              s=s.replace(needle,needle+"    subprocess.run(['python3','scripts/chromium-localhost.py','verify',str(root)],check=True)\n    subprocess.run(['python3','scripts/live-admin-network.py','verify',str(root)],check=True)\n",1)
+              needle='\nlibglib2.0-bin\n';assert s.count(needle)==1
+              packages=['sudo','network-manager','network-manager-gnome','wpasupplicant','iw','rfkill','pciutils','usbutils','wireless-regdb','firmware-linux-nonfree','firmware-realtek','firmware-iwlwifi','firmware-atheros','firmware-brcm80211','firmware-libertas','firmware-misc-nonfree']
+              s=s.replace(needle,needle+'\n'.join(packages)+'\n',1)
+          p.write_text(s);compile(s,str(p),'exec')
+          p=P('scripts/build-phase2.sh');s=p.read_text()
+          if 'live-admin-network.py sources' not in s:
+              needle='sudo chroot work/root apt-get update';assert s.count(needle)==1
+              s=s.replace(needle,'sudo python3 scripts/live-admin-network.py sources work/root | tee reports/firmware-sources.txt\n'+needle,1)
+          p.write_text(s)
+          p=P('scripts/capture-dock-cream.py');s=p.read_text()
+          marker="data['commands']=[command(c) for c in commands]"
+          if 'browser_processes' not in s:
+              assert s.count(marker)==1
+              insert="""data['sudo_noninteractive']=command('/usr/bin/sudo -n true; rc=$?; echo SUDO_EXIT=$rc; exit $rc')
+          data['network']=command('/usr/local/bin/nexium-network-diagnostics')
+          data['network_manager']=command('systemctl is-active NetworkManager')
+          browser_log=open('/tmp/nexium-browser.log','w')
+          subprocess.Popen(['/usr/bin/chromium'],stdout=browser_log,stderr=subprocess.STDOUT)
+          import time
+          time.sleep(12)
+          data['browser_processes']=[]
+          for pid in os.listdir('/proc'):
+              if not pid.isdigit():continue
+              try:
+                  with open('/proc/'+pid+'/cmdline','rb') as f:argv=f.read().decode().split('\\0')
+              except (OSError,UnicodeError):continue
+              if argv and argv[0]=='/opt/ungoogled-chromium/chrome' and '--no-proxy-server' in argv and 'about:blank' in argv:data['browser_processes'].append({'pid':pid,'argv':argv})
+          data['browser_log']=command('cat /tmp/nexium-browser.log')
+          """
+              s=s.replace(marker,insert+marker,1)
+              old="assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'";assert old in s
+              s=s.replace(old,old+"\nassert live.get('sudo_noninteractive',{}).get('exit')==0,'FAIL: sudo -n true failed in live desktop'\nassert live.get('network_manager',{}).get('exit')==0,'FAIL: NetworkManager not active in live guest'\nassert live.get('browser_processes'),'FAIL: normal-user direct about:blank Chromium process not observed'",1)
+          p.write_text(s);compile(s,str(p),'exec')
+          P('tests/live-fixes.md').write_text('''# Authorized live fixes\nPreserves existing X11/Openbox/gsettings dock, cream made by TOMO! source, regenerated initrd and all remaining boot/desktop/iOS4 preservation checks.\nAudits exact prior uploaded ISO with file/line receipts BEFORE fixing. Removes all Chrome/Chromium policies trees, even empty ones, and all initial_preferences/master_preferences under etc, home, root, opt, usr. No managed replacement policy is created.\nDefault wrapper opens direct about:blank; caller arguments and original ungoogled ELF are retained. User preferences are cleaned; unrecognized localhost values fail instead of blind deletion. Negative fixtures prove both localhost strings and policy directories/initial/master preferences fail. Final output SquashFS is rechecked.\nInstalls sudo, discovers live/desktop accounts, adds sudo group and validated 0440 NOPASSWD ALL drop-in; root remains locked because desktop user now has the authorized admin path. Both full sudoers and drop-in validate, with actual noninteractive sudo checked in chroot and in live QEMU.\nEnables Debian non-free-firmware repositories and installs realtek, iwlwifi, atheros, brcm80211, libertas and firmware-linux-nonfree/misc set. NetworkManager enabled with managed interfaces and adapter/firmware diagnostic launcher. QEMU emulates e1000 Ethernet, not Lenovo Wi-Fi; actual Lenovo adapter detection cannot be claimed from the cloud VM.\nLive headless BIOS capture records Plank/X11/gsettings, normal-user Chromium argv, sudo -n true, NetworkManager and adapter diagnostics. Contact sheets require visual dock/cream review. No physical test, release or email. No glossy Mac icons.\n''')
+          PY
+          python3 desktop/phase2.py --materialize | tee reports/source.txt
+          python3 scripts/prepare-ios4.py | tee reports/ios4-extraction.txt
+          python3 -m py_compile desktop/phase2.py scripts/chromium-localhost.py scripts/live-admin-network.py scripts/capture-dock-cream.py scripts/verify-phase2-boot.py
+          bash -n scripts/build-phase2.sh
+          rm -rf desktop/__pycache__ scripts/__pycache__
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add desktop/ branding/ scripts/ tests/live-fixes.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fix unmanaged direct Chromium, live passwordless sudo and Wi-Fi firmware while retaining dock cream boot'
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - name: Download prior dock cream ISO for exact diagnosis
+        uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          run-id: 38306885704
+          github-token: ${{ github.token }}
+          path: previous
+      - name: Audit previous ISO Chromium policies launchers and exact localhost lines
+        shell: bash
+        run: |
+          set -euxo pipefail
+          iso=$(find previous -name '*.iso' -print -quit)
+          test "$(stat -c%s "$iso")" = 760807424
+          echo '88bb1ec187c46a67be54a95a7273ba680116ecdfb586186d1b3060126d983a6e  '"$iso" | sha256sum -c -
+          xorriso -osirrox on -indev "$iso" -extract /live/filesystem.squashfs work/previous.squashfs
+          sudo unsquashfs -d work/previous-root work/previous.squashfs
+          sudo python3 scripts/chromium-localhost.py audit work/previous-root --report reports/chromium-previous-iso-audit.json | tee reports/chromium-previous-iso-audit.txt
+          sudo rm -rf work/previous-root work/previous.squashfs previous
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Rebuild existing dock cream ISO with queued Chromium admin network guards
+        shell: bash
+        run: bash scripts/build-phase2.sh
+      - name: Capture BIOS cream dock Chromium sudo and NetworkManager live session
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p reports/boot/frames
+          python3 scripts/capture-dock-cream.py | tee reports/boot-capture.txt
+      - name: Publish diagnostics and boot evidence no release
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          dest=tests/dock-cream-evidence/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          if [ -d reports/boot ]; then
+            cp reports/boot/*.png reports/boot/*.jpg reports/boot/*.json "$dest/" 2>/dev/null || true
+            cp reports/boot-capture.txt "$dest/" 2>/dev/null || true
+          fi
+          cp reports/chromium-*.json reports/chromium-*.txt reports/admin-network-manifest.json reports/firmware-sources.txt reports/boot-verification.txt reports/desktop-verification.txt reports/iso-sha256.txt reports/size.txt reports/source-commit.txt "$dest/" 2>/dev/null || true
+          rm -rf scripts/__pycache__ desktop/__pycache__
+          git add "$dest"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record queued fix audit and live boot evidence for run ${GITHUB_RUN_ID}"
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          path: output/
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload full verification and BIOS capture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-phase2-dock-cream-verification
+          path: reports/
+          if-no-files-found: error
