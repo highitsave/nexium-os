@@ -284,10 +284,10 @@ jobs:
           git add "$dest" scripts/capture-dock-cream.py 2>/dev/null || git add "$dest"
           if ! git diff --cached --quiet; then
             git commit -m "Record BIOS cream splash, live Plank and preservation evidence for run ${GITHUB_RUN_ID}"
-            git pull --rebase origin main
+            git restore -- .github/workflows/phase2-build.yml && git pull --rebase origin main
             git push origin HEAD:main
           fi
-      - name: Upload Phase 2 ISO (no release)
+      - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nexium-phase2-golden-gate-iso
