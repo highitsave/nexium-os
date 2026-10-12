@@ -1,0 +1,79 @@
+BIOS_FRAMES 99 DESKTOP_READY_FRAME 83 TOMO_OCR_FRAMES [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+{
+  "frames": 99,
+  "sample_interval_seconds": 2,
+  "wall_elapsed_seconds": 221.248,
+  "desktop_ready_frame": 83,
+  "cream_text_ocr_frames": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "vm_before_stop": {
+    "return": {
+      "status": "running",
+      "singlestep": false,
+      "running": true
+    }
+  },
+  "termination": "desktop capture completed then VM explicitly stopped",
+  "iso_bytes": 760807424,
+  "iso_sha256": "88bb1ec187c46a67be54a95a7273ba680116ecdfb586186d1b3060126d983a6e"
+}
+{
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "x11",
+    "XDG_CURRENT_DESKTOP": "Openbox",
+    "XDG_SESSION_DESKTOP": "Openbox",
+    "DESKTOP_SESSION": "openbox"
+  },
+  "commands": [
+    {
+      "command": "pgrep -a -x plank",
+      "exit": 0,
+      "output": "562 plank\n"
+    },
+    {
+      "command": "ps -ef | grep -E \"plank|openbox|tint2|picom\"",
+      "exit": 0,
+      "output": "nexium       501     449  0 21:03 tty1     00:00:00 dbus-run-session -- openbox-session\nnexium       504     501 17 21:03 tty1     00:00:12 /usr/bin/openbox --startup /usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX\nnexium       523       1  4 21:04 tty1     00:00:02 picom --config /etc/xdg/nexium/picom.conf\nnexium       524       1  2 21:04 tty1     00:00:01 tint2 -c /etc/xdg/nexium/tint2rc\nnexium       562       1 12 21:04 tty1     00:00:07 plank\nnexium       622     619  8 21:05 pts/0    00:00:00 /bin/sh -c ps -ef | grep -E \"plank|openbox|tint2|picom\"\nnexium       624     622 30 21:05 pts/0    00:00:00 grep -E plank|openbox|tint2|picom\n"
+    },
+    {
+      "command": "command -v gsettings; dpkg-query -W libglib2.0-bin",
+      "exit": 0,
+      "output": "/usr/bin/gsettings\nlibglib2.0-bin\t2.74.6-2+deb12u9\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface gtk-theme",
+      "exit": 0,
+      "output": "'GoldenGate'\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface icon-theme",
+      "exit": 0,
+      "output": "'NexiumIOS4'\n"
+    },
+    {
+      "command": "gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/",
+      "exit": 0,
+      "output": "net.launchpad.plank.dock.settings alignment 'center'\nnet.launchpad.plank.dock.settings auto-pinning true\nnet.launchpad.plank.dock.settings current-workspace-only false\nnet.launchpad.plank.dock.settings dock-items ['02-browser.dockitem', '07-vault.dockitem', '01-files.dockitem', '09-monitor.dockitem', '04-messages.dockitem', '08-editor.dockitem', '10-trash.dockitem', '03-terminal.dockitem', '05-calls.dockitem', '06-settings.dockitem']\nnet.launchpad.plank.dock.settings hide-delay 0\nnet.launchpad.plank.dock.settings hide-mode 'intelligent'\nnet.launchpad.plank.dock.settings icon-size 48\nnet.launchpad.plank.dock.settings items-alignment 'center'\nnet.launchpad.plank.dock.settings lock-items false\nnet.launchpad.plank.dock.settings monitor ''\nnet.launchpad.plank.dock.settings offset 0\nnet.launchpad.plank.dock.settings pinned-only false\nnet.launchpad.plank.dock.settings position 'bottom'\nnet.launchpad.plank.dock.settings pressure-reveal false\nnet.launchpad.plank.dock.settings show-dock-item false\nnet.launchpad.plank.dock.settings theme 'Default'\nnet.launchpad.plank.dock.settings tooltips-enabled true\nnet.launchpad.plank.dock.settings unhide-delay 0\nnet.launchpad.plank.dock.settings zoom-enabled false\nnet.launchpad.plank.dock.settings zoom-percent 150\n"
+    }
+  ],
+  "plank_running": true,
+  "pass": true
+}
+PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames

@@ -1,0 +1,43 @@
+{
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "x11",
+    "XDG_CURRENT_DESKTOP": "Openbox",
+    "XDG_SESSION_DESKTOP": "Openbox",
+    "DESKTOP_SESSION": "openbox"
+  },
+  "commands": [
+    {
+      "command": "pgrep -a -x plank",
+      "exit": 0,
+      "output": "562 plank\n"
+    },
+    {
+      "command": "ps -ef | grep -E \"plank|openbox|tint2|picom\"",
+      "exit": 0,
+      "output": "nexium       501     449  0 21:03 tty1     00:00:00 dbus-run-session -- openbox-session\nnexium       504     501 17 21:03 tty1     00:00:12 /usr/bin/openbox --startup /usr/lib/x86_64-linux-gnu/openbox-autostart OPENBOX\nnexium       523       1  4 21:04 tty1     00:00:02 picom --config /etc/xdg/nexium/picom.conf\nnexium       524       1  2 21:04 tty1     00:00:01 tint2 -c /etc/xdg/nexium/tint2rc\nnexium       562       1 12 21:04 tty1     00:00:07 plank\nnexium       622     619  8 21:05 pts/0    00:00:00 /bin/sh -c ps -ef | grep -E \"plank|openbox|tint2|picom\"\nnexium       624     622 30 21:05 pts/0    00:00:00 grep -E plank|openbox|tint2|picom\n"
+    },
+    {
+      "command": "command -v gsettings; dpkg-query -W libglib2.0-bin",
+      "exit": 0,
+      "output": "/usr/bin/gsettings\nlibglib2.0-bin\t2.74.6-2+deb12u9\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface gtk-theme",
+      "exit": 0,
+      "output": "'GoldenGate'\n"
+    },
+    {
+      "command": "gsettings get org.gnome.desktop.interface icon-theme",
+      "exit": 0,
+      "output": "'NexiumIOS4'\n"
+    },
+    {
+      "command": "gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/",
+      "exit": 0,
+      "output": "net.launchpad.plank.dock.settings alignment 'center'\nnet.launchpad.plank.dock.settings auto-pinning true\nnet.launchpad.plank.dock.settings current-workspace-only false\nnet.launchpad.plank.dock.settings dock-items ['02-browser.dockitem', '07-vault.dockitem', '01-files.dockitem', '09-monitor.dockitem', '04-messages.dockitem', '08-editor.dockitem', '10-trash.dockitem', '03-terminal.dockitem', '05-calls.dockitem', '06-settings.dockitem']\nnet.launchpad.plank.dock.settings hide-delay 0\nnet.launchpad.plank.dock.settings hide-mode 'intelligent'\nnet.launchpad.plank.dock.settings icon-size 48\nnet.launchpad.plank.dock.settings items-alignment 'center'\nnet.launchpad.plank.dock.settings lock-items false\nnet.launchpad.plank.dock.settings monitor ''\nnet.launchpad.plank.dock.settings offset 0\nnet.launchpad.plank.dock.settings pinned-only false\nnet.launchpad.plank.dock.settings position 'bottom'\nnet.launchpad.plank.dock.settings pressure-reveal false\nnet.launchpad.plank.dock.settings show-dock-item false\nnet.launchpad.plank.dock.settings theme 'Default'\nnet.launchpad.plank.dock.settings tooltips-enabled true\nnet.launchpad.plank.dock.settings unhide-delay 0\nnet.launchpad.plank.dock.settings zoom-enabled false\nnet.launchpad.plank.dock.settings zoom-percent 150\n"
+    }
+  ],
+  "plank_running": true,
+  "pass": true
+}
