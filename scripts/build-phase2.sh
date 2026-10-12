@@ -20,6 +20,7 @@ sudo mount --make-rslave work/root/dev
 sudo mount --bind /sys work/root/sys
 cleanup() { sudo umount -R work/root/tmp/.X11-unix 2>/dev/null || true; sudo umount -R work/root/proc 2>/dev/null || true; sudo umount -R work/root/sys 2>/dev/null || true; sudo umount -R work/root/dev 2>/dev/null || true; }
 trap cleanup EXIT
+sudo python3 scripts/live-admin-network.py sources work/root | tee reports/firmware-sources.txt
 sudo chroot work/root apt-get update
 packages=$(grep -v '^#' desktop/packages.txt | xargs)
 sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $packages gnome-themes-extra

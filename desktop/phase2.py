@@ -59,6 +59,22 @@ pavucontrol
 adwaita-icon-theme
 dbus-x11
 libglib2.0-bin
+sudo
+network-manager
+network-manager-gnome
+wpasupplicant
+iw
+rfkill
+pciutils
+usbutils
+wireless-regdb
+firmware-linux-nonfree
+firmware-realtek
+firmware-iwlwifi
+firmware-atheros
+firmware-brcm80211
+firmware-libertas
+firmware-misc-nonfree
 '''
 FILES['desktop/dock/README.md'] = '''# Provisional native dock
 Plank, bottom centered, 10 ordered pins, standard Adwaita fallback icons.
@@ -448,6 +464,9 @@ def materialize():
     print('Materialized',len(FILES),'source files and wallpaper PNG; reused repair boot verifier')
 
 def install(root):
+    # QUEUED_LIVE_FIXES: source hooks before ownership and overlay manifest.
+    subprocess.run(['python3','scripts/chromium-localhost.py','fix',str(root)],check=True)
+    subprocess.run(['python3','scripts/live-admin-network.py','install',str(root)],check=True)
     r=P(root).resolve();manifest={}
     def put(source,dest,executable=False):
         p=r/dest.lstrip('/');p.parent.mkdir(parents=True,exist_ok=True)
@@ -533,6 +552,8 @@ def verify_ungoogled(root):
     print('UNGOOGLED BINARY:',binary,'exists, executable, ELF; browser --version:',version)
 
 def verify(root):
+    subprocess.run(['python3','scripts/chromium-localhost.py','verify',str(root)],check=True)
+    subprocess.run(['python3','scripts/live-admin-network.py','verify',str(root)],check=True)
     verify_ungoogled(root)
     r=P(root);manifest=json.loads(P('reports/phase2-manifest.json').read_text())
     for name,digest in manifest.items():assert hashlib.sha256((r/name.lstrip('/')).read_bytes()).hexdigest()==digest,name

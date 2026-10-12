@@ -7,6 +7,21 @@ def command(c):
     return {'command':c,'exit':p.returncode,'output':p.stdout}
 data={'environment':{k:os.environ.get(k) for k in ['DISPLAY','XDG_SESSION_TYPE','XDG_CURRENT_DESKTOP','XDG_SESSION_DESKTOP','DESKTOP_SESSION']}}
 commands=['pgrep -a -x plank','ps -ef | grep -E "plank|openbox|tint2|picom"','command -v gsettings; dpkg-query -W libglib2.0-bin','gsettings get org.gnome.desktop.interface gtk-theme','gsettings get org.gnome.desktop.interface icon-theme','gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/']
+data['sudo_noninteractive']=command('/usr/bin/sudo -n true; rc=$?; echo SUDO_EXIT=$rc; exit $rc')
+data['network']=command('/usr/local/bin/nexium-network-diagnostics')
+data['network_manager']=command('systemctl is-active NetworkManager')
+browser_log=open('/tmp/nexium-browser.log','w')
+subprocess.Popen(['/usr/bin/chromium'],stdout=browser_log,stderr=subprocess.STDOUT)
+import time
+time.sleep(12)
+data['browser_processes']=[]
+for pid in os.listdir('/proc'):
+    if not pid.isdigit():continue
+    try:
+        with open('/proc/'+pid+'/cmdline','rb') as f:argv=f.read().decode().split('\0')
+    except (OSError,UnicodeError):continue
+    if argv and argv[0]=='/opt/ungoogled-chromium/chrome' and '--no-proxy-server' in argv and 'about:blank' in argv:data['browser_processes'].append({'pid':pid,'argv':argv})
+data['browser_log']=command('cat /tmp/nexium-browser.log')
 data['commands']=[command(c) for c in commands]
 data['plank_running']=data['commands'][0]['exit']==0 and bool(data['commands'][0]['output'].strip())
 data['pass']=data['plank_running'] and data['environment']['XDG_SESSION_TYPE']=='x11' and data['commands'][2]['exit']==0 and 'GoldenGate' in data['commands'][3]['output'] and 'NexiumIOS4' in data['commands'][4]['output']
@@ -86,4 +101,7 @@ print(json.dumps(receipt,indent=2));print(json.dumps(live,indent=2))
 assert ready is not None,'FAIL: desktop never reached'
 assert splash,'FAIL: made by TOMO! text not observed in BIOS frames'
 assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'
+assert live.get('sudo_noninteractive',{}).get('exit')==0,'FAIL: sudo -n true failed in live desktop'
+assert live.get('network_manager',{}).get('exit')==0,'FAIL: NetworkManager not active in live guest'
+assert live.get('browser_processes'),'FAIL: normal-user direct about:blank Chromium process not observed'
 print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
