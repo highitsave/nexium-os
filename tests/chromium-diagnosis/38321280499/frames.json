@@ -1,0 +1,764 @@
+[
+  {
+    "frame": 0,
+    "elapsed_seconds": 1.007,
+    "sha256": "23ea8128dc8784a6f5bbbba0d881d1b2dcee85ce7e5eb2e1d256354c0f1c1e9c",
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) 00:03.0 CA\u00ae\u00ae PCIZ.1@ PnP PMM+BEFCBOSO+BEFOBO50 CAoO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 1,
+    "elapsed_seconds": 2.003,
+    "sha256": "87c3fcb2987e95d4d899ec8af7d3ec5dbfde7f338a5ae5969b1050626dd67a0c",
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) 00:03.0 CA\u00ae\u00ae PCIZ.1@ PnP PMM+BEFCBOSO+BEFOBO50 CAoO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 2,
+    "elapsed_seconds": 4.004,
+    "sha256": "afe1941bc1d2a5b1dead7d9d31ef78d7d54a29d309433cd9949d9b3e006abbd1",
+    "ocr": "GNU GRUB version 2.06-13+debizuz\n\nNexium OS (safe graphics, for older computers)\nShut down\n\nUse the T and J keys to select which entry is highlighted.\nPress enter to boot the selected 0S, \u201ce\u2019 to edit the commands\nbefore booting or \u2018c\u2019 for a command-line.\n\nThe highlighted entry will be executed automatically in 3s.\n\n"
+  },
+  {
+    "frame": 3,
+    "elapsed_seconds": 12.666,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 4,
+    "elapsed_seconds": 13.195,
+    "sha256": "50ce3281244923eaaeff562463b8e3e3764fb19c767a3c9ce96cc3f55ae81de9",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 5,
+    "elapsed_seconds": 13.707,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 6,
+    "elapsed_seconds": 16.278,
+    "sha256": "50ce3281244923eaaeff562463b8e3e3764fb19c767a3c9ce96cc3f55ae81de9",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 7,
+    "elapsed_seconds": 17.866,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 8,
+    "elapsed_seconds": 18.514,
+    "sha256": "50ce3281244923eaaeff562463b8e3e3764fb19c767a3c9ce96cc3f55ae81de9",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 9,
+    "elapsed_seconds": 18.887,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 10,
+    "elapsed_seconds": 20.003,
+    "sha256": "50ce3281244923eaaeff562463b8e3e3764fb19c767a3c9ce96cc3f55ae81de9",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 11,
+    "elapsed_seconds": 24.605,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 12,
+    "elapsed_seconds": 26.694,
+    "sha256": "50ce3281244923eaaeff562463b8e3e3764fb19c767a3c9ce96cc3f55ae81de9",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 13,
+    "elapsed_seconds": 28.186,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 14,
+    "elapsed_seconds": 29.537,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 15,
+    "elapsed_seconds": 30.119,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 16,
+    "elapsed_seconds": 35.108,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 17,
+    "elapsed_seconds": 35.87,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 18,
+    "elapsed_seconds": 45.513,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 19,
+    "elapsed_seconds": 45.668,
+    "sha256": "fc3ac387b6fc2fd6fc51222b09c040ee42886581ace91e20ddea2a4101832ed3",
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 20,
+    "elapsed_seconds": 45.865,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 21,
+    "elapsed_seconds": 46.409,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 22,
+    "elapsed_seconds": 47.732,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 23,
+    "elapsed_seconds": 56.917,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 24,
+    "elapsed_seconds": 59.397,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 25,
+    "elapsed_seconds": 63.595,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 26,
+    "elapsed_seconds": 64.707,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 27,
+    "elapsed_seconds": 66.646,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 28,
+    "elapsed_seconds": 67.679,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 29,
+    "elapsed_seconds": 69.274,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 30,
+    "elapsed_seconds": 69.783,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 31,
+    "elapsed_seconds": 70.74,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 32,
+    "elapsed_seconds": 72.302,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 33,
+    "elapsed_seconds": 73.453,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 34,
+    "elapsed_seconds": 74.577,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 35,
+    "elapsed_seconds": 74.915,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 36,
+    "elapsed_seconds": 83.625,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 37,
+    "elapsed_seconds": 84.111,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 38,
+    "elapsed_seconds": 92.382,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 39,
+    "elapsed_seconds": 93.676,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 40,
+    "elapsed_seconds": 94.366,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 41,
+    "elapsed_seconds": 98.93,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 42,
+    "elapsed_seconds": 106.719,
+    "sha256": "db7fdd388f0241954a23c3c4aac110f91c546f5a18d4760ed0c9ffacee882f8e",
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 43,
+    "elapsed_seconds": 107.086,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 44,
+    "elapsed_seconds": 118.954,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 45,
+    "elapsed_seconds": 120.162,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 46,
+    "elapsed_seconds": 120.791,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 47,
+    "elapsed_seconds": 121.763,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 48,
+    "elapsed_seconds": 122.48,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 49,
+    "elapsed_seconds": 126.983,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 50,
+    "elapsed_seconds": 127.326,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 51,
+    "elapsed_seconds": 130.043,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 52,
+    "elapsed_seconds": 136.033,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 53,
+    "elapsed_seconds": 136.479,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 54,
+    "elapsed_seconds": 136.891,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 55,
+    "elapsed_seconds": 138.662,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 56,
+    "elapsed_seconds": 139.537,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 57,
+    "elapsed_seconds": 140.917,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 58,
+    "elapsed_seconds": 141.364,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 59,
+    "elapsed_seconds": 145.262,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 60,
+    "elapsed_seconds": 145.656,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 61,
+    "elapsed_seconds": 151.766,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 62,
+    "elapsed_seconds": 153.737,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 63,
+    "elapsed_seconds": 156.401,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 64,
+    "elapsed_seconds": 156.91,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 65,
+    "elapsed_seconds": 161.687,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 66,
+    "elapsed_seconds": 163.079,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 67,
+    "elapsed_seconds": 163.425,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 68,
+    "elapsed_seconds": 165.445,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 69,
+    "elapsed_seconds": 165.682,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 70,
+    "elapsed_seconds": 166.254,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 71,
+    "elapsed_seconds": 166.697,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 72,
+    "elapsed_seconds": 167.298,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 73,
+    "elapsed_seconds": 169.746,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 74,
+    "elapsed_seconds": 173.492,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 75,
+    "elapsed_seconds": 174.312,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 76,
+    "elapsed_seconds": 174.871,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 77,
+    "elapsed_seconds": 177.747,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 78,
+    "elapsed_seconds": 179.174,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 79,
+    "elapsed_seconds": 181.736,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 80,
+    "elapsed_seconds": 183.586,
+    "sha256": "ac96b42f2a3e7786ca1a569e193346d217456394557acda6c83bc55d18c227ad",
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 81,
+    "elapsed_seconds": 184.817,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 82,
+    "elapsed_seconds": 185.017,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 83,
+    "elapsed_seconds": 185.205,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 84,
+    "elapsed_seconds": 185.398,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 85,
+    "elapsed_seconds": 185.589,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 86,
+    "elapsed_seconds": 185.79,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 87,
+    "elapsed_seconds": 185.978,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 88,
+    "elapsed_seconds": 186.167,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 89,
+    "elapsed_seconds": 186.356,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 90,
+    "elapsed_seconds": 186.544,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 91,
+    "elapsed_seconds": 186.737,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 92,
+    "elapsed_seconds": 186.932,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 93,
+    "elapsed_seconds": 187.121,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 94,
+    "elapsed_seconds": 188.007,
+    "sha256": "76ed5c9c326ba62322d464a22d3fcf7b76c7352c6d33badc36ccea7a33325e97",
+    "ocr": ""
+  },
+  {
+    "frame": 95,
+    "elapsed_seconds": 190.007,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 96,
+    "elapsed_seconds": 192.007,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 97,
+    "elapsed_seconds": 194.01,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 98,
+    "elapsed_seconds": 196.008,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 99,
+    "elapsed_seconds": 198.011,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 100,
+    "elapsed_seconds": 200.01,
+    "sha256": "40fcff8edf508174933b693ab4c12260b0a88cbdea6213bb60668af40f0cc99e",
+    "ocr": ""
+  },
+  {
+    "frame": 101,
+    "elapsed_seconds": 202.009,
+    "sha256": "32925a38d52495e6bfa8da53dc7e81079fccb101fe442b38881931da0788c04e",
+    "ocr": "NEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 102,
+    "elapsed_seconds": 204.011,
+    "sha256": "8ec80db6ca0a1d4aad0b9d40d294c4b3f283c8d09d8013339a9d8522b0787ea0",
+    "ocr": "GOLDEN GATE\n\n"
+  },
+  {
+    "frame": 103,
+    "elapsed_seconds": 209.262,
+    "sha256": "684f1156b53bceea1a149fdcc262cfb8b3bc0fa26ee4438b834b4a1d4f1dea3c",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 104,
+    "elapsed_seconds": 209.788,
+    "sha256": "684f1156b53bceea1a149fdcc262cfb8b3bc0fa26ee4438b834b4a1d4f1dea3c",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 105,
+    "elapsed_seconds": 210.335,
+    "sha256": "684f1156b53bceea1a149fdcc262cfb8b3bc0fa26ee4438b834b4a1d4f1dea3c",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 106,
+    "elapsed_seconds": 212.009,
+    "sha256": "684f1156b53bceea1a149fdcc262cfb8b3bc0fa26ee4438b834b4a1d4f1dea3c",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 107,
+    "elapsed_seconds": 214.31,
+    "sha256": "684f1156b53bceea1a149fdcc262cfb8b3bc0fa26ee4438b834b4a1d4f1dea3c",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 108,
+    "elapsed_seconds": 221.851,
+    "sha256": "e9762a7010851d74af532acd24662922ca951cdb416c5e64574060093346f573",
+    "ocr": "Mon 12 Oct 23:21\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 109,
+    "elapsed_seconds": 227.44,
+    "sha256": "0d0398632307e6248299e86fc32856365219389a5358fc5b068e0aff93376c1e",
+    "ocr": "NEXIUM-OS\n\nGOLDEN GATE 2e: \u201cRe ) sf tf\n\n"
+  },
+  {
+    "frame": 110,
+    "elapsed_seconds": 230.035,
+    "sha256": "f3b0498aabe7b36d94d0d5a390aae30df0e9204550ea68ca0576bac08f864d1c",
+    "ocr": "NEXIUM-OS\nGOLDEN GATE 26\u00b0 2 ry =\u201c iB = gs\n\n"
+  },
+  {
+    "frame": 111,
+    "elapsed_seconds": 234.955,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 112,
+    "elapsed_seconds": 235.453,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 113,
+    "elapsed_seconds": 235.95,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 114,
+    "elapsed_seconds": 236.455,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 115,
+    "elapsed_seconds": 236.953,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 116,
+    "elapsed_seconds": 237.456,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 117,
+    "elapsed_seconds": 237.952,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 118,
+    "elapsed_seconds": 238.447,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 119,
+    "elapsed_seconds": 238.942,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 120,
+    "elapsed_seconds": 240.009,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 121,
+    "elapsed_seconds": 242.007,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 122,
+    "elapsed_seconds": 244.007,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 123,
+    "elapsed_seconds": 246.008,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 124,
+    "elapsed_seconds": 248.007,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 125,
+    "elapsed_seconds": 250.008,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  },
+  {
+    "frame": 126,
+    "elapsed_seconds": 252.008,
+    "sha256": "d74d928b21b3c08618ca157ec98e48854e6c9744f1a75b69e31fe1681513d2c3",
+    "ocr": "\u2018Welcome to Nexium OS Mon 12 Oct 23:21\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE\n\n"
+  }
+]
