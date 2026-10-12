@@ -1,0 +1,151 @@
+name: Diagnose exact Phase 2 ISO without rebuilding
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-phase2-runtime.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-phase2-golden-gate-iso
+          run-id: 38298752858
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: source
+      - name: Read exact ISO squashfs and preserved initrd
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso initramfs-tools-core qemu-system-x86 python3-pil tesseract-ocr
+          mkdir -p iso root initrd tests/runtime-diagnostic/38300321414
+          ISO=$(find source -name '*.iso' -print -quit)
+          echo "$ISO" > /tmp/exact-iso
+          test "$(stat -c%s "$ISO")" = 758710272
+          echo "b310fe81418c4d484984784cb2219e37dd56cd8e96cac1c67df49138e509cc2e  $ISO" | sha256sum -c - | tee tests/runtime-diagnostic/38300321414/iso-verification.txt
+          xorriso -osirrox on -indev "$ISO" -extract /live/filesystem.squashfs iso/root.squashfs -extract /live/initrd.img iso/initrd.img -extract /boot/grub/grub.cfg iso/grub.cfg
+          sudo unsquashfs -d root iso/root.squashfs
+          unmkinitramfs iso/initrd.img initrd
+          {
+            echo '=== OUTPUT SQUASHFS EXECUTABLES AND SESSION ==='
+            sudo stat -c '%A %U:%G %n' root/usr/bin/plank root/usr/bin/openbox-session root/usr/local/lib/nexium/session root/home/nexium/.config/openbox/autostart
+            sudo cat root/usr/local/lib/nexium/session root/home/nexium/.config/openbox/autostart root/etc/systemd/system/nexium-kiosk.service root/usr/bin/openbox-session root/usr/lib/x86_64-linux-gnu/openbox-autostart
+            echo '=== DOCK PINS OWNERSHIP ==='
+            sudo find root/home/nexium/.config/plank -printf '%M %u:%g %p\n'
+            echo '=== ROOTFS PLYMOUTH ==='
+            sudo find root/usr/share/plymouth root/etc/plymouth root/etc/alternatives -iname '*plymouth*' -o -iname '*nexium*' -o -iname 'default.plymouth'
+            sudo ls -l root/usr/share/plymouth/themes/default.plymouth root/etc/alternatives/default.plymouth || true
+            for f in root/etc/plymouth/* root/usr/share/plymouth/themes/*/*.plymouth root/usr/share/plymouth/themes/*/*.script root/var/lib/dpkg/alternatives/default.plymouth; do test -f "$f" && { echo "=== $f ==="; sudo cat "$f"; }; done
+            echo '=== INITRD PLYMOUTH ==='
+            find initrd -path '*plymouth*' -printf '%M %p -> %l\n'
+            find initrd -type f \( -name '*.plymouth' -o -name '*.script' -o -name 'plymouthd.conf' -o -name 'plymouthd.defaults' \) -print -exec cat {} \;
+            echo '=== GRUB ==='
+            cat iso/grub.cfg
+          } > tests/runtime-diagnostic/38300321414/iso-inspection.txt 2>&1
+          sudo cp root/usr/share/plymouth/themes/nexium-gold/nexium-gold.plymouth tests/runtime-diagnostic/38300321414/staged-gold.plymouth
+      - name: Collect journal and X logs from a new diagnostic boot of the exact unchanged ISO
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat > /tmp/runtime.py <<'PY'
+          import pathlib,subprocess,json,time,socket,threading,http.server,os
+          from PIL import Image
+          O=pathlib.Path('tests/runtime-diagnostic/38300321414').resolve()
+          probe=r'''import subprocess,urllib.request,os
+          def collect(cmd):
+              p=subprocess.run(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=45)
+              return '\n$ '+cmd+'\n'+p.stdout+'\nexit='+str(p.returncode)+'\n'
+          commands=[
+            'id; printf "DISPLAY=%s XDG_SESSION_TYPE=%s\\n" "$DISPLAY" "$XDG_SESSION_TYPE"; ps -ef',
+            'systemctl status nexium-kiosk.service --no-pager -l; journalctl -b -u nexium-kiosk.service --no-pager -o short-monotonic',
+            'sudo -n journalctl -b -u nexium-kiosk.service --no-pager -o short-monotonic',
+            'stat -c "%A %U:%G %n" /usr/bin/plank /usr/local/lib/nexium/session /home/nexium/.config/openbox/autostart; cat /home/nexium/.config/openbox/autostart; find /home/nexium/.config/plank -ls',
+            'ls -la /home/nexium/.xsession-errors /home/nexium/.local/share/xorg /var/log/Xorg* /var/log/matchbox*; cat /home/nexium/.xsession-errors /home/nexium/.local/share/xorg/Xorg.0.log /var/log/Xorg.0.log',
+            'env | sort; gsettings list-recursively net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/; dpkg-query -W plank openbox python3-xdg',
+            'timeout 8s plank --debug',
+            'ps -ef | grep -E "plank|openbox|tint2|matchbox|picom"'
+          ]
+          report='NEW DIAGNOSTIC BOOT OF EXACT UNCHANGED ISO; NOT ORIGINAL CAPTURE JOURNAL\n'
+          for cmd in commands:
+              try: report+=collect(cmd)
+              except Exception as e: report+=repr(e)+'\n'
+          urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=report.encode(),method='POST')).read()
+          '''
+          class Handler(http.server.BaseHTTPRequestHandler):
+              def do_GET(self):
+                  self.send_response(200);self.end_headers();self.wfile.write(probe.encode())
+              def do_POST(self):
+                  body=self.rfile.read(int(self.headers['Content-Length']))
+                  (O/'guest-live-report.txt').write_bytes(body)
+                  self.send_response(200);self.end_headers();self.wfile.write(b'OK')
+          server=http.server.HTTPServer(('0.0.0.0',8888),Handler)
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          iso=pathlib.Path('/tmp/exact-iso').read_text().strip()
+          cmd=['qemu-system-x86_64','-name','Nexium exact ISO diagnostic boot','-machine','pc','-accel','tcg,thread=multi','-cpu','max','-smp','2','-m','3072','-boot','order=d,menu=on','-cdrom',iso,'-vga','std','-display','none','-nic','user,model=e1000','-qmp','unix:/tmp/diag-qmp.sock,server=on,wait=off','-serial','file:'+str(O/'new-serial.log'),'-no-reboot','-rtc','base=utc']
+          (O/'new-invocation.json').write_text(json.dumps(cmd,indent=2))
+          err=(O/'new-qemu-stderr.log').open('w')
+          p=subprocess.Popen(cmd,stderr=err)
+          s=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
+          for _ in range(60):
+              try:s.connect('/tmp/diag-qmp.sock');break
+              except OSError:time.sleep(1)
+          stream=s.makefile('rwb',buffering=0);stream.readline()
+          def qmp(ex,args=None):
+              stream.write((json.dumps({'execute':ex,'arguments':args or {}})+'\n').encode())
+              while True:
+                  r=json.loads(stream.readline())
+                  if 'return' in r or 'error' in r:return r
+          qmp('qmp_capabilities')
+          def key(*codes):qmp('send-key',{'keys':[{'type':'qcode','data':c} for c in codes],'hold-time':30});time.sleep(.10)
+          time.sleep(12);key('ret')
+          ready=False
+          for n in range(48):
+              time.sleep(5)
+              qmp('screendump',{'filename':'/tmp/diag.ppm'})
+              txt=subprocess.run(['tesseract','/tmp/diag.ppm','stdout'],capture_output=True,text=True).stdout
+              if 'Welcome to Nexium OS' in txt:
+                  ready=True;break
+          Image.open('/tmp/diag.ppm').save(O/'new-before-diagnostic.png')
+          (O/'new-before-ocr.txt').write_text(txt)
+          print('GUEST_DESKTOP_READY',ready,flush=True)
+          if ready:
+              key('meta_l','t');time.sleep(8)
+              command="python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/probe.py\").read())'"
+              chars={' ':'spc','-':'minus','.':'dot',"'":'apostrophe','/':'slash',';':'semicolon',':':('shift','semicolon'),'(':('shift','9'),')':('shift','0'),'"':('shift','apostrophe')}
+              for c in command:
+                  mapped=chars.get(c,c)
+                  key(*(mapped if isinstance(mapped,tuple) else [mapped]))
+              key('ret')
+              for _ in range(100):
+                  if (O/'guest-live-report.txt').exists():break
+                  time.sleep(2)
+              qmp('screendump',{'filename':'/tmp/diag-after.ppm'})
+              Image.open('/tmp/diag-after.ppm').save(O/'new-after-diagnostic.png')
+          qmp('quit');p.wait(timeout=20)
+          print('GUEST_REPORT_RECEIVED',(O/'guest-live-report.txt').exists(),flush=True)
+          if (O/'guest-live-report.txt').exists():print((O/'guest-live-report.txt').read_text(),flush=True)
+          PY
+          python3 /tmp/runtime.py
+      - name: Publish diagnostic evidence only, no ISO rebuild
+        if: always()
+        run: |
+          sudo chown -R $(id -u):$(id -g) tests/runtime-diagnostic/38300321414
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add tests/runtime-diagnostic/38300321414
+          git commit -m "Record unchanged Phase 2 ISO Plymouth and live session diagnostics"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-phase2-runtime-diagnostic
+          path: tests/runtime-diagnostic/38300321414
+          if-no-files-found: error
