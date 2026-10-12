@@ -1,0 +1,3914 @@
+
+--- bios FRAME 0 ELAPSED 0.101s ---
+Headless QEMU VM | B10S|0.1selapsed | 2ssampling 12fps (24x) | NOT physical hardware
+
+Guest has not initialized the display (yet).
+
+--- bios FRAME 1 ELAPSED 2.0s ---
+Headless QEMU VM | BIOS] 20selapsed | 2ssampling 12fps (24) | NOT physical hardware
+
+SeaBIOS (version 1.16.3-debian-1.16.3-2)
+
+iPXE (https://ipxe org) 00:03.0 CA®® PCIZ.1@ PnP PMM+BEFCBOSO+BEFOBO50 CAoO
+
+Press ESC for boot menu.
+
+--- bios FRAME 2 ELAPSED 4.0s ---
+Headless QEMU VM | B10S| 40selapsed | 2ssampling /12fps (24x) | NOT physical hardware
+
+GNU GRUB version 2.06-13+debizuz
+
+Nexium OS (safe graphics, for older computers)
+Shut down
+
+Use the T and J keys to select which entry is highlighted.
+Press enter to boot the selected 0S, “e’ to edit the commands
+before booting or ‘c’ for a command-line.
+
+The highlighted entry will be executed automatically in 3s.
+
+--- bios FRAME 3 ELAPSED 13.938s ---
+Headless EMU VM | B10S| 13 9selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 4 ELAPSED 14.26s ---
+Headless QEMU VM | BIOS] 143selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 5 ELAPSED 14.726s ---
+Headless QEMU VM | BIOS] 147selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 6 ELAPSED 17.356s ---
+Headless QEMU VM | BIOS] 17.4selapoed | 2ssampling /12fps(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 7 ELAPSED 17.82s ---
+Headless QEMU VM | BIOS| 17 8selapeed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 8 ELAPSED 18.676s ---
+Headless QEMU VM | BIOS] 187selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 9 ELAPSED 20.364s ---
+Headless QEMU VM | B10S|20.4selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 10 ELAPSED 28.856s ---
+Headless QEMU VM | BI0S| 28 Qselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 11 ELAPSED 29.136s ---
+Headless QEMU VM | B10S|29.1selapeed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 12 ELAPSED 30.01s ---
+Headless QEMU VM | B10S|30.0selapoed | sampling /12fes(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 13 ELAPSED 33.744s ---
+Headless QEMU VM | 10S] 337selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 14 ELAPSED 34.247s ---
+Headless QEMU VM | 10S] 342selapoed | 2ssampling /12fps (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 15 ELAPSED 44.352s ---
+Headless QEMU VM | BIOS] 44 4selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 16 ELAPSED 44.443s ---
+Headless QEMU VM | BIOS] 44 4selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 17 ELAPSED 44.537s ---
+Headless QEMU VM | BI0S| 445selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 18 ELAPSED 44.615s ---
+Headless QEMU VM | BIOS] 446selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 19 ELAPSED 44.685s ---
+Headless QEMU VM | BI0S| 447selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 20 ELAPSED 44.761s ---
+Headless QEMU VM | BIOS] 448selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 21 ELAPSED 47.121s ---
+Headless QEMU VM | BIOS] 47.1selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 22 ELAPSED 47.237s ---
+Headless QEMU VM | BIOS] 47.2selapeed | 2ssampling /12fps (24x) | NOT physical hardware
+
+Nexium
+
+--- bios FRAME 23 ELAPSED 47.359s ---
+Headless QEMU VM | BIOS] 47.4selapoed | 2ssampling /12fps (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 24 ELAPSED 48.0s ---
+Headless QEMU VM | BIOS] 48 0selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Nexium
+
+--- bios FRAME 25 ELAPSED 50.0s ---
+Headless QEMU VM | B10] 50.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 26 ELAPSED 52.0s ---
+Headless QEMU VM | 10S] 52.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 27 ELAPSED 54.0s ---
+Headless QEMU VM | 10S] 540selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 28 ELAPSED 56.0s ---
+Headless QEMU VM | B10S| 58 Oselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium
+
+--- bios FRAME 29 ELAPSED 58.0s ---
+Headless QEMU VM | B10S| 58 Oselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 30 ELAPSED 60.0s ---
+Headless QEMU VM | B10S|60.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Nexium OS
+
+--- bios FRAME 31 ELAPSED 62.0s ---
+Headless QEMU VM | BIOS] 62.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 32 ELAPSED 64.0s ---
+Headless QEMU VM | 10S] 640selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 33 ELAPSED 66.0s ---
+Headless QEMU VM | B10S| 68 Oselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 34 ELAPSED 68.0s ---
+Headless QEMU VM | BIOS] 68 Oselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 35 ELAPSED 70.0s ---
+Headless QEMU VM | B10S|70.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 36 ELAPSED 72.0s ---
+Headless QEMU VM | B10S]72.0selapoed | 2ssampling /12fps (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 37 ELAPSED 74.0s ---
+Headless QEMU VM | B10S|740selapoed | sampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 38 ELAPSED 76.0s ---
+Headless QEMU VM | B10S| 76 Oselapoed | 2ssampling /12fes(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 39 ELAPSED 78.0s ---
+Headless QEMU VM | 10S] 78 Oselapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 40 ELAPSED 80.0s ---
+Headless QEMU VM | B10S|80.0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 41 ELAPSED 88.445s ---
+Headless QEMU VM | B10S| 88 4selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 42 ELAPSED 88.466s ---
+Headless QEMU VM | B10S| 88 Sselapoed | sampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 43 ELAPSED 88.486s ---
+Headless QEMU VM | B10S| 88 Sselapoed | sampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 44 ELAPSED 88.506s ---
+Headless QEMU VM | B10S| 88 Sselapoed | sampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 45 ELAPSED 90.0s ---
+Headless QEMU VM | B10S|90.0selapoed | 2ssampling /12fes(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 46 ELAPSED 92.0s ---
+Headless QEMU VM | B10] 92.0selapoed | 2ssampling /12fes(24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 47 ELAPSED 94.0s ---
+Headless QEMU VM | 10S] 940selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 48 ELAPSED 96.0s ---
+Headless QEMU VM | BI0S| 96 0selapoed | 2ssampling /12fes (24x) | NOT physical hardware
+
+Booting ‘Nexium OS’
+
+--- bios FRAME 49 ELAPSED 98.0s ---
+Headless QEMU VM | BI0S| 98 0selapoed | sampling /12fes (24x) | NOT physical hardware
+
+--- bios FRAME 50 ELAPSED 100.0s ---
+Headless QEMU VM | 10S] 100.0selapsed | 2ssampling | 12fps (24) | NOT physical hardware
+
+--- bios FRAME 51 ELAPSED 102.0s ---
+Headless QEMU VM | 10S] 10200selapsed | 2ssampling | 12fps (24 | NOT physical hardware
+
+--- bios FRAME 52 ELAPSED 104.0s ---
+Headless QEMU VM | 10S] 1040selapsed | 2ssampling | 12fps (24) | NOT physical hardware
+
+--- bios FRAME 53 ELAPSED 106.0s ---
+Headless QEMU VM | 10S] 108 0s elapsed | 2ssampling /12fps (24) | NOT physical hardware
+
+--- bios FRAME 54 ELAPSED 108.0s ---
+GOLDEN GATE
+
+--- bios FRAME 55 ELAPSED 110.0s ---
+Headless QEMU VM | 10S] 110.0selapsed | 2ssampling | 12fps (24 | NOT physical hardware
+
+--- bios FRAME 56 ELAPSED 112.0s ---
+Mon 12 Oct 19:53
+
+GOLDEN GATE
+
+--- bios FRAME 57 ELAPSED 114.0s ---
+Mon 12 Oct 19:53
+
+GOLDEN GATE
+
+--- bios FRAME 58 ELAPSED 116.0s ---
+Mon 12 Oct 19:53
+
+GOLDEN GATE
+
+--- bios FRAME 59 ELAPSED 118.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 60 ELAPSED 120.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 61 ELAPSED 122.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 62 ELAPSED 124.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 63 ELAPSED 126.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 64 ELAPSED 128.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 65 ELAPSED 130.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 66 ELAPSED 132.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 67 ELAPSED 134.0s ---
+Mon 12 Oct 19:53
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 68 ELAPSED 136.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 69 ELAPSED 138.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 70 ELAPSED 140.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 71 ELAPSED 142.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 72 ELAPSED 144.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 73 ELAPSED 146.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 74 ELAPSED 148.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 75 ELAPSED 150.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 76 ELAPSED 152.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 77 ELAPSED 154.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 78 ELAPSED 156.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 79 ELAPSED 158.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 80 ELAPSED 160.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 81 ELAPSED 162.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 82 ELAPSED 164.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 83 ELAPSED 166.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 84 ELAPSED 168.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 85 ELAPSED 170.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 86 ELAPSED 172.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 87 ELAPSED 174.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 88 ELAPSED 176.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 89 ELAPSED 178.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 90 ELAPSED 180.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 91 ELAPSED 182.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 92 ELAPSED 184.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 93 ELAPSED 186.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 94 ELAPSED 188.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 95 ELAPSED 190.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 96 ELAPSED 192.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 97 ELAPSED 194.0s ---
+Mon 12 Oct 19:54
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 98 ELAPSED 196.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 99 ELAPSED 198.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 100 ELAPSED 200.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 101 ELAPSED 202.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 102 ELAPSED 204.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 103 ELAPSED 206.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 104 ELAPSED 208.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 105 ELAPSED 210.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 106 ELAPSED 212.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 107 ELAPSED 214.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 108 ELAPSED 216.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 109 ELAPSED 218.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 110 ELAPSED 220.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 111 ELAPSED 222.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 112 ELAPSED 224.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 113 ELAPSED 226.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 114 ELAPSED 228.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 115 ELAPSED 230.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 116 ELAPSED 232.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 117 ELAPSED 234.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 118 ELAPSED 236.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 119 ELAPSED 238.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 120 ELAPSED 240.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 121 ELAPSED 242.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 122 ELAPSED 244.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 123 ELAPSED 246.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 124 ELAPSED 248.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 125 ELAPSED 250.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 126 ELAPSED 252.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 127 ELAPSED 254.0s ---
+Mon 12 Oct 19:55
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 128 ELAPSED 256.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 129 ELAPSED 258.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 130 ELAPSED 260.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 131 ELAPSED 262.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 132 ELAPSED 264.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 133 ELAPSED 266.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 134 ELAPSED 268.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 135 ELAPSED 270.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 136 ELAPSED 272.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 137 ELAPSED 274.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 138 ELAPSED 276.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 139 ELAPSED 278.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 140 ELAPSED 280.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 141 ELAPSED 282.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 142 ELAPSED 284.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 143 ELAPSED 286.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 144 ELAPSED 288.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 145 ELAPSED 290.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 146 ELAPSED 292.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 147 ELAPSED 294.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 148 ELAPSED 296.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 149 ELAPSED 298.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 150 ELAPSED 300.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 151 ELAPSED 302.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 152 ELAPSED 304.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 153 ELAPSED 306.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 154 ELAPSED 308.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 155 ELAPSED 310.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 156 ELAPSED 312.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 157 ELAPSED 314.0s ---
+Mon 12 Oct 19:56
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 158 ELAPSED 316.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 159 ELAPSED 318.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 160 ELAPSED 320.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 161 ELAPSED 322.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 162 ELAPSED 324.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 163 ELAPSED 326.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 164 ELAPSED 328.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 165 ELAPSED 330.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 166 ELAPSED 332.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 167 ELAPSED 334.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 168 ELAPSED 336.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 169 ELAPSED 338.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 170 ELAPSED 340.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 171 ELAPSED 342.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 172 ELAPSED 344.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 173 ELAPSED 346.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 174 ELAPSED 348.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 175 ELAPSED 350.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 176 ELAPSED 352.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 177 ELAPSED 354.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 178 ELAPSED 356.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 179 ELAPSED 358.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 180 ELAPSED 360.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 181 ELAPSED 362.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 182 ELAPSED 364.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 183 ELAPSED 366.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 184 ELAPSED 368.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 185 ELAPSED 370.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 186 ELAPSED 372.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 187 ELAPSED 374.0s ---
+Mon 12 Oct 19:57
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 188 ELAPSED 376.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 189 ELAPSED 378.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 190 ELAPSED 380.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 191 ELAPSED 382.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 192 ELAPSED 384.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 193 ELAPSED 386.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 194 ELAPSED 388.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 195 ELAPSED 390.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 196 ELAPSED 392.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 197 ELAPSED 394.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 198 ELAPSED 396.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 199 ELAPSED 398.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 200 ELAPSED 400.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 201 ELAPSED 402.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 202 ELAPSED 404.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 203 ELAPSED 406.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 204 ELAPSED 408.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 205 ELAPSED 410.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 206 ELAPSED 412.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 207 ELAPSED 414.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 208 ELAPSED 416.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 209 ELAPSED 418.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 210 ELAPSED 420.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 211 ELAPSED 422.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 212 ELAPSED 424.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 213 ELAPSED 426.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 214 ELAPSED 428.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 215 ELAPSED 430.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 216 ELAPSED 432.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 217 ELAPSED 434.0s ---
+Mon 12 Oct 19:58
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 218 ELAPSED 436.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 219 ELAPSED 438.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 220 ELAPSED 440.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 221 ELAPSED 442.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 222 ELAPSED 444.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 223 ELAPSED 446.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 224 ELAPSED 448.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 225 ELAPSED 450.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 226 ELAPSED 452.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 227 ELAPSED 454.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 228 ELAPSED 456.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 229 ELAPSED 458.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 230 ELAPSED 460.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 231 ELAPSED 462.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 232 ELAPSED 464.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 233 ELAPSED 466.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 234 ELAPSED 468.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 235 ELAPSED 470.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 236 ELAPSED 472.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 237 ELAPSED 474.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 238 ELAPSED 476.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
+
+--- bios FRAME 239 ELAPSED 478.0s ---
+Mon 12 Oct 19:59
+
+Welcome to Nexium OS
+
+Welcome to Nexium 0S — Golden Gate desktop.
+Your bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.
+Messages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.
+
+This is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal
+administration still requires care.
+
+Use System Information in the top panel for actual system details.
+
+ok
+
+NEXIUM-OS
+
+OLDEN GATE
