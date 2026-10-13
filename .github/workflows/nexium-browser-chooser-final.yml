@@ -1,0 +1,396 @@
+name: Ship fitting browser chooser with persistent sites and strict painted GUI
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/nexium-browser-chooser-final.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Implement persistent chooser and non-Google search; preserve strict GUI gate
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml python3-pil xvfb x11-utils xdotool wmctrl scrot initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core curl
+          mkdir -p reports/boot/frames reports/browser output work
+          python3 desktop/phase2.py --materialize
+          python3 scripts/prepare-ios4.py | tee reports/ios4-icons.txt
+          cat > browser/nexium_launchers.py <<'PY'
+          """Small user-owned launcher/search config; no account, shell or network service."""
+          import json,os,re,shutil,subprocess,ipaddress
+          from pathlib import Path
+          from urllib.parse import urlsplit,urlunsplit,quote_plus
+          ENGINES={'DuckDuckGo':('https://duckduckgo.com/','https://duckduckgo.com/?q='),'Bing':('https://www.bing.com/','https://www.bing.com/search?q=')}
+          BUILTINS=(('Nexium Browser',None),('Firefox','firefox-esr'),('Brave','brave-browser'))
+          def validate_url(value):
+              value=value.strip()
+              if not value or re.search(r'[\s\x00-\x1f\x7f]',value):raise ValueError('Enter a valid website URL without spaces.')
+              if '://' not in value:value='https://'+value
+              try:
+                  p=urlsplit(value);host=p.hostname;port=p.port
+                  if p.scheme not in ('https','http') or not host or p.username or p.password:raise ValueError()
+                  if host!='localhost':
+                      try:ipaddress.ip_address(host)
+                      except ValueError:
+                          ascii_host=host.encode('idna').decode('ascii')
+                          labels=ascii_host.split('.')
+                          if len(labels)<2 or not all(re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?',x) for x in labels) or len(labels[-1])<2:raise ValueError()
+                  return urlunsplit(p)
+              except (ValueError,UnicodeError):raise ValueError('Use an http(s) website address, such as example.com.')
+          class LauncherStore:
+              def __init__(self,path=None):
+                  self.path=Path(path) if path else Path.home()/'.config/nexium-browser/launchers.json'
+                  self.engine='DuckDuckGo';self.sites=[]
+                  if self.path.exists():
+                      data=json.loads(self.path.read_text())
+                      self.engine=data.get('search_engine','DuckDuckGo')
+                      if self.engine not in ENGINES:self.engine='DuckDuckGo'
+                      for entry in data.get('sites',[]):
+                          try:self.sites.append({'name':str(entry['name'])[:100],'url':validate_url(entry['url'])})
+                          except (ValueError,KeyError,TypeError):continue
+              def save(self):
+                  self.path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+                  tmp=self.path.with_suffix('.tmp');tmp.write_text(json.dumps({'version':1,'search_engine':self.engine,'sites':self.sites},indent=2)+'\n');tmp.chmod(0o600);os.replace(tmp,self.path)
+              def add(self,url):
+                  url=validate_url(url)
+                  if any(s['url']==url for s in self.sites):return
+                  self.sites.append({'name':urlsplit(url).hostname,'url':url});self.save()
+              def remove(self,index):
+                  self.sites.pop(index);self.save()
+              def set_engine(self,engine):
+                  if engine not in ENGINES:raise ValueError('Unsupported search engine')
+                  self.engine=engine;self.save()
+          def make_url(text):
+              text=text.strip();engine=LauncherStore().engine
+              if not text:return ENGINES[engine][0]
+              try:return validate_url(text)
+              except ValueError:return ENGINES[engine][1]+quote_plus(text)
+          def chooser(owner):
+              from PySide6.QtWidgets import QDialog,QVBoxLayout,QHBoxLayout,QListWidget,QPushButton,QInputDialog,QMessageBox,QLabel
+              dialog=QDialog(owner);dialog.setWindowTitle('Nexium Browser chooser');dialog.resize(580,420)
+              layout=QVBoxLayout(dialog);layout.addWidget(QLabel('Browsers and saved sites — websites open in Nexium Browser.'))
+              items=QListWidget();items.setObjectName('launcherList');layout.addWidget(items)
+              row=QHBoxLayout();buttons={}
+              for name in ('Open','Add browser / Add site','Remove','Close'):
+                  b=QPushButton(name);row.addWidget(b);buttons[name]=b
+              buttons['Add browser / Add site'].setObjectName('addSite');buttons['Remove'].setObjectName('removeSite');layout.addLayout(row)
+              def refresh():
+                  items.clear()
+                  for name,exe in BUILTINS:items.addItem(name+(' (not installed)' if exe and not shutil.which(exe) else ''))
+                  for entry in owner.launchers.sites:items.addItem(entry['name']+' — '+entry['url'])
+                  items.setCurrentRow(0)
+              def state():
+                  i=items.currentRow();buttons['Remove'].setEnabled(i>=len(BUILTINS))
+                  buttons['Open'].setEnabled(i>=0 and (i>=len(BUILTINS) or not BUILTINS[i][1] or bool(shutil.which(BUILTINS[i][1]))))
+              def opened():
+                  i=items.currentRow()
+                  if i<0:return
+                  try:
+                      if i>=len(BUILTINS):owner.add_web_tab(owner.launchers.sites[i-len(BUILTINS)]['url'])
+                      elif BUILTINS[i][1]:subprocess.Popen([shutil.which(BUILTINS[i][1])],start_new_session=True)
+                      else:owner.add_home_tab()
+                      dialog.accept()
+                  except OSError as e:QMessageBox.warning(dialog,'Could not open browser',str(e))
+              def added():
+                  value,ok=QInputDialog.getText(dialog,'Add browser / Add site','Website URL (https:// is added when missing):')
+                  if not ok:return
+                  try:owner.launchers.add(value);refresh()
+                  except (ValueError,OSError) as e:QMessageBox.warning(dialog,'Invalid site',str(e))
+              def removed():
+                  i=items.currentRow()-len(BUILTINS)
+                  if i<0:return
+                  try:owner.launchers.remove(i);refresh()
+                  except OSError as e:QMessageBox.warning(dialog,'Could not save',str(e))
+              items.currentRowChanged.connect(state);items.itemDoubleClicked.connect(opened)
+              buttons['Open'].clicked.connect(opened);buttons['Add browser / Add site'].clicked.connect(added);buttons['Remove'].clicked.connect(removed);buttons['Close'].clicked.connect(dialog.reject)
+              refresh();owner.chooser_dialog=dialog;dialog.show();return dialog
+          PY
+          cat > scripts/prepare-browser-chooser.py <<'PY'
+          import re,ast
+          from pathlib import Path
+          p=Path('browser/nexium_browser.py');s=p.read_text()
+          if 'from nexium_launchers import' not in s:
+              s=s.replace('import sys','import sys\nfrom nexium_launchers import LauncherStore, ENGINES, make_url, chooser\nfrom PySide6.QtWidgets import QComboBox, QMessageBox',1)
+              s=re.sub(r'^GOOGLE_(?:HOME|SEARCH|ACCOUNT) = .*\n','',s,flags=re.M)
+              s=re.sub(r'class NexiumSearchPage\(QWebEnginePage\):.*?(?=class BrowserPage)', '',s,flags=re.S)
+              s=s.replace('        self.web.loadFinished.connect(self.inject_nexium_search_ui)\n','')
+              s=re.sub(r'    def inject_nexium_search_ui\(self, ok\):.*?(?=class NexiumHome)', '',s,flags=re.S)
+              s=re.sub(r'def make_url\(text\):.*?(?=class )','',s,flags=re.S)
+              s=s.replace('"Nexium Search uses Google to obtain web results while Nexium controls "\n            "the presentation layer. Search results may therefore be subject "\n            "to Google\'s availability and policies.<br><br>"','"Nexium Search uses DuckDuckGo by default, with Bing as an optional engine. "\n            "Search results remain subject to the selected provider\'s policies.<br><br>"')
+              s=s.replace('self.sign_in_btn = QPushButton("Sign in")','self.sign_in_btn = QPushButton("Browsers / Add site")')
+              s=s.replace('google_btn','search_home_btn').replace('QPushButton("Open Google")','QPushButton("Open search engine")')
+              s=s.replace('self.navigate_callback(GOOGLE_HOME)','self.navigate_callback(make_url(""))')
+              s=s.replace('menu.addAction("Google",','menu.addAction("DuckDuckGo",')
+              s=s.replace('self.open_url(GOOGLE_HOME)','self.open_url("https://duckduckgo.com/")')
+              s=s.replace('menu.addAction("YouTube", lambda: self.navigate_callback("https://www.youtube.com"))','menu.addAction("Bing", lambda: self.navigate_callback("https://www.bing.com/"))')
+              s=s.replace('menu.addAction("YouTube", lambda: self.open_url("https://www.youtube.com"))','menu.addAction("Bing", lambda: self.open_url("https://www.bing.com/"))')
+              s='\n'.join(line for line in s.splitlines() if 'menu.addAction("Gmail"' not in line)+'\n'
+              s=s.replace('        self.dark_mode = False','        self.launchers = LauncherStore()\n        self.dark_mode = False',1)
+              s=s.replace('self.shortcuts_button = QPushButton("Shortcuts")','self.shortcuts_button = QPushButton("Browsers / Add site")')
+              s=s.replace('self.shortcuts_button.clicked.connect(self.show_shortcuts)','self.shortcuts_button.clicked.connect(self.show_chooser)')
+              needle='        nav_layout.addWidget(self.shortcuts_button)'
+              s=s.replace(needle,needle+'\n        self.search_engine = QComboBox()\n        self.search_engine.setObjectName("searchEngine")\n        self.search_engine.addItems(list(ENGINES))\n        self.search_engine.setCurrentText(self.launchers.engine)\n        self.search_engine.currentTextChanged.connect(self.change_engine)\n        nav_layout.addWidget(self.search_engine)')
+              s=s.replace('        nav_layout.addWidget(self.sign_in)','        self.sign_in.hide()')
+              s=s.replace('            self.sign_in_clicked,','            self.show_chooser,')
+              s=re.sub(r'    def sign_in_clicked\(self\):.*?(?=    def profile_clicked)', '    def sign_in_clicked(self):\n        self.show_chooser()\n\n',s,flags=re.S)
+              needle='    def make_tool_button(self, text, callback, tooltip):'
+              s=s.replace(needle,'    def show_chooser(self):\n        return chooser(self)\n\n    def change_engine(self, engine):\n        try:self.launchers.set_engine(engine)\n        except OSError as e:QMessageBox.warning(self,"Could not save search engine",str(e))\n\n'+needle)
+              s=s.replace('            app.nexium_window = window','            app.nexium_window = window\n            if "--chooser" in sys.argv:window.show_chooser()')
+          assert 'GOOGLE_' not in s and 'google.com/search' not in s and 'accounts.google.com' not in s and 'mail.google.com' not in s
+          assert 'class NexiumBrowser' in s and 'class NexiumHome' in s
+          ast.parse(s);compile(s,str(p),'exec');p.write_text(s)
+          print('PASS chooser/search source syntax; no Google home/search/account default')
+          PY
+          python3 scripts/prepare-browser-chooser.py
+          cat > scripts/test-browser-chooser.py <<'PY'
+          import sys,tempfile,json,unittest,os
+          from pathlib import Path
+          sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'browser'))
+          from nexium_launchers import LauncherStore,validate_url,make_url
+          class ModelTests(unittest.TestCase):
+              def test_urls(self):
+                  self.assertEqual(validate_url('example.com'),'https://example.com')
+                  for value in ('','garbage','not a url','javascript:alert(1)','ftp://example.com','https://','https://bad_host.com','https://x:password@example.com','https://example.com:bad'):
+                      with self.assertRaises(ValueError,msg=value):validate_url(value)
+              def test_restart_remove_search(self):
+                  with tempfile.TemporaryDirectory() as home:
+                      old=os.environ.get('HOME');os.environ['HOME']=home
+                      try:
+                          a=LauncherStore();a.add('example.com');b=LauncherStore();self.assertEqual(b.sites[0]['url'],'https://example.com')
+                          self.assertIn('duckduckgo.com',make_url('two search words'))
+                          b.set_engine('Bing');self.assertIn('bing.com',make_url('two search words'))
+                          b.remove(0);self.assertEqual(LauncherStore().sites,[])
+                          self.assertEqual(LauncherStore().engine,'Bing')
+                          self.assertEqual(a.path.stat().st_mode & 0o777,0o600)
+                      finally:
+                          if old is None:os.environ.pop('HOME',None)
+                          else:os.environ['HOME']=old
+          if '--qt' not in sys.argv:unittest.main()
+          else:
+              from PySide6.QtWidgets import QApplication,QInputDialog,QPushButton,QComboBox,QListWidget
+              from unittest.mock import patch
+              import nexium_browser
+              app=QApplication([]);window=nexium_browser.NexiumBrowser();window.show()
+              dialog=window.show_chooser();app.processEvents()
+              assert dialog.findChild(QPushButton,'addSite') and window.findChild(QComboBox,'searchEngine').currentText()=='DuckDuckGo'
+              with patch.object(QInputDialog,'getText',return_value=('example.com',True)):
+                  dialog.findChild(QPushButton,'addSite').click();app.processEvents()
+              assert LauncherStore().sites[-1]['url']=='https://example.com'
+              items=dialog.findChild(QListWidget,'launcherList');items.setCurrentRow(items.count()-1)
+              dialog.findChild(QPushButton,'removeSite').click();app.processEvents();assert not LauncherStore().sites
+              window.search_engine.setCurrentText('Bing');assert LauncherStore().engine=='Bing'
+              window.search_engine.setCurrentText('DuckDuckGo')
+              print('PASS real Qt chooser Add site/remove clicks, persistent reopen and DDG/Bing selection',flush=True)
+              window.close()
+          PY
+          python3 scripts/test-browser-chooser.py 2>&1 | tee reports/browser/chooser-model-tests.txt
+          # Record root open-source documents without adding any.
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          names=[p.name for p in Path('.').iterdir() if p.is_file()]
+          report={k:[n for n in names if n.upper().startswith(k)] for k in ['LICENSE','README','CONTRIBUTING']}
+          Path('reports/browser/open-source-readiness.json').write_text(json.dumps(report,indent=2)+'\n');print(report)
+          PY
+          cat > scripts/measure-install-chooser.sh <<'SH'
+          #!/bin/bash
+          set -euo pipefail
+          root=work/root
+          before=reports/browser/chooser-packages-before.tsv
+          sudo chroot "$root" dpkg-query -W -f='${Package}\t${Version}\t${Installed-Size}\n' > "$before"
+          sudo mkdir -p "$root/usr/share/keyrings"
+          curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo tee "$root/usr/share/keyrings/brave-browser-archive-keyring.gpg" >/dev/null
+          echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main' | sudo tee "$root/etc/apt/sources.list.d/brave-browser-release.list"
+          sudo chroot "$root" apt-get update
+          for p in firefox-esr brave-browser; do
+            sudo chroot "$root" apt-cache show --no-all-versions "$p" | tee "reports/browser/$p-metadata.txt"
+            sudo chroot "$root" apt-get -s install --no-install-recommends "$p" | tee "reports/browser/$p-simulated-deps.txt"
+          done
+          sudo chroot "$root" env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends firefox-esr brave-browser
+          sudo chroot "$root" dpkg-query -W -f='${Package}\t${Version}\t${Installed-Size}\n' > reports/browser/chooser-packages-after.tsv
+          sudo chroot "$root" apt-get clean
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          def read(n):return {p:(v,int(s)*1024) for p,v,s in (l.split('\t') for l in Path(n).read_text().splitlines())}
+          before=read('reports/browser/chooser-packages-before.tsv');after=read('reports/browser/chooser-packages-after.tsv')
+          entries={}
+          for name in ['firefox-esr','brave-browser']:
+              text=Path(f'reports/browser/{name}-metadata.txt').read_text()
+              def value(k):return re.search(r'^'+k+r': (.*)$',text,re.M)[1]
+              entries[name]={'version':value('Version'),'deb_package_bytes':int(value('Size')),'installed_bytes':after[name][1],'debian_metadata_installed_bytes':int(value('Installed-Size'))*1024,'filename':value('Filename')}
+          extra={p:{'version':v,'installed_bytes':s,'previous_bytes':before.get(p,('',0))[1]} for p,(v,s) in after.items() if before.get(p)!=(v,s)}
+          report={'current_iso_bytes':777256960,'ceiling_bytes':1000000000,'headroom_bytes':1000000000-777256960,'browsers':entries,'added_or_changed':extra,'both_installed_delta_bytes':sum(v['installed_bytes']-v['previous_bytes'] for v in extra.values()),'caution':'DEB and installed sizes are not the compressed ISO delta. Fit is measured by rebuilding candidate ISO with xz and unchanged boot inputs.','existing_pyside6_venv_apparent_bytes':716222983,'previous_native_package_delta_bytes':4969472}
+          Path('reports/browser/browser-sizes.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
+          PY
+          SH
+          cat > scripts/install-chooser-overlay.py <<'PY'
+          import json,hashlib,os,shutil
+          from pathlib import Path
+          def installed(r,p):return (r/p).exists()
+          def install(root):
+              r=Path(root);uid,gid=next((int(x.split(':')[2]),int(x.split(':')[3])) for x in (r/'etc/passwd').read_text().splitlines() if x.startswith('nexium:'));paths=[]
+              target=r/'usr/local/lib/nexium/nexium_launchers.py';target.write_bytes(Path('browser/nexium_launchers.py').read_bytes());paths.append(target)
+              choices=[('chooser','Browser chooser','/usr/local/bin/nexium-browser --chooser','nexium-browser')]
+              if installed(r,'usr/bin/firefox-esr'):choices.append(('firefox-choice','Firefox','/usr/bin/firefox-esr','firefox-esr'))
+              if installed(r,'usr/bin/brave-browser'):choices.append(('brave-choice','Brave','/usr/bin/brave-browser','brave-browser'))
+              for key in ['chooser','firefox-choice','brave-choice']:
+                  (r/f'usr/share/applications/nexium-{key}.desktop').unlink(missing_ok=True)
+                  for base in ['etc/skel','home/nexium']:
+                      (r/base/f'.config/plank/dock1/launchers/11-{key}.dockitem').unlink(missing_ok=True)
+              for key,title,cmd,icon in choices:
+                  p=r/f'usr/share/applications/nexium-{key}.desktop';p.write_text(f'[Desktop Entry]\nType=Application\nName={title}\nExec={cmd}\nIcon={icon}\nTerminal=false\nCategories=Network;WebBrowser;\n');paths.append(p)
+                  for base in ['etc/skel','home/nexium']:
+                      q=r/base/f'.config/plank/dock1/launchers/11-{key}.dockitem';q.parent.mkdir(parents=True,exist_ok=True);q.write_text(f'[PlankDockItemPreferences]\nLauncher=file:///usr/share/applications/nexium-{key}.desktop\n');paths.append(q)
+                      if base=='home/nexium':os.chown(q,uid,gid)
+              # Never seed a fake user site or Google engine into the shipped image.
+              for base in ['etc/skel','home/nexium']:
+                  p=r/base/'.config/nexium-browser/launchers.json';p.parent.mkdir(parents=True,exist_ok=True);p.write_text('{"version":1,"search_engine":"DuckDuckGo","sites":[]}\n');p.chmod(0o600);paths.append(p)
+                  if base=='home/nexium':os.chown(p,uid,gid);os.chown(p.parent,uid,gid)
+              manifest=json.loads(Path('reports/phase2-manifest.json').read_text())
+              for name in list(manifest):
+                  if '11-' in name or any(f'nexium-{key}.desktop' in name for key in ['chooser','firefox-choice','brave-choice']):manifest.pop(name)
+              for p in paths:manifest['/'+str(p.relative_to(r))]=hashlib.sha256(p.read_bytes()).hexdigest()
+              Path('reports/phase2-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+              # Store a reproducible selection manifest in the image and verification manifest.
+              selected=['Nexium Browser']+[title for key,title,cmd,icon in choices if key!='chooser']
+              p=r/'etc/nexium-browsers.json';p.write_text(json.dumps({'shipped':selected,'search_default':'DuckDuckGo','search_options':['DuckDuckGo','Bing']},indent=2)+'\n')
+              manifest['/etc/nexium-browsers.json']=hashlib.sha256(p.read_bytes()).hexdigest();Path('reports/phase2-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+              return selected
+          PY
+          cat > scripts/choose-fitting-browsers.py <<'PY'
+          """Measure actual ISO bytes; largest count first, Firefox wins a one-extra-browser tie."""
+          import json,subprocess,importlib.util,hashlib
+          from pathlib import Path
+          def run(argv):subprocess.run(argv,check=True)
+          spec=importlib.util.spec_from_file_location('overlay','scripts/install-chooser-overlay.py');overlay=importlib.util.module_from_spec(spec);spec.loader.exec_module(overlay)
+          attempts=[]
+          options=[('both',[]),('Firefox',['brave-browser']),('Brave',['firefox-esr']),('Nexium only',['brave-browser'])]
+          for label,remove in options:
+              if remove:
+                  run(['chroot','work/root','env','DEBIAN_FRONTEND=noninteractive','apt-get','purge','-y',*remove])
+                  if label=='Brave':
+                      # Restore the other measured candidate only if Firefox also exceeds the cap.
+                      saved=Path('work/root/etc/resolv.conf').read_bytes();Path('work/root/etc/resolv.conf').write_bytes(Path('/etc/resolv.conf').read_bytes())
+                      try:run(['chroot','work/root','env','DEBIAN_FRONTEND=noninteractive','apt-get','install','-y','--no-install-recommends','brave-browser'])
+                      finally:Path('work/root/etc/resolv.conf').write_bytes(saved)
+                  run(['chroot','work/root','apt-get','clean'])
+              shipped=overlay.install('work/root')
+              Path('work/new.squashfs').unlink(missing_ok=True)
+              run(['mksquashfs','work/root','work/new.squashfs','-noappend','-comp','xz','-b','1048576','-Xdict-size','1048576','-Xbcj','x86','-processors','2'])
+              trial=Path('output/candidate.iso');trial.unlink(missing_ok=True)
+              run(['xorriso','-indev','work/orig.iso','-outdev',str(trial),'-boot_image','any','replay','-map','work/new.squashfs','/live/filesystem.squashfs','-map','work/new.initrd','/live/initrd.img','-commit','-end'])
+              size=trial.stat().st_size
+              record={'candidate':label,'shipped':shipped,'iso_bytes':size,'sha256':hashlib.sha256(trial.read_bytes()).hexdigest(),'under_ceiling':size<1000000000}
+              attempts.append(record);print(json.dumps(record),flush=True)
+              Path('reports/browser/fitting-set.json').write_text(json.dumps({'baseline_bytes':777256960,'ceiling_bytes':1000000000,'headroom_bytes':222743040,'attempts':attempts,'selected':record if size<1000000000 else None},indent=2)+'\n')
+              trial.unlink()
+              if size<1000000000:break
+          else:raise AssertionError('Nothing sensible fits without cutting preservation; stopped')
+          run(['python3','scripts/nexium-phase2.py','--verify','work/root'])
+          PY
+          cat > scripts/test-chooser-in-root.sh <<'SH'
+          #!/bin/bash
+          set -euo pipefail
+          sudo cp scripts/test-browser-chooser.py work/root/usr/local/lib/nexium/test-browser-chooser.py
+          sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 XDG_RUNTIME_DIR=/tmp/nexium-runtime QT_QPA_PLATFORM=xcb /bin/sh -c 'mkdir -p "$XDG_RUNTIME_DIR"; chmod 700 "$XDG_RUNTIME_DIR"; /opt/nexium-browser/venv/bin/python /usr/local/lib/nexium/test-browser-chooser.py --qt' 2>&1 | tee reports/browser/chooser-qt-tests.txt
+          sudo rm work/root/usr/local/lib/nexium/test-browser-chooser.py
+          SH
+          python3 - <<'PY'
+          from pathlib import Path
+          import ast
+          p=Path('scripts/nexium-phase2.py');s=p.read_text()
+          if 'install-chooser-overlay.py' not in s:
+              s=s.replace("def verify(root):", "    load('chooser_overlay','scripts/install-chooser-overlay.py').install(root)\n\ndef verify(root):")
+              p.write_text(s)
+          shell=Path('scripts/build-nexium-browser.sh').read_text()
+          shell=shell.replace('bash scripts/install-nexium-browser.sh\n','bash scripts/install-nexium-browser.sh\nbash scripts/measure-install-chooser.sh\n')
+          shell=shell.replace('sleep 10\nDISPLAY=:99','sleep 10\nbash scripts/test-chooser-in-root.sh\nDISPLAY=:99')
+          old='sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2'
+          assert shell.count(old)==1
+          shell=shell.replace(old,'sudo python3 scripts/choose-fitting-browsers.py')
+          # Keep root intact until final boot/output verification but discard unused debug cache.
+          Path('scripts/build-browser-chooser.sh').write_text(shell)
+          for name in ['scripts/nexium-phase2.py','scripts/choose-fitting-browsers.py','scripts/install-chooser-overlay.py','browser/nexium_browser.py','browser/nexium_launchers.py']:compile(Path(name).read_text(),name,'exec')
+          # The existing strict captured probe is retained, not regenerated by the old full-pass workflow.
+          capture=Path('scripts/capture-nexium-browser.py').read_text()
+          assert '# NEXIUM_STRICT_PAINT_PROBE' in capture and "assert live.get('browser_gui_pass')" in capture
+          PY
+          bash -n scripts/build-browser-chooser.sh scripts/measure-install-chooser.sh scripts/test-chooser-in-root.sh
+          mkdir -p reports/negative-test
+          printf '%s\n' '{"browser_gui_pass":false,"browser_launch":{"stdout_stderr":"synthetic-failure-log"}}' > reports/negative-test/live-session.json
+          set +e
+          python3 scripts/assert-nexium-capture.py reports/negative-test 2>&1 | tee reports/negative-test/failure.txt
+          rc=$?
+          set -e
+          echo "FALSE_GUI_PIPELINE_EXIT=$rc" | tee reports/negative-test/result.txt
+          test "$rc" -ne 0
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add browser/nexium_browser.py browser/nexium_launchers.py scripts/prepare-browser-chooser.py scripts/test-browser-chooser.py scripts/measure-install-chooser.sh scripts/install-chooser-overlay.py scripts/choose-fitting-browsers.py scripts/test-chooser-in-root.sh scripts/build-browser-chooser.sh scripts/nexium-phase2.py
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add persistent site chooser and DuckDuckGo/Bing with measured fitting browser selection'
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Measure candidates and build largest fitting browser set with unchanged preservation gates
+        run: |
+          set -euo pipefail
+          bash scripts/build-browser-chooser.sh 2>&1 | tee reports/build-chooser.txt
+      - name: Boot final ISO and enforce real dock-Exec painted Nexium window
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-nexium-browser.py 2>&1 | tee reports/boot-capture.txt
+      - name: Commit and summarize exact final evidence even on failure
+        if: always()
+        run: |
+          set -euo pipefail
+          dest=tests/browser-chooser/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/browser/* reports/boot/*.json reports/boot/*.png reports/*.txt "$dest/" 2>/dev/null || true
+          cp reports/negative-test/result.txt "$dest/" 2>/dev/null || true
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$dest"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record final chooser size and strict GUI evidence ${GITHUB_RUN_ID}"
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          { echo '## Final browser chooser'; cat reports/size.txt reports/iso-sha256.txt reports/browser/browser-sizes.json reports/browser/fitting-set.json reports/browser/open-source-readiness.json reports/negative-test/result.txt reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-iso
+          path: |
+            output/nexium-os-1.2-ungoogled-amd64.iso
+            output/SHA256SUMS
+          compression-level: 0
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-verification
+          path: reports/
+          if-no-files-found: error
