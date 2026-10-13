@@ -31,6 +31,19 @@ except Exception as e:
     urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
     raise
 
+test_path='/tmp/nexium-chooser-live-test.py'
+open(test_path,'wb').write(urllib.request.urlopen('http://10.0.2.2:8888/chooser-test.py').read())
+data['chooser_restart_test']=[]
+for stage in ['add','restart-remove','restart-check']:
+    result=subprocess.run(['/opt/nexium-browser/venv/bin/python',test_path,stage],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=60)
+    data['chooser_restart_test'].append({'stage':stage,'exit':result.returncode,'stdout_stderr':result.stdout})
+    print('CHOOSER LIVE STAGE',stage,result.returncode,result.stdout,flush=True)
+    if result.returncode!=0:
+        data['browser_gui_pass']=False;data['pass']=False
+        urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
+        raise AssertionError('FAIL final guest chooser restart test '+stage)
+data['chooser_restart_pass']=True
+
 text = open('/usr/share/applications/nexium-browser.desktop').read()
 argv = shlex.split(next(line[5:] for line in text.splitlines() if line.startswith('Exec=')))
 log_path = '/tmp/nexium-browser.log'
@@ -124,7 +137,7 @@ urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data
 '''
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200);self.end_headers();self.wfile.write(probe.encode())
+        self.send_response(200);self.end_headers();self.wfile.write(pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else probe.encode())
     def do_POST(self):
         target = O/('browser-window.png' if self.path=='/browser-window.png' else 'live-session.json')
         target.write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
@@ -176,7 +189,7 @@ if ready is not None:
     for c in command:
         mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
     key('ret')
-    for _ in range(360):
+    for _ in range(450):
         if (O/'live-session.json').exists():break
         time.sleep(2)
     qmp('screendump',{'filename':'/tmp/dock-live.ppm'});Image.open('/tmp/dock-live.ppm').save(O/'live-probe.png')
@@ -207,3 +220,5 @@ assert live.get('browser_gui_pass'),'FAIL: dock Nexium GUI; exit/stdout/stderr/l
 print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
 
 subprocess.run(['python3','scripts/assert-nexium-capture.py',str(O)],check=True)
+
+assert live.get('chooser_restart_pass'), 'FAIL final booted image chooser restart persistence'

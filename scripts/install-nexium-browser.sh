@@ -27,7 +27,7 @@ python3 - <<'PY'
 from pathlib import Path
 import json
 def read(name):
-    return {p:(v,int(k)*1024) for p,v,k in (l.split('\t') for l in Path(name).read_text().splitlines())}
+    return {p:(v,int(k or 0)*1024) for p,v,k in (l.split('\t') for l in Path(name).read_text().splitlines())}
 before=read('reports/browser/packages-before.tsv');after=read('reports/browser/packages-after.tsv')
 added={p:{'version':v,'installed_bytes':n,'before_bytes':before.get(p,('',0))[1]} for p,(v,n) in after.items() if before.get(p)!=(v,n)}
 removed={p:{'version':v,'installed_bytes':n} for p,(v,n) in before.items() if p not in after}

@@ -563,7 +563,19 @@ def verify(root):
         if k in ['settings','messages','calls','vault']:assert (r/'usr/bin/zenity').exists()
         print('DOCK',k,'=>',c, '(honest coming-soon placeholder)' if k in ['messages','calls','vault'] else '(real application)')
     pins=list((r/'home/nexium/.config/plank/dock1/launchers').glob('*.dockitem'))
-    assert len(pins)==10, f'Expected 10 pins, got {len(pins)}'
+    # Retain ALL ten original pins and icons, additionally verify authorized browser pins.
+    expected={p.name for p in P('desktop/dock/launchers').glob('*.dockitem')}
+    assert len(expected)==10, 'Original ten dock pins must remain intact'
+    expected.add('11-chooser.dockitem')
+    for key,exe in [('firefox-choice','/usr/bin/firefox-esr'),('brave-choice','/usr/bin/brave-browser')]:
+        if (r/exe.lstrip('/')).exists():
+            expected.add('11-'+key+'.dockitem')
+            output_executable(r,exe)
+            assert 'Exec='+exe in (r/f'usr/share/applications/nexium-{key}.desktop').read_text()
+    for base in ['etc/skel','home/nexium']:
+        actual={p.name for p in (r/base/'.config/plank/dock1/launchers').glob('*.dockitem')}
+        assert actual==expected, f'Dock pin mismatch: expected {expected}, got {actual}'
+    print('PASS original ten pins plus all installed chooser/browser pins:',sorted(expected))
     assert 'Nexium OS' in (r/'etc/os-release').read_text()
     assert 'User=nexium' in (r/'etc/systemd/system/nexium-kiosk.service').read_text()
     assert (r/'usr/share/backgrounds/nexium/golden-gate.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
