@@ -14,21 +14,51 @@ import time, re, shlex
 data['browser_runtime'] = {k: os.environ.get(k) for k in ['HOME','DISPLAY','XDG_RUNTIME_DIR']}
 data['browser_ldd'] = command('find /opt/nexium-browser/venv -name QtWebEngineProcess -exec ldd {} \;')
 data['browser_paths'] = command('ls -ld "$HOME" "$XDG_RUNTIME_DIR" /dev/shm; df -h /dev/shm')
+# NEXIUM_STRICT_PAINT_PROBE
+# X helpers must exist INSIDE the guest running this probe, not only on the host.
+data['test_only_guest_packages'] = []
+try:
+    for setup in [['sudo','-n','apt-get','update'], ['sudo','-n','env','DEBIAN_FRONTEND=noninteractive','apt-get','install','-y','--no-install-recommends','xdotool','wmctrl','scrot','x11-utils']]:
+        result=subprocess.run(setup,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=180)
+        record={'argv':setup,'exit':result.returncode,'output':result.stdout}
+        data['test_only_guest_packages'].append(record)
+        print(json.dumps(record),flush=True)
+        assert result.returncode==0, 'FAIL guest X helper installation'
+    data['test_helpers']=command('command -v xdotool; command -v wmctrl; command -v scrot; command -v xwininfo; command -v xprop')
+    assert data['test_helpers']['exit']==0
+except Exception as e:
+    data['setup_error']=repr(e);data['browser_gui_pass']=False;data['pass']=False
+    urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
+    raise
+
 text = open('/usr/share/applications/nexium-browser.desktop').read()
 argv = shlex.split(next(line[5:] for line in text.splitlines() if line.startswith('Exec=')))
 log_path = '/tmp/nexium-browser.log'
 browser_log = open(log_path, 'w')
 browser = subprocess.Popen(argv, stdout=browser_log, stderr=subprocess.STDOUT)
 
-# Accept the actual Terms widget through X11 input; no shipped bypass.
-time.sleep(5)
-terms = command("xdotool search --name 'Nexium Browser.*Terms of Service'")
-data['terms_window'] = terms
-if terms['exit'] == 0 and terms['output'].strip():
-    wid = terms['output'].splitlines()[0]
-    command('xdotool windowactivate --sync ' + wid)
-    command('xdotool key --window ' + wid + ' Tab Tab Return')
-    time.sleep(8)
+# Accept only the real mapped Terms window's bottom-right I Agree button.
+# No test bypass is introduced into the shipped browser source.
+terms_started=time.monotonic()
+data['terms_interaction']=[]
+while time.monotonic()-terms_started<90 and browser.poll() is None:
+    terms=command("xdotool search --onlyvisible --name '^Nexium Browser.*Terms of Service$'")
+    data['terms_window']=terms
+    if terms['exit']==0 and terms['output'].strip():
+        wid=terms['output'].splitlines()[0]
+        geometry=command('xdotool getwindowgeometry --shell '+wid)
+        values=dict(re.findall(r'^(WIDTH|HEIGHT)=(\d+)$',geometry['output'],re.M))
+        if int(values.get('WIDTH',0))>=720 and int(values.get('HEIGHT',0))>=570:
+            data['terms_geometry']=geometry
+            data['terms_interaction'].append(command('wmctrl -ia '+wid))
+            time.sleep(2)
+            # Contents margins: right 34px, bottom 30px; button centre is ~84,49px inward.
+            x=int(values['WIDTH'])-84;y=int(values['HEIGHT'])-49
+            data['terms_interaction'].append(command('xdotool mousemove --window '+wid+' '+str(x)+' '+str(y)+' click 1'))
+            time.sleep(15)
+            data['terms_after_accept']=command("xdotool search --onlyvisible --name '^Nexium Browser.*Terms of Service$'")
+            break
+    time.sleep(2)
 began = time.monotonic()
 data['browser_timeline'] = []
 data['browser_processes'] = []
@@ -55,14 +85,14 @@ while time.monotonic() - began < 150:
     windows = []
     for line in tree['output'].splitlines():
         m = re.search(r'(0x[0-9a-f]+) "([^"]*)": .*?(\d+)x(\d+)', line)
-        if not m or m[2] != 'Nexium Browser' or int(m[3]) < 100 or int(m[4]) < 100:
+        if not m or m[2] != 'Nexium Browser' or int(m[3]) < 900 or int(m[4]) < 600:
             continue
         view = command('xwininfo -id ' + m[1])
         owner = command('xprop -id ' + m[1] + ' _NET_WM_PID')
         match = re.search(r'=\s*(\d+)', owner['output'])
         window_pid = int(match[1]) if match else None
         if view['exit'] == 0 and 'Map State: IsViewable' in view['output'] and window_pid == browser.pid:
-            windows.append({'id':m[1], 'title':m[2], 'view':view, 'owner':owner, 'pid':window_pid})
+            windows.append({'id':m[1], 'title':m[2], 'view':view, 'owner':owner, 'pid':window_pid, 'width':int(m[3]), 'height':int(m[4])})
     rc = browser.poll()
     data['browser_timeline'].append({'seconds':round(time.monotonic()-began,3),'exit':rc,'processes':processes,'observed':observed,'windows':len(windows)})
     data['browser_processes'] = processes
@@ -71,23 +101,33 @@ while time.monotonic() - began < 150:
     if (processes and windows) or rc is not None:
         break
     time.sleep(2)
+data['browser_paint_capture']=None
+if data['browser_processes'] and data['browser_windows'] and browser.poll() is None:
+    wid=data['browser_windows'][0]['id']
+    data['browser_activate']=command('wmctrl -ia '+wid)
+    time.sleep(8)
+    data['browser_paint_capture']=command('scrot --overwrite -u /tmp/nexium-browser-window.png')
+    if data['browser_paint_capture']['exit']==0:
+        urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/browser-window.png',data=open('/tmp/nexium-browser-window.png','rb').read(),method='POST')).read()
+
 browser_log.flush()
 data['browser_launch'] = {'dock_exec':argv,'pid':browser.pid,'exit_code':browser.poll(),'seconds':round(time.monotonic()-began,3),'stdout_stderr':open(log_path).read()}
-data['browser_gui_pass'] = bool(data['browser_processes'] and data['browser_windows']) and browser.poll() is None and 'not found' not in data['browser_ldd']['output'] and data['browser_ldd']['exit'] == 0
+data['browser_gui_pass'] = bool(data['browser_processes'] and data['browser_windows'] and data.get('browser_paint_capture',{}).get('exit')==0) and browser.poll() is None and 'not found' not in data['browser_ldd']['output'] and data['browser_ldd']['exit'] == 0
 data['browser_log'] = command('cat ' + log_path)
 data['update_check'] = command('/usr/local/bin/nexium-update-check')
 data['image_version'] = command('cat /etc/nexium-version')
 print('REAL NEXIUM GUI', json.dumps({k:v for k,v in data.items() if k.startswith('browser_')}, indent=2), flush=True)
 data['commands']=[command(c) for c in commands]
 data['plank_running']=data['commands'][0]['exit']==0 and bool(data['commands'][0]['output'].strip())
-data['pass']=data['plank_running'] and data['environment']['XDG_SESSION_TYPE']=='x11' and data['commands'][2]['exit']==0 and 'GoldenGate' in data['commands'][3]['output'] and 'NexiumIOS4' in data['commands'][4]['output']
+data['pass']=data['browser_gui_pass'] and data['plank_running'] and data['environment']['XDG_SESSION_TYPE']=='x11' and data['commands'][2]['exit']==0 and 'GoldenGate' in data['commands'][3]['output'] and 'NexiumIOS4' in data['commands'][4]['output']
 urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
 '''
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200);self.end_headers();self.wfile.write(probe.encode())
     def do_POST(self):
-        (O/'live-session.json').write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
+        target = O/('browser-window.png' if self.path=='/browser-window.png' else 'live-session.json')
+        target.write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
         self.send_response(200);self.end_headers();self.wfile.write(b'OK')
 server=http.server.HTTPServer(('0.0.0.0',8888),Handler)
 threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -136,7 +176,7 @@ if ready is not None:
     for c in command:
         mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
     key('ret')
-    for _ in range(180):
+    for _ in range(360):
         if (O/'live-session.json').exists():break
         time.sleep(2)
     qmp('screendump',{'filename':'/tmp/dock-live.ppm'});Image.open('/tmp/dock-live.ppm').save(O/'live-probe.png')
@@ -154,13 +194,16 @@ subprocess.run(['ffmpeg','-y','-framerate','12','-i',str(F/'bios-%03d.png'),'-c:
 subprocess.run(['ffmpeg','-y','-framerate','12','-i',str(F/'bios-%03d.png'),'-vf','scale=640:-1',str(O/'nexium-dock-cream-bios.gif')],check=True)
 live=json.loads((O/'live-session.json').read_text()) if (O/'live-session.json').exists() else {}
 print(json.dumps(receipt,indent=2));print(json.dumps(live,indent=2))
+print('NEXIUM STDOUT/STDERR BEGIN', flush=True)
+print(live.get('browser_launch', {}).get('stdout_stderr', '<no guest report>'), flush=True)
+print('NEXIUM STDOUT/STDERR END', flush=True)
+
 assert ready is not None,'FAIL: desktop never reached'
 assert splash,'FAIL: made by TOMO! text not observed in BIOS frames'
 assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'
 assert live.get('sudo_noninteractive',{}).get('exit')==0,'FAIL: sudo -n true failed in live desktop'
 assert live.get('network_manager',{}).get('exit')==0,'FAIL: NetworkManager not active in live guest'
-print('NEXIUM STDOUT/STDERR BEGIN', flush=True)
-print(live.get('browser_launch', {}).get('stdout_stderr', '<no guest report>'), flush=True)
-print('NEXIUM STDOUT/STDERR END', flush=True)
 assert live.get('browser_gui_pass'),'FAIL: dock Nexium GUI; exit/stdout/stderr/loader/window timeline printed above'
 print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
+
+subprocess.run(['python3','scripts/assert-nexium-capture.py',str(O)],check=True)
