@@ -1,0 +1,10 @@
+{
+  "users": [
+    "nexium"
+  ],
+  "files": {
+    "etc/sudoers.d/90-nexium-live-admin": "# Intentionally passwordless admin in the authorized live desktop image.\nnexium ALL=(ALL:ALL) NOPASSWD: ALL\n",
+    "etc/NetworkManager/conf.d/10-nexium-live.conf": "[main]\nplugins=ifupdown,keyfile\n[ifupdown]\nmanaged=true\n",
+    "usr/local/bin/nexium-network-diagnostics": "#!/bin/sh\necho \"Hardware adapter and firmware diagnostics; no saved Wi-Fi secrets\"\nlspci -nnk\nlsusb\nip -brief link\nrfkill list\nnmcli general status\nnmcli device status\nnmcli radio\nsudo -n dmesg | grep -iE \"firmware|wlan|wifi|iwlwifi|rtl|ath|brcm\" || true\n"
+  }
+}

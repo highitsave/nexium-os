@@ -1,0 +1,4 @@
+update-initramfs: Generating /tmp/nexium-initrd/initrd.img-6.1.0-53-amd64
+W: plymouth: The plugin label.so is missing, the selected theme might not work as expected.
+W: plymouth: You might want to install the plymouth-themes package to fix this.
+live-boot: core filesystems dm-verity devices utils udev blockdev dns.

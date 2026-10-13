@@ -1,0 +1,151 @@
+{
+  "baseline_iso_user_reported_bytes": 764084224,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 235915776,
+  "pyside6_venv_apparent_bytes": 716222983,
+  "native_package_delta_installed_bytes": 4969472,
+  "removed_packages_installed_bytes": 799125504,
+  "uncompressed_conservative_addition_without_removal": 1485276679,
+  "uncompressed_budget_with_package_removal": 686151175,
+  "important": "Installed footprint is NOT compressed ISO size. Only rebuilt ISO stat determines fit. Debian PyQt6 does not provide PySide6 modules; compatible pinned wheel lock is used.",
+  "added_or_changed": {
+    "libopengl0": {
+      "version": "1.6.0-1",
+      "installed_bytes": 224256,
+      "before_bytes": 0
+    },
+    "libxcb-cursor0": {
+      "version": "0.1.4-1",
+      "installed_bytes": 47104,
+      "before_bytes": 0
+    },
+    "libxcb-icccm4": {
+      "version": "0.4.1-1.1",
+      "installed_bytes": 59392,
+      "before_bytes": 0
+    },
+    "libxcb-image0": {
+      "version": "0.4.0-2",
+      "installed_bytes": 48128,
+      "before_bytes": 0
+    },
+    "libxcb-keysyms1": {
+      "version": "0.4.0-1+b2",
+      "installed_bytes": 39936,
+      "before_bytes": 0
+    },
+    "libxcb-render-util0": {
+      "version": "0.3.9-1+b1",
+      "installed_bytes": 45056,
+      "before_bytes": 0
+    },
+    "libxcb-xkb1": {
+      "version": "1.15-1",
+      "installed_bytes": 248832,
+      "before_bytes": 0
+    },
+    "libxkbcommon-x11-0": {
+      "version": "1.5.0-1",
+      "installed_bytes": 58368,
+      "before_bytes": 0
+    },
+    "python3-distutils": {
+      "version": "3.11.2-3",
+      "installed_bytes": 653312,
+      "before_bytes": 0
+    },
+    "python3-lib2to3": {
+      "version": "3.11.2-3",
+      "installed_bytes": 373760,
+      "before_bytes": 0
+    },
+    "python3-pip-whl": {
+      "version": "23.0.1+dfsg-1",
+      "installed_bytes": 1788928,
+      "before_bytes": 0
+    },
+    "python3-setuptools-whl": {
+      "version": "66.1.1-1+deb12u2",
+      "installed_bytes": 1347584,
+      "before_bytes": 0
+    },
+    "python3-venv": {
+      "version": "3.11.2-1+b1",
+      "installed_bytes": 6144,
+      "before_bytes": 0
+    },
+    "python3.11-venv": {
+      "version": "3.11.2-6+deb12u9",
+      "installed_bytes": 28672,
+      "before_bytes": 0
+    }
+  },
+  "removed": {
+    "ungoogled-chromium": {
+      "version": "155.0.8059.39-1+nexium1",
+      "installed_bytes": 799125504
+    }
+  },
+  "largest_remaining_packages": [
+    {
+      "name": "linux-image-6.1.0-53-amd64",
+      "bytes": 409793536
+    },
+    {
+      "name": "libllvm15",
+      "bytes": 117360640
+    },
+    {
+      "name": "firmware-iwlwifi",
+      "bytes": 84260864
+    },
+    {
+      "name": "firmware-amd-graphics",
+      "bytes": 82582528
+    },
+    {
+      "name": "firmware-atheros",
+      "bytes": 62461952
+    },
+    {
+      "name": "firmware-misc-nonfree",
+      "bytes": 52972544
+    },
+    {
+      "name": "firmware-libertas",
+      "bytes": 38969344
+    },
+    {
+      "name": "libicu72",
+      "bytes": 37038080
+    },
+    {
+      "name": "cpp-12",
+      "bytes": 34660352
+    },
+    {
+      "name": "libmfx1",
+      "bytes": 28002304
+    },
+    {
+      "name": "libgtk-3-common",
+      "bytes": 27140096
+    },
+    {
+      "name": "libgl1-mesa-dri",
+      "bytes": 25860096
+    },
+    {
+      "name": "libz3-4",
+      "bytes": 23313408
+    },
+    {
+      "name": "adwaita-icon-theme",
+      "bytes": 21400576
+    },
+    {
+      "name": "iso-codes",
+      "bytes": 20568064
+    }
+  ]
+}

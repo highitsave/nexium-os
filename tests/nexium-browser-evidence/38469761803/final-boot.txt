@@ -1,0 +1,30 @@
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 376269 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'output/nexium-os-1.2-ungoogled-amd64.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 376237 data blocks,  735m data, 78.6g free
+Volume id    : 'NEXIUM_OS'
+El Torito catalog  : 81  1
+El Torito cat path : /boot.catalog
+El Torito images   :   N  Pltf  B   Emul  Ld_seg  Hdpt  Ldsiz         LBA
+El Torito boot img :   1  BIOS  y   none  0x0000  0x00      4          82
+El Torito boot img :   2  UEFI  y   none  0x0000  0x00  12288      376269
+El Torito img path :   1  /boot/grub/bios.img
+El Torito img opts :   1  boot-info-table grub2-boot-info
+El Torito img blks :   2  3072
+System area options: 0x00004a00
+System area summary: MBR grub2-mbr cyl-align-off
+ISO image size/512 : 1505076
+Partition offset   : 0
+MBR heads per cyl  : 64
+MBR secs per head  : 32
+MBR partition table:   N Status  Type        Start       Blocks
+MBR partition      :   1   0x80  0x83            0      1505076
+MBR partition      :   2   0x00  0xef      1505076        12288
