@@ -17,7 +17,7 @@ sudo chroot "$root" apt-get clean
 python3 - <<'PY'
 import json,re
 from pathlib import Path
-def read(n):return {p:(v,int(s)*1024) for p,v,s in (l.split('\t') for l in Path(n).read_text().splitlines())}
+def read(n):return {p:(v,int(s or 0)*1024) for p,v,s in (l.split('\t') for l in Path(n).read_text().splitlines())}
 before=read('reports/browser/chooser-packages-before.tsv');after=read('reports/browser/chooser-packages-after.tsv')
 entries={}
 for name in ['firefox-esr','brave-browser']:

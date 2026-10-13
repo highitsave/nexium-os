@@ -1,6 +1,7 @@
 import sys,tempfile,json,unittest,os
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'browser'))
+sys.path.insert(0,str(Path(__file__).resolve().parent))
 from nexium_launchers import LauncherStore,validate_url,make_url
 class ModelTests(unittest.TestCase):
     def test_urls(self):
