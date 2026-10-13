@@ -1,0 +1,6 @@
+Failed to create Vulkan instance: -9
+Failed to create platform Vulkan instance
+Unable to detect GPU vendor for device: Mesa/X.org llvmpipe (LLVM 15.0.6, 256 bits) 4.5 (Compatibility Profile) Mesa 22.3.6
+GLX: No DRI3 Extension.
+[35983:36000:1013/192203.685899:ERROR:../../../qtwebengine/src/3rdparty/chromium/dbus/bus.cc:408] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+PASS real Qt chooser Add site/remove clicks, persistent reopen and DDG/Bing selection

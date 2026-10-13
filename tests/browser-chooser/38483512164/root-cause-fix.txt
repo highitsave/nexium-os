@@ -1,0 +1,1 @@
+PASS exact dock-count fix; ten original pins/icons unchanged; final guest restart assertion added

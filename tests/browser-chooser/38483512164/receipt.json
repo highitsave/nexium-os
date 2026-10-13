@@ -1,0 +1,28 @@
+{
+  "frames": 72,
+  "sample_interval_seconds": 2,
+  "wall_elapsed_seconds": 243.003,
+  "desktop_ready_frame": 56,
+  "cream_text_ocr_frames": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "vm_before_stop": {
+    "return": {
+      "status": "running",
+      "singlestep": false,
+      "running": true
+    }
+  },
+  "termination": "desktop capture completed then VM explicitly stopped",
+  "iso_bytes": 862846976,
+  "iso_sha256": "e6e23037bb041db61e175c449ce8bd7f2d444e84a848d7cb285d3bb8b02af243"
+}

@@ -1,0 +1,37 @@
+{
+  "baseline_bytes": 777256960,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 222743040,
+  "attempts": [
+    {
+      "candidate": "both",
+      "shipped": [
+        "Nexium Browser",
+        "Firefox"
+      ],
+      "iso_bytes": 1031536640,
+      "sha256": "c8af3c847ad55c8cac36d4ec132816e3c6c2f3a2b4276acba8fadb608ca5656d",
+      "under_ceiling": false
+    },
+    {
+      "candidate": "Firefox",
+      "shipped": [
+        "Nexium Browser",
+        "Firefox"
+      ],
+      "iso_bytes": 862846976,
+      "sha256": "447c8f1b74b481acfe9e985485bd68b30dd2f51e56ca883f410f5eb6d69c7403",
+      "under_ceiling": true
+    }
+  ],
+  "selected": {
+    "candidate": "Firefox",
+    "shipped": [
+      "Nexium Browser",
+      "Firefox"
+    ],
+    "iso_bytes": 862846976,
+    "sha256": "447c8f1b74b481acfe9e985485bd68b30dd2f51e56ca883f410f5eb6d69c7403",
+    "under_ceiling": true
+  }
+}

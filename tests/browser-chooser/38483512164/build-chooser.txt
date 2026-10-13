@@ -1,0 +1,2719 @@
+++ find source -name '*.iso' -print -quit
++ iso=source/nexium-os-1.2-ungoogled-amd64.iso
++ test -n source/nexium-os-1.2-ungoogled-amd64.iso
+++ stat -c%s source/nexium-os-1.2-ungoogled-amd64.iso
++ test 661454848 = 661454848
++ echo '9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5  source/nexium-os-1.2-ungoogled-amd64.iso'
++ sha256sum -c -
+source/nexium-os-1.2-ungoogled-amd64.iso: OK
++ cp source/nexium-os-1.2-ungoogled-amd64.iso work/orig.iso
++ xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain
++ xorriso -osirrox on -indev work/orig.iso -extract / work/original
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Copying of file objects from ISO image to disk filesystem is: Enabled
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 83.1g free
+Volume id    : 'NEXIUM_OS'
+xorriso : UPDATE :     306 files restored ( 624.0m) in 1 seconds = 472.5xD
+Extracted from ISO image: file '/'='/home/runner/work/nexium-os/nexium-os/work/original'
++ sudo unsquashfs -d work/root work/original/live/filesystem.squashfs
+Parallel unsquashfs: Using 4 processors
+24524 inodes (23862 blocks) to write
+
+[=/                                                          ]   957/48386   1%[=-                                                          ]  1011/48386   2%[==\                                                         ]  1814/48386   3%[==|                                                         ]  1988/48386   4%[===/                                                        ]  2820/48386   5%[====-                                                       ]  3793/48386   7%[======\                                                     ]  5134/48386  10%[======|                                                     ]  5602/48386  11%[=======/                                                    ]  5998/48386  12%[========-                                                   ]  6974/48386  14%[========|                                                   ]  7370/48386  15%[===========/                                                ]  9324/48386  19%[=============-                                              ] 11427/48386  23%[================\                                           ] 13187/48386  27%[================|                                           ] 13808/48386  28%[=================/                                          ] 14590/48386  30%[==================-                                         ] 15539/48386  32%[====================\                                       ] 16637/48386  34%[======================|                                     ] 18044/48386  37%[=========================/                                  ] 20577/48386  42%[=========================-                                  ] 21086/48386  43%[==========================\                                 ] 21585/48386  44%[==========================|                                 ] 21778/48386  45%[===========================\                                ] 22271/48386  46%[===========================-                                ] 22829/48386  47%[=================================\                          ] 27354/48386  56%[====================================|                       ] 30293/48386  62%[=====================================================/      ] 44056/48386  91%[======================================================-     ] 44886/48386  92%[===========================================================-] 48386/48386 100%
+
+created 22752 files
+created 2709 directories
+created 1754 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+created 18 hardlinks
++ sudo cp -a work/root/etc/resolv.conf work/resolv.saved
++ sudo rm -f work/root/etc/resolv.conf
++ sudo cp /etc/resolv.conf work/root/etc/resolv.conf
++ '[' -e work/root/usr/sbin/policy-rc.d ']'
++ printf '#!/bin/sh\nexit 101\n'
++ sudo tee work/root/usr/sbin/policy-rc.d
+#!/bin/sh
+exit 101
++ sudo chmod +x work/root/usr/sbin/policy-rc.d
++ sudo mount -t proc proc work/root/proc
++ sudo mount --rbind /dev work/root/dev
++ sudo mount --make-rslave work/root/dev
++ sudo mount --bind /sys work/root/sys
++ trap cleanup EXIT
++ sudo python3 scripts/live-admin-network.py sources work/root
++ tee reports/firmware-sources.txt
+APT firmware components enabled before package install
++ sudo chroot work/root apt-get update
+Get:1 http://security.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Get:3 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:4 http://deb.debian.org/debian bookworm/non-free amd64 Packages [102 kB]
+Get:5 http://security.debian.org/debian-security bookworm-security/main amd64 Packages [349 kB]
+Get:6 http://deb.debian.org/debian bookworm/non-free Translation-en [68.2 kB]
+Get:7 http://security.debian.org/debian-security bookworm-security/non-free amd64 Packages [6296 B]
+Get:8 http://security.debian.org/debian-security bookworm-security/non-free Translation-en [5340 B]
+Fetched 621 kB in 0s (1309 kB/s)
+Reading package lists...
++ bash scripts/install-nexium-browser.sh
++ root=work/root
++ sudo cat work/root/etc/os-release
++ tee reports/browser/debian-base.txt
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Version}\t${Installed-Size}\n'
++ sudo chroot work/root apt-cache policy python3-pyside6 python3-pyside6.qtwebenginewidgets python3-pyside6.qtwebenginecore python3-pyqt6.qtwebengine libqt6webenginecore6 qt6-webengine
++ tee reports/browser/debian-pyside6-availability.txt
+python3-pyqt6.qtwebengine:
+  Installed: (none)
+  Candidate: 6.4.0-1
+  Version table:
+     6.4.0-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
+libqt6webenginecore6:
+  Installed: (none)
+  Candidate: 6.4.2-final+dfsg-1
+  Version table:
+     6.4.2-final+dfsg-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
++ sudo chroot work/root apt-cache search pyside6
++ tee reports/browser/pyside6-search.txt
+python3-qtpy - Abstraction layer for PySide2/PySide6/PyQt5/PyQt6 (Python 3)
+python3-sphinx-qt-documentation - Plugin for proper resolve intersphinx references for Qt elements
+python-superqt-doc - 'missing' widgets and components for PyQt/PySide - documentation
+python3-superqt - 'missing' widgets and components for PyQt/PySide
+++ sudo chroot work/root dpkg-query -W '-f=${Package}\n'
+++ grep -E '^(ungoogled-chromium|chromium)(-|$)'
++ pkgs=ungoogled-chromium
++ tee reports/browser/standalone-chromium-bytes.txt
++ sudo du -sb work/root/opt/ungoogled-chromium
+797546240	work/root/opt/ungoogled-chromium
++ '[' -n ungoogled-chromium ']'
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get purge -y ungoogled-chromium
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  adwaita-icon-theme at-spi2-common dconf-gsettings-backend dconf-service
+  gtk-update-icon-cache hicolor-icon-theme libatk-bridge2.0-0 libatk1.0-0
+  libatspi2.0-0 libavahi-client3 libavahi-common-data libavahi-common3
+  libcolord2 libcups2 libdconf1 libdouble-conversion3 libgtk-3-0
+  libgtk-3-common libharfbuzz-subset0 libminizip1 libnspr4 libnss3
+  libopenh264-7 libproc2-0 libwayland-cursor0 libwayland-egl1 libxcb-shape0
+  libxcomposite1 libxdamage1 libxinerama1 libxkbcommon0 libxnvctrl0 libxv1
+  libxxf86dga1 procps x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  ungoogled-chromium*
+0 upgraded, 0 newly installed, 1 to remove and 3 not upgraded.
+After this operation, 799 MB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 30588 files and directories currently installed.)
+Removing ungoogled-chromium (155.0.8059.39-1+nexium1) ...
++ sudo rm -rf work/root/opt/ungoogled-chromium
++ sudo rm -f work/root/usr/bin/chromium work/root/usr/bin/ungoogled-chromium
++ native='python3 python3-venv ca-certificates libglib2.0-0 libdbus-1-3 libfontconfig1 libfreetype6 libgl1 libegl1 libopengl0 libnss3 libnspr4 libxkbcommon0 libxkbcommon-x11-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 libdrm2 libgbm1 libasound2 libxcb1 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xfixes0 libxcb-xkb1 libx11-xcb1 libxrender1 libxext6 libx11-6'
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-venv ca-certificates libglib2.0-0 libdbus-1-3 libfontconfig1 libfreetype6 libgl1 libegl1 libopengl0 libnss3 libnspr4 libxkbcommon0 libxkbcommon-x11-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 libdrm2 libgbm1 libasound2 libxcb1 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xfixes0 libxcb-xkb1 libx11-xcb1 libxrender1 libxext6 libx11-6
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3 is already the newest version (3.11.2-1+b1).
+ca-certificates is already the newest version (20250419~deb12u1).
+libglib2.0-0 is already the newest version (2.74.6-2+deb12u9).
+libglib2.0-0 set to manually installed.
+libdbus-1-3 is already the newest version (1.14.10-1~deb12u1).
+libdbus-1-3 set to manually installed.
+libfontconfig1 is already the newest version (2.14.1-4).
+libfontconfig1 set to manually installed.
+libfreetype6 is already the newest version (2.12.1+dfsg-5+deb12u4).
+libfreetype6 set to manually installed.
+libgl1 is already the newest version (1.6.0-1).
+libgl1 set to manually installed.
+libegl1 is already the newest version (1.6.0-1).
+libnss3 is already the newest version (2:3.87.1-1+deb12u4).
+libnss3 set to manually installed.
+libnspr4 is already the newest version (2:4.35-1).
+libnspr4 set to manually installed.
+libxkbcommon0 is already the newest version (1.5.0-1).
+libxkbcommon0 set to manually installed.
+libxcomposite1 is already the newest version (1:0.4.5-1).
+libxcomposite1 set to manually installed.
+libxdamage1 is already the newest version (1:1.1.6-1).
+libxdamage1 set to manually installed.
+libxrandr2 is already the newest version (2:1.5.2-2+b1).
+libxrandr2 set to manually installed.
+libxfixes3 is already the newest version (1:6.0.0-2).
+libxfixes3 set to manually installed.
+libdrm2 is already the newest version (2.4.114-1+b1).
+libdrm2 set to manually installed.
+libgbm1 is already the newest version (22.3.6-1+deb12u2).
+libgbm1 set to manually installed.
+libasound2 is already the newest version (1.2.8-1+b1).
+libasound2 set to manually installed.
+libxcb1 is already the newest version (1.15-1).
+libxcb1 set to manually installed.
+libxcb-randr0 is already the newest version (1.15-1).
+libxcb-randr0 set to manually installed.
+libxcb-shape0 is already the newest version (1.15-1).
+libxcb-shape0 set to manually installed.
+libxcb-xfixes0 is already the newest version (1.15-1).
+libxcb-xfixes0 set to manually installed.
+libx11-xcb1 is already the newest version (2:1.8.4-2+deb12u2).
+libx11-xcb1 set to manually installed.
+libxrender1 is already the newest version (1:0.9.10-1.1).
+libxrender1 set to manually installed.
+libxext6 is already the newest version (2:1.3.4-1+b1).
+libxext6 set to manually installed.
+libx11-6 is already the newest version (2:1.8.4-2+deb12u2).
+libx11-6 set to manually installed.
+The following packages were automatically installed and are no longer required:
+  adwaita-icon-theme at-spi2-common dconf-gsettings-backend dconf-service
+  gtk-update-icon-cache hicolor-icon-theme libatk-bridge2.0-0 libatk1.0-0
+  libatspi2.0-0 libavahi-client3 libavahi-common-data libavahi-common3
+  libcolord2 libcups2 libdconf1 libdouble-conversion3 libgtk-3-0
+  libgtk-3-common libharfbuzz-subset0 libminizip1 libopenh264-7 libproc2-0
+  libwayland-cursor0 libwayland-egl1 libxinerama1 libxnvctrl0 libxv1
+  libxxf86dga1 procps x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  python3-distutils python3-lib2to3 python3-pip-whl python3-setuptools-whl
+  python3.11-venv
+The following NEW packages will be installed:
+  libopengl0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1
+  libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0 python3-distutils
+  python3-lib2to3 python3-pip-whl python3-setuptools-whl python3-venv
+  python3.11-venv
+0 upgraded, 14 newly installed, 0 to remove and 3 not upgraded.
+Need to get 3321 kB of archives.
+After this operation, 4969 kB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 python3.11-venv amd64 3.11.2-6+deb12u9 [5896 B]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libxcb-image0 amd64 0.4.0-2 [22.9 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libxcb-render-util0 amd64 0.3.9-1+b1 [18.3 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libxcb-cursor0 amd64 0.1.4-1 [16.7 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libxcb-icccm4 amd64 0.4.1-1.1 [27.4 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libxcb-keysyms1 amd64 0.4.0-1+b2 [16.4 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libxcb-xkb1 amd64 1.15-1 [129 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libxkbcommon-x11-0 amd64 1.5.0-1 [15.6 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 python3-lib2to3 all 3.11.2-3 [76.3 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 python3-distutils all 3.11.2-3 [131 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 python3-pip-whl all 23.0.1+dfsg-1 [1717 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 python3-setuptools-whl all 66.1.1-1+deb12u2 [1112 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 python3-venv amd64 3.11.2-1+b1 [1200 B]
+Get:14 http://deb.debian.org/debian bookworm/main amd64 libopengl0 amd64 1.6.0-1 [30.6 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 3321 kB in 1s (5320 kB/s)
+Selecting previously unselected package libxcb-image0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29910 files and directories currently installed.)
+Preparing to unpack .../00-libxcb-image0_0.4.0-2_amd64.deb ...
+Unpacking libxcb-image0:amd64 (0.4.0-2) ...
+Selecting previously unselected package libxcb-render-util0:amd64.
+Preparing to unpack .../01-libxcb-render-util0_0.3.9-1+b1_amd64.deb ...
+Unpacking libxcb-render-util0:amd64 (0.3.9-1+b1) ...
+Selecting previously unselected package libxcb-cursor0:amd64.
+Preparing to unpack .../02-libxcb-cursor0_0.1.4-1_amd64.deb ...
+Unpacking libxcb-cursor0:amd64 (0.1.4-1) ...
+Selecting previously unselected package libxcb-icccm4:amd64.
+Preparing to unpack .../03-libxcb-icccm4_0.4.1-1.1_amd64.deb ...
+Unpacking libxcb-icccm4:amd64 (0.4.1-1.1) ...
+Selecting previously unselected package libxcb-keysyms1:amd64.
+Preparing to unpack .../04-libxcb-keysyms1_0.4.0-1+b2_amd64.deb ...
+Unpacking libxcb-keysyms1:amd64 (0.4.0-1+b2) ...
+Selecting previously unselected package libxcb-xkb1:amd64.
+Preparing to unpack .../05-libxcb-xkb1_1.15-1_amd64.deb ...
+Unpacking libxcb-xkb1:amd64 (1.15-1) ...
+Selecting previously unselected package libxkbcommon-x11-0:amd64.
+Preparing to unpack .../06-libxkbcommon-x11-0_1.5.0-1_amd64.deb ...
+Unpacking libxkbcommon-x11-0:amd64 (1.5.0-1) ...
+Selecting previously unselected package python3-lib2to3.
+Preparing to unpack .../07-python3-lib2to3_3.11.2-3_all.deb ...
+Unpacking python3-lib2to3 (3.11.2-3) ...
+Selecting previously unselected package python3-distutils.
+Preparing to unpack .../08-python3-distutils_3.11.2-3_all.deb ...
+Unpacking python3-distutils (3.11.2-3) ...
+Selecting previously unselected package python3-pip-whl.
+Preparing to unpack .../09-python3-pip-whl_23.0.1+dfsg-1_all.deb ...
+Unpacking python3-pip-whl (23.0.1+dfsg-1) ...
+Selecting previously unselected package python3-setuptools-whl.
+Preparing to unpack .../10-python3-setuptools-whl_66.1.1-1+deb12u2_all.deb ...
+Unpacking python3-setuptools-whl (66.1.1-1+deb12u2) ...
+Selecting previously unselected package python3.11-venv.
+Preparing to unpack .../11-python3.11-venv_3.11.2-6+deb12u9_amd64.deb ...
+Unpacking python3.11-venv (3.11.2-6+deb12u9) ...
+Selecting previously unselected package python3-venv.
+Preparing to unpack .../12-python3-venv_3.11.2-1+b1_amd64.deb ...
+Unpacking python3-venv (3.11.2-1+b1) ...
+Selecting previously unselected package libopengl0:amd64.
+Preparing to unpack .../13-libopengl0_1.6.0-1_amd64.deb ...
+Unpacking libopengl0:amd64 (1.6.0-1) ...
+Setting up python3-setuptools-whl (66.1.1-1+deb12u2) ...
+Setting up python3-pip-whl (23.0.1+dfsg-1) ...
+Setting up libxcb-keysyms1:amd64 (0.4.0-1+b2) ...
+Setting up libxcb-render-util0:amd64 (0.3.9-1+b1) ...
+Setting up libxcb-icccm4:amd64 (0.4.1-1.1) ...
+Setting up libopengl0:amd64 (1.6.0-1) ...
+Setting up libxcb-xkb1:amd64 (1.15-1) ...
+Setting up libxcb-image0:amd64 (0.4.0-2) ...
+Setting up libxcb-cursor0:amd64 (0.1.4-1) ...
+Setting up libxkbcommon-x11-0:amd64 (1.5.0-1) ...
+Setting up python3-lib2to3 (3.11.2-3) ...
+Setting up python3-distutils (3.11.2-3) ...
+Setting up python3.11-venv (3.11.2-6+deb12u9) ...
+Setting up python3-venv (3.11.2-1+b1) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
++ sudo chroot work/root python3 -m venv /opt/nexium-browser/venv
++ sudo chroot work/root /opt/nexium-browser/venv/bin/pip install --only-binary=:all: --no-cache-dir PySide6
+Collecting PySide6
+  Downloading pyside6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (577 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 577.7/577.7 kB 39.0 MB/s eta 0:00:00
+Collecting PySide6_Essentials==6.12.0
+  Downloading pyside6_essentials-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (84.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.3/84.3 MB 170.5 MB/s eta 0:00:00
+Collecting PySide6_Addons==6.12.0
+  Downloading pyside6_addons-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (59.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.2/59.2 MB 219.9 MB/s eta 0:00:00
+Collecting PySide6_WebEngine==6.12.0.140
+  Downloading pyside6_webengine-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (116.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.7/116.7 MB 226.4 MB/s eta 0:00:00
+Collecting PySide6_Pdf==6.12.0.140
+  Downloading pyside6_pdf-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (2.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 271.8 MB/s eta 0:00:00
+Collecting shiboken6==6.12.0
+  Downloading shiboken6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (279 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 279.3/279.3 kB 347.6 MB/s eta 0:00:00
+Installing collected packages: shiboken6, PySide6_Essentials, PySide6_Pdf, PySide6_Addons, PySide6_WebEngine, PySide6
+Successfully installed PySide6-6.12.0 PySide6_Addons-6.12.0 PySide6_Essentials-6.12.0 PySide6_Pdf-6.12.0.140 PySide6_WebEngine-6.12.0.140 shiboken6-6.12.0
++ sudo chroot work/root /opt/nexium-browser/venv/bin/pip freeze
++ tee reports/browser/python-lock.txt
+PySide6==6.12.0
+PySide6_Addons==6.12.0
+PySide6_Essentials==6.12.0
+PySide6_Pdf==6.12.0.140
+PySide6_WebEngine==6.12.0.140
+shiboken6==6.12.0
++ sudo chroot work/root /opt/nexium-browser/venv/bin/python -c 'import PySide6; from PySide6.QtWebEngineWidgets import QWebEngineView; from PySide6.QtWebEngineCore import QWebEngineProfile,QWebEnginePage; print("PySide6",PySide6.__version__); print("PASS QTWEBENGINE IMPORTS")'
++ tee reports/browser/imports.txt
+PySide6 6.12.0
+PASS QTWEBENGINE IMPORTS
++ sudo du -sb work/root/opt/nexium-browser/venv
++ tee reports/browser/pyside6-footprint.txt
+716222983	work/root/opt/nexium-browser/venv
+++ sudo find work/root/opt/nexium-browser -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/libqxcb.so
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/libqxcb.so
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007f29943f3000)
+	libQt6XcbQpa.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6XcbQpa.so.6 (0x00007f2994325000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6Gui.so.6 (0x00007f2993800000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007f2993779000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6Core.so.6 (0x00007f2993000000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f2992fba000)
+	libxkbcommon-x11.so.0 => /lib/x86_64-linux-gnu/libxkbcommon-x11.so.0 (0x00007f299376c000)
+	libxcb-cursor.so.0 => /lib/x86_64-linux-gnu/libxcb-cursor.so.0 (0x00007f2993765000)
+	libxcb-icccm.so.4 => /lib/x86_64-linux-gnu/libxcb-icccm.so.4 (0x00007f299375e000)
+	libxcb-util.so.1 => /lib/x86_64-linux-gnu/libxcb-util.so.1 (0x00007f2992fb2000)
+	libxcb-image.so.0 => /lib/x86_64-linux-gnu/libxcb-image.so.0 (0x00007f2992fac000)
+	libxcb-keysyms.so.1 => /lib/x86_64-linux-gnu/libxcb-keysyms.so.1 (0x00007f2992c00000)
+	libxcb-randr.so.0 => /lib/x86_64-linux-gnu/libxcb-randr.so.0 (0x00007f2992f9b000)
+	libxcb-render-util.so.0 => /lib/x86_64-linux-gnu/libxcb-render-util.so.0 (0x00007f2992800000)
+	libxcb-shm.so.0 => /lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007f2992f96000)
+	libxcb-sync.so.1 => /lib/x86_64-linux-gnu/libxcb-sync.so.1 (0x00007f2992f8e000)
+	libxcb-xfixes.so.0 => /lib/x86_64-linux-gnu/libxcb-xfixes.so.0 (0x00007f2992f85000)
+	libxcb-render.so.0 => /lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007f2992f75000)
+	libxcb-shape.so.0 => /lib/x86_64-linux-gnu/libxcb-shape.so.0 (0x00007f2992f70000)
+	libxcb-xkb.so.1 => /lib/x86_64-linux-gnu/libxcb-xkb.so.1 (0x00007f2992f53000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f2992f29000)
+	libX11-xcb.so.1 => /lib/x86_64-linux-gnu/libX11-xcb.so.1 (0x00007f2992f24000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007f2992abe000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f2992400000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f2992e42000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f2992e22000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f299261e000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f29922c7000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007f2992e1d000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007f2992e05000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6DBus.so.6 (0x00007f29921ec000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f2992a9f000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f2992122000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f2992a54000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007f2992069000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007f2992a20000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicui18n.so.73 (0x00007f2991c00000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicuuc.so.73 (0x00007f2991800000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicudata.so.73 (0x00007f298f800000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007f2991fad000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f29943f5000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007f2992a19000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f298f400000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f2991b66000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f2991f57000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f2991b30000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007f2992a0a000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f2991b04000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f2992a05000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f2991f52000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f2991aee000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f2991a1e000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007f29917dd000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007f29917d0000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007f29917c4000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f298f6b9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f2991795000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f299176f000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f2991747000)
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebEngineCore.so.6
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebEngineCore.so.6
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007fa74f38f000)
+	libQt6WebChannel.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebChannel.so.6 (0x00007fa74f346000)
+	libQt6Positioning.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Positioning.so.6 (0x00007fa74f2a1000)
+	libxcb-dri3.so.0 => /lib/x86_64-linux-gnu/libxcb-dri3.so.0 (0x00007fa74f294000)
+	libnspr4.so => /lib/x86_64-linux-gnu/libnspr4.so (0x00007fa742dbe000)
+	libnss3.so => /lib/x86_64-linux-gnu/libnss3.so (0x00007fa742c65000)
+	libnssutil3.so => /lib/x86_64-linux-gnu/libnssutil3.so (0x00007fa74f260000)
+	libsmime3.so => /lib/x86_64-linux-gnu/libsmime3.so (0x00007fa742c36000)
+	libgbm.so.1 => /lib/x86_64-linux-gnu/libgbm.so.1 (0x00007fa742c25000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007fa742ae3000)
+	libXcomposite.so.1 => /lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007fa74f25b000)
+	libXdamage.so.1 => /lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007fa74f256000)
+	libXext.so.6 => /lib/x86_64-linux-gnu/libXext.so.6 (0x00007fa742acc000)
+	libXfixes.so.3 => /lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007fa742ac4000)
+	libXrandr.so.2 => /lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007fa742ab7000)
+	libXtst.so.6 => /lib/x86_64-linux-gnu/libXtst.so.6 (0x00007fa742aaf000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007fa742a59000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fa742a0e000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fa742942000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fa742916000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007fa7428d0000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fa7428a6000)
+	libasound.so.2 => /lib/x86_64-linux-gnu/libasound.so.2 (0x00007fa74279d000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fa74277e000)
+	libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fa74274e000)
+	libxkbfile.so.1 => /lib/x86_64-linux-gnu/libxkbfile.so.1 (0x00007fa742727000)
+	libQt6Quick.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Quick.so.6 (0x00007fa741e00000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Gui.so.6 (0x00007fa741200000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007fa7426a0000)
+	libQt6Qml.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Qml.so.6 (0x00007fa740a00000)
+	libQt6Network.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Network.so.6 (0x00007fa740600000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Core.so.6 (0x00007fa73fe00000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fa73fa00000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fa741d20000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fa74267c000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa74081e000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fa74f391000)
+	libplc4.so => /lib/x86_64-linux-gnu/libplc4.so (0x00007fa742675000)
+	libplds4.so => /lib/x86_64-linux-gnu/libplds4.so (0x00007fa742670000)
+	libdrm.so.2 => /lib/x86_64-linux-gnu/libdrm.so.2 (0x00007fa74265a000)
+	libwayland-server.so.0 => /lib/x86_64-linux-gnu/libwayland-server.so.0 (0x00007fa742644000)
+	libXrender.so.1 => /lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fa742635000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007fa741130000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fa7410fa000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007fa742628000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007fa742623000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fa73f600000)
+	libQt6QmlMeta.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlMeta.so.6 (0x00007fa7410ce000)
+	libQt6QmlModels.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlModels.so.6 (0x00007fa73fcc8000)
+	libQt6QmlWorkerScript.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlWorkerScript.so.6 (0x00007fa74260b000)
+	libQt6OpenGL.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6OpenGL.so.6 (0x00007fa73f951000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007fa7410b8000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007fa73f818000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6DBus.so.6 (0x00007fa73f525000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007fa742604000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007fa73f46c000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007fa741082000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007fa73f3b0000)
+	libgssapi_krb5.so.2 => /lib/x86_64-linux-gnu/libgssapi_krb5.so.2 (0x00007fa7405ad000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007fa74058a000)
+	libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007fa740579000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicui18n.so.73 (0x00007fa73f000000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicuuc.so.73 (0x00007fa73ec00000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicudata.so.73 (0x00007fa73cc00000)
+	libffi.so.8 => /lib/x86_64-linux-gnu/libffi.so.8 (0x00007fa740810000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fa740574000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007fa740566000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007fa73eeb9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007fa73fc99000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007fa73fc73000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fa73fc5d000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007fa73ee1f000)
+	libkrb5.so.3 => /lib/x86_64-linux-gnu/libkrb5.so.3 (0x00007fa73eb26000)
+	libk5crypto.so.3 => /lib/x86_64-linux-gnu/libk5crypto.so.3 (0x00007fa73fc30000)
+	libcom_err.so.2 => /lib/x86_64-linux-gnu/libcom_err.so.2 (0x00007fa74055e000)
+	libkrb5support.so.0 => /lib/x86_64-linux-gnu/libkrb5support.so.0 (0x00007fa73fc22000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fa73fc1d000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007fa73f388000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007fa73f80b000)
+	libkeyutils.so.1 => /lib/x86_64-linux-gnu/libkeyutils.so.1 (0x00007fa73f381000)
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/QtWebEngineProcess
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/QtWebEngineProcess
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007fd3f616b000)
+	libQt6WebEngineCore.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6WebEngineCore.so.6 (0x00007fd3e9c00000)
+	libQt6Quick.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Quick.so.6 (0x00007fd3e9200000)
+	libQt6OpenGL.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6OpenGL.so.6 (0x00007fd3f60ae000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Gui.so.6 (0x00007fd3e8600000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007fd3e9b79000)
+	libQt6WebChannel.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6WebChannel.so.6 (0x00007fd3f6065000)
+	libQt6Qml.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Qml.so.6 (0x00007fd3e7e00000)
+	libQt6Network.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Network.so.6 (0x00007fd3e7a00000)
+	libQt6Positioning.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Positioning.so.6 (0x00007fd3e9ad4000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Core.so.6 (0x00007fd3e7200000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fd3e6e00000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fd3e9120000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fd3e9ab4000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fd3e7c1e000)
+	libxcb-dri3.so.0 => /lib/x86_64-linux-gnu/libxcb-dri3.so.0 (0x00007fd3f605c000)
+	libnspr4.so => /lib/x86_64-linux-gnu/libnspr4.so (0x00007fd3e9a72000)
+	libnss3.so => /lib/x86_64-linux-gnu/libnss3.so (0x00007fd3e84a7000)
+	libnssutil3.so => /lib/x86_64-linux-gnu/libnssutil3.so (0x00007fd3e9a40000)
+	libsmime3.so => /lib/x86_64-linux-gnu/libsmime3.so (0x00007fd3e9a11000)
+	libgbm.so.1 => /lib/x86_64-linux-gnu/libgbm.so.1 (0x00007fd3e8496000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007fd3e70be000)
+	libXcomposite.so.1 => /lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007fd3e9a0c000)
+	libXdamage.so.1 => /lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007fd3e9a07000)
+	libXext.so.6 => /lib/x86_64-linux-gnu/libXext.so.6 (0x00007fd3e79eb000)
+	libXfixes.so.3 => /lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007fd3e848e000)
+	libXrandr.so.2 => /lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007fd3e7c11000)
+	libXtst.so.6 => /lib/x86_64-linux-gnu/libXtst.so.6 (0x00007fd3e8486000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007fd3e7995000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fd3e7073000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fd3e6d36000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fd3e7969000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007fd3e702d000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fd3e6d0c000)
+	libasound.so.2 => /lib/x86_64-linux-gnu/libasound.so.2 (0x00007fd3e6c03000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fd3e6be4000)
+	libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fd3e6bb6000)
+	libxkbfile.so.1 => /lib/x86_64-linux-gnu/libxkbfile.so.1 (0x00007fd3e6b8f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fd3f616d000)
+	libQt6QmlMeta.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlMeta.so.6 (0x00007fd3e6b63000)
+	libQt6QmlModels.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlModels.so.6 (0x00007fd3e6a2b000)
+	libQt6QmlWorkerScript.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlWorkerScript.so.6 (0x00007fd3e6a15000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007fd3e69ff000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007fd3e68c6000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6DBus.so.6 (0x00007fd3e67eb000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007fd3e7964000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007fd3e6732000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007fd3e66fe000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007fd3e6642000)
+	libgssapi_krb5.so.2 => /lib/x86_64-linux-gnu/libgssapi_krb5.so.2 (0x00007fd3e65ef000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007fd3e7020000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007fd3e65cc000)
+	libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007fd3e65bb000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicui18n.so.73 (0x00007fd3e6200000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicuuc.so.73 (0x00007fd3e5e00000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicudata.so.73 (0x00007fd3e3e00000)
+	libplc4.so => /lib/x86_64-linux-gnu/libplc4.so (0x00007fd3e65b4000)
+	libplds4.so => /lib/x86_64-linux-gnu/libplds4.so (0x00007fd3e795b000)
+	libdrm.so.2 => /lib/x86_64-linux-gnu/libdrm.so.2 (0x00007fd3e659e000)
+	libwayland-server.so.0 => /lib/x86_64-linux-gnu/libwayland-server.so.0 (0x00007fd3e6588000)
+	libXrender.so.1 => /lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fd3e657b000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007fd3e6130000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fd3e60fa000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007fd3e6576000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fd3e3a00000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007fd3e6060000)
+	libkrb5.so.3 => /lib/x86_64-linux-gnu/libkrb5.so.3 (0x00007fd3e5d26000)
+	libk5crypto.so.3 => /lib/x86_64-linux-gnu/libk5crypto.so.3 (0x00007fd3e6033000)
+	libcom_err.so.2 => /lib/x86_64-linux-gnu/libcom_err.so.2 (0x00007fd3e6570000)
+	libkrb5support.so.0 => /lib/x86_64-linux-gnu/libkrb5support.so.0 (0x00007fd3e6562000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fd3e655d000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fd3e6558000)
+	libffi.so.8 => /lib/x86_64-linux-gnu/libffi.so.8 (0x00007fd3e6027000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007fd3e601b000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007fd3e3cb9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007fd3e5cf7000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007fd3e5cd1000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fd3e5cbb000)
+	libkeyutils.so.1 => /lib/x86_64-linux-gnu/libkeyutils.so.1 (0x00007fd3e654f000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007fd3e5c93000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007fd3e3cac000)
++ grep -q 'not found' reports/browser/loader.txt
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Version}\t${Installed-Size}\n'
++ python3 -
+{
+  "baseline_iso_user_reported_bytes": 764084224,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 235915776,
+  "pyside6_venv_apparent_bytes": 716222983,
+  "native_package_delta_installed_bytes": 4969472,
+  "removed_packages_installed_bytes": 799125504,
+  "uncompressed_conservative_addition_without_removal": 1485276679,
+  "uncompressed_budget_with_package_removal": 686151175,
+  "important": "Installed footprint is NOT compressed ISO size. Only rebuilt ISO stat determines fit. Debian PyQt6 does not provide PySide6 modules; compatible pinned wheel lock is used.",
+  "added_or_changed": {
+    "libopengl0": {
+      "version": "1.6.0-1",
+      "installed_bytes": 224256,
+      "before_bytes": 0
+    },
+    "libxcb-cursor0": {
+      "version": "0.1.4-1",
+      "installed_bytes": 47104,
+      "before_bytes": 0
+    },
+    "libxcb-icccm4": {
+      "version": "0.4.1-1.1",
+      "installed_bytes": 59392,
+      "before_bytes": 0
+    },
+    "libxcb-image0": {
+      "version": "0.4.0-2",
+      "installed_bytes": 48128,
+      "before_bytes": 0
+    },
+    "libxcb-keysyms1": {
+      "version": "0.4.0-1+b2",
+      "installed_bytes": 39936,
+      "before_bytes": 0
+    },
+    "libxcb-render-util0": {
+      "version": "0.3.9-1+b1",
+      "installed_bytes": 45056,
+      "before_bytes": 0
+    },
+    "libxcb-xkb1": {
+      "version": "1.15-1",
+      "installed_bytes": 248832,
+      "before_bytes": 0
+    },
+    "libxkbcommon-x11-0": {
+      "version": "1.5.0-1",
+      "installed_bytes": 58368,
+      "before_bytes": 0
+    },
+    "python3-distutils": {
+      "version": "3.11.2-3",
+      "installed_bytes": 653312,
+      "before_bytes": 0
+    },
+    "python3-lib2to3": {
+      "version": "3.11.2-3",
+      "installed_bytes": 373760,
+      "before_bytes": 0
+    },
+    "python3-pip-whl": {
+      "version": "23.0.1+dfsg-1",
+      "installed_bytes": 1788928,
+      "before_bytes": 0
+    },
+    "python3-setuptools-whl": {
+      "version": "66.1.1-1+deb12u2",
+      "installed_bytes": 1347584,
+      "before_bytes": 0
+    },
+    "python3-venv": {
+      "version": "3.11.2-1+b1",
+      "installed_bytes": 6144,
+      "before_bytes": 0
+    },
+    "python3.11-venv": {
+      "version": "3.11.2-6+deb12u9",
+      "installed_bytes": 28672,
+      "before_bytes": 0
+    }
+  },
+  "removed": {
+    "ungoogled-chromium": {
+      "version": "155.0.8059.39-1+nexium1",
+      "installed_bytes": 799125504
+    }
+  },
+  "largest_remaining_packages": [
+    {
+      "name": "linux-image-6.1.0-53-amd64",
+      "bytes": 409793536
+    },
+    {
+      "name": "libllvm15",
+      "bytes": 117360640
+    },
+    {
+      "name": "firmware-iwlwifi",
+      "bytes": 84260864
+    },
+    {
+      "name": "firmware-amd-graphics",
+      "bytes": 82582528
+    },
+    {
+      "name": "firmware-atheros",
+      "bytes": 62461952
+    },
+    {
+      "name": "firmware-misc-nonfree",
+      "bytes": 52972544
+    },
+    {
+      "name": "firmware-libertas",
+      "bytes": 38969344
+    },
+    {
+      "name": "libicu72",
+      "bytes": 37038080
+    },
+    {
+      "name": "cpp-12",
+      "bytes": 34660352
+    },
+    {
+      "name": "libmfx1",
+      "bytes": 28002304
+    },
+    {
+      "name": "libgtk-3-common",
+      "bytes": 27140096
+    },
+    {
+      "name": "libgl1-mesa-dri",
+      "bytes": 25860096
+    },
+    {
+      "name": "libz3-4",
+      "bytes": 23313408
+    },
+    {
+      "name": "adwaita-icon-theme",
+      "bytes": 21400576
+    },
+    {
+      "name": "iso-codes",
+      "bytes": 20568064
+    }
+  ]
+}
++ bash scripts/measure-install-chooser.sh
+deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main
+Hit:1 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Get:4 https://brave-browser-apt-release.s3.brave.com stable InRelease [7567 B]
+Get:5 https://brave-browser-apt-release.s3.brave.com stable/main amd64 Packages [39.4 kB]
+Fetched 47.0 kB in 0s (217 kB/s)
+Reading package lists...
+Package: firefox-esr
+Version: 153.4.0esr-1~deb12u1
+Installed-Size: 301305
+Maintainer: Maintainers of Mozilla-related packages <team+pkg-mozilla@tracker.debian.org>
+Architecture: amd64
+Provides: gnome-www-browser, www-browser
+Depends: libasound2 (>= 1.0.16), libatk1.0-0 (>= 1.12.4), libc6 (>= 2.35), libcairo-gobject2 (>= 1.10.0), libcairo2 (>= 1.10.0), libdbus-1-3 (>= 1.9.14), libevent-2.1-7 (>= 2.1.8-stable), libffi8 (>= 3.4), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.10.1), libgcc-s1 (>= 4.2), libgdk-pixbuf-2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.39.90), libgtk-3-0 (>= 3.13.7), libnspr4 (>= 2:4.32~), libpango-1.0-0 (>= 1.14.0), libstdc++6 (>= 12), libvpx7 (>= 1.12.0), libx11-6, libx11-xcb1 (>= 2:1.8.4), libxcb-shm0, libxcb1, libxcomposite1 (>= 1:0.4.5), libxdamage1 (>= 1:1.1), libxext6, libxfixes3 (>= 1:5.0), libxrandr2 (>= 2:1.4.0), zlib1g (>= 1:1.2.3.4), fontconfig, procps, debianutils (>= 1.16)
+Suggests: fonts-stix | otf-stix, fonts-lmodern, libgssapi-krb5-2 | libkrb53, libcanberra0, pulseaudio
+Description-en: Mozilla Firefox web browser - Extended Support Release (ESR)
+ Firefox ESR is a powerful, extensible web browser with support for modern
+ web application technologies.
+Description-md5: 88ee196fd829d9218a763b4d498a6f6a
+Recommends: libavcodec63 | libavcodec-extra63 | libavcodec62 | libavcodec-extra62 | libavcodec61 | libavcodec-extra61 | libavcodec60 | libavcodec-extra60 | libavcodec59 | libavcodec-extra59 | libavcodec58 | libavcodec-extra58 | libavcodec57 | libavcodec-extra57 | libavcodec56 | libavcodec-extra56 | libavcodec55 | libavcodec-extra55 | libavcodec54 | libavcodec-extra54 | libavcodec53 | libavcodec-extra53
+Section: web
+Priority: optional
+Filename: pool/updates/main/f/firefox-esr/firefox-esr_153.4.0esr-1~deb12u1_amd64.deb
+Size: 79798392
+SHA256: a59e034759615e46d3b4071cd79f42642416865419319c0d2c2a35a559db5430
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0 libxv1 libxxf86dga1 x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libevent-2.1-7
+Suggested packages:
+  fonts-stix | otf-stix fonts-lmodern libcanberra0
+The following NEW packages will be installed:
+  firefox-esr libevent-2.1-7
+0 upgraded, 2 newly installed, 0 to remove and 3 not upgraded.
+Inst libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Inst firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Package: brave-browser
+Priority: optional
+Section: web
+Installed-Size: 481636
+Maintainer: Brave Software <support@brave.com>
+Architecture: amd64
+Version: 1.97.56
+Provides: www-browser
+Depends: brave-keyring, ca-certificates, fonts-liberation, libasound2 (>= 1.0.17), libatk-bridge2.0-0 (>= 2.5.3), libatk1.0-0 (>= 2.11.90), libatspi2.0-0 (>= 2.9.90), libc6 (>= 2.25), libcairo2 (>= 1.14.0), libcups2 (>= 1.7.0), libcurl3-gnutls | libcurl3-nss | libcurl4 | libcurl3, libdbus-1-3 (>= 1.9.14), libexpat1 (>= 2.1~beta3), libgbm1 (>= 17.1.0~rc2), libglib2.0-0 (>= 2.49.3), libgtk-3-0 (>= 3.9.10) | libgtk-4-1, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.35), libpango-1.0-0 (>= 1.14.0), libudev1 (>= 183), libvulkan1, libx11-6 (>= 2:1.4.99.1), libxcb1 (>= 1.9.2), libxcomposite1 (>= 1:0.4.4-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxkbcommon0 (>= 0.5.0), libxrandr2, wget, xdg-utils (>= 1.0.2)
+Pre-Depends: dpkg (>= 1.14.0)
+Filename: pool/main/b/brave-browser/brave-browser_1.97.56_amd64.deb
+Size: 150935868
+MD5sum: 2dd1878fc5b1a07e7a06fb3fbd6bf556
+SHA1: 05731b3c71c047fac0fa108f58753875c798ca4e
+SHA256: 30e4cb89db380567e6fcdaab7110a17d6250517e22860c6bdb02eadf8993b669
+SHA512: fea5bd2fd46bb7eb4cfcb3fc078cb72790890d3491b83de25632fa2d7407e60fd30c70420c66ee0f5ebe333cc5f15cd784ba61ae2ab49c0976091278a1a0dc9d
+Description: The web browser from Brave
+ Browse faster by blocking ads and trackers that violate your privacy and cost you time and money.
+Description-md5: b2cf5139d141e520416a7325bc3a7550
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  brave-keyring libvulkan1 wget
+Recommended packages:
+  mesa-vulkan-drivers | vulkan-icd
+The following NEW packages will be installed:
+  brave-browser brave-keyring libvulkan1 wget
+0 upgraded, 4 newly installed, 0 to remove and 3 not upgraded.
+Inst brave-keyring (1.20 Brave Browser:stable [all])
+Inst libvulkan1 (1.3.239.0-1 Debian:12.15/oldstable [amd64])
+Inst wget (1.21.3-1+deb12u1 Debian:12.15/oldstable [amd64])
+Inst brave-browser (1.97.56 Brave Browser:stable [amd64])
+Conf brave-keyring (1.20 Brave Browser:stable [all])
+Conf libvulkan1 (1.3.239.0-1 Debian:12.15/oldstable [amd64])
+Conf wget (1.21.3-1+deb12u1 Debian:12.15/oldstable [amd64])
+Conf brave-browser (1.97.56 Brave Browser:stable [amd64])
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  brave-keyring libevent-2.1-7 libvulkan1 wget
+Suggested packages:
+  fonts-stix | otf-stix fonts-lmodern libcanberra0
+Recommended packages:
+  mesa-vulkan-drivers | vulkan-icd
+The following NEW packages will be installed:
+  brave-browser brave-keyring firefox-esr libevent-2.1-7 libvulkan1 wget
+0 upgraded, 6 newly installed, 0 to remove and 3 not upgraded.
+Need to get 232 MB of archives.
+After this operation, 806 MB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 libevent-2.1-7 amd64 2.1.12-stable-8+deb12u1 [181 kB]
+Get:2 http://security.debian.org/debian-security bookworm-security/main amd64 firefox-esr amd64 153.4.0esr-1~deb12u1 [79.8 MB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libvulkan1 amd64 1.3.239.0-1 [116 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 wget amd64 1.21.3-1+deb12u1 [937 kB]
+Get:5 https://brave-browser-apt-release.s3.brave.com stable/main amd64 brave-keyring all 1.20 [8180 B]
+Get:6 https://brave-browser-apt-release.s3.brave.com stable/main amd64 brave-browser amd64 1.97.56 [151 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 232 MB in 2s (137 MB/s)
+Selecting previously unselected package brave-keyring.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 30122 files and directories currently installed.)
+Preparing to unpack .../0-brave-keyring_1.20_all.deb ...
+Unpacking brave-keyring (1.20) ...
+Selecting previously unselected package libvulkan1:amd64.
+Preparing to unpack .../1-libvulkan1_1.3.239.0-1_amd64.deb ...
+Unpacking libvulkan1:amd64 (1.3.239.0-1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../2-wget_1.21.3-1+deb12u1_amd64.deb ...
+Unpacking wget (1.21.3-1+deb12u1) ...
+Selecting previously unselected package brave-browser.
+Preparing to unpack .../3-brave-browser_1.97.56_amd64.deb ...
+Unpacking brave-browser (1.97.56) ...
+Selecting previously unselected package libevent-2.1-7:amd64.
+Preparing to unpack .../4-libevent-2.1-7_2.1.12-stable-8+deb12u1_amd64.deb ...
+Unpacking libevent-2.1-7:amd64 (2.1.12-stable-8+deb12u1) ...
+Selecting previously unselected package firefox-esr.
+Preparing to unpack .../5-firefox-esr_153.4.0esr-1~deb12u1_amd64.deb ...
+Adding 'diversion of /usr/bin/firefox to /usr/bin/firefox.real by firefox-esr'
+Unpacking firefox-esr (153.4.0esr-1~deb12u1) ...
+Setting up wget (1.21.3-1+deb12u1) ...
+Setting up brave-keyring (1.20) ...
+Setting up libevent-2.1-7:amd64 (2.1.12-stable-8+deb12u1) ...
+Setting up libvulkan1:amd64 (1.3.239.0-1) ...
+Setting up brave-browser (1.97.56) ...
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/x-www-browser (x-www-browser) in auto mode
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/gnome-www-browser (gnome-www-browser) in auto mode
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/brave-browser (brave-browser) in auto mode
+Setting up firefox-esr (153.4.0esr-1~deb12u1) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+{
+  "current_iso_bytes": 777256960,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 222743040,
+  "browsers": {
+    "firefox-esr": {
+      "version": "153.4.0esr-1~deb12u1",
+      "deb_package_bytes": 79798392,
+      "installed_bytes": 308536320,
+      "debian_metadata_installed_bytes": 308536320,
+      "filename": "pool/updates/main/f/firefox-esr/firefox-esr_153.4.0esr-1~deb12u1_amd64.deb"
+    },
+    "brave-browser": {
+      "version": "1.97.56",
+      "deb_package_bytes": 150935868,
+      "installed_bytes": 493195264,
+      "debian_metadata_installed_bytes": 493195264,
+      "filename": "pool/main/b/brave-browser/brave-browser_1.97.56_amd64.deb"
+    }
+  },
+  "added_or_changed": {
+    "brave-browser": {
+      "version": "1.97.56",
+      "installed_bytes": 493195264,
+      "previous_bytes": 0
+    },
+    "brave-keyring": {
+      "version": "1.20",
+      "installed_bytes": 0,
+      "previous_bytes": 0
+    },
+    "firefox-esr": {
+      "version": "153.4.0esr-1~deb12u1",
+      "installed_bytes": 308536320,
+      "previous_bytes": 0
+    },
+    "libevent-2.1-7": {
+      "version": "2.1.12-stable-8+deb12u1",
+      "installed_bytes": 445440,
+      "previous_bytes": 0
+    },
+    "libvulkan1": {
+      "version": "1.3.239.0-1",
+      "installed_bytes": 488448,
+      "previous_bytes": 0
+    },
+    "wget": {
+      "version": "1.21.3-1+deb12u1",
+      "installed_bytes": 3605504,
+      "previous_bytes": 0
+    }
+  },
+  "both_installed_delta_bytes": 806270976,
+  "caution": "DEB and installed sizes are not the compressed ISO delta. Fit is measured by rebuilding candidate ISO with xz and unchanged boot inputs.",
+  "existing_pyside6_venv_apparent_bytes": 716222983,
+  "previous_native_package_delta_bytes": 4969472
+}
+++ grep -v '^#' desktop/packages.txt
+++ xargs
++ packages='openbox plank tint2 pcmanfm xterm mousepad lxtask lxappearance obconf feh zenity picom network-manager-gnome pavucontrol adwaita-icon-theme dbus-x11 libglib2.0-bin sudo network-manager network-manager-gnome wpasupplicant iw rfkill pciutils usbutils wireless-regdb firmware-linux-nonfree firmware-realtek firmware-iwlwifi firmware-atheros firmware-brcm80211 firmware-libertas firmware-misc-nonfree'
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends openbox plank tint2 pcmanfm xterm mousepad lxtask lxappearance obconf feh zenity picom network-manager-gnome pavucontrol adwaita-icon-theme dbus-x11 libglib2.0-bin sudo network-manager network-manager-gnome wpasupplicant iw rfkill pciutils usbutils wireless-regdb firmware-linux-nonfree firmware-realtek firmware-iwlwifi firmware-atheros firmware-brcm80211 firmware-libertas firmware-misc-nonfree gnome-themes-extra
+Reading package lists...
+Building dependency tree...
+Reading state information...
+adwaita-icon-theme is already the newest version (43-1).
+adwaita-icon-theme set to manually installed.
+network-manager is already the newest version (1.42.4-1+deb12u1).
+wpasupplicant is already the newest version (2:2.10-12+deb12u3).
+iw is already the newest version (5.19-1).
+rfkill is already the newest version (2.38.1-5+deb12u3).
+wireless-regdb is already the newest version (2026.05.30-1~deb12u1).
+firmware-realtek is already the newest version (20230210-5).
+firmware-iwlwifi is already the newest version (20230210-5).
+firmware-atheros is already the newest version (20230210-5).
+firmware-brcm80211 is already the newest version (20230210-5).
+firmware-libertas is already the newest version (20230210-5).
+firmware-misc-nonfree is already the newest version (20230210-5).
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  bamfdaemon bubblewrap dictionaries-common emacsen-common fonts-urw-base35
+  glib-networking glib-networking-common glib-networking-services
+  gnome-themes-extra-data gsettings-desktop-schemas gstreamer1.0-plugins-base
+  gstreamer1.0-plugins-good gtk2-engines-pixbuf hunspell-en-us libaa1
+  libabsl20220623 libaspell15 libatkmm-1.6-1v5 libatomic1 libavc1394-0
+  libavif15 libayatana-appindicator3-1 libayatana-ido3-0.4-0
+  libayatana-indicator3-7 libbamf3-2 libcaca0 libcairomm-1.0-1v5
+  libcanberra-gtk3-0 libcanberra0 libcdparanoia0 libconfig9 libcurl4
+  libdbus-glib-1-2 libdbusmenu-glib4 libdbusmenu-gtk3-4 libde265-0 libdv4
+  libenchant-2-2 libexif12 libflite1 libfm-data libfm-extra4 libfm-gtk-data
+  libfm-gtk4 libfm4 libgav1-1 libgck-1-0 libgcr-base-3-1 libgee-0.8-2 libgif7
+  libglib2.0-data libglibmm-2.4-1v5 libgnome-menu-3-0 libgpm2 libgs-common
+  libgs10 libgs10-common libgspell-1-2 libgspell-1-common libgstreamer-gl1.0-0
+  libgtk2.0-0 libgtk2.0-common libgtkmm-3.0-1v5 libgtksourceview-4-0
+  libgtksourceview-4-common libgtop-2.0-11 libgtop2-common libharfbuzz-icu0
+  libheif1 libhunspell-1.7-0 libhyphen0 libid3tag0 libidn12 libiec61883-0
+  libijs-0.35 libimlib2 libjavascriptcoregtk-4.1-0 libjbig2dec0
+  libjson-glib-1.0-0 libjson-glib-1.0-common libmanette-0.2-0
+  libmenu-cache-bin libmenu-cache3 libmousepad0 libncurses6 libnma-common
+  libnma0 libnotify4 libobrender32v5 libobt2v5 libpangomm-1.4-1v5 libpaper1
+  libpci3 libpcre3 libplank-common libplank1 libproxy1v5
+  libpulse-mainloop-glib0 libraw1394-11 libsecret-1-0 libsecret-common
+  libshout3 libsigc++-2.0-0v5 libsoup-3.0-0 libsoup-3.0-common libsoup2.4-1
+  libsoup2.4-common libspectre1 libtag1v5 libtag1v5-vanilla libtext-iconv-perl
+  libusb-1.0-0 libutempter0 libv4l-0 libv4lconvert0 libvisual-0.4-0
+  libvorbisfile3 libwavpack1 libwebkit2gtk-4.1-0 libwebpdemux2 libwnck-3-0
+  libwnck-3-common libwoff1 libxcb-composite0 libxcb-damage0 libxcb-xinerama0
+  libxres1 libxslt1.1 libyuv0 lxmenu-data pci.ids policykit-1-gnome
+  poppler-data sensible-utils sound-theme-freedesktop ucf xbitmaps
+  xdg-dbus-proxy xfonts-encodings xfonts-utils yudit-common zenity-common
+Suggested packages:
+  ispell | aspell | hunspell wordlist fonts-freefont-otf | fonts-freefont-ttf
+  fonts-texgyre gvfs hunspell openoffice.org-hunspell | openoffice.org-core
+  aspell libcanberra-gtk0 libcanberra-pulse libdv-bin oss-compat
+  libenchant-2-voikko libfm-tools nautilus-actions gpm notification-daemon
+  libraw1394-doc libvisual-0.4-plugins gstreamer1.0-alsa
+  network-manager-openconnect-gnome network-manager-openvpn-gnome
+  network-manager-vpnc-gnome network-manager-pptp-gnome fonts-dejavu
+  libxml2-dev openbox-gnome-session openbox-kde-session bzip2 libplank-doc
+  poppler-utils ghostscript fonts-japanese-mincho | fonts-ipafont-mincho
+  fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai
+  fonts-arphic-uming fonts-nanum xfonts-cyrillic yudit-doc yudit
+Recommended packages:
+  libjpeg-progs intel-microcode amd64-microcode gnome-accessibility-themes
+  gstreamer1.0-x aspell-en | aspell-dictionary | aspell6a-dictionary
+  libcanberra-gtk3-module enchant-2 eject libfm-modules fonts-droid-fallback
+  gstreamer1.0-gl libgail-common librsvg2-common libgtk2.0-bin libpaper-utils
+  xdg-desktop-portal-gtk gstreamer1.0-libav gstreamer1.0-plugins-bad
+  gtk2-engines lxde-settings-daemon notification-daemon gnome-keyring
+  gnome-icon-theme mobile-broadband-provider-info scrot gvfs-backends
+  gvfs-fuse lxde-icon-theme | gnome-icon-theme | oxygen-icon-theme
+  | tango-icon-theme
+The following NEW packages will be installed:
+  bamfdaemon bubblewrap dbus-x11 dictionaries-common emacsen-common feh
+  firmware-linux-nonfree fonts-urw-base35 glib-networking
+  glib-networking-common glib-networking-services gnome-themes-extra
+  gnome-themes-extra-data gsettings-desktop-schemas gstreamer1.0-plugins-base
+  gstreamer1.0-plugins-good gtk2-engines-pixbuf hunspell-en-us libaa1
+  libabsl20220623 libaspell15 libatkmm-1.6-1v5 libatomic1 libavc1394-0
+  libavif15 libayatana-appindicator3-1 libayatana-ido3-0.4-0
+  libayatana-indicator3-7 libbamf3-2 libcaca0 libcairomm-1.0-1v5
+  libcanberra-gtk3-0 libcanberra0 libcdparanoia0 libconfig9 libcurl4
+  libdbus-glib-1-2 libdbusmenu-glib4 libdbusmenu-gtk3-4 libde265-0 libdv4
+  libenchant-2-2 libexif12 libflite1 libfm-data libfm-extra4 libfm-gtk-data
+  libfm-gtk4 libfm4 libgav1-1 libgck-1-0 libgcr-base-3-1 libgee-0.8-2 libgif7
+  libglib2.0-bin libglib2.0-data libglibmm-2.4-1v5 libgnome-menu-3-0 libgpm2
+  libgs-common libgs10 libgs10-common libgspell-1-2 libgspell-1-common
+  libgstreamer-gl1.0-0 libgtk2.0-0 libgtk2.0-common libgtkmm-3.0-1v5
+  libgtksourceview-4-0 libgtksourceview-4-common libgtop-2.0-11
+  libgtop2-common libharfbuzz-icu0 libheif1 libhunspell-1.7-0 libhyphen0
+  libid3tag0 libidn12 libiec61883-0 libijs-0.35 libimlib2
+  libjavascriptcoregtk-4.1-0 libjbig2dec0 libjson-glib-1.0-0
+  libjson-glib-1.0-common libmanette-0.2-0 libmenu-cache-bin libmenu-cache3
+  libmousepad0 libncurses6 libnma-common libnma0 libnotify4 libobrender32v5
+  libobt2v5 libpangomm-1.4-1v5 libpaper1 libpci3 libpcre3 libplank-common
+  libplank1 libproxy1v5 libpulse-mainloop-glib0 libraw1394-11 libsecret-1-0
+  libsecret-common libshout3 libsigc++-2.0-0v5 libsoup-3.0-0
+  libsoup-3.0-common libsoup2.4-1 libsoup2.4-common libspectre1 libtag1v5
+  libtag1v5-vanilla libtext-iconv-perl libusb-1.0-0 libutempter0 libv4l-0
+  libv4lconvert0 libvisual-0.4-0 libvorbisfile3 libwavpack1
+  libwebkit2gtk-4.1-0 libwebpdemux2 libwnck-3-0 libwnck-3-common libwoff1
+  libxcb-composite0 libxcb-damage0 libxcb-xinerama0 libxres1 libxslt1.1
+  libyuv0 lxappearance lxmenu-data lxtask mousepad network-manager-gnome
+  obconf openbox pavucontrol pci.ids pciutils pcmanfm picom plank
+  policykit-1-gnome poppler-data sensible-utils sound-theme-freedesktop sudo
+  tint2 ucf usbutils xbitmaps xdg-dbus-proxy xfonts-encodings xfonts-utils
+  xterm yudit-common zenity zenity-common
+0 upgraded, 163 newly installed, 0 to remove and 3 not upgraded.
+Need to get 97.2 MB of archives.
+After this operation, 376 MB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 libde265-0 amd64 1.0.11-1+deb12u3 [186 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 poppler-data all 0.4.12-1 [1601 kB]
+Get:3 http://security.debian.org/debian-security bookworm-security/main amd64 libjbig2dec0 amd64 0.19-3+deb12u1 [64.6 kB]
+Get:4 http://security.debian.org/debian-security bookworm-security/main amd64 gstreamer1.0-plugins-base amd64 1.22.0-3+deb12u7 [740 kB]
+Get:5 http://security.debian.org/debian-security bookworm-security/main amd64 libgstreamer-gl1.0-0 amd64 1.22.0-3+deb12u7 [246 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 sudo amd64 1.9.13p3-1+deb12u4 [1890 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 sensible-utils all 0.0.17+nmu1 [19.0 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 pci.ids all 0.0~2023.04.11-1 [243 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 libpci3 amd64 1:3.9.0-4 [67.4 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 pciutils amd64 1:3.9.0-4 [104 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 ucf all 3.0043+nmu1+deb12u1 [55.3 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 libbamf3-2 amd64 0.5.6+repack-1 [118 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 libgtop2-common all 2.40.0-2 [95.2 kB]
+Get:14 http://deb.debian.org/debian bookworm/main amd64 libgtop-2.0-11 amd64 2.40.0-2 [72.1 kB]
+Get:15 http://deb.debian.org/debian bookworm/main amd64 libxres1 amd64 2:1.2.1-1 [19.2 kB]
+Get:16 http://deb.debian.org/debian bookworm/main amd64 libwnck-3-common all 43.0-3 [229 kB]
+Get:17 http://deb.debian.org/debian bookworm/main amd64 libwnck-3-0 amd64 43.0-3 [112 kB]
+Get:18 http://deb.debian.org/debian bookworm/main amd64 bamfdaemon amd64 0.5.6+repack-1 [155 kB]
+Get:19 http://deb.debian.org/debian bookworm/main amd64 bubblewrap amd64 0.8.0-2+deb12u1 [47.3 kB]
+Get:20 http://deb.debian.org/debian bookworm/main amd64 dbus-x11 amd64 1.14.10-1~deb12u1 [91.0 kB]
+Get:21 http://deb.debian.org/debian bookworm/main amd64 libtext-iconv-perl amd64 1.7-8 [14.5 kB]
+Get:22 http://deb.debian.org/debian bookworm/main amd64 emacsen-common all 3.0.5 [12.3 kB]
+Get:23 http://deb.debian.org/debian bookworm/main amd64 dictionaries-common all 1.29.5 [184 kB]
+Get:24 http://deb.debian.org/debian bookworm/main amd64 libcurl4 amd64 7.88.1-10+deb12u15 [392 kB]
+Get:25 http://deb.debian.org/debian bookworm/main amd64 libexif12 amd64 0.6.24-1+deb12u1 [397 kB]
+Get:26 http://deb.debian.org/debian bookworm/main amd64 libgif7 amd64 5.2.1-2.5+deb12u1 [43.0 kB]
+Get:27 http://deb.debian.org/debian bookworm/main amd64 libheif1 amd64 1.15.1-1+deb12u1 [215 kB]
+Get:28 http://deb.debian.org/debian bookworm/main amd64 libid3tag0 amd64 0.15.1b-14 [35.4 kB]
+Get:29 http://deb.debian.org/debian bookworm/main amd64 xfonts-encodings all 1:1.0.4-2.2 [577 kB]
+Get:30 http://deb.debian.org/debian bookworm/main amd64 xfonts-utils amd64 1:7.7+6 [93.0 kB]
+Get:31 http://deb.debian.org/debian bookworm/main amd64 fonts-urw-base35 all 20200910-7 [10.8 MB]
+Get:32 http://deb.debian.org/debian bookworm/main amd64 libgs-common all 10.0.0~dfsg-11+deb12u8 [149 kB]
+Get:33 http://deb.debian.org/debian bookworm/main amd64 libgs10-common all 10.0.0~dfsg-11+deb12u8 [587 kB]
+Get:34 http://deb.debian.org/debian bookworm/main amd64 libidn12 amd64 1.41-1 [83.8 kB]
+Get:35 http://deb.debian.org/debian bookworm/main amd64 libijs-0.35 amd64 0.35-15 [16.4 kB]
+Get:36 http://deb.debian.org/debian bookworm/main amd64 libpaper1 amd64 1.1.29 [12.5 kB]
+Get:37 http://deb.debian.org/debian bookworm/main amd64 libgs10 amd64 10.0.0~dfsg-11+deb12u8 [2467 kB]
+Get:38 http://deb.debian.org/debian bookworm/main amd64 libspectre1 amd64 0.2.12-1 [50.6 kB]
+Get:39 http://deb.debian.org/debian bookworm/main amd64 libwebpdemux2 amd64 1.2.4-0.2+deb12u1 [99.4 kB]
+Get:40 http://deb.debian.org/debian bookworm/main amd64 libimlib2 amd64 1.10.0-4+deb12u1 [206 kB]
+Get:41 http://deb.debian.org/debian bookworm/main amd64 yudit-common all 3.1.0-1 [1752 kB]
+Get:42 http://deb.debian.org/debian bookworm/main amd64 feh amd64 3.9.1-2 [157 kB]
+Get:43 http://deb.debian.org/debian bookworm/non-free-firmware amd64 firmware-linux-nonfree all 20230210-5 [49.5 kB]
+Get:44 http://deb.debian.org/debian bookworm/main amd64 libproxy1v5 amd64 0.4.18-1.2 [56.2 kB]
+Get:45 http://deb.debian.org/debian bookworm/main amd64 glib-networking-common all 2.74.0-4 [80.3 kB]
+Get:46 http://deb.debian.org/debian bookworm/main amd64 glib-networking-services amd64 2.74.0-4 [12.0 kB]
+Get:47 http://deb.debian.org/debian bookworm/main amd64 gsettings-desktop-schemas all 43.0-1 [643 kB]
+Get:48 http://deb.debian.org/debian bookworm/main amd64 glib-networking amd64 2.74.0-4 [68.4 kB]
+Get:49 http://deb.debian.org/debian bookworm/main amd64 gnome-themes-extra-data all 3.28-2 [575 kB]
+Get:50 http://deb.debian.org/debian bookworm/main amd64 gtk2-engines-pixbuf amd64 2.24.33-2+deb12u1 [22.8 kB]
+Get:51 http://deb.debian.org/debian bookworm/main amd64 gnome-themes-extra amd64 3.28-2 [522 kB]
+Get:52 http://deb.debian.org/debian bookworm/main amd64 libcdparanoia0 amd64 3.10.2+debian-14 [48.8 kB]
+Get:53 http://deb.debian.org/debian bookworm/main amd64 libvisual-0.4-0 amd64 0.4.0-19 [132 kB]
+Get:54 http://deb.debian.org/debian bookworm/main amd64 libgpm2 amd64 1.20.7-10+b1 [14.2 kB]
+Get:55 http://deb.debian.org/debian bookworm/main amd64 libncurses6 amd64 6.4-4 [103 kB]
+Get:56 http://deb.debian.org/debian bookworm/main amd64 libaa1 amd64 1.4p5-50 [55.7 kB]
+Get:57 http://deb.debian.org/debian bookworm/main amd64 libraw1394-11 amd64 2.1.2-2 [41.1 kB]
+Get:58 http://deb.debian.org/debian bookworm/main amd64 libavc1394-0 amd64 0.5.4-5 [19.9 kB]
+Get:59 http://deb.debian.org/debian bookworm/main amd64 libcaca0 amd64 0.99.beta20-3+deb12u1 [201 kB]
+Get:60 http://deb.debian.org/debian bookworm/main amd64 libdv4 amd64 1.0.0-15 [74.4 kB]
+Get:61 http://deb.debian.org/debian bookworm/main amd64 libiec61883-0 amd64 1.2.0-6+b1 [30.5 kB]
+Get:62 http://deb.debian.org/debian bookworm/main amd64 libshout3 amd64 2.4.6-1+b1 [56.4 kB]
+Get:63 http://deb.debian.org/debian bookworm/main amd64 libtag1v5-vanilla amd64 1.13-2+deb12u1 [298 kB]
+Get:64 http://deb.debian.org/debian bookworm/main amd64 libtag1v5 amd64 1.13-2+deb12u1 [18.8 kB]
+Get:65 http://deb.debian.org/debian bookworm/main amd64 libv4lconvert0 amd64 1.22.1-5+b2 [143 kB]
+Get:66 http://deb.debian.org/debian bookworm/main amd64 libv4l-0 amd64 1.22.1-5+b2 [109 kB]
+Get:67 http://deb.debian.org/debian bookworm/main amd64 libwavpack1 amd64 5.6.0-1 [85.7 kB]
+Get:68 http://deb.debian.org/debian bookworm/main amd64 libsoup2.4-common all 2.74.3-1+deb12u1 [56.2 kB]
+Get:69 http://deb.debian.org/debian bookworm/main amd64 libsoup2.4-1 amd64 2.74.3-1+deb12u1 [269 kB]
+Get:70 http://deb.debian.org/debian bookworm/main amd64 libsoup-3.0-common all 3.2.3-0+deb12u2 [62.5 kB]
+Get:71 http://deb.debian.org/debian bookworm/main amd64 libsoup-3.0-0 amd64 3.2.3-0+deb12u2 [272 kB]
+Get:72 http://deb.debian.org/debian bookworm/main amd64 gstreamer1.0-plugins-good amd64 1.22.0-5+deb12u3 [2222 kB]
+Get:73 http://deb.debian.org/debian bookworm/main amd64 hunspell-en-us all 1:2020.12.07-2 [269 kB]
+Get:74 http://deb.debian.org/debian bookworm/main amd64 libabsl20220623 amd64 20220623.1-1+deb12u2 [391 kB]
+Get:75 http://deb.debian.org/debian bookworm/main amd64 libaspell15 amd64 0.60.8-4+b1 [344 kB]
+Get:76 http://deb.debian.org/debian bookworm/main amd64 libsigc++-2.0-0v5 amd64 2.12.0-1 [25.7 kB]
+Get:77 http://deb.debian.org/debian bookworm/main amd64 libglibmm-2.4-1v5 amd64 2.66.5-2 [607 kB]
+Get:78 http://deb.debian.org/debian bookworm/main amd64 libatkmm-1.6-1v5 amd64 2.28.3-1 [81.8 kB]
+Get:79 http://deb.debian.org/debian bookworm/main amd64 libatomic1 amd64 12.2.0-14+deb12u1 [9376 B]
+Get:80 http://deb.debian.org/debian bookworm/main amd64 libgav1-1 amd64 0.18.0-1+b1 [332 kB]
+Get:81 http://deb.debian.org/debian bookworm/main amd64 libyuv0 amd64 0.0~git20230123.b2528b0-1 [168 kB]
+Get:82 http://deb.debian.org/debian bookworm/main amd64 libavif15 amd64 0.11.1-1+deb12u1 [94.4 kB]
+Get:83 http://deb.debian.org/debian bookworm/main amd64 libayatana-ido3-0.4-0 amd64 0.9.3-1 [57.6 kB]
+Get:84 http://deb.debian.org/debian bookworm/main amd64 libayatana-indicator3-7 amd64 0.9.3-1 [32.8 kB]
+Get:85 http://deb.debian.org/debian bookworm/main amd64 libdbusmenu-glib4 amd64 18.10.20180917~bzr492+repack1-3 [42.1 kB]
+Get:86 http://deb.debian.org/debian bookworm/main amd64 libdbusmenu-gtk3-4 amd64 18.10.20180917~bzr492+repack1-3 [29.0 kB]
+Get:87 http://deb.debian.org/debian bookworm/main amd64 libayatana-appindicator3-1 amd64 0.5.92-1 [24.5 kB]
+Get:88 http://deb.debian.org/debian bookworm/main amd64 libcairomm-1.0-1v5 amd64 1.14.4-2 [56.5 kB]
+Get:89 http://deb.debian.org/debian bookworm/main amd64 libvorbisfile3 amd64 1.3.7-1 [26.1 kB]
+Get:90 http://deb.debian.org/debian bookworm/main amd64 sound-theme-freedesktop all 0.8-2 [384 kB]
+Get:91 http://deb.debian.org/debian bookworm/main amd64 libcanberra0 amd64 0.30-10 [41.3 kB]
+Get:92 http://deb.debian.org/debian bookworm/main amd64 libcanberra-gtk3-0 amd64 0.30-10 [12.7 kB]
+Get:93 http://deb.debian.org/debian bookworm/main amd64 libconfig9 amd64 1.5-0.4 [29.9 kB]
+Get:94 http://deb.debian.org/debian bookworm/main amd64 libdbus-glib-1-2 amd64 0.112-3 [58.8 kB]
+Get:95 http://deb.debian.org/debian bookworm/main amd64 libhunspell-1.7-0 amd64 1.7.1-1 [193 kB]
+Get:96 http://deb.debian.org/debian bookworm/main amd64 libenchant-2-2 amd64 2.3.3-2 [47.0 kB]
+Get:97 http://deb.debian.org/debian bookworm/main amd64 libflite1 amd64 2.2-5 [12.8 MB]
+Get:98 http://deb.debian.org/debian bookworm/main amd64 libfm-data all 1.3.2-1 [248 kB]
+Get:99 http://deb.debian.org/debian bookworm/main amd64 libfm-extra4 amd64 1.3.2-1 [32.7 kB]
+Get:100 http://deb.debian.org/debian bookworm/main amd64 libfm-gtk-data all 1.3.2-1 [35.6 kB]
+Get:101 http://deb.debian.org/debian bookworm/main amd64 libmenu-cache-bin amd64 1.1.0-1.1 [34.5 kB]
+Get:102 http://deb.debian.org/debian bookworm/main amd64 libmenu-cache3 amd64 1.1.0-1.1 [20.2 kB]
+Get:103 http://deb.debian.org/debian bookworm/main amd64 lxmenu-data all 0.1.5-2.1 [48.2 kB]
+Get:104 http://deb.debian.org/debian bookworm/main amd64 libfm4 amd64 1.3.2-1 [133 kB]
+Get:105 http://deb.debian.org/debian bookworm/main amd64 libgtk2.0-common all 2.24.33-2+deb12u1 [2660 kB]
+Get:106 http://deb.debian.org/debian bookworm/main amd64 libgtk2.0-0 amd64 2.24.33-2+deb12u1 [1811 kB]
+Get:107 http://deb.debian.org/debian bookworm/main amd64 libfm-gtk4 amd64 1.3.2-1 [166 kB]
+Get:108 http://deb.debian.org/debian bookworm/main amd64 libgck-1-0 amd64 3.41.1-1+b1 [75.0 kB]
+Get:109 http://deb.debian.org/debian bookworm/main amd64 libgcr-base-3-1 amd64 3.41.1-1+b1 [196 kB]
+Get:110 http://deb.debian.org/debian bookworm/main amd64 libgee-0.8-2 amd64 0.20.6-1 [236 kB]
+Get:111 http://deb.debian.org/debian bookworm/main amd64 libglib2.0-data all 2.74.6-2+deb12u9 [1211 kB]
+Get:112 http://deb.debian.org/debian bookworm/main amd64 libglib2.0-bin amd64 2.74.6-2+deb12u9 [112 kB]
+Get:113 http://deb.debian.org/debian bookworm/main amd64 libgnome-menu-3-0 amd64 3.36.0-1.1 [95.7 kB]
+Get:114 http://deb.debian.org/debian bookworm/main amd64 libgspell-1-common all 1.12.0-1 [32.9 kB]
+Get:115 http://deb.debian.org/debian bookworm/main amd64 libgspell-1-2 amd64 1.12.0-1+b2 [52.6 kB]
+Get:116 http://deb.debian.org/debian bookworm/main amd64 libpangomm-1.4-1v5 amd64 2.46.3-1 [64.9 kB]
+Get:117 http://deb.debian.org/debian bookworm/main amd64 libgtkmm-3.0-1v5 amd64 3.24.7-1 [986 kB]
+Get:118 http://deb.debian.org/debian bookworm/main amd64 libgtksourceview-4-common all 4.8.4-4 [532 kB]
+Get:119 http://deb.debian.org/debian bookworm/main amd64 libgtksourceview-4-0 amd64 4.8.4-4 [216 kB]
+Get:120 http://deb.debian.org/debian bookworm/main amd64 libharfbuzz-icu0 amd64 6.0.0+dfsg-3 [1557 kB]
+Get:121 http://deb.debian.org/debian bookworm/main amd64 libhyphen0 amd64 2.8.8-7 [32.5 kB]
+Get:122 http://deb.debian.org/debian bookworm/main amd64 libjavascriptcoregtk-4.1-0 amd64 2.50.6-1~deb12u2 [7256 kB]
+Get:123 http://deb.debian.org/debian bookworm/main amd64 libjson-glib-1.0-common all 1.6.6-1 [57.1 kB]
+Get:124 http://deb.debian.org/debian bookworm/main amd64 libjson-glib-1.0-0 amd64 1.6.6-1 [65.6 kB]
+Get:125 http://deb.debian.org/debian bookworm/main amd64 libmanette-0.2-0 amd64 0.2.6-3+b1 [28.4 kB]
+Get:126 http://deb.debian.org/debian bookworm/main amd64 libmousepad0 amd64 0.5.10-2 [322 kB]
+Get:127 http://deb.debian.org/debian bookworm/main amd64 libnma-common all 1.10.6-1 [135 kB]
+Get:128 http://deb.debian.org/debian bookworm/main amd64 libnma0 amd64 1.10.6-1 [96.6 kB]
+Get:129 http://deb.debian.org/debian bookworm/main amd64 libnotify4 amd64 0.8.1-1 [30.1 kB]
+Get:130 http://deb.debian.org/debian bookworm/main amd64 libobt2v5 amd64 3.6.1-10 [68.9 kB]
+Get:131 http://deb.debian.org/debian bookworm/main amd64 libobrender32v5 amd64 3.6.1-10 [78.9 kB]
+Get:132 http://deb.debian.org/debian bookworm/main amd64 libpcre3 amd64 2:8.39-15 [341 kB]
+Get:133 http://deb.debian.org/debian bookworm/main amd64 libplank-common all 0.11.89-4 [108 kB]
+Get:134 http://deb.debian.org/debian bookworm/main amd64 libplank1 amd64 0.11.89-4+b1 [305 kB]
+Get:135 http://deb.debian.org/debian bookworm/main amd64 libpulse-mainloop-glib0 amd64 16.1+dfsg1-2+b1 [27.3 kB]
+Get:136 http://deb.debian.org/debian bookworm/main amd64 libsecret-common all 0.20.5-3 [28.5 kB]
+Get:137 http://deb.debian.org/debian bookworm/main amd64 libsecret-1-0 amd64 0.20.5-3 [115 kB]
+Get:138 http://deb.debian.org/debian bookworm/main amd64 libusb-1.0-0 amd64 2:1.0.26-1 [62.6 kB]
+Get:139 http://deb.debian.org/debian bookworm/main amd64 libutempter0 amd64 1.2.1-3 [8960 B]
+Get:140 http://deb.debian.org/debian bookworm/main amd64 xdg-dbus-proxy amd64 0.1.4-3+deb12u1 [23.8 kB]
+Get:141 http://deb.debian.org/debian bookworm/main amd64 libwoff1 amd64 1.0.2-2 [43.0 kB]
+Get:142 http://deb.debian.org/debian bookworm/main amd64 libxslt1.1 amd64 1.1.35-1+deb12u4 [232 kB]
+Get:143 http://deb.debian.org/debian bookworm/main amd64 libwebkit2gtk-4.1-0 amd64 2.50.6-1~deb12u2 [22.6 MB]
+Get:144 http://deb.debian.org/debian bookworm/main amd64 libxcb-composite0 amd64 1.15-1 [105 kB]
+Get:145 http://deb.debian.org/debian bookworm/main amd64 libxcb-damage0 amd64 1.15-1 [105 kB]
+Get:146 http://deb.debian.org/debian bookworm/main amd64 libxcb-xinerama0 amd64 1.15-1 [105 kB]
+Get:147 http://deb.debian.org/debian bookworm/main amd64 lxappearance amd64 0.6.3-1+b2 [81.8 kB]
+Get:148 http://deb.debian.org/debian bookworm/main amd64 lxtask amd64 0.1.10-1 [59.7 kB]
+Get:149 http://deb.debian.org/debian bookworm/main amd64 mousepad amd64 0.5.10-2 [520 kB]
+Get:150 http://deb.debian.org/debian bookworm/main amd64 policykit-1-gnome amd64 0.105-8 [64.9 kB]
+Get:151 http://deb.debian.org/debian bookworm/main amd64 network-manager-gnome amd64 1.30.0-2 [894 kB]
+Get:152 http://deb.debian.org/debian bookworm/main amd64 obconf amd64 1:2.0.4+git20150213-2+b1 [128 kB]
+Get:153 http://deb.debian.org/debian bookworm/main amd64 openbox amd64 3.6.1-10 [316 kB]
+Get:154 http://deb.debian.org/debian bookworm/main amd64 pavucontrol amd64 5.0-2 [174 kB]
+Get:155 http://deb.debian.org/debian bookworm/main amd64 pcmanfm amd64 1.3.2-1 [292 kB]
+Get:156 http://deb.debian.org/debian bookworm/main amd64 picom amd64 9.1-1 [170 kB]
+Get:157 http://deb.debian.org/debian bookworm/main amd64 plank amd64 0.11.89-4+b1 [149 kB]
+Get:158 http://deb.debian.org/debian bookworm/main amd64 tint2 amd64 17.0.1-1 [411 kB]
+Get:159 http://deb.debian.org/debian bookworm/main amd64 usbutils amd64 1:014-1+deb12u1 [73.5 kB]
+Get:160 http://deb.debian.org/debian bookworm/main amd64 xbitmaps all 1.1.1-2.2 [25.1 kB]
+Get:161 http://deb.debian.org/debian bookworm/main amd64 xterm amd64 379-1 [840 kB]
+Get:162 http://deb.debian.org/debian bookworm/main amd64 zenity-common all 3.44.0-1 [2974 kB]
+Get:163 http://deb.debian.org/debian bookworm/main amd64 zenity amd64 3.44.0-1 [63.2 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 97.2 MB in 1s (67.1 MB/s)
+Selecting previously unselected package poppler-data.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 30588 files and directories currently installed.)
+Preparing to unpack .../000-poppler-data_0.4.12-1_all.deb ...
+Unpacking poppler-data (0.4.12-1) ...
+Selecting previously unselected package sudo.
+Preparing to unpack .../001-sudo_1.9.13p3-1+deb12u4_amd64.deb ...
+Unpacking sudo (1.9.13p3-1+deb12u4) ...
+Selecting previously unselected package sensible-utils.
+Preparing to unpack .../002-sensible-utils_0.0.17+nmu1_all.deb ...
+Unpacking sensible-utils (0.0.17+nmu1) ...
+Selecting previously unselected package pci.ids.
+Preparing to unpack .../003-pci.ids_0.0~2023.04.11-1_all.deb ...
+Unpacking pci.ids (0.0~2023.04.11-1) ...
+Selecting previously unselected package libpci3:amd64.
+Preparing to unpack .../004-libpci3_1%3a3.9.0-4_amd64.deb ...
+Unpacking libpci3:amd64 (1:3.9.0-4) ...
+Selecting previously unselected package pciutils.
+Preparing to unpack .../005-pciutils_1%3a3.9.0-4_amd64.deb ...
+Unpacking pciutils (1:3.9.0-4) ...
+Selecting previously unselected package ucf.
+Preparing to unpack .../006-ucf_3.0043+nmu1+deb12u1_all.deb ...
+Moving old data out of the way
+Unpacking ucf (3.0043+nmu1+deb12u1) ...
+Selecting previously unselected package libbamf3-2:amd64.
+Preparing to unpack .../007-libbamf3-2_0.5.6+repack-1_amd64.deb ...
+Unpacking libbamf3-2:amd64 (0.5.6+repack-1) ...
+Selecting previously unselected package libgtop2-common.
+Preparing to unpack .../008-libgtop2-common_2.40.0-2_all.deb ...
+Unpacking libgtop2-common (2.40.0-2) ...
+Selecting previously unselected package libgtop-2.0-11:amd64.
+Preparing to unpack .../009-libgtop-2.0-11_2.40.0-2_amd64.deb ...
+Unpacking libgtop-2.0-11:amd64 (2.40.0-2) ...
+Selecting previously unselected package libxres1:amd64.
+Preparing to unpack .../010-libxres1_2%3a1.2.1-1_amd64.deb ...
+Unpacking libxres1:amd64 (2:1.2.1-1) ...
+Selecting previously unselected package libwnck-3-common.
+Preparing to unpack .../011-libwnck-3-common_43.0-3_all.deb ...
+Unpacking libwnck-3-common (43.0-3) ...
+Selecting previously unselected package libwnck-3-0:amd64.
+Preparing to unpack .../012-libwnck-3-0_43.0-3_amd64.deb ...
+Unpacking libwnck-3-0:amd64 (43.0-3) ...
+Selecting previously unselected package bamfdaemon.
+Preparing to unpack .../013-bamfdaemon_0.5.6+repack-1_amd64.deb ...
+Unpacking bamfdaemon (0.5.6+repack-1) ...
+Selecting previously unselected package bubblewrap.
+Preparing to unpack .../014-bubblewrap_0.8.0-2+deb12u1_amd64.deb ...
+Unpacking bubblewrap (0.8.0-2+deb12u1) ...
+Selecting previously unselected package dbus-x11.
+Preparing to unpack .../015-dbus-x11_1.14.10-1~deb12u1_amd64.deb ...
+Unpacking dbus-x11 (1.14.10-1~deb12u1) ...
+Selecting previously unselected package libtext-iconv-perl:amd64.
+Preparing to unpack .../016-libtext-iconv-perl_1.7-8_amd64.deb ...
+Unpacking libtext-iconv-perl:amd64 (1.7-8) ...
+Selecting previously unselected package emacsen-common.
+Preparing to unpack .../017-emacsen-common_3.0.5_all.deb ...
+Unpacking emacsen-common (3.0.5) ...
+Selecting previously unselected package dictionaries-common.
+Preparing to unpack .../018-dictionaries-common_1.29.5_all.deb ...
+Adding 'diversion of /usr/share/dict/words to /usr/share/dict/words.pre-dictionaries-common by dictionaries-common'
+Unpacking dictionaries-common (1.29.5) ...
+Selecting previously unselected package libcurl4:amd64.
+Preparing to unpack .../019-libcurl4_7.88.1-10+deb12u15_amd64.deb ...
+Unpacking libcurl4:amd64 (7.88.1-10+deb12u15) ...
+Selecting previously unselected package libexif12:amd64.
+Preparing to unpack .../020-libexif12_0.6.24-1+deb12u1_amd64.deb ...
+Unpacking libexif12:amd64 (0.6.24-1+deb12u1) ...
+Selecting previously unselected package libgif7:amd64.
+Preparing to unpack .../021-libgif7_5.2.1-2.5+deb12u1_amd64.deb ...
+Unpacking libgif7:amd64 (5.2.1-2.5+deb12u1) ...
+Selecting previously unselected package libde265-0:amd64.
+Preparing to unpack .../022-libde265-0_1.0.11-1+deb12u3_amd64.deb ...
+Unpacking libde265-0:amd64 (1.0.11-1+deb12u3) ...
+Selecting previously unselected package libheif1:amd64.
+Preparing to unpack .../023-libheif1_1.15.1-1+deb12u1_amd64.deb ...
+Unpacking libheif1:amd64 (1.15.1-1+deb12u1) ...
+Selecting previously unselected package libid3tag0:amd64.
+Preparing to unpack .../024-libid3tag0_0.15.1b-14_amd64.deb ...
+Unpacking libid3tag0:amd64 (0.15.1b-14) ...
+Selecting previously unselected package xfonts-encodings.
+Preparing to unpack .../025-xfonts-encodings_1%3a1.0.4-2.2_all.deb ...
+Unpacking xfonts-encodings (1:1.0.4-2.2) ...
+Selecting previously unselected package xfonts-utils.
+Preparing to unpack .../026-xfonts-utils_1%3a7.7+6_amd64.deb ...
+Unpacking xfonts-utils (1:7.7+6) ...
+Selecting previously unselected package fonts-urw-base35.
+Preparing to unpack .../027-fonts-urw-base35_20200910-7_all.deb ...
+Unpacking fonts-urw-base35 (20200910-7) ...
+Selecting previously unselected package libgs-common.
+Preparing to unpack .../028-libgs-common_10.0.0~dfsg-11+deb12u8_all.deb ...
+Unpacking libgs-common (10.0.0~dfsg-11+deb12u8) ...
+Selecting previously unselected package libgs10-common.
+Preparing to unpack .../029-libgs10-common_10.0.0~dfsg-11+deb12u8_all.deb ...
+Unpacking libgs10-common (10.0.0~dfsg-11+deb12u8) ...
+Selecting previously unselected package libidn12:amd64.
+Preparing to unpack .../030-libidn12_1.41-1_amd64.deb ...
+Unpacking libidn12:amd64 (1.41-1) ...
+Selecting previously unselected package libijs-0.35:amd64.
+Preparing to unpack .../031-libijs-0.35_0.35-15_amd64.deb ...
+Unpacking libijs-0.35:amd64 (0.35-15) ...
+Selecting previously unselected package libjbig2dec0:amd64.
+Preparing to unpack .../032-libjbig2dec0_0.19-3+deb12u1_amd64.deb ...
+Unpacking libjbig2dec0:amd64 (0.19-3+deb12u1) ...
+Selecting previously unselected package libpaper1:amd64.
+Preparing to unpack .../033-libpaper1_1.1.29_amd64.deb ...
+Unpacking libpaper1:amd64 (1.1.29) ...
+Selecting previously unselected package libgs10:amd64.
+Preparing to unpack .../034-libgs10_10.0.0~dfsg-11+deb12u8_amd64.deb ...
+Unpacking libgs10:amd64 (10.0.0~dfsg-11+deb12u8) ...
+Selecting previously unselected package libspectre1:amd64.
+Preparing to unpack .../035-libspectre1_0.2.12-1_amd64.deb ...
+Unpacking libspectre1:amd64 (0.2.12-1) ...
+Selecting previously unselected package libwebpdemux2:amd64.
+Preparing to unpack .../036-libwebpdemux2_1.2.4-0.2+deb12u1_amd64.deb ...
+Unpacking libwebpdemux2:amd64 (1.2.4-0.2+deb12u1) ...
+Selecting previously unselected package libimlib2:amd64.
+Preparing to unpack .../037-libimlib2_1.10.0-4+deb12u1_amd64.deb ...
+Unpacking libimlib2:amd64 (1.10.0-4+deb12u1) ...
+Selecting previously unselected package yudit-common.
+Preparing to unpack .../038-yudit-common_3.1.0-1_all.deb ...
+Unpacking yudit-common (3.1.0-1) ...
+Selecting previously unselected package feh.
+Preparing to unpack .../039-feh_3.9.1-2_amd64.deb ...
+Unpacking feh (3.9.1-2) ...
+Selecting previously unselected package firmware-linux-nonfree.
+Preparing to unpack .../040-firmware-linux-nonfree_20230210-5_all.deb ...
+Unpacking firmware-linux-nonfree (20230210-5) ...
+Selecting previously unselected package libproxy1v5:amd64.
+Preparing to unpack .../041-libproxy1v5_0.4.18-1.2_amd64.deb ...
+Unpacking libproxy1v5:amd64 (0.4.18-1.2) ...
+Selecting previously unselected package glib-networking-common.
+Preparing to unpack .../042-glib-networking-common_2.74.0-4_all.deb ...
+Unpacking glib-networking-common (2.74.0-4) ...
+Selecting previously unselected package glib-networking-services.
+Preparing to unpack .../043-glib-networking-services_2.74.0-4_amd64.deb ...
+Unpacking glib-networking-services (2.74.0-4) ...
+Selecting previously unselected package gsettings-desktop-schemas.
+Preparing to unpack .../044-gsettings-desktop-schemas_43.0-1_all.deb ...
+Unpacking gsettings-desktop-schemas (43.0-1) ...
+Selecting previously unselected package glib-networking:amd64.
+Preparing to unpack .../045-glib-networking_2.74.0-4_amd64.deb ...
+Unpacking glib-networking:amd64 (2.74.0-4) ...
+Selecting previously unselected package gnome-themes-extra-data.
+Preparing to unpack .../046-gnome-themes-extra-data_3.28-2_all.deb ...
+Unpacking gnome-themes-extra-data (3.28-2) ...
+Selecting previously unselected package gtk2-engines-pixbuf:amd64.
+Preparing to unpack .../047-gtk2-engines-pixbuf_2.24.33-2+deb12u1_amd64.deb ...
+Unpacking gtk2-engines-pixbuf:amd64 (2.24.33-2+deb12u1) ...
+Selecting previously unselected package gnome-themes-extra:amd64.
+Preparing to unpack .../048-gnome-themes-extra_3.28-2_amd64.deb ...
+Unpacking gnome-themes-extra:amd64 (3.28-2) ...
+Selecting previously unselected package libcdparanoia0:amd64.
+Preparing to unpack .../049-libcdparanoia0_3.10.2+debian-14_amd64.deb ...
+Unpacking libcdparanoia0:amd64 (3.10.2+debian-14) ...
+Selecting previously unselected package libvisual-0.4-0:amd64.
+Preparing to unpack .../050-libvisual-0.4-0_0.4.0-19_amd64.deb ...
+Unpacking libvisual-0.4-0:amd64 (0.4.0-19) ...
+Selecting previously unselected package gstreamer1.0-plugins-base:amd64.
+Preparing to unpack .../051-gstreamer1.0-plugins-base_1.22.0-3+deb12u7_amd64.deb ...
+Unpacking gstreamer1.0-plugins-base:amd64 (1.22.0-3+deb12u7) ...
+Selecting previously unselected package libgpm2:amd64.
+Preparing to unpack .../052-libgpm2_1.20.7-10+b1_amd64.deb ...
+Unpacking libgpm2:amd64 (1.20.7-10+b1) ...
+Selecting previously unselected package libncurses6:amd64.
+Preparing to unpack .../053-libncurses6_6.4-4_amd64.deb ...
+Unpacking libncurses6:amd64 (6.4-4) ...
+Selecting previously unselected package libaa1:amd64.
+Preparing to unpack .../054-libaa1_1.4p5-50_amd64.deb ...
+Unpacking libaa1:amd64 (1.4p5-50) ...
+Selecting previously unselected package libraw1394-11:amd64.
+Preparing to unpack .../055-libraw1394-11_2.1.2-2_amd64.deb ...
+Unpacking libraw1394-11:amd64 (2.1.2-2) ...
+Selecting previously unselected package libavc1394-0:amd64.
+Preparing to unpack .../056-libavc1394-0_0.5.4-5_amd64.deb ...
+Unpacking libavc1394-0:amd64 (0.5.4-5) ...
+Selecting previously unselected package libcaca0:amd64.
+Preparing to unpack .../057-libcaca0_0.99.beta20-3+deb12u1_amd64.deb ...
+Unpacking libcaca0:amd64 (0.99.beta20-3+deb12u1) ...
+Selecting previously unselected package libdv4:amd64.
+Preparing to unpack .../058-libdv4_1.0.0-15_amd64.deb ...
+Unpacking libdv4:amd64 (1.0.0-15) ...
+Selecting previously unselected package libiec61883-0:amd64.
+Preparing to unpack .../059-libiec61883-0_1.2.0-6+b1_amd64.deb ...
+Unpacking libiec61883-0:amd64 (1.2.0-6+b1) ...
+Selecting previously unselected package libshout3:amd64.
+Preparing to unpack .../060-libshout3_2.4.6-1+b1_amd64.deb ...
+Unpacking libshout3:amd64 (2.4.6-1+b1) ...
+Selecting previously unselected package libtag1v5-vanilla:amd64.
+Preparing to unpack .../061-libtag1v5-vanilla_1.13-2+deb12u1_amd64.deb ...
+Unpacking libtag1v5-vanilla:amd64 (1.13-2+deb12u1) ...
+Selecting previously unselected package libtag1v5:amd64.
+Preparing to unpack .../062-libtag1v5_1.13-2+deb12u1_amd64.deb ...
+Unpacking libtag1v5:amd64 (1.13-2+deb12u1) ...
+Selecting previously unselected package libv4lconvert0:amd64.
+Preparing to unpack .../063-libv4lconvert0_1.22.1-5+b2_amd64.deb ...
+Unpacking libv4lconvert0:amd64 (1.22.1-5+b2) ...
+Selecting previously unselected package libv4l-0:amd64.
+Preparing to unpack .../064-libv4l-0_1.22.1-5+b2_amd64.deb ...
+Unpacking libv4l-0:amd64 (1.22.1-5+b2) ...
+Selecting previously unselected package libwavpack1:amd64.
+Preparing to unpack .../065-libwavpack1_5.6.0-1_amd64.deb ...
+Unpacking libwavpack1:amd64 (5.6.0-1) ...
+Selecting previously unselected package libsoup2.4-common.
+Preparing to unpack .../066-libsoup2.4-common_2.74.3-1+deb12u1_all.deb ...
+Unpacking libsoup2.4-common (2.74.3-1+deb12u1) ...
+Selecting previously unselected package libsoup2.4-1:amd64.
+Preparing to unpack .../067-libsoup2.4-1_2.74.3-1+deb12u1_amd64.deb ...
+Unpacking libsoup2.4-1:amd64 (2.74.3-1+deb12u1) ...
+Selecting previously unselected package libsoup-3.0-common.
+Preparing to unpack .../068-libsoup-3.0-common_3.2.3-0+deb12u2_all.deb ...
+Unpacking libsoup-3.0-common (3.2.3-0+deb12u2) ...
+Selecting previously unselected package libsoup-3.0-0:amd64.
+Preparing to unpack .../069-libsoup-3.0-0_3.2.3-0+deb12u2_amd64.deb ...
+Unpacking libsoup-3.0-0:amd64 (3.2.3-0+deb12u2) ...
+Selecting previously unselected package gstreamer1.0-plugins-good:amd64.
+Preparing to unpack .../070-gstreamer1.0-plugins-good_1.22.0-5+deb12u3_amd64.deb ...
+Unpacking gstreamer1.0-plugins-good:amd64 (1.22.0-5+deb12u3) ...
+Selecting previously unselected package hunspell-en-us.
+Preparing to unpack .../071-hunspell-en-us_1%3a2020.12.07-2_all.deb ...
+Unpacking hunspell-en-us (1:2020.12.07-2) ...
+Selecting previously unselected package libabsl20220623:amd64.
+Preparing to unpack .../072-libabsl20220623_20220623.1-1+deb12u2_amd64.deb ...
+Unpacking libabsl20220623:amd64 (20220623.1-1+deb12u2) ...
+Selecting previously unselected package libaspell15:amd64.
+Preparing to unpack .../073-libaspell15_0.60.8-4+b1_amd64.deb ...
+Unpacking libaspell15:amd64 (0.60.8-4+b1) ...
+Selecting previously unselected package libsigc++-2.0-0v5:amd64.
+Preparing to unpack .../074-libsigc++-2.0-0v5_2.12.0-1_amd64.deb ...
+Unpacking libsigc++-2.0-0v5:amd64 (2.12.0-1) ...
+Selecting previously unselected package libglibmm-2.4-1v5:amd64.
+Preparing to unpack .../075-libglibmm-2.4-1v5_2.66.5-2_amd64.deb ...
+Unpacking libglibmm-2.4-1v5:amd64 (2.66.5-2) ...
+Selecting previously unselected package libatkmm-1.6-1v5:amd64.
+Preparing to unpack .../076-libatkmm-1.6-1v5_2.28.3-1_amd64.deb ...
+Unpacking libatkmm-1.6-1v5:amd64 (2.28.3-1) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../077-libatomic1_12.2.0-14+deb12u1_amd64.deb ...
+Unpacking libatomic1:amd64 (12.2.0-14+deb12u1) ...
+Selecting previously unselected package libgav1-1:amd64.
+Preparing to unpack .../078-libgav1-1_0.18.0-1+b1_amd64.deb ...
+Unpacking libgav1-1:amd64 (0.18.0-1+b1) ...
+Selecting previously unselected package libyuv0:amd64.
+Preparing to unpack .../079-libyuv0_0.0~git20230123.b2528b0-1_amd64.deb ...
+Unpacking libyuv0:amd64 (0.0~git20230123.b2528b0-1) ...
+Selecting previously unselected package libavif15:amd64.
+Preparing to unpack .../080-libavif15_0.11.1-1+deb12u1_amd64.deb ...
+Unpacking libavif15:amd64 (0.11.1-1+deb12u1) ...
+Selecting previously unselected package libayatana-ido3-0.4-0:amd64.
+Preparing to unpack .../081-libayatana-ido3-0.4-0_0.9.3-1_amd64.deb ...
+Unpacking libayatana-ido3-0.4-0:amd64 (0.9.3-1) ...
+Selecting previously unselected package libayatana-indicator3-7:amd64.
+Preparing to unpack .../082-libayatana-indicator3-7_0.9.3-1_amd64.deb ...
+Unpacking libayatana-indicator3-7:amd64 (0.9.3-1) ...
+Selecting previously unselected package libdbusmenu-glib4:amd64.
+Preparing to unpack .../083-libdbusmenu-glib4_18.10.20180917~bzr492+repack1-3_amd64.deb ...
+Unpacking libdbusmenu-glib4:amd64 (18.10.20180917~bzr492+repack1-3) ...
+Selecting previously unselected package libdbusmenu-gtk3-4:amd64.
+Preparing to unpack .../084-libdbusmenu-gtk3-4_18.10.20180917~bzr492+repack1-3_amd64.deb ...
+Unpacking libdbusmenu-gtk3-4:amd64 (18.10.20180917~bzr492+repack1-3) ...
+Selecting previously unselected package libayatana-appindicator3-1.
+Preparing to unpack .../085-libayatana-appindicator3-1_0.5.92-1_amd64.deb ...
+Unpacking libayatana-appindicator3-1 (0.5.92-1) ...
+Selecting previously unselected package libcairomm-1.0-1v5:amd64.
+Preparing to unpack .../086-libcairomm-1.0-1v5_1.14.4-2_amd64.deb ...
+Unpacking libcairomm-1.0-1v5:amd64 (1.14.4-2) ...
+Selecting previously unselected package libvorbisfile3:amd64.
+Preparing to unpack .../087-libvorbisfile3_1.3.7-1_amd64.deb ...
+Unpacking libvorbisfile3:amd64 (1.3.7-1) ...
+Selecting previously unselected package sound-theme-freedesktop.
+Preparing to unpack .../088-sound-theme-freedesktop_0.8-2_all.deb ...
+Unpacking sound-theme-freedesktop (0.8-2) ...
+Selecting previously unselected package libcanberra0:amd64.
+Preparing to unpack .../089-libcanberra0_0.30-10_amd64.deb ...
+Unpacking libcanberra0:amd64 (0.30-10) ...
+Selecting previously unselected package libcanberra-gtk3-0:amd64.
+Preparing to unpack .../090-libcanberra-gtk3-0_0.30-10_amd64.deb ...
+Unpacking libcanberra-gtk3-0:amd64 (0.30-10) ...
+Selecting previously unselected package libconfig9:amd64.
+Preparing to unpack .../091-libconfig9_1.5-0.4_amd64.deb ...
+Unpacking libconfig9:amd64 (1.5-0.4) ...
+Selecting previously unselected package libdbus-glib-1-2:amd64.
+Preparing to unpack .../092-libdbus-glib-1-2_0.112-3_amd64.deb ...
+Unpacking libdbus-glib-1-2:amd64 (0.112-3) ...
+Selecting previously unselected package libhunspell-1.7-0:amd64.
+Preparing to unpack .../093-libhunspell-1.7-0_1.7.1-1_amd64.deb ...
+Unpacking libhunspell-1.7-0:amd64 (1.7.1-1) ...
+Selecting previously unselected package libenchant-2-2:amd64.
+Preparing to unpack .../094-libenchant-2-2_2.3.3-2_amd64.deb ...
+Unpacking libenchant-2-2:amd64 (2.3.3-2) ...
+Selecting previously unselected package libflite1:amd64.
+Preparing to unpack .../095-libflite1_2.2-5_amd64.deb ...
+Unpacking libflite1:amd64 (2.2-5) ...
+Selecting previously unselected package libfm-data.
+Preparing to unpack .../096-libfm-data_1.3.2-1_all.deb ...
+Unpacking libfm-data (1.3.2-1) ...
+Selecting previously unselected package libfm-extra4:amd64.
+Preparing to unpack .../097-libfm-extra4_1.3.2-1_amd64.deb ...
+Unpacking libfm-extra4:amd64 (1.3.2-1) ...
+Selecting previously unselected package libfm-gtk-data.
+Preparing to unpack .../098-libfm-gtk-data_1.3.2-1_all.deb ...
+Unpacking libfm-gtk-data (1.3.2-1) ...
+Selecting previously unselected package libmenu-cache-bin.
+Preparing to unpack .../099-libmenu-cache-bin_1.1.0-1.1_amd64.deb ...
+Unpacking libmenu-cache-bin (1.1.0-1.1) ...
+Selecting previously unselected package libmenu-cache3:amd64.
+Preparing to unpack .../100-libmenu-cache3_1.1.0-1.1_amd64.deb ...
+Unpacking libmenu-cache3:amd64 (1.1.0-1.1) ...
+Selecting previously unselected package lxmenu-data.
+Preparing to unpack .../101-lxmenu-data_0.1.5-2.1_all.deb ...
+Unpacking lxmenu-data (0.1.5-2.1) ...
+Selecting previously unselected package libfm4:amd64.
+Preparing to unpack .../102-libfm4_1.3.2-1_amd64.deb ...
+Unpacking libfm4:amd64 (1.3.2-1) ...
+Selecting previously unselected package libgtk2.0-common.
+Preparing to unpack .../103-libgtk2.0-common_2.24.33-2+deb12u1_all.deb ...
+Unpacking libgtk2.0-common (2.24.33-2+deb12u1) ...
+Selecting previously unselected package libgtk2.0-0:amd64.
+Preparing to unpack .../104-libgtk2.0-0_2.24.33-2+deb12u1_amd64.deb ...
+Unpacking libgtk2.0-0:amd64 (2.24.33-2+deb12u1) ...
+Selecting previously unselected package libfm-gtk4:amd64.
+Preparing to unpack .../105-libfm-gtk4_1.3.2-1_amd64.deb ...
+Unpacking libfm-gtk4:amd64 (1.3.2-1) ...
+Selecting previously unselected package libgck-1-0:amd64.
+Preparing to unpack .../106-libgck-1-0_3.41.1-1+b1_amd64.deb ...
+Unpacking libgck-1-0:amd64 (3.41.1-1+b1) ...
+Selecting previously unselected package libgcr-base-3-1:amd64.
+Preparing to unpack .../107-libgcr-base-3-1_3.41.1-1+b1_amd64.deb ...
+Unpacking libgcr-base-3-1:amd64 (3.41.1-1+b1) ...
+Selecting previously unselected package libgee-0.8-2:amd64.
+Preparing to unpack .../108-libgee-0.8-2_0.20.6-1_amd64.deb ...
+Unpacking libgee-0.8-2:amd64 (0.20.6-1) ...
+Selecting previously unselected package libglib2.0-data.
+Preparing to unpack .../109-libglib2.0-data_2.74.6-2+deb12u9_all.deb ...
+Unpacking libglib2.0-data (2.74.6-2+deb12u9) ...
+Selecting previously unselected package libglib2.0-bin.
+Preparing to unpack .../110-libglib2.0-bin_2.74.6-2+deb12u9_amd64.deb ...
+Unpacking libglib2.0-bin (2.74.6-2+deb12u9) ...
+Selecting previously unselected package libgnome-menu-3-0:amd64.
+Preparing to unpack .../111-libgnome-menu-3-0_3.36.0-1.1_amd64.deb ...
+Unpacking libgnome-menu-3-0:amd64 (3.36.0-1.1) ...
+Selecting previously unselected package libgspell-1-common.
+Preparing to unpack .../112-libgspell-1-common_1.12.0-1_all.deb ...
+Unpacking libgspell-1-common (1.12.0-1) ...
+Selecting previously unselected package libgspell-1-2:amd64.
+Preparing to unpack .../113-libgspell-1-2_1.12.0-1+b2_amd64.deb ...
+Unpacking libgspell-1-2:amd64 (1.12.0-1+b2) ...
+Selecting previously unselected package libgstreamer-gl1.0-0:amd64.
+Preparing to unpack .../114-libgstreamer-gl1.0-0_1.22.0-3+deb12u7_amd64.deb ...
+Unpacking libgstreamer-gl1.0-0:amd64 (1.22.0-3+deb12u7) ...
+Selecting previously unselected package libpangomm-1.4-1v5:amd64.
+Preparing to unpack .../115-libpangomm-1.4-1v5_2.46.3-1_amd64.deb ...
+Unpacking libpangomm-1.4-1v5:amd64 (2.46.3-1) ...
+Selecting previously unselected package libgtkmm-3.0-1v5:amd64.
+Preparing to unpack .../116-libgtkmm-3.0-1v5_3.24.7-1_amd64.deb ...
+Unpacking libgtkmm-3.0-1v5:amd64 (3.24.7-1) ...
+Selecting previously unselected package libgtksourceview-4-common.
+Preparing to unpack .../117-libgtksourceview-4-common_4.8.4-4_all.deb ...
+Unpacking libgtksourceview-4-common (4.8.4-4) ...
+Selecting previously unselected package libgtksourceview-4-0:amd64.
+Preparing to unpack .../118-libgtksourceview-4-0_4.8.4-4_amd64.deb ...
+Unpacking libgtksourceview-4-0:amd64 (4.8.4-4) ...
+Selecting previously unselected package libharfbuzz-icu0:amd64.
+Preparing to unpack .../119-libharfbuzz-icu0_6.0.0+dfsg-3_amd64.deb ...
+Unpacking libharfbuzz-icu0:amd64 (6.0.0+dfsg-3) ...
+Selecting previously unselected package libhyphen0:amd64.
+Preparing to unpack .../120-libhyphen0_2.8.8-7_amd64.deb ...
+Unpacking libhyphen0:amd64 (2.8.8-7) ...
+Selecting previously unselected package libjavascriptcoregtk-4.1-0:amd64.
+Preparing to unpack .../121-libjavascriptcoregtk-4.1-0_2.50.6-1~deb12u2_amd64.deb ...
+Unpacking libjavascriptcoregtk-4.1-0:amd64 (2.50.6-1~deb12u2) ...
+Selecting previously unselected package libjson-glib-1.0-common.
+Preparing to unpack .../122-libjson-glib-1.0-common_1.6.6-1_all.deb ...
+Unpacking libjson-glib-1.0-common (1.6.6-1) ...
+Selecting previously unselected package libjson-glib-1.0-0:amd64.
+Preparing to unpack .../123-libjson-glib-1.0-0_1.6.6-1_amd64.deb ...
+Unpacking libjson-glib-1.0-0:amd64 (1.6.6-1) ...
+Selecting previously unselected package libmanette-0.2-0:amd64.
+Preparing to unpack .../124-libmanette-0.2-0_0.2.6-3+b1_amd64.deb ...
+Unpacking libmanette-0.2-0:amd64 (0.2.6-3+b1) ...
+Selecting previously unselected package libmousepad0:amd64.
+Preparing to unpack .../125-libmousepad0_0.5.10-2_amd64.deb ...
+Unpacking libmousepad0:amd64 (0.5.10-2) ...
+Selecting previously unselected package libnma-common.
+Preparing to unpack .../126-libnma-common_1.10.6-1_all.deb ...
+Unpacking libnma-common (1.10.6-1) ...
+Selecting previously unselected package libnma0:amd64.
+Preparing to unpack .../127-libnma0_1.10.6-1_amd64.deb ...
+Unpacking libnma0:amd64 (1.10.6-1) ...
+Selecting previously unselected package libnotify4:amd64.
+Preparing to unpack .../128-libnotify4_0.8.1-1_amd64.deb ...
+Unpacking libnotify4:amd64 (0.8.1-1) ...
+Selecting previously unselected package libobt2v5.
+Preparing to unpack .../129-libobt2v5_3.6.1-10_amd64.deb ...
+Unpacking libobt2v5 (3.6.1-10) ...
+Selecting previously unselected package libobrender32v5.
+Preparing to unpack .../130-libobrender32v5_3.6.1-10_amd64.deb ...
+Unpacking libobrender32v5 (3.6.1-10) ...
+Selecting previously unselected package libpcre3:amd64.
+Preparing to unpack .../131-libpcre3_2%3a8.39-15_amd64.deb ...
+Unpacking libpcre3:amd64 (2:8.39-15) ...
+Selecting previously unselected package libplank-common.
+Preparing to unpack .../132-libplank-common_0.11.89-4_all.deb ...
+Unpacking libplank-common (0.11.89-4) ...
+Selecting previously unselected package libplank1:amd64.
+Preparing to unpack .../133-libplank1_0.11.89-4+b1_amd64.deb ...
+Unpacking libplank1:amd64 (0.11.89-4+b1) ...
+Selecting previously unselected package libpulse-mainloop-glib0:amd64.
+Preparing to unpack .../134-libpulse-mainloop-glib0_16.1+dfsg1-2+b1_amd64.deb ...
+Unpacking libpulse-mainloop-glib0:amd64 (16.1+dfsg1-2+b1) ...
+Selecting previously unselected package libsecret-common.
+Preparing to unpack .../135-libsecret-common_0.20.5-3_all.deb ...
+Unpacking libsecret-common (0.20.5-3) ...
+Selecting previously unselected package libsecret-1-0:amd64.
+Preparing to unpack .../136-libsecret-1-0_0.20.5-3_amd64.deb ...
+Unpacking libsecret-1-0:amd64 (0.20.5-3) ...
+Selecting previously unselected package libusb-1.0-0:amd64.
+Preparing to unpack .../137-libusb-1.0-0_2%3a1.0.26-1_amd64.deb ...
+Unpacking libusb-1.0-0:amd64 (2:1.0.26-1) ...
+Selecting previously unselected package libutempter0:amd64.
+Preparing to unpack .../138-libutempter0_1.2.1-3_amd64.deb ...
+Unpacking libutempter0:amd64 (1.2.1-3) ...
+Selecting previously unselected package xdg-dbus-proxy.
+Preparing to unpack .../139-xdg-dbus-proxy_0.1.4-3+deb12u1_amd64.deb ...
+Unpacking xdg-dbus-proxy (0.1.4-3+deb12u1) ...
+Selecting previously unselected package libwoff1:amd64.
+Preparing to unpack .../140-libwoff1_1.0.2-2_amd64.deb ...
+Unpacking libwoff1:amd64 (1.0.2-2) ...
+Selecting previously unselected package libxslt1.1:amd64.
+Preparing to unpack .../141-libxslt1.1_1.1.35-1+deb12u4_amd64.deb ...
+Unpacking libxslt1.1:amd64 (1.1.35-1+deb12u4) ...
+Selecting previously unselected package libwebkit2gtk-4.1-0:amd64.
+Preparing to unpack .../142-libwebkit2gtk-4.1-0_2.50.6-1~deb12u2_amd64.deb ...
+Unpacking libwebkit2gtk-4.1-0:amd64 (2.50.6-1~deb12u2) ...
+Selecting previously unselected package libxcb-composite0:amd64.
+Preparing to unpack .../143-libxcb-composite0_1.15-1_amd64.deb ...
+Unpacking libxcb-composite0:amd64 (1.15-1) ...
+Selecting previously unselected package libxcb-damage0:amd64.
+Preparing to unpack .../144-libxcb-damage0_1.15-1_amd64.deb ...
+Unpacking libxcb-damage0:amd64 (1.15-1) ...
+Selecting previously unselected package libxcb-xinerama0:amd64.
+Preparing to unpack .../145-libxcb-xinerama0_1.15-1_amd64.deb ...
+Unpacking libxcb-xinerama0:amd64 (1.15-1) ...
+Selecting previously unselected package lxappearance.
+Preparing to unpack .../146-lxappearance_0.6.3-1+b2_amd64.deb ...
+Unpacking lxappearance (0.6.3-1+b2) ...
+Selecting previously unselected package lxtask.
+Preparing to unpack .../147-lxtask_0.1.10-1_amd64.deb ...
+Unpacking lxtask (0.1.10-1) ...
+Selecting previously unselected package mousepad.
+Preparing to unpack .../148-mousepad_0.5.10-2_amd64.deb ...
+Unpacking mousepad (0.5.10-2) ...
+Selecting previously unselected package policykit-1-gnome.
+Preparing to unpack .../149-policykit-1-gnome_0.105-8_amd64.deb ...
+Unpacking policykit-1-gnome (0.105-8) ...
+Selecting previously unselected package network-manager-gnome.
+Preparing to unpack .../150-network-manager-gnome_1.30.0-2_amd64.deb ...
+Unpacking network-manager-gnome (1.30.0-2) ...
+Selecting previously unselected package obconf.
+Preparing to unpack .../151-obconf_1%3a2.0.4+git20150213-2+b1_amd64.deb ...
+Unpacking obconf (1:2.0.4+git20150213-2+b1) ...
+Selecting previously unselected package openbox.
+Preparing to unpack .../152-openbox_3.6.1-10_amd64.deb ...
+Unpacking openbox (3.6.1-10) ...
+Selecting previously unselected package pavucontrol.
+Preparing to unpack .../153-pavucontrol_5.0-2_amd64.deb ...
+Unpacking pavucontrol (5.0-2) ...
+Selecting previously unselected package pcmanfm.
+Preparing to unpack .../154-pcmanfm_1.3.2-1_amd64.deb ...
+Unpacking pcmanfm (1.3.2-1) ...
+Selecting previously unselected package picom.
+Preparing to unpack .../155-picom_9.1-1_amd64.deb ...
+Unpacking picom (9.1-1) ...
+Selecting previously unselected package plank.
+Preparing to unpack .../156-plank_0.11.89-4+b1_amd64.deb ...
+Unpacking plank (0.11.89-4+b1) ...
+Selecting previously unselected package tint2.
+Preparing to unpack .../157-tint2_17.0.1-1_amd64.deb ...
+Unpacking tint2 (17.0.1-1) ...
+Selecting previously unselected package usbutils.
+Preparing to unpack .../158-usbutils_1%3a014-1+deb12u1_amd64.deb ...
+Unpacking usbutils (1:014-1+deb12u1) ...
+Selecting previously unselected package xbitmaps.
+Preparing to unpack .../159-xbitmaps_1.1.1-2.2_all.deb ...
+Unpacking xbitmaps (1.1.1-2.2) ...
+Selecting previously unselected package xterm.
+Preparing to unpack .../160-xterm_379-1_amd64.deb ...
+Unpacking xterm (379-1) ...
+Selecting previously unselected package zenity-common.
+Preparing to unpack .../161-zenity-common_3.44.0-1_all.deb ...
+Unpacking zenity-common (3.44.0-1) ...
+Selecting previously unselected package zenity.
+Preparing to unpack .../162-zenity_3.44.0-1_amd64.deb ...
+Unpacking zenity (3.44.0-1) ...
+Setting up libconfig9:amd64 (1.5-0.4) ...
+Setting up bubblewrap (0.8.0-2+deb12u1) ...
+Setting up gsettings-desktop-schemas (43.0-1) ...
+Setting up libtext-iconv-perl:amd64 (1.7-8) ...
+Setting up libcdparanoia0:amd64 (3.10.2+debian-14) ...
+Setting up libabsl20220623:amd64 (20220623.1-1+deb12u2) ...
+Setting up libfm-gtk-data (1.3.2-1) ...
+Setting up libraw1394-11:amd64 (2.1.2-2) ...
+Setting up libproxy1v5:amd64 (0.4.18-1.2) ...
+Setting up pci.ids (0.0~2023.04.11-1) ...
+Setting up libtag1v5-vanilla:amd64 (1.13-2+deb12u1) ...
+Setting up libharfbuzz-icu0:amd64 (6.0.0+dfsg-3) ...
+Setting up libgpm2:amd64 (1.20.7-10+b1) ...
+Setting up libcaca0:amd64 (0.99.beta20-3+deb12u1) ...
+Setting up libfm-extra4:amd64 (1.3.2-1) ...
+Setting up libwoff1:amd64 (1.0.2-2) ...
+Setting up libhyphen0:amd64 (2.8.8-7) ...
+Setting up libgspell-1-common (1.12.0-1) ...
+Setting up libvisual-0.4-0:amd64 (0.4.0-19) ...
+Setting up libaspell15:amd64 (0.60.8-4+b1) ...
+Setting up libwnck-3-common (43.0-3) ...
+Setting up libijs-0.35:amd64 (0.35-15) ...
+Setting up libwebpdemux2:amd64 (1.2.4-0.2+deb12u1) ...
+Setting up libdbusmenu-glib4:amd64 (18.10.20180917~bzr492+repack1-3) ...
+Setting up libmanette-0.2-0:amd64 (0.2.6-3+b1) ...
+Setting up libgs-common (10.0.0~dfsg-11+deb12u8) ...
+Setting up gnome-themes-extra-data (3.28-2) ...
+Setting up libbamf3-2:amd64 (0.5.6+repack-1) ...
+Setting up libsoup-3.0-common (3.2.3-0+deb12u2) ...
+Setting up libayatana-ido3-0.4-0:amd64 (0.9.3-1) ...
+Setting up libfm-data (1.3.2-1) ...
+Setting up poppler-data (0.4.12-1) ...
+Setting up lxmenu-data (0.1.5-2.1) ...
+Setting up libid3tag0:amd64 (0.15.1b-14) ...
+Setting up libgtop2-common (2.40.0-2) ...
+Setting up libvorbisfile3:amd64 (1.3.7-1) ...
+Setting up libpcre3:amd64 (2:8.39-15) ...
+Setting up libgstreamer-gl1.0-0:amd64 (1.22.0-3+deb12u7) ...
+Setting up libglib2.0-data (2.74.6-2+deb12u9) ...
+Setting up libxcb-xinerama0:amd64 (1.15-1) ...
+Setting up gstreamer1.0-plugins-base:amd64 (1.22.0-3+deb12u7) ...
+Setting up emacsen-common (3.0.5) ...
+Setting up libjbig2dec0:amd64 (0.19-3+deb12u1) ...
+Setting up libsigc++-2.0-0v5:amd64 (2.12.0-1) ...
+Setting up libdbus-glib-1-2:amd64 (0.112-3) ...
+Setting up libnotify4:amd64 (0.8.1-1) ...
+Setting up libpulse-mainloop-glib0:amd64 (16.1+dfsg1-2+b1) ...
+Setting up libncurses6:amd64 (6.4-4) ...
+Setting up libplank-common (0.11.89-4) ...
+Setting up xfonts-encodings (1:1.0.4-2.2) ...
+Setting up zenity-common (3.44.0-1) ...
+Setting up libexif12:amd64 (0.6.24-1+deb12u1) ...
+Setting up gtk2-engines-pixbuf:amd64 (2.24.33-2+deb12u1) ...
+Setting up libshout3:amd64 (2.4.6-1+b1) ...
+Setting up libgee-0.8-2:amd64 (0.20.6-1) ...
+Setting up libatomic1:amd64 (12.2.0-14+deb12u1) ...
+Setting up libidn12:amd64 (1.41-1) ...
+Setting up libobt2v5 (3.6.1-10) ...
+Setting up sudo (1.9.13p3-1+deb12u4) ...
+Running in chroot, ignoring request.
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up libgav1-1:amd64 (0.18.0-1+b1) ...
+Setting up libnma-common (1.10.6-1) ...
+Setting up libgnome-menu-3-0:amd64 (3.36.0-1.1) ...
+Setting up libsoup2.4-common (2.74.3-1+deb12u1) ...
+Setting up libutempter0:amd64 (1.2.1-3) ...
+Setting up libgif7:amd64 (5.2.1-2.5+deb12u1) ...
+Setting up yudit-common (3.1.0-1) ...
+Setting up libpci3:amd64 (1:3.9.0-4) ...
+Setting up xdg-dbus-proxy (0.1.4-3+deb12u1) ...
+Setting up firmware-linux-nonfree (20230210-5) ...
+Setting up libtag1v5:amd64 (1.13-2+deb12u1) ...
+Setting up libxcb-composite0:amd64 (1.15-1) ...
+Setting up libflite1:amd64 (2.2-5) ...
+Setting up sound-theme-freedesktop (0.8-2) ...
+Setting up sensible-utils (0.0.17+nmu1) ...
+Setting up libdv4:amd64 (1.0.0-15) ...
+Setting up dbus-x11 (1.14.10-1~deb12u1) ...
+Setting up libwavpack1:amd64 (5.6.0-1) ...
+Setting up libv4lconvert0:amd64 (1.22.1-5+b2) ...
+Setting up libxslt1.1:amd64 (1.1.35-1+deb12u4) ...
+Setting up libgtop-2.0-11:amd64 (2.40.0-2) ...
+Setting up libcurl4:amd64 (7.88.1-10+deb12u15) ...
+Setting up libjson-glib-1.0-common (1.6.6-1) ...
+Setting up libgtk2.0-common (2.24.33-2+deb12u1) ...
+Setting up libusb-1.0-0:amd64 (2:1.0.26-1) ...
+Setting up libmenu-cache-bin (1.1.0-1.1) ...
+Setting up libhunspell-1.7-0:amd64 (1.7.1-1) ...
+Setting up glib-networking-common (2.74.0-4) ...
+Setting up libgck-1-0:amd64 (3.41.1-1+b1) ...
+Setting up libde265-0:amd64 (1.0.11-1+deb12u3) ...
+Setting up libayatana-indicator3-7:amd64 (0.9.3-1) ...
+Setting up libyuv0:amd64 (0.0~git20230123.b2528b0-1) ...
+Setting up libgcr-base-3-1:amd64 (3.41.1-1+b1) ...
+Setting up libgtksourceview-4-common (4.8.4-4) ...
+Setting up xbitmaps (1.1.1-2.2) ...
+Setting up libsecret-common (0.20.5-3) ...
+Setting up libxres1:amd64 (2:1.2.1-1) ...
+Setting up libaa1:amd64 (1.4p5-50) ...
+Setting up libiec61883-0:amd64 (1.2.0-6+b1) ...
+Setting up policykit-1-gnome (0.105-8) ...
+Setting up libxcb-damage0:amd64 (1.15-1) ...
+Setting up libavc1394-0:amd64 (0.5.4-5) ...
+Setting up glib-networking-services (2.74.0-4) ...
+Setting up libglibmm-2.4-1v5:amd64 (2.66.5-2) ...
+Setting up libcanberra0:amd64 (0.30-10) ...
+Setting up libdbusmenu-gtk3-4:amd64 (18.10.20180917~bzr492+repack1-3) ...
+Setting up libavif15:amd64 (0.11.1-1+deb12u1) ...
+Setting up dictionaries-common (1.29.5) ...
+Setting up libgtk2.0-0:amd64 (2.24.33-2+deb12u1) ...
+Setting up libheif1:amd64 (1.15.1-1+deb12u1) ...
+Setting up libglib2.0-bin (2.74.6-2+deb12u9) ...
+Setting up libcanberra-gtk3-0:amd64 (0.30-10) ...
+Setting up xfonts-utils (1:7.7+6) ...
+Setting up gnome-themes-extra:amd64 (3.28-2) ...
+Setting up usbutils (1:014-1+deb12u1) ...
+Setting up libjson-glib-1.0-0:amd64 (1.6.6-1) ...
+Setting up libcairomm-1.0-1v5:amd64 (1.14.4-2) ...
+Setting up libv4l-0:amd64 (1.22.1-5+b2) ...
+Setting up libgtksourceview-4-0:amd64 (4.8.4-4) ...
+Setting up libsecret-1-0:amd64 (0.20.5-3) ...
+Setting up libjavascriptcoregtk-4.1-0:amd64 (2.50.6-1~deb12u2) ...
+Setting up libayatana-appindicator3-1 (0.5.92-1) ...
+Setting up picom (9.1-1) ...
+Setting up ucf (3.0043+nmu1+deb12u1) ...
+Setting up pciutils (1:3.9.0-4) ...
+Setting up libpangomm-1.4-1v5:amd64 (2.46.3-1) ...
+Setting up lxappearance (0.6.3-1+b2) ...
+Setting up libwnck-3-0:amd64 (43.0-3) ...
+Setting up hunspell-en-us (1:2020.12.07-2) ...
+Setting up libmenu-cache3:amd64 (1.1.0-1.1) ...
+Setting up xterm (379-1) ...
+update-alternatives: using /usr/bin/xterm to provide /usr/bin/x-terminal-emulator (x-terminal-emulator) in auto mode
+update-alternatives: using /usr/bin/lxterm to provide /usr/bin/x-terminal-emulator (x-terminal-emulator) in auto mode
+Setting up libatkmm-1.6-1v5:amd64 (2.28.3-1) ...
+Setting up lxtask (0.1.10-1) ...
+Setting up libpaper1:amd64 (1.1.29) ...
+
+Creating config file /etc/papersize with new version
+Setting up bamfdaemon (0.5.6+repack-1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Can't locate File/Find.pm in @INC (you may need to install the File::Find module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at -e line 2.
+BEGIN failed--compilation aborted at -e line 2.
+Setting up libenchant-2-2:amd64 (2.3.3-2) ...
+Setting up libgtkmm-3.0-1v5:amd64 (3.24.7-1) ...
+Setting up fonts-urw-base35 (20200910-7) ...
+Setting up libmousepad0:amd64 (0.5.10-2) ...
+Setting up libfm4:amd64 (1.3.2-1) ...
+Setting up libgspell-1-2:amd64 (1.12.0-1+b2) ...
+Setting up libfm-gtk4:amd64 (1.3.2-1) ...
+Setting up libgs10-common (10.0.0~dfsg-11+deb12u8) ...
+Setting up pcmanfm (1.3.2-1) ...
+Setting up pavucontrol (5.0-2) ...
+Setting up mousepad (0.5.10-2) ...
+Setting up libgs10:amd64 (10.0.0~dfsg-11+deb12u8) ...
+Setting up libspectre1:amd64 (0.2.12-1) ...
+Setting up libimlib2:amd64 (1.10.0-4+deb12u1) ...
+Setting up libobrender32v5 (3.6.1-10) ...
+Setting up obconf (1:2.0.4+git20150213-2+b1) ...
+Setting up tint2 (17.0.1-1) ...
+Setting up openbox (3.6.1-10) ...
+update-alternatives: using /usr/bin/openbox to provide /usr/bin/x-window-manager (x-window-manager) in auto mode
+update-alternatives: using /usr/bin/openbox-session to provide /usr/bin/x-session-manager (x-session-manager) in auto mode
+Setting up feh (3.9.1-2) ...
+Processing triggers for fontconfig (2.14.1-4) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for libglib2.0-0:amd64 (2.74.6-2+deb12u9) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Setting up libnma0:amd64 (1.10.6-1) ...
+Setting up libplank1:amd64 (0.11.89-4+b1) ...
+Processing triggers for shared-mime-info (2.2-1) ...
+Setting up glib-networking:amd64 (2.74.0-4) ...
+Setting up libsoup2.4-1:amd64 (2.74.3-1+deb12u1) ...
+Setting up plank (0.11.89-4+b1) ...
+Setting up network-manager-gnome (1.30.0-2) ...
+Setting up gstreamer1.0-plugins-good:amd64 (1.22.0-5+deb12u3) ...
+Setting up libsoup-3.0-0:amd64 (3.2.3-0+deb12u2) ...
+Setting up libwebkit2gtk-4.1-0:amd64 (2.50.6-1~deb12u2) ...
+Setting up zenity (3.44.0-1) ...
+Processing triggers for dictionaries-common (1.29.5) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
++ sudo chroot work/root apt-get clean
++ sudo python3 scripts/nexium-phase2.py --install work/root
++ tee reports/install.txt
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+Installed native layer: 152 SHA256-tracked files; icon theme: NexiumIOS4
++ sudo python3 scripts/nexium-phase2.py --verify work/root
++ tee reports/preflight-desktop.txt
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+PASS PYSIDE6 QTWEBENGINE IMPORTS
+PASS NEXIUM browser source, isolated Python, imports, and removal of standalone Chromium
+OUTPUT SQUASHFS: all 167 desktop/branding overlay files present and SHA256-identical
+DOCK files => /usr/bin/pcmanfm (real application)
+DOCK browser => /usr/local/bin/nexium-browser (real application)
+DOCK terminal => /usr/bin/xterm (real application)
+DOCK messages => /usr/local/bin/nexium-coming-soon Messages (honest coming-soon placeholder)
+DOCK calls => /usr/local/bin/nexium-coming-soon Calls (honest coming-soon placeholder)
+DOCK settings => /usr/local/bin/nexium-settings (real application)
+DOCK vault => /usr/local/bin/nexium-coming-soon Vault (honest coming-soon placeholder)
+DOCK editor => /usr/bin/mousepad (real application)
+DOCK monitor => /usr/bin/lxtask (real application)
+DOCK trash => /usr/bin/pcmanfm trash:/// (real application)
+PASS original ten pins plus all installed chooser/browser pins: ['01-files.dockitem', '02-browser.dockitem', '03-terminal.dockitem', '04-messages.dockitem', '05-calls.dockitem', '06-settings.dockitem', '07-vault.dockitem', '08-editor.dockitem', '09-monitor.dockitem', '10-trash.dockitem', '11-chooser.dockitem', '11-firefox-choice.dockitem']
+Output desktop: Openbox / Plank / Tint2 / PCManFM / Xterm; Plymouth retained
+ICON THEME: NexiumIOS4
+ICON files => ios4-utilities-folder 64px and 128px PNG verified
+ICON browser => ios4-safari 64px and 128px PNG verified
+ICON terminal => ios4-linen 64px and 128px PNG verified
+ICON messages => ios4-messages 64px and 128px PNG verified
+ICON calls => ios4-phone 64px and 128px PNG verified
+ICON settings => ios4-settings 64px and 128px PNG verified
+ICON vault => ios4-cydia 64px and 128px PNG verified
+ICON editor => ios4-notes 64px and 128px PNG verified
+ICON monitor => ios4-stocks 64px and 128px PNG verified
+ICON trash => ios4-blank-gray 64px and 128px PNG verified
+iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita
+Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately
+No physical boot/hardware test performed; launcher resolution is not full hardware verification
+PASS actual on-disk Nexium browser launcher and custom Nexium icon; full final manifest SHA256 checked
++ sudo chroot work/root dpkg-query -W
++ sudo chroot work/root plymouth-set-default-theme nexium-gold
+++ sudo cat work/root/etc/plymouth/plymouthd.conf
+++ grep '^Theme='
++ test Theme=nexium-gold = Theme=nexium-gold
++ mapfile -t kernels
+++ sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n'
++ printf '%s\n' 6.1.0-53-amd64
++ tee reports/initrd-kernels.txt
+6.1.0-53-amd64
++ test 1 = 1
++ sudo mkdir -p work/root/tmp/nexium-initrd
++ sudo chroot work/root update-initramfs -c -k 6.1.0-53-amd64 -b /tmp/nexium-initrd
++ tee reports/initrd-regeneration.txt
+update-initramfs: Generating /tmp/nexium-initrd/initrd.img-6.1.0-53-amd64
+W: plymouth: The plugin label.so is missing, the selected theme might not work as expected.
+W: plymouth: You might want to install the plymouth-themes package to fix this.
+live-boot: core filesystems dm-verity devices utils udev blockdev dns.
++ sudo cp work/root/tmp/nexium-initrd/initrd.img-6.1.0-53-amd64 work/new.initrd
++ sudo rm -rf work/root/tmp/nexium-initrd
++ sleep 2
++ Xvfb :99 -screen 0 1280x800x24 -ac
++ sudo mkdir -p work/root/tmp/.X11-unix
++ sudo mount --bind /tmp/.X11-unix work/root/tmp/.X11-unix
++ sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 /usr/local/lib/nexium/session
++ sleep 10
++ bash scripts/test-chooser-in-root.sh
+Failed to create Vulkan instance: -9
+Failed to create platform Vulkan instance
+Unable to detect GPU vendor for device: Mesa/X.org llvmpipe (LLVM 15.0.6, 256 bits) 4.5 (Compatibility Profile) Mesa 22.3.6
+GLX: No DRI3 Extension.
+[35983:36000:1013/192203.685899:ERROR:../../../qtwebengine/src/3rdparty/chromium/dbus/bus.cc:408] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+PASS real Qt chooser Add site/remove clicks, persistent reopen and DDG/Bing selection
++ DISPLAY=:99
++ xwininfo -root -tree
++ tee reports/windows.txt
+
+xwininfo: Window id: 0x21f (the root window) (has no name)
+
+  Root window id: 0x21f (the root window) (has no name)
+  Parent window id: 0x0 (none)
+     12 children:
+     0x800001 (has no name): ()  10x10+-20+-20  +-20+-20
+     0x20020b "Openbox": ("" (none))  1x1+-100+-100  +-100+-100
+     0x20025f (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x200260 (has no name): ()  1x1+0+0  +1+1
+     0x20025d (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x20025e (has no name): ()  1x1+0+0  +1+1
+     0x20025a (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x20025b (has no name): ()  1x1+0+0  +1+1
+     0x200256 (has no name): ("OPENBOX_FOCUS_CYCLE_POPUP" "OPENBOX_FOCUS_CYCLE_POPUP")  1x1+0+0  +0+0
+        3 children:
+        0x200259 (has no name): ()  1x1+0+0  +1+1
+        0x200258 (has no name): ()  1x1+0+0  +1+1
+        0x200257 (has no name): ()  1x1+0+0  +1+1
+     0x200253 (has no name): ()  1x1+0+0  +0+0
+        2 children:
+        0x200255 (has no name): ()  1x1+0+0  +1+1
+        0x200254 (has no name): ()  1x1+0+0  +1+1
+     0x200252 (has no name): ()  1x1+0+0  +0+0
+     0x200251 (has no name): ()  1x1+0+0  +0+0
+     0x200250 (has no name): ()  1x1+0+0  +0+0
+     0x20024f (has no name): ()  1x1+0+0  +0+0
+     0x20025c (has no name): ()  1x1+0+0  +0+0
+
++ for app in pcmanfm xterm mousepad lxtask
++ sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 pcmanfm
++ for app in pcmanfm xterm mousepad lxtask
++ sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 xterm
++ for app in pcmanfm xterm mousepad lxtask
++ for app in pcmanfm xterm mousepad lxtask
++ sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 mousepad
++ sudo chroot work/root runuser -u nexium -- env HOME=/home/nexium DISPLAY=:99 lxtask
++ sleep 8
++ DISPLAY=:99
++ xwininfo -root -tree
++ tee reports/native-app-windows.txt
+
+xwininfo: Window id: 0x21f (the root window) (has no name)
+
+  Root window id: 0x21f (the root window) (has no name)
+  Parent window id: 0x0 (none)
+     17 children:
+     0xc00001 "Mousepad": ("mousepad" "Mousepad")  10x10+10+10  +10+10
+     0x600001 "lxtask": ("lxtask" "Lxtask")  10x10+10+10  +10+10
+        1 child:
+        0x600002 (has no name): ()  1x1+-1+-1  +9+9
+     0x800001 (has no name): ()  10x10+-20+-20  +-20+-20
+     0x20020b "Openbox": ("" (none))  1x1+-100+-100  +-100+-100
+     0x20025f (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x200260 (has no name): ()  1x1+0+0  +1+1
+     0x20025d (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x20025e (has no name): ()  1x1+0+0  +1+1
+     0x20025a (has no name): ()  1x1+0+0  +0+0
+        1 child:
+        0x20025b (has no name): ()  1x1+0+0  +1+1
+     0x200256 (has no name): ("OPENBOX_FOCUS_CYCLE_POPUP" "OPENBOX_FOCUS_CYCLE_POPUP")  1x1+0+0  +0+0
+        3 children:
+        0x200259 (has no name): ()  1x1+0+0  +1+1
+        0x200258 (has no name): ()  1x1+0+0  +1+1
+        0x200257 (has no name): ()  1x1+0+0  +1+1
+     0x200253 (has no name): ()  1x1+0+0  +0+0
+        2 children:
+        0x200255 (has no name): ()  1x1+0+0  +1+1
+        0x200254 (has no name): ()  1x1+0+0  +1+1
+     0x200252 (has no name): ()  1x1+0+0  +0+0
+     0x200251 (has no name): ()  1x1+0+0  +0+0
+     0x200250 (has no name): ()  1x1+0+0  +0+0
+     0x20024f (has no name): ()  1x1+0+0  +0+0
+     0x20025c (has no name): ()  1x1+0+0  +0+0
+     0x20046f (has no name): ()  642x505+638+295  +638+295
+        56 children:
+        0xc00003 "Untitled 1 - Mousepad": ("mousepad" "Mousepad")  640x480+1+20  +639+315
+           1 child:
+           0xc00004 (has no name): ()  1x1+-1+-1  +638+314
+        0x2004bb (has no name): ()  1x1+0+0  +638+295
+        0x2004ba (has no name): ()  1x1+0+0  +638+295
+        0x2004b9 (has no name): ()  1x1+0+0  +638+295
+        0x2004b8 (has no name): ()  1x1+0+0  +638+295
+        0x2004b7 (has no name): ()  1x1+0+0  +638+295
+        0x2004b6 (has no name): ()  1x1+0+0  +638+295
+        0x2004b5 (has no name): ()  1x1+0+0  +638+295
+        0x2004b4 (has no name): ()  1x1+0+0  +638+295
+        0x2004b3 (has no name): ()  1x1+0+0  +638+295
+        0x2004b2 (has no name): ()  1x1+0+0  +638+295
+        0x2004b1 (has no name): ()  1x1+0+0  +638+295
+        0x2004b0 (has no name): ()  1x1+0+0  +638+295
+        0x2004af (has no name): ()  1x1+0+0  +638+295
+        0x2004ae (has no name): ()  1x1+0+0  +638+295
+        0x2004ad (has no name): ()  1x1+0+0  +638+295
+        0x2004ac (has no name): ()  1x1+0+0  +638+295
+        0x2004ab (has no name): ()  1x1+0+0  +638+295
+        0x2004aa (has no name): ()  1x1+0+0  +638+295
+        0x2004a9 (has no name): ()  1x1+0+0  +638+295
+        0x2004a8 (has no name): ()  1x1+0+0  +638+295
+        0x2004a7 (has no name): ()  1x1+0+0  +638+295
+        0x2004a6 (has no name): ()  1x1+0+0  +638+295
+        0x2004a5 (has no name): ()  1x1+0+0  +638+295
+        0x2004a4 (has no name): ()  1x1+0+0  +638+295
+        0x2004a3 (has no name): ()  1x1+0+0  +638+295
+        0x2004a2 (has no name): ()  1x1+0+0  +638+295
+        0x2004a1 (has no name): ()  1x1+0+0  +638+295
+        0x2004a0 (has no name): ()  1x1+0+0  +638+295
+        0x20049f (has no name): ()  1x1+0+0  +638+295
+        0x20049e (has no name): ()  1x1+0+0  +638+295
+        0x20049d (has no name): ()  1x1+0+0  +638+295
+        0x20049c (has no name): ()  1x1+0+0  +638+295
+        0x20049b (has no name): ()  26x1+615+504  +1253+799
+        0x20049a (has no name): ()  26x1+615+500  +1253+795
+        0x200499 (has no name): ()  1x25+641+480  +1279+775
+        0x200498 (has no name): ()  26x1+1+504  +639+799
+        0x200497 (has no name): ()  26x1+1+500  +639+795
+        0x200496 (has no name): ()  1x25+0+480  +638+775
+        0x200495 (has no name): ()  588x1+27+504  +665+799
+        0x200494 (has no name): ()  588x1+27+500  +665+795
+        0x20048f (has no name): ()  640x3+1+501  +639+796
+           4 children:
+           0x200493 (has no name): ()  1x3+614+0  +1253+796
+           0x200492 (has no name): ()  1x3+25+0  +664+796
+           0x200491 (has no name): ()  25x3+615+0  +1254+796
+           0x200490 (has no name): ()  25x3+0+0  +639+796
+        0x200487 (has no name): ()  1x455+641+26  +1279+321
+        0x200486 (has no name): ()  1x455+0+26  +638+321
+        0x200480 (has no name): ()  640x1+1+19  +639+314
+        0x20047f (has no name): ()  1x25+641+1  +1279+296
+        0x20047e (has no name): ()  26x1+616+0  +1254+295
+        0x20047d (has no name): ()  26x1+0+0  +638+295
+        0x20047c (has no name): ()  590x1+26+0  +664+295
+        0x20047b (has no name): ()  1x25+0+1  +638+296
+        0x20047a (has no name): ()  640x18+1+1  +639+296
+           12 children:
+           0x20048e (has no name): ()  12x12+592+3  +1231+299
+           0x20048d (has no name): ()  14x14+4+2  +643+298
+           0x20048c (has no name): ()  12x12+0+0  +639+296
+           0x20048b (has no name): ()  12x12+0+0  +639+296
+           0x20048a (has no name): ()  12x12+624+3  +1263+299
+           0x200489 (has no name): ()  12x12+608+3  +1247+299
+           0x200488 (has no name): ()  536x14+52+2  +691+298
+           0x200485 (has no name): ()  4x18+636+0  +1275+296
+           0x200484 (has no name): ()  25x3+615+0  +1254+296
+           0x200483 (has no name): ()  4x18+0+0  +639+296
+           0x200482 (has no name): ()  25x3+0+0  +639+296
+           0x200481 (has no name): ()  590x3+25+0  +664+296
+        0x200475 (has no name): ()  1x1+0+0  +638+295
+           2 children:
+           0x200477 (has no name): ()  1x1+0+0  +638+295
+           0x200476 (has no name): ()  1x1+0+0  +638+295
+        0x200474 (has no name): ()  1x1+0+0  +638+295
+           1 child:
+           0x200479 (has no name): ()  1x1+0+0  +638+295
+        0x200473 (has no name): ()  1x1+0+0  +638+295
+        0x200472 (has no name): ()  1x1+0+0  +638+295
+           1 child:
+           0x200478 (has no name): ()  1x1+0+0  +638+295
+        0x200470 (has no name): ()  640x480+1+20  +639+315
+           1 child:
+           0x200471 (has no name): ()  640x480+0+0  +639+315
+     0x2003d7 (has no name): ()  536x425+0+375  +0+375
+        56 children:
+        0x600003 "Task Manager": ("lxtask" "Lxtask")  534x400+1+20  +1+395
+           1 child:
+           0x600004 (has no name): ()  1x1+-1+-1  +0+394
+        0x200423 (has no name): ()  1x1+0+0  +0+375
+        0x200422 (has no name): ()  1x1+0+0  +0+375
+        0x200421 (has no name): ()  1x1+0+0  +0+375
+        0x200420 (has no name): ()  1x1+0+0  +0+375
+        0x20041f (has no name): ()  1x1+0+0  +0+375
+        0x20041e (has no name): ()  1x1+0+0  +0+375
+        0x20041d (has no name): ()  1x1+0+0  +0+375
+        0x20041c (has no name): ()  1x1+0+0  +0+375
+        0x20041b (has no name): ()  1x1+0+0  +0+375
+        0x20041a (has no name): ()  1x1+0+0  +0+375
+        0x200419 (has no name): ()  1x1+0+0  +0+375
+        0x200418 (has no name): ()  1x1+0+0  +0+375
+        0x200417 (has no name): ()  1x1+0+0  +0+375
+        0x200416 (has no name): ()  1x1+0+0  +0+375
+        0x200415 (has no name): ()  1x1+0+0  +0+375
+        0x200414 (has no name): ()  1x1+0+0  +0+375
+        0x200413 (has no name): ()  1x1+0+0  +0+375
+        0x200412 (has no name): ()  1x1+0+0  +0+375
+        0x200411 (has no name): ()  1x1+0+0  +0+375
+        0x200410 (has no name): ()  1x1+0+0  +0+375
+        0x20040f (has no name): ()  1x1+0+0  +0+375
+        0x20040e (has no name): ()  1x1+0+0  +0+375
+        0x20040d (has no name): ()  1x1+0+0  +0+375
+        0x20040c (has no name): ()  1x1+0+0  +0+375
+        0x20040b (has no name): ()  1x1+0+0  +0+375
+        0x20040a (has no name): ()  1x1+0+0  +0+375
+        0x200409 (has no name): ()  1x1+0+0  +0+375
+        0x200408 (has no name): ()  1x1+0+0  +0+375
+        0x200407 (has no name): ()  1x1+0+0  +0+375
+        0x200406 (has no name): ()  1x1+0+0  +0+375
+        0x200405 (has no name): ()  1x1+0+0  +0+375
+        0x200404 (has no name): ()  1x1+0+0  +0+375
+        0x200403 (has no name): ()  26x1+509+424  +509+799
+        0x200402 (has no name): ()  26x1+509+420  +509+795
+        0x200401 (has no name): ()  1x25+535+400  +535+775
+        0x200400 (has no name): ()  26x1+1+424  +1+799
+        0x2003ff (has no name): ()  26x1+1+420  +1+795
+        0x2003fe (has no name): ()  1x25+0+400  +0+775
+        0x2003fd (has no name): ()  482x1+27+424  +27+799
+        0x2003fc (has no name): ()  482x1+27+420  +27+795
+        0x2003f7 (has no name): ()  534x3+1+421  +1+796
+           4 children:
+           0x2003fb (has no name): ()  1x3+508+0  +509+796
+           0x2003fa (has no name): ()  1x3+25+0  +26+796
+           0x2003f9 (has no name): ()  25x3+509+0  +510+796
+           0x2003f8 (has no name): ()  25x3+0+0  +1+796
+        0x2003ef (has no name): ()  1x375+535+26  +535+401
+        0x2003ee (has no name): ()  1x375+0+26  +0+401
+        0x2003e8 (has no name): ()  534x1+1+19  +1+394
+        0x2003e7 (has no name): ()  1x25+535+1  +535+376
+        0x2003e6 (has no name): ()  26x1+510+0  +510+375
+        0x2003e5 (has no name): ()  26x1+0+0  +0+375
+        0x2003e4 (has no name): ()  484x1+26+0  +26+375
+        0x2003e3 (has no name): ()  1x25+0+1  +0+376
+        0x2003e2 (has no name): ()  534x18+1+1  +1+376
+           12 children:
+           0x2003f6 (has no name): ()  12x12+486+3  +487+379
+           0x2003f5 (has no name): ()  14x14+4+2  +5+378
+           0x2003f4 (has no name): ()  12x12+0+0  +1+376
+           0x2003f3 (has no name): ()  12x12+0+0  +1+376
+           0x2003f2 (has no name): ()  12x12+518+3  +519+379
+           0x2003f1 (has no name): ()  12x12+502+3  +503+379
+           0x2003f0 (has no name): ()  430x14+52+2  +53+378
+           0x2003ed (has no name): ()  4x18+530+0  +531+376
+           0x2003ec (has no name): ()  25x3+509+0  +510+376
+           0x2003eb (has no name): ()  4x18+0+0  +1+376
+           0x2003ea (has no name): ()  25x3+0+0  +1+376
+           0x2003e9 (has no name): ()  484x3+25+0  +26+376
+        0x2003dd (has no name): ()  1x1+0+0  +0+375
+           2 children:
+           0x2003df (has no name): ()  1x1+0+0  +0+375
+           0x2003de (has no name): ()  1x1+0+0  +0+375
+        0x2003dc (has no name): ()  1x1+0+0  +0+375
+           1 child:
+           0x2003e1 (has no name): ()  1x1+0+0  +0+375
+        0x2003db (has no name): ()  1x1+0+0  +0+375
+        0x2003da (has no name): ()  1x1+0+0  +0+375
+           1 child:
+           0x2003e0 (has no name): ()  1x1+0+0  +0+375
+        0x2003d8 (has no name): ()  534x400+1+20  +1+395
+           1 child:
+           0x2003d9 (has no name): ()  534x400+0+0  +1+395
+     0x20035d (has no name): ()  486x341+397+229  +397+229
+        56 children:
+        0x40000c "nexium@runnervmmprz5: /": ("xterm" "XTerm")  484x316+1+20  +398+249
+           1 child:
+           0x40001b (has no name): ()  484x316+0+0  +398+249
+        0x2003a9 (has no name): ()  1x1+0+0  +397+229
+        0x2003a8 (has no name): ()  1x1+0+0  +397+229
+        0x2003a7 (has no name): ()  1x1+0+0  +397+229
+        0x2003a6 (has no name): ()  1x1+0+0  +397+229
+        0x2003a5 (has no name): ()  1x1+0+0  +397+229
+        0x2003a4 (has no name): ()  1x1+0+0  +397+229
+        0x2003a3 (has no name): ()  1x1+0+0  +397+229
+        0x2003a2 (has no name): ()  1x1+0+0  +397+229
+        0x2003a1 (has no name): ()  1x1+0+0  +397+229
+        0x2003a0 (has no name): ()  1x1+0+0  +397+229
+        0x20039f (has no name): ()  1x1+0+0  +397+229
+        0x20039e (has no name): ()  1x1+0+0  +397+229
+        0x20039d (has no name): ()  1x1+0+0  +397+229
+        0x20039c (has no name): ()  1x1+0+0  +397+229
+        0x20039b (has no name): ()  1x1+0+0  +397+229
+        0x20039a (has no name): ()  1x1+0+0  +397+229
+        0x200399 (has no name): ()  1x1+0+0  +397+229
+        0x200398 (has no name): ()  1x1+0+0  +397+229
+        0x200397 (has no name): ()  1x1+0+0  +397+229
+        0x200396 (has no name): ()  1x1+0+0  +397+229
+        0x200395 (has no name): ()  1x1+0+0  +397+229
+        0x200394 (has no name): ()  1x1+0+0  +397+229
+        0x200393 (has no name): ()  1x1+0+0  +397+229
+        0x200392 (has no name): ()  1x1+0+0  +397+229
+        0x200391 (has no name): ()  1x1+0+0  +397+229
+        0x200390 (has no name): ()  1x1+0+0  +397+229
+        0x20038f (has no name): ()  1x1+0+0  +397+229
+        0x20038e (has no name): ()  1x1+0+0  +397+229
+        0x20038d (has no name): ()  1x1+0+0  +397+229
+        0x20038c (has no name): ()  1x1+0+0  +397+229
+        0x20038b (has no name): ()  1x1+0+0  +397+229
+        0x20038a (has no name): ()  1x1+0+0  +397+229
+        0x200389 (has no name): ()  26x1+459+340  +856+569
+        0x200388 (has no name): ()  26x1+459+336  +856+565
+        0x200387 (has no name): ()  1x25+485+316  +882+545
+        0x200386 (has no name): ()  26x1+1+340  +398+569
+        0x200385 (has no name): ()  26x1+1+336  +398+565
+        0x200384 (has no name): ()  1x25+0+316  +397+545
+        0x200383 (has no name): ()  432x1+27+340  +424+569
+        0x200382 (has no name): ()  432x1+27+336  +424+565
+        0x20037d (has no name): ()  484x3+1+337  +398+566
+           4 children:
+           0x200381 (has no name): ()  1x3+458+0  +856+566
+           0x200380 (has no name): ()  1x3+25+0  +423+566
+           0x20037f (has no name): ()  25x3+459+0  +857+566
+           0x20037e (has no name): ()  25x3+0+0  +398+566
+        0x200375 (has no name): ()  1x291+485+26  +882+255
+        0x200374 (has no name): ()  1x291+0+26  +397+255
+        0x20036e (has no name): ()  484x1+1+19  +398+248
+        0x20036d (has no name): ()  1x25+485+1  +882+230
+        0x20036c (has no name): ()  26x1+460+0  +857+229
+        0x20036b (has no name): ()  26x1+0+0  +397+229
+        0x20036a (has no name): ()  434x1+26+0  +423+229
+        0x200369 (has no name): ()  1x25+0+1  +397+230
+        0x200368 (has no name): ()  484x18+1+1  +398+230
+           12 children:
+           0x20037c (has no name): ()  12x12+436+3  +834+233
+           0x20037b (has no name): ()  14x14+4+2  +402+232
+           0x20037a (has no name): ()  12x12+0+0  +398+230
+           0x200379 (has no name): ()  12x12+0+0  +398+230
+           0x200378 (has no name): ()  12x12+468+3  +866+233
+           0x200377 (has no name): ()  12x12+452+3  +850+233
+           0x200376 (has no name): ()  380x14+52+2  +450+232
+           0x200373 (has no name): ()  4x18+480+0  +878+230
+           0x200372 (has no name): ()  25x3+459+0  +857+230
+           0x200371 (has no name): ()  4x18+0+0  +398+230
+           0x200370 (has no name): ()  25x3+0+0  +398+230
+           0x20036f (has no name): ()  434x3+25+0  +423+230
+        0x200363 (has no name): ()  1x1+0+0  +397+229
+           2 children:
+           0x200365 (has no name): ()  1x1+0+0  +397+229
+           0x200364 (has no name): ()  1x1+0+0  +397+229
+        0x200362 (has no name): ()  1x1+0+0  +397+229
+           1 child:
+           0x200367 (has no name): ()  1x1+0+0  +397+229
+        0x200361 (has no name): ()  1x1+0+0  +397+229
+        0x200360 (has no name): ()  1x1+0+0  +397+229
+           1 child:
+           0x200366 (has no name): ()  1x1+0+0  +397+229
+        0x20035e (has no name): ()  484x316+1+20  +398+249
+           1 child:
+           0x20035f (has no name): ()  484x316+0+0  +398+249
+
++ DISPLAY=:99
++ xprop -root _NET_SUPPORTING_WM_CHECK _NET_CLIENT_LIST
++ tee reports/window-manager.txt
+_NET_SUPPORTING_WM_CHECK(WINDOW): window id # 0x20020b
+_NET_CLIENT_LIST(WINDOW): window id # 0x40000c, 0x600003, 0xc00003
++ DISPLAY=:99
++ xwd -root -silent -out reports/desktop.xwd
+scripts/build-browser-chooser.sh: line 59: xwd: command not found
++ true
+++ awk -F: '$1=="nexium" {print $3}' work/root/etc/passwd
++ sudo pkill -u 1000
++ sleep 2
++ cleanup
++ sudo umount -R work/root/tmp/.X11-unix
++ sudo umount -R work/root/proc
++ sudo umount -R work/root/sys
++ sudo umount -R work/root/dev
++ sudo rm -f work/root/etc/resolv.conf work/root/usr/sbin/policy-rc.d
++ sudo cp -a work/resolv.saved work/root/etc/resolv.conf
++ '[' -e work/policy.saved ']'
++ sudo rm -rf work/root/home/nexium/.local/state/nexium work/root/home/nexium/.cache
++ sudo python3 scripts/nexium-phase2.py --install work/root
+sudo: unable to resolve host runnervmmprz5: Temporary failure in name resolution
++ sudo find work/root -type f -path '*/.Xauthority' -delete
++ sudo rm -f 'work/root/tmp/.X*-lock'
++ sudo python3 scripts/choose-fitting-browsers.py
+Parallel mksquashfs: Using 2 processors
+Creating 4.0 filesystem on work/new.squashfs, block size 1048576.
+[/                                                           ]   400/37604   1%[|                                                           ]   500/37604   1%[============-                                               ]  7700/37604  20%[============-                                               ]  7800/37604  20%[===========================/                                ] 17300/37604  46%[======================================================-     ] 34800/37604  92%[===========================================================|] 37604/37604 100%
+
+Exportable Squashfs 4.0 filesystem, xz compressed, data block size 1048576
+	compressed data, compressed metadata, compressed fragments,
+	compressed xattrs, compressed ids
+	duplicates are removed
+Filesystem size 920018.85 Kbytes (898.46 Mbytes)
+	27.27% of uncompressed filesystem size (3373275.17 Kbytes)
+Inode table size 324192 bytes (316.59 Kbytes)
+	23.11% of uncompressed inode table size (1402723 bytes)
+Directory table size 379600 bytes (370.70 Kbytes)
+	33.28% of uncompressed directory table size (1140722 bytes)
+Xattr table size 40 bytes (0.04 Kbytes)
+	100.00% of uncompressed xattr table size (40 bytes)
+Number of duplicate files found 2858
+Number of inodes 42029
+Number of files 35617
+Number of fragments 1211
+Number of symbolic links 2300
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 4112
+Number of hard-links 18
+Number of ids (unique uids + gids) 10
+Number of uids 4
+	root (0)
+	_apt (42)
+	unknown (997)
+	packer (1000)
+Number of gids 9
+	root (0)
+	shadow (42)
+	packer (1000)
+	lxd (105)
+	utmp (43)
+	staff (50)
+	adm (4)
+	systemd-journal (999)
+	mail (8)
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 78.2g free
+Volume id    : 'NEXIUM_OS'
+Drive current: -outdev 'output/candidate.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 78.2g free
+xorriso : NOTE : Replayed 22 boot related commands
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/filesystem.squashfs'='/home/runner/work/nexium-os/nexium-os/work/new.squashfs'
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/initrd.img'='/home/runner/work/nexium-os/nexium-os/work/new.initrd'
+xorriso : NOTE : Copying to System Area: 32768 bytes from file '--interval:imported_iso:0s-15s:zero_mbrpt:work/orig.iso'
+xorriso : UPDATE : Writing:      16384s    3.3%   fifo 100%  buf  50%
+xorriso : UPDATE : Writing:      81920s   16.3%   fifo 100%  buf  50%  138.3xD 
+xorriso : UPDATE : Writing:     180224s   35.8%   fifo 100%  buf  50%  145.2xD 
+xorriso : UPDATE : Writing:     278528s   55.3%   fifo 100%  buf  50%  145.2xD 
+xorriso : UPDATE : Writing:     376832s   74.8%   fifo 100%  buf  50%  145.2xD 
+xorriso : UPDATE : Writing:     483328s   96.0%   fifo 100%  buf  50%  157.3xD 
+ISO image produced: 503495 sectors
+Written to medium : 503648 sectors at LBA 32
+Writing to 'output/candidate.iso' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev 'output/candidate.iso'
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 500455 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -dev 'output/candidate.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 500423 data blocks,  977m data, 77.3g free
+Volume id    : 'NEXIUM_OS'
+{"candidate": "both", "shipped": ["Nexium Browser", "Firefox"], "iso_bytes": 1031536640, "sha256": "c8af3c847ad55c8cac36d4ec132816e3c6c2f3a2b4276acba8fadb608ca5656d", "under_ceiling": false}
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  brave-keyring libdouble-conversion3 libharfbuzz-subset0 libminizip1
+  libopenh264-7 libvulkan1 libxnvctrl0 xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  brave-browser*
+0 upgraded, 0 newly installed, 1 to remove and 3 not upgraded.
+After this operation, 493 MB disk space will be freed.
+E: Can not write log (Is /dev/pts mounted?) - posix_openpt (2: No such file or directory)
+(Reading database ... 38003 files and directories currently installed.)
+Removing brave-browser (1.97.56) ...
+update-alternatives: using /usr/bin/firefox-esr to provide /usr/bin/x-www-browser (x-www-browser) in auto mode
+update-alternatives: using /usr/bin/firefox-esr to provide /usr/bin/gnome-www-browser (gnome-www-browser) in auto mode
+Processing triggers for bamfdaemon (0.5.6+repack-1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Can't locate File/Find.pm in @INC (you may need to install the File::Find module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at -e line 2.
+BEGIN failed--compilation aborted at -e line 2.
+(Reading database ... 37742 files and directories currently installed.)
+Purging configuration files for brave-browser (1.97.56) ...
+dpkg: warning: while removing brave-browser, directory '/opt' not empty so not removed
+Parallel mksquashfs: Using 2 processors
+Creating 4.0 filesystem on work/new.squashfs, block size 1048576.
+[|                                                           ]   400/37000   1%[=\                                                          ]   700/37000   1%[=\                                                          ]   900/37000   2%[===========/                                                ]  7100/37000  19%[===========\                                                ]  7300/37000  19%[==========================-                                 ] 16400/37000  44%[===========================/                                ] 17200/37000  46%[===========================================================\] 37000/37000 100%
+
+Exportable Squashfs 4.0 filesystem, xz compressed, data block size 1048576
+	compressed data, compressed metadata, compressed fragments,
+	compressed xattrs, compressed ids
+	duplicates are removed
+Filesystem size 755256.75 Kbytes (737.56 Mbytes)
+	26.12% of uncompressed filesystem size (2891730.57 Kbytes)
+Inode table size 320404 bytes (312.89 Kbytes)
+	23.01% of uncompressed inode table size (1392181 bytes)
+Directory table size 377062 bytes (368.22 Kbytes)
+	33.23% of uncompressed directory table size (1134859 bytes)
+Xattr table size 40 bytes (0.04 Kbytes)
+	100.00% of uncompressed xattr table size (40 bytes)
+Number of duplicate files found 2850
+Number of inodes 41757
+Number of files 35429
+Number of fragments 1165
+Number of symbolic links 2299
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 4029
+Number of hard-links 18
+Number of ids (unique uids + gids) 10
+Number of uids 4
+	root (0)
+	_apt (42)
+	unknown (997)
+	packer (1000)
+Number of gids 9
+	root (0)
+	shadow (42)
+	packer (1000)
+	lxd (105)
+	utmp (43)
+	staff (50)
+	adm (4)
+	systemd-journal (999)
+	mail (8)
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 78.8g free
+Volume id    : 'NEXIUM_OS'
+Drive current: -outdev 'output/candidate.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 78.8g free
+xorriso : NOTE : Replayed 22 boot related commands
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/filesystem.squashfs'='/home/runner/work/nexium-os/nexium-os/work/new.squashfs'
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/initrd.img'='/home/runner/work/nexium-os/nexium-os/work/new.initrd'
+xorriso : NOTE : Copying to System Area: 32768 bytes from file '--interval:imported_iso:0s-15s:zero_mbrpt:work/orig.iso'
+xorriso : UPDATE : Writing:      16384s    3.9%   fifo 100%  buf  50%
+xorriso : UPDATE : Writing:     155648s   36.9%   fifo 100%  buf  50%  205.8xD 
+xorriso : UPDATE : Writing:     294912s   70.0%   fifo 100%  buf  50%  205.8xD 
+ISO image produced: 421115 sectors
+Written to medium : 421280 sectors at LBA 32
+Writing to 'output/candidate.iso' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev 'output/candidate.iso'
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 418075 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -dev 'output/candidate.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 418043 data blocks,  816m data, 78.0g free
+Volume id    : 'NEXIUM_OS'
+{"candidate": "Firefox", "shipped": ["Nexium Browser", "Firefox"], "iso_bytes": 862846976, "sha256": "447c8f1b74b481acfe9e985485bd68b30dd2f51e56ca883f410f5eb6d69c7403", "under_ceiling": true}
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+sudo: unable to resolve host runnervmmprz5: Temporary failure in name resolution
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+PASS PYSIDE6 QTWEBENGINE IMPORTS
+PASS NEXIUM browser source, isolated Python, imports, and removal of standalone Chromium
+OUTPUT SQUASHFS: all 167 desktop/branding overlay files present and SHA256-identical
+DOCK files => /usr/bin/pcmanfm (real application)
+DOCK browser => /usr/local/bin/nexium-browser (real application)
+DOCK terminal => /usr/bin/xterm (real application)
+DOCK messages => /usr/local/bin/nexium-coming-soon Messages (honest coming-soon placeholder)
+DOCK calls => /usr/local/bin/nexium-coming-soon Calls (honest coming-soon placeholder)
+DOCK settings => /usr/local/bin/nexium-settings (real application)
+DOCK vault => /usr/local/bin/nexium-coming-soon Vault (honest coming-soon placeholder)
+DOCK editor => /usr/bin/mousepad (real application)
+DOCK monitor => /usr/bin/lxtask (real application)
+DOCK trash => /usr/bin/pcmanfm trash:/// (real application)
+PASS original ten pins plus all installed chooser/browser pins: ['01-files.dockitem', '02-browser.dockitem', '03-terminal.dockitem', '04-messages.dockitem', '05-calls.dockitem', '06-settings.dockitem', '07-vault.dockitem', '08-editor.dockitem', '09-monitor.dockitem', '10-trash.dockitem', '11-chooser.dockitem', '11-firefox-choice.dockitem']
+Output desktop: Openbox / Plank / Tint2 / PCManFM / Xterm; Plymouth retained
+ICON THEME: NexiumIOS4
+ICON files => ios4-utilities-folder 64px and 128px PNG verified
+ICON browser => ios4-safari 64px and 128px PNG verified
+ICON terminal => ios4-linen 64px and 128px PNG verified
+ICON messages => ios4-messages 64px and 128px PNG verified
+ICON calls => ios4-phone 64px and 128px PNG verified
+ICON settings => ios4-settings 64px and 128px PNG verified
+ICON vault => ios4-cydia 64px and 128px PNG verified
+ICON editor => ios4-notes 64px and 128px PNG verified
+ICON monitor => ios4-stocks 64px and 128px PNG verified
+ICON trash => ios4-blank-gray 64px and 128px PNG verified
+iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita
+Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately
+No physical boot/hardware test performed; launcher resolution is not full hardware verification
+PASS actual on-disk Nexium browser launcher and custom Nexium icon; full final manifest SHA256 checked
++ out=output/nexium-os-1.2-ungoogled-amd64.iso
++ xorriso -indev work/orig.iso -outdev output/nexium-os-1.2-ungoogled-amd64.iso -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -map work/new.initrd /live/initrd.img -commit -end
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 78.8g free
+Volume id    : 'NEXIUM_OS'
+Drive current: -outdev 'output/nexium-os-1.2-ungoogled-amd64.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 78.8g free
+xorriso : NOTE : Replayed 22 boot related commands
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/filesystem.squashfs'='/home/runner/work/nexium-os/nexium-os/work/new.squashfs'
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/live/initrd.img'='/home/runner/work/nexium-os/nexium-os/work/new.initrd'
+xorriso : NOTE : Copying to System Area: 32768 bytes from file '--interval:imported_iso:0s-15s:zero_mbrpt:work/orig.iso'
+xorriso : UPDATE : Writing:      16384s    3.9%   fifo 100%  buf  50%
+xorriso : UPDATE : Writing:     114688s   27.2%   fifo 100%  buf  50%  207.5xD 
+xorriso : UPDATE : Writing:     229376s   54.4%   fifo 100%  buf  50%  169.4xD 
+xorriso : UPDATE : Writing:     327680s   77.8%   fifo 100%  buf  50%  145.2xD 
+xorriso : UPDATE : Writing:     421280s  100.0%   fifo   0%  buf  50%  138.3xD 
+ISO image produced: 421115 sectors
+Written to medium : 421280 sectors at LBA 32
+Writing to 'output/nexium-os-1.2-ungoogled-amd64.iso' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev 'output/nexium-os-1.2-ungoogled-amd64.iso'
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 418075 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -dev 'output/nexium-os-1.2-ungoogled-amd64.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 418043 data blocks,  816m data, 78.0g free
+Volume id    : 'NEXIUM_OS'
++ xorriso -indev output/nexium-os-1.2-ungoogled-amd64.iso -report_el_torito plain -report_system_area plain
++ xorriso -osirrox on -indev output/nexium-os-1.2-ungoogled-amd64.iso -extract / work/final
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Copying of file objects from ISO image to disk filesystem is: Enabled
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 418075 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'output/nexium-os-1.2-ungoogled-amd64.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 418043 data blocks,  816m data, 78.0g free
+Volume id    : 'NEXIUM_OS'
+xorriso : UPDATE :     306 files restored ( 816.1m) in 1 seconds = 617.9xD
+Extracted from ISO image: file '/'='/home/runner/work/nexium-os/nexium-os/work/final'
++ python3 scripts/verify-phase2-boot.py
++ tee reports/boot-verification.txt
+EFI payload: byte-identical; 6291456 bytes; SHA256 ee34513e431dfd903dd98b9bb47aec40988fe880f27e7c73a64e0e3698ebccb6
+El Torito catalog: identical except required BIOS/UEFI LBA relocation
+System area: MBR grub2-mbr cyl-align-off; original system-area options and MBR partition flags/types unchanged
+UNCHANGED: /live/vmlinuz
+UNCHANGED: /boot/grub/grub.cfg
+VALID ISO9660: NEXIUM_OS; original boot catalog, BIOS/UEFI and GRUB2 isohybrid MBR structure verified; original MBR boot code identical
+INITRD SOURCE SHA256 MATCH: nexium-gold.plymouth a99b147d27045ddb4915dff59de01a2d11d5ff1b1b45d3894f59d39d8c8250cf
+INITRD SOURCE SHA256 MATCH: nexium-gold.script 363d2b4d3a20bdcd1666f3731b22689e5ff6e9d8aaed5b4ed0504c425cd48de4
+INITRD SOURCE SHA256 MATCH: attribution.png 87a755f7b8c517ff9a940084b67b0b4c77757f159bb38f1b35623b7c0e648b14
+PASS REGENERATED INITRD: selected Theme=nexium-gold; cream script and made by TOMO! attribution PNG match committed branding source
+INITRD SHA256: 63274f0f89d34ccd72a8c18a3e4d7e46bc21edc26cd47583f35af58f28bce450
++ sudo unsquashfs -d work/final-root work/final/live/filesystem.squashfs
+Parallel unsquashfs: Using 4 processors
+37746 inodes (37000 blocks) to write
+
+[=/                                                          ]  1398/74746   1%[=\                                                          ]  1956/74746   2%[=\                                                          ]  2318/74746   3%[======/                                                     ]  8654/74746  11%[=======-                                                    ]  9488/74746  12%[==========\                                                 ] 13658/74746  18%[===========|                                                ] 14544/74746  19%[============/                                               ] 16141/74746  21%[=============\                                              ] 16890/74746  22%[==============|                                             ] 17739/74746  23%[==============/                                             ] 18003/74746  24%[===============-                                            ] 19530/74746  26%[================\                                           ] 20702/74746  27%[==================|                                         ] 23828/74746  31%[===================/                                        ] 25084/74746  33%[====================-                                       ] 26426/74746  35%[=======================\                                    ] 30305/74746  40%[=========================|                                  ] 32559/74746  43%[==========================/                                 ] 33189/74746  44%[==========================\                                 ] 33834/74746  45%[===========================\                                ] 34646/74746  46%[============================-                               ] 36709/74746  49%[=================================\                          ] 41867/74746  56%[===================================|                        ] 44491/74746  59%[============================================/               ] 56465/74746  75%[==================================================-         ] 63451/74746  84%[======================================================\     ] 69334/74746  92%[==========================================================| ] 74067/74746  99%[===========================================================|] 74746/74746 100%
+
+created 35429 files
+created 4029 directories
+created 2299 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+created 18 hardlinks
++ sudo python3 scripts/nexium-phase2.py --verify work/final-root
++ tee reports/desktop-verification.txt
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+sudo: unable to resolve host runnervmmprz5: Temporary failure in name resolution
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+PASS PYSIDE6 QTWEBENGINE IMPORTS
+PASS NEXIUM browser source, isolated Python, imports, and removal of standalone Chromium
+OUTPUT SQUASHFS: all 167 desktop/branding overlay files present and SHA256-identical
+DOCK files => /usr/bin/pcmanfm (real application)
+DOCK browser => /usr/local/bin/nexium-browser (real application)
+DOCK terminal => /usr/bin/xterm (real application)
+DOCK messages => /usr/local/bin/nexium-coming-soon Messages (honest coming-soon placeholder)
+DOCK calls => /usr/local/bin/nexium-coming-soon Calls (honest coming-soon placeholder)
+DOCK settings => /usr/local/bin/nexium-settings (real application)
+DOCK vault => /usr/local/bin/nexium-coming-soon Vault (honest coming-soon placeholder)
+DOCK editor => /usr/bin/mousepad (real application)
+DOCK monitor => /usr/bin/lxtask (real application)
+DOCK trash => /usr/bin/pcmanfm trash:/// (real application)
+PASS original ten pins plus all installed chooser/browser pins: ['01-files.dockitem', '02-browser.dockitem', '03-terminal.dockitem', '04-messages.dockitem', '05-calls.dockitem', '06-settings.dockitem', '07-vault.dockitem', '08-editor.dockitem', '09-monitor.dockitem', '10-trash.dockitem', '11-chooser.dockitem', '11-firefox-choice.dockitem']
+Output desktop: Openbox / Plank / Tint2 / PCManFM / Xterm; Plymouth retained
+ICON THEME: NexiumIOS4
+ICON files => ios4-utilities-folder 64px and 128px PNG verified
+ICON browser => ios4-safari 64px and 128px PNG verified
+ICON terminal => ios4-linen 64px and 128px PNG verified
+ICON messages => ios4-messages 64px and 128px PNG verified
+ICON calls => ios4-phone 64px and 128px PNG verified
+ICON settings => ios4-settings 64px and 128px PNG verified
+ICON vault => ios4-cydia 64px and 128px PNG verified
+ICON editor => ios4-notes 64px and 128px PNG verified
+ICON monitor => ios4-stocks 64px and 128px PNG verified
+ICON trash => ios4-blank-gray 64px and 128px PNG verified
+iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita
+Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately
+No physical boot/hardware test performed; launcher resolution is not full hardware verification
+PASS actual on-disk Nexium browser launcher and custom Nexium icon; full final manifest SHA256 checked
++ unsquashfs -s work/final/live/filesystem.squashfs
++ tee reports/squashfs.txt
+Found a valid SQUASHFS 4:0 superblock on work/final/live/filesystem.squashfs.
+Creation or last append time Tue Oct 13 23:38:07 2026
+Filesystem size 773382916 bytes (755256.75 Kbytes / 737.56 Mbytes)
+Compression xz
+	Dictionary size 1048576
+	Filters selected: x86
+Block size 1048576
+Filesystem is exportable via NFS
+Inodes are compressed
+Data is compressed
+Uids/Gids (Id table) are compressed
+Fragments are compressed
+Always-use-fragments option is not specified
+Xattrs are compressed
+Duplicates are removed
+Number of fragments 1165
+Number of inodes 41757
+Number of ids 10
+Number of xattr ids 1
+++ stat -c%s output/nexium-os-1.2-ungoogled-amd64.iso
++ test 862846976 -lt 1000000000
++ sha256sum output/nexium-os-1.2-ungoogled-amd64.iso
++ tee output/SHA256SUMS reports/iso-sha256.txt
+e6e23037bb041db61e175c449ce8bd7f2d444e84a848d7cb285d3bb8b02af243  output/nexium-os-1.2-ungoogled-amd64.iso
++ python3 -
++ tee reports/size.txt
+ISO: 862846976 bytes
+ISO: 862.846976 MB (decimal)
+Under 1,000,000,000 bytes: True
++ echo '## Nexium Phase 2 native desktop with user-authorized iOS4 crops'
++ cat reports/source-commit.txt reports/ios4-icons.txt reports/size.txt reports/iso-sha256.txt reports/boot-verification.txt reports/desktop-verification.txt reports/native-app-windows.txt
++ echo 'Xvfb native desktop smoke test, not a physical or virtual ISO boot test.'
++ cleanup
++ sudo umount -R work/root/tmp/.X11-unix
++ true
++ sudo umount -R work/root/proc
++ true
++ sudo umount -R work/root/sys
++ true
++ sudo umount -R work/root/dev
++ true
