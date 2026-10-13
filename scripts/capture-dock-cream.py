@@ -24,16 +24,23 @@ data['browser_timeline'] = []
 data['browser_processes'] = []
 data['browser_windows'] = []
 while time.monotonic() - began < 150:
+    # NEXIUM_EXE_PID_GUI_PROBE: executable identity, launch PID, UID, real mapped window.
     processes = []
-    for pid in os.listdir('/proc'):
-        if not pid.isdigit():
-            continue
-        try:
-            cmd = [part.decode() for part in open('/proc/'+pid+'/cmdline','rb').read().split(bytes([0])) if part]
-        except (OSError, UnicodeError):
-            continue
-        if cmd and cmd[0] == '/opt/ungoogled-chromium/chrome' and not any(c.startswith('--type=') for c in cmd):
-            processes.append({'pid':pid, 'argv':cmd})
+    proc = '/proc/' + str(browser.pid)
+    observed = {'pid': browser.pid, 'launch_poll': browser.poll(), 'uid': os.getuid()}
+    try:
+        raw = open(proc + '/cmdline', 'rb').read()
+        cmd = [part.decode(errors='replace') for part in raw.split(bytes([0])) if part]
+        exe = os.readlink(proc + '/exe')
+        status = open(proc + '/status').read()
+        uid = int(next(line.split()[1] for line in status.splitlines() if line.startswith('Uid:')))
+        observed.update({'exe': exe, 'argv': cmd, 'raw_cmdline_repr': repr(raw), 'process_uid': uid})
+        expected_exe = os.path.realpath('/opt/ungoogled-chromium/chrome')
+        if os.path.realpath(exe) == expected_exe and uid == os.getuid() and uid != 0 and browser.poll() is None and not any(c.startswith('--type=') or c == '--no-sandbox' for c in cmd):
+            processes.append(observed)
+    except (OSError, ValueError, StopIteration) as e:
+        observed['proc_error'] = repr(e)
+    data['browser_proc_observed'] = observed
     tree = command('xwininfo -root -tree')
     windows = []
     for line in tree['output'].splitlines():
@@ -41,10 +48,13 @@ while time.monotonic() - began < 150:
         if not m or 'Chromium' not in m[2] or int(m[3]) < 100 or int(m[4]) < 100:
             continue
         view = command('xwininfo -id ' + m[1])
-        if view['exit'] == 0 and 'Map State: IsViewable' in view['output']:
-            windows.append({'id':m[1], 'title':m[2], 'view':view})
+        owner = command('xprop -id ' + m[1] + ' _NET_WM_PID')
+        match = re.search(r'=\s*(\d+)', owner['output'])
+        window_pid = int(match[1]) if match else None
+        if view['exit'] == 0 and 'Map State: IsViewable' in view['output'] and window_pid == browser.pid:
+            windows.append({'id':m[1], 'title':m[2], 'view':view, 'owner':owner, 'pid':window_pid})
     rc = browser.poll()
-    data['browser_timeline'].append({'seconds':round(time.monotonic()-began,3),'exit':rc,'processes':processes,'windows':len(windows)})
+    data['browser_timeline'].append({'seconds':round(time.monotonic()-began,3),'exit':rc,'processes':processes,'observed':observed,'windows':len(windows)})
     data['browser_processes'] = processes
     data['browser_windows'] = windows
     data['browser_window_tree'] = tree
@@ -53,7 +63,7 @@ while time.monotonic() - began < 150:
     time.sleep(2)
 browser_log.flush()
 data['browser_launch'] = {'dock_exec':argv,'pid':browser.pid,'exit_code':browser.poll(),'seconds':round(time.monotonic()-began,3),'stdout_stderr':open(log_path).read()}
-data['browser_gui_pass'] = bool(data['browser_processes'] and data['browser_windows']) and browser.poll() is None and 'not found' not in data['browser_ldd']['output']
+data['browser_gui_pass'] = bool(data['browser_processes'] and data['browser_windows']) and browser.poll() is None and 'not found' not in data['browser_ldd']['output'] and data['browser_ldd']['exit'] == 0
 data['browser_log'] = command('cat ' + log_path)
 data['update_check'] = command('/usr/local/bin/nexium-update-check')
 data['image_version'] = command('cat /etc/nexium-version')
@@ -139,5 +149,8 @@ assert splash,'FAIL: made by TOMO! text not observed in BIOS frames'
 assert live.get('pass'),'FAIL: running Plank/X11/gsettings not verified in live guest'
 assert live.get('sudo_noninteractive',{}).get('exit')==0,'FAIL: sudo -n true failed in live desktop'
 assert live.get('network_manager',{}).get('exit')==0,'FAIL: NetworkManager not active in live guest'
+print('CHROMIUM STDOUT/STDERR BEGIN', flush=True)
+print(live.get('browser_launch', {}).get('stdout_stderr', '<no guest report>'), flush=True)
+print('CHROMIUM STDOUT/STDERR END', flush=True)
 assert live.get('browser_gui_pass'),'FAIL: dock Chromium GUI; exit/stdout/stderr/loader/window timeline printed above'
 print('PASS HEADLESS BIOS: cream TOMO splash observed and live Plank process verified; visual dock review required from frames')
