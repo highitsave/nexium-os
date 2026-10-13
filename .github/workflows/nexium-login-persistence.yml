@@ -1,0 +1,380 @@
+name: Nexium login and USB persistence final image
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate all workflows and provision login persistence source
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y python3-yaml python3-pil squashfs-tools xorriso initramfs-tools-core qemu-system-x86 xdotool wmctrl scrot x11-utils ffmpeg tesseract-ocr fonts-dejavu-core e2fsprogs util-linux curl
+          mkdir -p reports/boot/frames reports/browser output work
+          python3 - <<'PY' | tee reports/workflow-validation.txt
+          import yaml
+          from pathlib import Path
+          for p in sorted(Path('.github/workflows').glob('*.y*ml')):
+              d=yaml.safe_load(p.read_text());assert isinstance(d,dict) and isinstance(d.get('jobs'),dict),str(p);print('PASS YAML',p)
+          PY
+          cat > scripts/persistence-grub.py <<'PY'
+          """Only add Debian live persistence to linux boot=live lines; no other GRUB edit."""
+          import re
+          from pathlib import Path
+          def patch(data):
+              lines=data.decode().splitlines(keepends=True);count=0
+              for i,line in enumerate(lines):
+                  if re.match(r'^\s*linux(?:efi|16)?\s',line) and re.search(r'\bboot=live\b',line):
+                      assert not re.search(r'\bpersistence(?:=|\b)',line),'Unexpected preexisting persistence option'
+                      newline='\r\n' if line.endswith('\r\n') else '\n' if line.endswith('\n') else ''
+                      body=line[:-len(newline)] if newline else line
+                      lines[i]=body+' persistence'+newline;count+=1
+              assert count>0,'No live GRUB entries found'
+              return ''.join(lines).encode()
+          if __name__=='__main__':
+              import sys
+              p=Path(sys.argv[1]);p.write_bytes(patch(p.read_bytes()))
+              print('PASS only persistence appended to each live linux line')
+          PY
+          cat > scripts/install-login.py <<'PY'
+          import os,json,hashlib,subprocess
+          from pathlib import Path
+          from PIL import Image,ImageDraw,ImageFont
+          def install(root):
+              r=Path(root);paths=[]
+              def put(name,text,mode=0o644):
+                  p=r/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text);p.chmod(mode);paths.append(p);return p
+              put('usr/share/xsessions/nexium.desktop','[Desktop Entry]\nName=Nexium Golden Gate\nComment=Nexium Openbox desktop\nExec=/usr/local/lib/nexium/session\nType=Application\nDesktopNames=Openbox;\n')
+              put('etc/lightdm/lightdm.conf','[LightDM]\nrun-directory=/run/lightdm\n[Seat:*]\ngreeter-session=lightdm-gtk-greeter\nuser-session=nexium\nautologin-user=\nallow-guest=false\ngreeter-hide-users=false\n')
+              put('etc/lightdm/lightdm-gtk-greeter.conf','[greeter]\nbackground=/usr/share/backgrounds/nexium/greeter.png\ntheme-name=GoldenGate\nicon-theme-name=NexiumIOS4\nfont-name=DejaVu Sans 11\nindicators=~spacer;~clock;~power\nclock-format=%H:%M\nposition=50%,center 65%,center\nuser-background=false\n')
+              put('etc/X11/default-display-manager','/usr/sbin/lightdm\n')
+              put('etc/skel/.dmrc','[Desktop]\nSession=nexium\n');dm=put('home/nexium/.dmrc','[Desktop]\nSession=nexium\n')
+              uid,gid=next((int(x.split(':')[2]),int(x.split(':')[3])) for x in (r/'etc/passwd').read_text().splitlines() if x.startswith('nexium:'));os.chown(dm,uid,gid)
+              # Public live-image credentials, not a saved user's private password.
+              subprocess.run(['chroot',str(r),'chpasswd'],input='nexium:nexium\n',text=True,check=True)
+              subprocess.run(['systemctl','--root',str(r),'disable','nexium-kiosk.service'],check=True)
+              subprocess.run(['systemctl','--root',str(r),'mask','nexium-kiosk.service'],check=True)
+              subprocess.run(['systemctl','--root',str(r),'enable','lightdm.service'],check=True)
+              subprocess.run(['systemctl','--root',str(r),'set-default','graphical.target'],check=True)
+              # Debian live-config must not reset the login/password or add automatic login.
+              put('etc/live/config.conf.d/90-nexium.conf','LIVE_CONFIG_NOAUTOLOGIN="true"\nLIVE_USERNAME="nexium"\n')
+              put('usr/share/nexium/persistence.conf','/ union\n')
+              put('usr/local/sbin/nexium-persistence-setup',Path('scripts/nexium-persistence-setup').read_text(),0o755)
+              art=Image.new('RGB',(1280,800),'#eee5d2');d=ImageDraw.Draw(art)
+              f=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',64);small=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',23)
+              d.text((640,170),'Nexium login',font=f,fill='#453a2e',anchor='mm');d.text((640,232),'Golden Gate',font=small,fill='#88704f',anchor='mm')
+              p=r/'usr/share/backgrounds/nexium/greeter.png';art.save(p);paths.append(p)
+              manifest=json.loads(Path('reports/phase2-manifest.json').read_text())
+              for p in paths:manifest['/'+str(p.relative_to(r))]=hashlib.sha256(p.read_bytes()).hexdigest()
+              Path('reports/phase2-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          def verify(root):
+              r=Path(root)
+              assert (r/'etc/systemd/system/nexium-kiosk.service').is_symlink() and os.readlink(r/'etc/systemd/system/nexium-kiosk.service')=='/dev/null'
+              assert 'lightdm.service' in os.readlink(r/'etc/systemd/system/display-manager.service')
+              text=(r/'etc/lightdm/lightdm.conf').read_text();assert 'autologin-user=\n' in text and 'user-session=nexium' in text
+              assert (r/'usr/share/nexium/persistence.conf').read_text()=='/ union\n'
+              assert (r/'usr/share/backgrounds/nexium/greeter.png').is_file()
+              print('PASS LightDM greeter enabled, kiosk masked, normal nexium login; / union template; branded greeter')
+          if __name__=='__main__':
+              import sys
+              (install if sys.argv[1]=='install' else verify)(sys.argv[2])
+          PY
+          cat > scripts/nexium-persistence-setup <<'SH'
+          #!/bin/sh
+          # Format ONLY an already-created second partition; never repartition or touch an ISO.
+          set -eu
+          if [ "$(id -u)" -ne 0 ] || [ "$#" -ne 2 ] || [ "$2" != --format-this-partition ]; then
+            echo 'Usage: sudo nexium-persistence-setup /dev/sdX2 --format-this-partition' >&2
+            echo 'WARNING: destroys all data on that partition. Create unused second partition first.' >&2
+            exit 2
+          fi
+          part=$1
+          [ -b "$part" ] || { echo 'Not a block device' >&2; exit 2; }
+          [ "$(lsblk -dn -o TYPE "$part")" = part ] || { echo 'Refusing whole disks' >&2; exit 2; }
+          case "$(lsblk -dn -o PARTN "$part")" in 2) ;; *) echo 'Refusing anything except partition 2' >&2; exit 2;; esac
+          [ -z "$(lsblk -dn -o MOUNTPOINT "$part")" ] || { echo 'Partition is mounted; refusing' >&2; exit 2; }
+          size=$(blockdev --getsize64 "$part");[ "$size" -ge 268435456 ] || { echo 'Need at least 256 MiB persistence storage' >&2; exit 2; }
+          mkfs.ext4 -F -L persistence "$part"
+          dir=$(mktemp -d);trap 'umount "$dir" 2>/dev/null || true; rmdir "$dir"' EXIT
+          mount "$part" "$dir";printf '/ union\n' > "$dir/persistence.conf";sync;umount "$dir"
+          echo 'Created ext4 label persistence with / union. Reboot with the persistence-enabled live entry.'
+          SH
+          cat > scripts/build-login-persistence.sh <<'SH'
+          #!/bin/bash
+          set -euxo pipefail
+          base=$(find source -name '*.iso' -print -quit)
+          seed=$(find seed -name '*.iso' -print -quit)
+          test "$(stat -c%s "$base")" -eq 661454848
+          echo "9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5  $base" | sha256sum -c -
+          test "$(stat -c%s "$seed")" -eq 862846976
+          echo "e6e23037bb041db61e175c449ce8bd7f2d444e84a848d7cb285d3bb8b02af243  $seed" | sha256sum -c -
+          cp "$base" work/orig.iso
+          xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain > reports/original-boot.txt 2>&1
+          xorriso -osirrox on -indev work/orig.iso -extract / work/original
+          xorriso -osirrox on -indev "$seed" -extract / work/seed
+          sudo unsquashfs -d work/root work/seed/live/filesystem.squashfs
+          sudo cp -a work/root/etc/resolv.conf work/resolv.saved
+          sudo rm work/root/etc/resolv.conf
+          sudo cp /etc/resolv.conf work/root/etc/resolv.conf
+          if [ -e work/root/usr/sbin/policy-rc.d ];then sudo cp -a work/root/usr/sbin/policy-rc.d work/policy.saved;fi
+          printf '#!/bin/sh\nexit 101\n' | sudo tee work/root/usr/sbin/policy-rc.d
+          sudo chmod +x work/root/usr/sbin/policy-rc.d
+          sudo mount -t proc proc work/root/proc
+          sudo mount --rbind /dev work/root/dev
+          sudo mount --make-rslave work/root/dev
+          sudo mount --bind /sys work/root/sys
+          cleanup(){ sudo umount -R work/root/proc 2>/dev/null || true;sudo umount -R work/root/dev 2>/dev/null || true;sudo umount -R work/root/sys 2>/dev/null || true; }
+          trap cleanup EXIT
+          sudo chroot work/root dpkg-query -W -f='${Package}\t${Installed-Size}\n' > reports/browser/login-packages-before.tsv
+          sudo chroot work/root apt-get update
+          sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends lightdm lightdm-gtk-greeter live-boot live-config xdotool wmctrl scrot e2fsprogs util-linux
+          sudo chroot work/root apt-get clean
+          sudo chroot work/root dpkg-query -W -f='${Package}\t${Version}\t${Installed-Size}\n' > reports/browser/final-packages.tsv
+          sudo python3 scripts/nexium-phase2.py --install work/root | tee reports/install.txt
+          sudo python3 scripts/install-login.py install work/root
+          sudo python3 scripts/nexium-phase2.py --verify work/root | tee reports/preflight-desktop.txt
+          sudo python3 scripts/install-login.py verify work/root | tee reports/login-verification.txt
+          sudo chroot work/root plymouth-set-default-theme nexium-gold
+          mapfile -t kernels < <(sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
+          test "${#kernels[@]}" -eq 1
+          sudo mkdir -p work/root/tmp/nexium-initrd
+          sudo chroot work/root update-initramfs -c -k "${kernels[0]}" -b /tmp/nexium-initrd 2>&1 | tee reports/initrd-regeneration.txt
+          sudo cp "work/root/tmp/nexium-initrd/initrd.img-${kernels[0]}" work/new.initrd
+          sudo rm -rf work/root/tmp/nexium-initrd
+          cleanup
+          sudo rm -f work/root/etc/resolv.conf work/root/usr/sbin/policy-rc.d
+          sudo cp -a work/resolv.saved work/root/etc/resolv.conf
+          if [ -e work/policy.saved ];then sudo cp -a work/policy.saved work/root/usr/sbin/policy-rc.d;fi
+          cp work/original/boot/grub/grub.cfg work/persistence-grub.cfg
+          python3 scripts/persistence-grub.py work/persistence-grub.cfg | tee reports/grub-change.txt
+          sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2
+          out=output/nexium-os-1.2-ungoogled-amd64.iso
+          xorriso -indev work/orig.iso -outdev "$out" -boot_image any replay -map work/new.squashfs /live/filesystem.squashfs -map work/new.initrd /live/initrd.img -map work/persistence-grub.cfg /boot/grub/grub.cfg -commit -end
+          xorriso -indev "$out" -report_el_torito plain -report_system_area plain > reports/final-boot.txt 2>&1
+          xorriso -osirrox on -indev "$out" -extract / work/final
+          python3 scripts/verify-phase2-boot.py | tee reports/boot-verification.txt
+          sudo unsquashfs -d work/final-root work/final/live/filesystem.squashfs
+          sudo python3 scripts/nexium-phase2.py --verify work/final-root | tee reports/desktop-verification.txt
+          sudo python3 scripts/install-login.py verify work/final-root | tee reports/final-login-verification.txt
+          test "$(stat -c%s "$out")" -lt 1000000000
+          sha256sum "$out" | tee output/SHA256SUMS reports/iso-sha256.txt
+          stat -c 'ISO_BYTES=%s' "$out" | tee reports/size.txt
+          sudo cat work/final-root/etc/nexium-browsers.json | tee reports/browser/shipped-browsers.json
+          # 512 MiB ext4 persistence partition attached as a USB storage device to the VM.
+          truncate -s 536870912 work/persistence-disk.img
+          printf 'label: dos\n, ,83\n' | sfdisk work/persistence-disk.img
+          loop=$(sudo losetup --find --show --partscan work/persistence-disk.img)
+          sudo mkfs.ext4 -F -L persistence "${loop}p1"
+          mkdir -p work/persistence-mount
+          sudo mount "${loop}p1" work/persistence-mount
+          printf '/ union\n' | sudo tee work/persistence-mount/persistence.conf
+          sync;sudo umount work/persistence-mount;sudo losetup -d "$loop"
+          SH
+          cat > scripts/capture-login-persistence.py <<'PY'
+          import ast,pathlib,subprocess,json,time,socket,threading,http.server,hashlib,os
+          from PIL import Image,ImageStat
+          O=pathlib.Path('reports/boot').resolve();F=O/'frames';F.mkdir(parents=True,exist_ok=True)
+          # Reuse the already strict PID/window/paint probe, never import its VM side effects.
+          tree=ast.parse(pathlib.Path('scripts/capture-nexium-browser.py').read_text())
+          probe=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='probe' for t in n.targets))
+          # QEMU software renderer only: avoid Mesa llvmpipe's LLVM subtarget crash, no sandbox bypass.
+          software="os.environ.update({'GALLIUM_DRIVER':'softpipe','QT_QUICK_BACKEND':'software','QT_OPENGL':'software','QTWEBENGINE_CHROMIUM_FLAGS':'--disable-gpu'})\n"
+          probe=probe.replace("data={'environment':",software+"data={'environment':",1)
+          before="data['environment']['test_vm_rendering']='softpipe, Qt software, WebEngine disable-gpu; sandbox remains enabled'\ndata['persistence_reboot_pass']=open(os.path.expanduser('~/.nexium-persistence-check')).read()=='NEXIUM_PERSISTENCE_PROOF\\n' and open('/proc/sys/kernel/random/boot_id').read().strip()!=open(os.path.expanduser('~/.nexium-previous-boot-id')).read().strip()\ndata['live_cmdline']=open('/proc/cmdline').read()\ndata['persistence_mounts']=command('findmnt; lsblk -f')\ndata['login_status']=command('systemctl is-active lightdm; loginctl list-sessions; id')\nassert data['persistence_reboot_pass'] and 'persistence' in data['live_cmdline']\n"
+          probe=probe.replace("data['sudo_noninteractive']=",before+"data['sudo_noninteractive']=",1)
+          compile(probe,'post-reboot-guest-probe','exec')
+          write=r'''import os,json,urllib.request,subprocess
+          from pathlib import Path
+          assert os.getuid()!=0
+          Path.home().joinpath('.nexium-persistence-check').write_text('NEXIUM_PERSISTENCE_PROOF\n')
+          boot=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+          Path.home().joinpath('.nexium-previous-boot-id').write_text(boot)
+          subprocess.run(['sync'],check=True)
+          data={'marker':'NEXIUM_PERSISTENCE_PROOF','boot_id_before':boot,'uid':os.getuid(),'cmdline':Path('/proc/cmdline').read_text(),'mounts':subprocess.run(['findmnt'],capture_output=True,text=True).stdout}
+          urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/persistence-before.json',data=json.dumps(data,indent=2).encode(),method='POST')).read()
+          subprocess.run(['sudo','-n','systemctl','reboot'],check=True)
+          '''
+          class Handler(http.server.BaseHTTPRequestHandler):
+              def do_GET(self):
+                  body=pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else write.encode() if self.path=='/write.py' else probe.encode()
+                  self.send_response(200);self.end_headers();self.wfile.write(body)
+              def do_POST(self):
+                  name=self.path.strip('/') if self.path in ['/browser-window.png','/persistence-before.json'] else 'live-session.json'
+                  (O/name).write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
+                  self.send_response(200);self.end_headers();self.wfile.write(b'OK')
+          server=http.server.HTTPServer(('0.0.0.0',8888),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
+          iso=str(pathlib.Path('output/nexium-os-1.2-ungoogled-amd64.iso').resolve())
+          cmd=['qemu-system-x86_64','-machine','pc','-accel','tcg,thread=multi','-cpu','max','-smp','2','-m','3072','-boot','order=d,menu=on','-cdrom',iso,'-vga','std','-display','none','-nic','user,model=e1000','-device','qemu-xhci,id=xhci','-drive','if=none,id=usbdata,format=raw,file='+str(pathlib.Path('work/persistence-disk.img').resolve()),'-device','usb-storage,drive=usbdata','-qmp','unix:/tmp/login-qmp.sock,server=on,wait=off','-serial','file:'+str(O/'serial.log'),'-rtc','base=utc']
+          (O/'qemu-invocation.json').write_text(json.dumps(cmd,indent=2)+'\n');started=time.monotonic();p=subprocess.Popen(cmd,stderr=(O/'qemu-stderr.log').open('w'))
+          sock=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
+          for _ in range(60):
+              try:sock.connect('/tmp/login-qmp.sock');break
+              except OSError:time.sleep(1)
+          stream=sock.makefile('rwb',buffering=0);stream.readline()
+          def qmp(ex,args=None):
+              stream.write((json.dumps({'execute':ex,'arguments':args or {}})+'\n').encode())
+              while True:
+                  r=json.loads(stream.readline())
+                  if 'return' in r or 'error' in r:return r
+          qmp('qmp_capabilities')
+          def key(*codes):
+              qmp('send-key',{'keys':[{'type':'qcode','data':c} for c in codes],'hold-time':40});time.sleep(.12)
+          chars={' ':'spc','-':'minus','.':'dot',"'":'apostrophe','/':'slash',';':'semicolon',':':('shift','semicolon'),'(':('shift','9'),')':('shift','0'),'"':('shift','apostrophe')}
+          def typed(value):
+              for c in value:
+                  mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
+          entries=[];greeters=[];splash=[];desktop=[]
+          def frame(stage):
+              n=len(entries);qmp('screendump',{'filename':'/tmp/login-frame.ppm'});im=Image.open('/tmp/login-frame.ppm').convert('RGB');file=F/f'frame-{n:04d}.png';im.save(file)
+              text=subprocess.run(['tesseract',str(file),'stdout'],capture_output=True,text=True).stdout
+              e={'frame':n,'stage':stage,'elapsed':round(time.monotonic()-started,2),'ocr':text};entries.append(e)
+              if 'TOMO' in text.upper():splash.append(e);im.save(O/'cream-splash.png')
+              (O/'frames.json').write_text(json.dumps(entries,indent=2))
+              return im,text
+          def boot_and_login(stage):
+              deadline=time.monotonic()+600;sent=False;logged=False;greeter=None;login_at=0;retry=0
+              while time.monotonic()<deadline:
+                  im,text=frame(stage)
+                  if not sent and ('NEXIUM' in text.upper() or time.monotonic()-started>15):key('ret');sent=True
+                  if not logged and 'Nexium login' in text:
+                      greeter={'stage':stage,'width':im.width,'height':im.height,'variance':sum(ImageStat.Stat(im).var),'ocr':text}
+                      assert im.width>=800 and im.height>=600 and greeter['variance']>50
+                      im.save(O/f'greeter-{stage}.png');greeters.append(greeter)
+                      # GTK greeter selects the sole normal user and focuses its password box.
+                      typed('nexium');key('ret');logged=True;login_at=time.monotonic()
+                  if logged and ('Welcome to Nexium OS' in text or 'Golden Gate' in text and 'Nexium login' not in text):
+                      time.sleep(15);im,text=frame(stage);im.save(O/f'desktop-{stage}.png');desktop.append(stage);return
+                  if logged and time.monotonic()-login_at>40 and 'Nexium login' in text and retry<1:
+                      # Alternative keyboard route if GTK initially focused its user selector.
+                      key('tab');typed('nexium');key('ret');retry+=1;login_at=time.monotonic()
+                  time.sleep(2)
+              raise AssertionError('FAIL greeter/login/desktop timeout '+stage)
+          def terminal_script(name):
+              key('meta_l','t');time.sleep(6)
+              typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/"+name+"\").read())'");key('ret')
+          try:
+              boot_and_login('before-reboot')
+              terminal_script('write.py')
+              for _ in range(120):
+                  if (O/'persistence-before.json').exists():break
+                  frame('reboot-request');time.sleep(2)
+              assert (O/'persistence-before.json').exists(),'FAIL persistence write/normal user reboot request'
+              # Require a genuine reboot reaching greeter again, not a second terminal in the same boot.
+              time.sleep(20);boot_and_login('after-reboot')
+              terminal_script('probe.py')
+              for _ in range(450):
+                  if (O/'live-session.json').exists():break
+                  frame('post-reboot-gui');time.sleep(2)
+              live=json.loads((O/'live-session.json').read_text()) if (O/'live-session.json').exists() else {}
+              im,text=frame('final');im.save(O/'final-desktop.png')
+              print('NEXIUM STDOUT/STDERR BEGIN',flush=True);print(live.get('browser_launch',{}).get('stdout_stderr','<no report>'),flush=True);print('NEXIUM STDOUT/STDERR END',flush=True)
+              print(json.dumps(live,indent=2),flush=True)
+              receipt={'iso_bytes':pathlib.Path(iso).stat().st_size,'iso_sha256':hashlib.sha256(pathlib.Path(iso).read_bytes()).hexdigest(),'greeter_paint_pass':len(greeters)>=2,'greeters':greeters,'persistence_reboot_pass':live.get('persistence_reboot_pass',False),'chooser_restart_pass':live.get('chooser_restart_pass',False),'browser_gui_pass':live.get('browser_gui_pass',False),'cream_splash_pass':bool(splash),'plank_running':live.get('plank_running',False),'sudo_exit':live.get('sudo_noninteractive',{}).get('exit'),'wall_elapsed_seconds':round(time.monotonic()-started,2),'test_kind':'HEADLESS QEMU BIOS, virtual USB persistence; NOT PHYSICAL HARDWARE'}
+              (O/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt,indent=2),flush=True)
+              assert receipt['greeter_paint_pass'] and receipt['persistence_reboot_pass'] and receipt['chooser_restart_pass']
+              assert receipt['cream_splash_pass'] and receipt['plank_running'] and receipt['sudo_exit']==0 and receipt['browser_gui_pass']
+              subprocess.run(['python3','scripts/assert-nexium-capture.py',str(O)],check=True)
+              print('PASS FINAL LOGIN, USB PERSISTENCE AFTER REAL REBOOT, CHOOSER RESTARTS AND REAL NEXIUM PAINT',flush=True)
+          finally:
+              if p.poll() is None:
+                  qmp('quit');p.wait(timeout=30)
+              server.shutdown()
+          PY
+          # Narrow authorized GRUB exception: exact function result, not a skipped comparison.
+          python3 - <<'PY'
+          from pathlib import Path
+          import ast
+          p=Path('scripts/verify-phase2-boot.py');s=p.read_text()
+          if 'persistence-grub.py' not in s:
+              s=s.replace('P=pathlib.Path','P=pathlib.Path\nimport importlib.util\nspec=importlib.util.spec_from_file_location("persistence_grub","scripts/persistence-grub.py");pg=importlib.util.module_from_spec(spec);spec.loader.exec_module(pg)',1)
+              needle="    x,y=p.read_bytes(),rebuilt[name].read_bytes()"
+              s=s.replace(needle,needle+'\n    if name==P("boot/grub/grub.cfg"):\n        assert y==pg.patch(x), "GRUB changed beyond authorized persistence parameter"\n        print("PASS GRUB: ONLY persistence added to live linux entries; every other byte unchanged")\n        continue')
+              s=s.replace("for n in ['live/vmlinuz','boot/grub/grub.cfg']:","for n in ['live/vmlinuz']:")
+              p.write_text(s)
+          # Use PAM login instead of kiosk; verification keeps the account/service source assertion,
+          # and install-login.py separately proves the old kiosk is disabled/masked.
+          # Symlinks such as Firefox are output-root checked by existing resolver.
+          for name in ['scripts/persistence-grub.py','scripts/install-login.py','scripts/capture-login-persistence.py','scripts/verify-phase2-boot.py']:compile(Path(name).read_text(),name,'exec')
+          PY
+          cat >> README.md <<'TXT'
+
+          ## Real login and USB persistence
+
+          The login/persistence workflow is `.github/workflows/nexium-login-persistence.yml`. It builds on the measured Firefox ESR + Nexium Browser image, adds lightweight LightDM/GTK greeter and Golden Gate branding, disables the kiosk auto-session, and boots to a password prompt for the normal `nexium` user. Public initial **live-image** credentials are `nexium` / `nexium`; this is not a private account secret. Change the password locally with `passwd`; root login is not the desktop default. Passwordless sudo is still enabled for the live user, so this is NOT a hardened security boundary. No cloud authentication service or Google login is used.
+
+          All live GRUB kernel entries add `persistence`. The preservation verifier now requires the exact original grub.cfg plus only that parameter; it does not waive kernel, EFI payload, El Torito, GRUB2/MBR/system-area or initrd-theme checks. The kernel stays byte-identical. The initrd is regenerated with Debian live-boot/Plymouth support and verified against the cream-theme source.
+
+          Persistence is stored on the USB stick, NOT inside the ISO. Required layout: partition 1 holds the ISO/image as written; a separate partition 2 in **unused space beyond the image** is ext4, labeled exactly `persistence`, with a root-level `persistence.conf` containing exactly `/ union`. At least 256 MiB (preferably 512 MiB or more) must remain beyond the ISO. A nominal 1 GB stick may boot an under-1,000,000,000-byte ISO but does not have enough space for the recommended persistence layout. A larger stick is required; do not erase a drive or assume persistence works without that partition.
+
+          Rufus alone does not create this Debian persistence partition. After writing the image, use a Linux partition editor to create partition 2 in unallocated space, without modifying the ISO boot partitions. Back up the stick first and verify the actual device name and partition table. Some writers leave no editable free space or an incompatible layout; do not force a partition change in that case. Run the included `sudo nexium-persistence-setup /dev/sdX2 --format-this-partition` ONLY after substituting and verifying the new unused second partition. The script refuses whole disks, mounted partitions and partitions other than number 2, formats that partition (destroying its contents), labels it, and installs the shipped `/usr/share/nexium/persistence.conf` template. Manual equivalent after safely formatting: mount the ext4 partition and write `/ union` plus newline to `persistence.conf` at its root; unmount cleanly. Reboot the persistence-enabled entry. User files, browser/site config, password changes and installed packages can then persist; unplugging power without shutdown can corrupt it.
+
+          CI tests a labeled ext4 filesystem on a separate virtual USB storage disk: write a marker as the normal user, cleanly reboot, log in again, check a different kernel boot ID and the original marker, and test Add/remove site across separate app processes. This proves the live-boot path in QEMU, not that any particular physical USB stick is healthy or partitioned correctly. Consult the actual run's receipt before claiming a passing test.
+          TXT
+          cat >> CONTRIBUTING.md <<'TXT'
+
+          Login/persistence changes must retain the original boot structures and exact persistence-only GRUB delta check. Require captured branded greeter before and after reboot, normal-user login, a changed boot ID and persistent marker on labeled storage. Never describe live credentials or passwordless sudo as hardened security. Do not run the destructive partition formatter on a user's drive during CI; use a disposable virtual disk.
+          TXT
+          bash -n scripts/build-login-persistence.sh scripts/nexium-persistence-setup
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add scripts/persistence-grub.py scripts/install-login.py scripts/nexium-persistence-setup scripts/build-login-persistence.sh scripts/capture-login-persistence.py scripts/verify-phase2-boot.py README.md CONTRIBUTING.md
+          if ! git diff --cached --quiet;then git commit -m 'Add branded normal-user login and Debian USB persistence with exact GRUB delta guard';git pull --rebase origin main;git push origin HEAD:main;fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-browser-chooser-iso
+          run-id: 38483512164
+          github-token: ${{ github.token }}
+          path: seed
+      - name: Build login and persistence Firefox image with full preservation checks
+        run: |
+          set -euo pipefail
+          bash scripts/build-login-persistence.sh 2>&1 | tee reports/build-login.txt
+      - name: Boot branded greeter and verify USB persistence reboot plus actual browser GUI
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-login-persistence.py 2>&1 | tee reports/boot-capture.txt
+      - name: Commit evidence and summarize even on failure
+        if: always()
+        run: |
+          set -euo pipefail
+          dest=tests/login-persistence/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/boot/*.json reports/boot/*.png reports/browser/* reports/*.txt "$dest/" 2>/dev/null || true
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$dest"
+          if ! git diff --cached --quiet;then git commit -m "Record login persistence final image proof ${GITHUB_RUN_ID}";git pull --rebase origin main;git push origin HEAD:main;fi
+          { echo '## Nexium login and USB persistence';cat reports/source-commit.txt reports/size.txt reports/iso-sha256.txt reports/browser/shipped-browsers.json reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-login-persistence-iso
+          path: |
+            output/nexium-os-1.2-ungoogled-amd64.iso
+            output/SHA256SUMS
+          compression-level: 0
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-login-persistence-verification
+          path: reports/
+          if-no-files-found: error
