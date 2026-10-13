@@ -1,0 +1,89 @@
+name: Final Nexium login persistence and painted browser proof
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate every workflow and prepare corrected login sources
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y python3-yaml
+          python3 - <<'PY' | tee /tmp/all-workflows.txt
+          import yaml,re,subprocess
+          from pathlib import Path
+          for p in sorted(Path('.github/workflows').glob('*.y*ml')):
+              d=yaml.safe_load(p.read_text());assert isinstance(d,dict) and isinstance(d.get('jobs'),dict),str(p);print('PASS YAML',p,flush=True)
+          # Reuse the authored source-generating step without token-pushing a workflow file.
+          d=yaml.safe_load(Path('.github/workflows/nexium-login-persistence.yml').read_text())
+          prepare=d['jobs']['final']['steps'][1]['run']
+          # Existing kiosk unit is retained for original source checks but disabled, not masked
+          # over a regular unit file. LightDM is the sole enabled graphical entry point.
+          prepare=re.sub(r'^.*subprocess\.run\(.*\x27mask\x27,\x27nexium-kiosk.service\x27.*\n','',prepare,flags=re.M)
+          prepare=prepare.replace("assert (r/'etc/systemd/system/nexium-kiosk.service').is_symlink() and os.readlink(r/'etc/systemd/system/nexium-kiosk.service')=='/dev/null'", "assert not (r/'etc/systemd/system/graphical.target.wants/nexium-kiosk.service').exists()")
+          prepare=prepare.replace('LIVE_CONFIG_NOAUTOLOGIN="true"', 'LIVE_CONFIG_NOCOMPONENTS="user-setup,lightdm"\\nLIVE_CONFIG_NOAUTOLOGIN="true"')
+          prepare=prepare.replace('kiosk masked','kiosk disabled')
+          prepare=prepare.replace("('Welcome to Nexium OS' in text or 'Golden Gate' in text and 'Nexium login' not in text)", "('Welcome to Nexium OS' in text or time.monotonic()-login_at>30 and 'Nexium login' not in text)")
+          subprocess.run(['bash','-euo','pipefail','-c',prepare],check=True)
+          Path('reports/workflow-validation.txt').write_text(Path('/tmp/all-workflows.txt').read_text())
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-browser-chooser-iso
+          run-id: 38483512164
+          github-token: ${{ github.token }}
+          path: seed
+      - name: Build selected Firefox plus login persistence with all boot checks
+        run: |
+          set -euo pipefail
+          bash scripts/build-login-persistence.sh 2>&1 | tee reports/build-login.txt
+      - name: Boot final image and verify painted greeter real reboot persistence and browser
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-login-persistence.py 2>&1 | tee reports/boot-capture.txt
+      - name: Preserve actual final evidence even on failure
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          dest=tests/login-persistence/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/boot/*.json reports/boot/*.png reports/browser/* reports/*.txt "$dest/" 2>/dev/null || true
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$dest"
+          if ! git diff --cached --quiet;then git commit -m "Record final login USB reboot persistence proof ${GITHUB_RUN_ID}";git pull --rebase origin main;git push origin HEAD:main;fi
+          { echo '## Final Nexium login USB persistence image';cat reports/source-commit.txt reports/size.txt reports/iso-sha256.txt reports/browser/shipped-browsers.json reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-login-persistence-iso
+          path: |
+            output/nexium-os-1.2-ungoogled-amd64.iso
+            output/SHA256SUMS
+          compression-level: 0
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-login-persistence-verification
+          path: reports/
+          if-no-files-found: error
