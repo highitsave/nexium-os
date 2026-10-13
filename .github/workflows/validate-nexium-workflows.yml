@@ -1,0 +1,48 @@
+name: Validate Nexium workflows before rebuild
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/validate-nexium-workflows.yml]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse every workflow and compile the real guest probe
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y python3-yaml
+          mkdir -p reports
+          python3 - <<'PY' | tee reports/preflight.txt
+          from pathlib import Path
+          import ast, yaml
+          files = sorted(Path('.github/workflows').glob('*.yml')) + sorted(Path('.github/workflows').glob('*.yaml'))
+          assert files
+          for f in files:
+              data = yaml.safe_load(f.read_text())
+              assert isinstance(data, dict) and 'jobs' in data, str(f)
+              print('PASS YAML', f)
+          print('PASS ALL WORKFLOWS', len(files))
+          source = Path('scripts/prepare-chromium-gui.py').read_text()
+          compile(source, 'prepare-chromium-gui.py', 'exec')
+          exec(compile(source, 'prepare-chromium-gui.py', 'exec'), {'__name__': '__main__'})
+          for f in ['scripts/chromium-localhost.py', 'scripts/capture-dock-cream.py', 'scripts/nexium-update-check']:
+              compile(Path(f).read_text(), f, 'exec')
+              print('PASS PYTHON', f)
+          tree = ast.parse(Path('scripts/capture-dock-cream.py').read_text())
+          for node in tree.body:
+              if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'probe' for t in node.targets):
+                  compile(ast.literal_eval(node.value), 'guest-probe', 'exec')
+                  print('PASS embedded real guest GUI probe')
+          PY
+          if command -v actionlint; then actionlint; else echo 'actionlint not installed on runner'; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-workflow-preflight
+          path: reports/
+          if-no-files-found: error
