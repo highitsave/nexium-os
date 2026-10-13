@@ -1,0 +1,267 @@
+name: Complete measured Nexium chooser ISO and final live verification
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate every workflow and repair exact dock verification root cause
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml python3-pil xvfb x11-utils xdotool wmctrl scrot initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core curl
+          mkdir -p reports/boot/frames reports/browser output work
+          python3 - <<'PY' | tee reports/workflow-validation.txt
+          from pathlib import Path
+          import yaml
+          for p in sorted(Path('.github/workflows').glob('*.y*ml')):
+              d=yaml.safe_load(p.read_text());assert isinstance(d,dict) and isinstance(d.get('jobs'),dict),str(p)
+              print('PASS YAML',p)
+          PY
+          python3 desktop/phase2.py --materialize
+          python3 scripts/prepare-ios4.py | tee reports/ios4-icons.txt
+          cat > scripts/complete-chooser-fixes.py <<'PY'
+          from pathlib import Path
+          import ast
+          p=Path('desktop/phase2.py');s=p.read_text()
+          old="    assert len(pins)==10, f'Expected 10 pins, got {len(pins)}'"
+          new='''    # Retain ALL ten original pins and icons, additionally verify authorized browser pins.
+              expected={p.name for p in P('desktop/dock/launchers').glob('*.dockitem')}
+              assert len(expected)==10, 'Original ten dock pins must remain intact'
+              expected.add('11-chooser.dockitem')
+              for key,exe in [('firefox-choice','/usr/bin/firefox-esr'),('brave-choice','/usr/bin/brave-browser')]:
+                  if (r/exe.lstrip('/')).exists():
+                      expected.add('11-'+key+'.dockitem')
+                      output_executable(r,exe)
+                      assert 'Exec='+exe in (r/f'usr/share/applications/nexium-{key}.desktop').read_text()
+              for base in ['etc/skel','home/nexium']:
+                  actual={p.name for p in (r/base/'.config/plank/dock1/launchers').glob('*.dockitem')}
+                  assert actual==expected, f'Dock pin mismatch: expected {expected}, got {actual}'
+              print('PASS original ten pins plus all installed chooser/browser pins:',sorted(expected))'''
+          if old in s:s=s.replace(old,new)
+          else:assert 'Original ten dock pins must remain intact' in s
+          ast.parse(s);p.write_text(s)
+          # The earlier dpkg recovery is now present; cover its exact field name as well.
+          for name in ['scripts/install-nexium-browser.sh','scripts/measure-install-chooser.sh']:
+              p=Path(name);s=p.read_text()
+              for v in ['k','s','size']:s=s.replace('int('+v+')*1024','int('+v+' or 0)*1024')
+              p.write_text(s)
+          # A new real process per stage tests restart persistence in the final booted guest.
+          p=Path('scripts/capture-nexium-browser.py');s=p.read_text()
+          needle="text = open('/usr/share/applications/nexium-browser.desktop').read()"
+          if 'chooser_restart_test' not in s:
+              test=r'''test_path='/tmp/nexium-chooser-live-test.py'
+          open(test_path,'wb').write(urllib.request.urlopen('http://10.0.2.2:8888/chooser-test.py').read())
+          data['chooser_restart_test']=[]
+          for stage in ['add','restart-remove','restart-check']:
+              result=subprocess.run(['/opt/nexium-browser/venv/bin/python',test_path,stage],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=60)
+              data['chooser_restart_test'].append({'stage':stage,'exit':result.returncode,'stdout_stderr':result.stdout})
+              print('CHOOSER LIVE STAGE',stage,result.returncode,result.stdout,flush=True)
+              if result.returncode!=0:
+                  data['browser_gui_pass']=False;data['pass']=False
+                  urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/report',data=json.dumps(data,indent=2).encode(),method='POST')).read()
+                  raise AssertionError('FAIL final guest chooser restart test '+stage)
+          data['chooser_restart_pass']=True
+          '''
+              assert s.count(needle)==1;s=s.replace(needle,test+'\n'+needle)
+              needle="self.send_response(200);self.end_headers();self.wfile.write(probe.encode())"
+              assert s.count(needle)==1
+              s=s.replace(needle,"self.send_response(200);self.end_headers();self.wfile.write(pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else probe.encode())")
+              s=s.replace('for _ in range(360):','for _ in range(450):')
+              s += "\nassert live.get('chooser_restart_pass'), 'FAIL final booted image chooser restart persistence'\n"
+              ast.parse(s)
+              for node in ast.parse(s).body:
+                  if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='probe' for t in node.targets):compile(ast.literal_eval(node.value),'guest-probe','exec')
+              p.write_text(s)
+          print('PASS exact dock-count fix; ten original pins/icons unchanged; final guest restart assertion added')
+          PY
+          python3 scripts/complete-chooser-fixes.py | tee reports/root-cause-fix.txt
+          cat > scripts/chooser-live-test.py <<'PY'
+          import sys,json,os
+          from pathlib import Path
+          sys.path.insert(0,'/usr/local/lib/nexium')
+          from PySide6.QtWidgets import QApplication,QPushButton,QInputDialog,QListWidget,QMessageBox
+          from unittest.mock import patch
+          from nexium_launchers import LauncherStore
+          from nexium_browser import NexiumBrowser,BrowserPage
+          stage=sys.argv[1];app=QApplication([]);window=NexiumBrowser();window.show();app.processEvents()
+          config=Path.home()/'.config/nexium-browser/launchers.json'
+          assert os.getuid()!=0 and str(config).startswith('/home/nexium/')
+          source=Path('/usr/local/lib/nexium/nexium_browser.py').read_text()
+          for bad in ['GOOGLE_HOME','GOOGLE_SEARCH','google.com/search','accounts.google.com']:
+              assert bad not in source,bad
+          dialog=window.show_chooser();app.processEvents();items=dialog.findChild(QListWidget,'launcherList')
+          if stage=='add':
+              assert window.launchers.engine=='DuckDuckGo' and window.search_engine.currentText()=='DuckDuckGo'
+              for bad in ['','garbage','javascript:alert(1)']:
+                  with patch.object(QInputDialog,'getText',return_value=(bad,True)),patch.object(QMessageBox,'warning') as warning:
+                      dialog.findChild(QPushButton,'addSite').click();app.processEvents();assert warning.called
+              with patch.object(QInputDialog,'getText',return_value=('example.com/nexium-persistence-test',True)):
+                  dialog.findChild(QPushButton,'addSite').click();app.processEvents()
+              assert LauncherStore().sites[-1]['url']=='https://example.com/nexium-persistence-test'
+              window.search_engine.setCurrentText('Bing');assert LauncherStore().engine=='Bing'
+              print('PASS actual Add-site click and validation; https prefix; home config saved; Bing selected',flush=True)
+          elif stage=='restart-remove':
+              assert window.launchers.sites[-1]['url']=='https://example.com/nexium-persistence-test'
+              assert window.search_engine.currentText()=='Bing'
+              # Same saved site opens as a new in-app BrowserPage, never shell execution.
+              window.add_web_tab(window.launchers.sites[-1]['url']);assert isinstance(window.current(),BrowserPage)
+              assert window.current().web.url().toString()=='https://example.com/nexium-persistence-test'
+              items.setCurrentRow(items.count()-1);dialog.findChild(QPushButton,'removeSite').click();app.processEvents()
+              assert not LauncherStore().sites
+              window.search_engine.setCurrentText('DuckDuckGo')
+              print('PASS new app process loaded saved site and Bing; new in-app tab; actual Remove click persisted',flush=True)
+          else:
+              assert not window.launchers.sites and window.search_engine.currentText()=='DuckDuckGo'
+              print('PASS second restart confirms deletion and DuckDuckGo; no Google default',flush=True)
+          window.close();app.processEvents()
+          # Assertions have completed; avoid QtWebEngine profile teardown ordering noise in test driver.
+          sys.stdout.flush();sys.stderr.flush();os._exit(0)
+          PY
+          cat > LICENSE <<'TXT'
+          MIT License
+
+          Copyright (c) 2026 Onx
+
+          Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:
+
+          The above copyright notice and this permission notice shall be included in all
+          copies or substantial portions of the Software.
+
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+          SOFTWARE.
+          TXT
+          cat > README.md <<'TXT'
+          # Nexium OS
+
+          Nexium OS is an experimental amd64 Debian live-image project by Onx. The Golden Gate desktop uses Openbox, Plank, Tint2, PCManFM and Xterm, with a cream Plymouth splash. Nexium Browser is a Python/PySide6 QtWebEngine application. Messages, Calls and Vault are explicitly coming-soon placeholders, not working services.
+
+          ## Browser chooser
+
+          The chooser offers Nexium Browser and any installed Firefox ESR/Brave binaries. Uninstalled browsers are disabled, not claimed to ship. Add browser / Add site validates http(s) URLs, prefixes https:// when omitted, and saves entries in `~/.config/nexium-browser/launchers.json`; Remove deletes a saved entry. Site links open in Nexium Browser tabs. DuckDuckGo is the default search engine; Bing is selectable. DuckDuckGo Browser and Safari are not Linux binaries shipped by this project.
+
+          Config survives app restarts. A RAM-only live session does **not** retain its home directory across reboot unless the live system has persistent storage; this project does not promise persistence on an unconfigured USB.
+
+          ## Build
+
+          The supported cloud build is `.github/workflows/nexium-browser-complete.yml`, manually dispatched on main. It validates every workflow YAML, materializes the desktop, installs pinned/recorded browser dependencies, measures complete compressed candidate ISO images, chooses the largest set below 1,000,000,000 bytes, verifies boot preservation, and boots the final image in headless QEMU for GUI checks. Python package locks and exact measurements are retained in its verification artifact. It requires the repository's existing immutable base artifact `nexium-tab-1.2-ungoogled-iso` from run 38179706990; if that artifact expires, it must be restored from the same verified source, not replaced silently.
+
+          For a Linux build machine, inspect the workflow's dependency installation and run `python3 desktop/phase2.py --materialize`, `python3 scripts/prepare-ios4.py`, `python3 scripts/complete-chooser-fixes.py`, then `bash scripts/build-browser-chooser.sh` with the verified source ISO under `source/` and empty `work/`, `output/`, and `reports/boot/frames/` directories. The build requires sudo, chroot/mount support, several GB of free disk/RAM and network access. Expected base ISO: 661454848 bytes, SHA-256 `9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5`. Do not run the privileged build scripts on an untrusted checkout.
+
+          ## Download and boot
+
+          Successful builds provide `nexium-browser-chooser-iso` containing the ISO and SHA256SUMS, plus `nexium-browser-chooser-verification`. Verify SHA-256 before writing or booting. Write the ISO as an image to a USB device using a trusted image writer; writing erases that device, so back it up and double-check the target. Boot amd64 BIOS or UEFI firmware. Secure Boot compatibility is not promised. Artifacts are build outputs, not published releases.
+
+          ## Verification and limitations
+
+          The final gate requires a real mapped PID-owned Nexium window, normal geometry, painted nonblank pixels, a live chooser/restart test, Plank, cream splash and noninteractive sudo. The workflow fails on a failed GUI check and prints browser stdout/stderr. Kernel and GRUB configuration, EFI payload and original boot/system-area structure are preservation-checked; initrd is intentionally regenerated for Plymouth. QEMU/Xvfb evidence is not physical hardware validation. There is no guarantee that a particular Wi-Fi adapter or Lenovo model works until tested on that hardware. The live desktop uses passwordless sudo for the live user: do not treat it as a hardened multi-user system.
+
+          ## License and third-party components
+
+          Original project code is under the MIT License in LICENSE. Debian packages, Firefox, Brave, Qt/PySide6, Chromium/QtWebEngine, bundled firmware, imported vendor sources and artwork retain their own licenses/notices. MIT does not relicense third-party assets or grant trademark rights. Before redistribution, review those licenses and provenance; especially supplied icon-sheet artwork. See CONTRIBUTING.md. No release is created by the build workflow.
+          TXT
+          cat > CONTRIBUTING.md <<'TXT'
+          # Contributing to Nexium OS
+
+          Open an issue explaining the problem, affected commit/image and evidence, or submit a focused pull request. Do not post passwords, tokens, private user data or recovery codes. Use a public-safe commit identity.
+
+          ## Development and checks
+
+          - Read SPEC.md and the selected workflow before changing generated desktop/branding code. Keep changes reproducible in the generator or a documented patch helper.
+          - Run `python3 -m py_compile browser/nexium_browser.py browser/nexium_launchers.py scripts/*.py` and `python3 scripts/test-browser-chooser.py` for browser changes. Use PyYAML to parse all `.github/workflows/*.yml` before dispatch; GitHub's own workflow validation is also required.
+          - For privileged image builds use a disposable Linux build environment and the README workflow. Never bypass the byte ceiling, real-window assertion, ten original dock pins/icons, source identity, firmware/admin checks or boot-preservation gates to make a job green.
+          - Record actual ISO bytes/SHA-256 and final-image test evidence. A running process, 1x1 window, package download size, or green job alone is not proof of a usable browser or fitting ISO.
+          - Added sites must validate URLs, persist under the user's home, support removal and open without shell interpolation. Default search stays DuckDuckGo, with Bing selectable; do not add Google defaults.
+          - Preserve third-party copyright/license notices. Do not contribute proprietary assets without distribution rights. Describe provenance and applicable licenses for artwork/vendor sources.
+
+          Contributions to original project code are under the MIT License unless explicitly agreed otherwise. This does not override third-party licensing. Do not publish releases or contact users from automated workflows without project authorization.
+          TXT
+          python3 scripts/test-browser-chooser.py 2>&1 | tee reports/browser/chooser-model-tests.txt
+          python3 -m py_compile browser/nexium_browser.py browser/nexium_launchers.py scripts/complete-chooser-fixes.py scripts/chooser-live-test.py desktop/phase2.py
+          bash -n scripts/build-browser-chooser.sh scripts/measure-install-chooser.sh scripts/test-chooser-in-root.sh
+          mkdir -p reports/negative-test
+          printf '%s\n' '{"browser_gui_pass":false,"browser_launch":{"stdout_stderr":"synthetic-failure-log"}}' > reports/negative-test/live-session.json
+          set +e
+          python3 scripts/assert-nexium-capture.py reports/negative-test 2>&1 | tee reports/negative-test/failure.txt
+          rc=$?
+          set -e
+          echo "FALSE_GUI_PIPELINE_EXIT=$rc" | tee reports/negative-test/result.txt
+          test "$rc" -ne 0
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add LICENSE README.md CONTRIBUTING.md scripts/complete-chooser-fixes.py scripts/chooser-live-test.py scripts/capture-nexium-browser.py scripts/install-nexium-browser.sh scripts/measure-install-chooser.sh desktop/phase2.py
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fix exact chooser pin verification and add final restart tests and MIT project docs'
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Measure complete compressed candidates and build largest fitting set
+        run: |
+          set -euo pipefail
+          bash scripts/build-browser-chooser.sh 2>&1 | tee reports/build-chooser.txt
+      - name: Boot final ISO and verify chooser restarts and real painted Nexium GUI
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-nexium-browser.py 2>&1 | tee reports/boot-capture.txt
+      - name: Preserve final receipts even on failure
+        if: always()
+        run: |
+          set -euo pipefail
+          dest=tests/browser-chooser/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/browser/* reports/boot/*.json reports/boot/*.png reports/*.txt "$dest/" 2>/dev/null || true
+          cp reports/negative-test/result.txt "$dest/" 2>/dev/null || true
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$dest"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record final measured chooser ISO and GUI ${GITHUB_RUN_ID}"
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          { echo '## Final measured chooser ISO'; cat reports/source-commit.txt reports/size.txt reports/iso-sha256.txt reports/browser/browser-sizes.json reports/browser/fitting-set.json reports/negative-test/result.txt reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-iso
+          path: |
+            output/nexium-os-1.2-ungoogled-amd64.iso
+            output/SHA256SUMS
+          compression-level: 0
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-verification
+          path: reports/
+          if-no-files-found: error
