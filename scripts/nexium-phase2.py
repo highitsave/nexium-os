@@ -58,6 +58,8 @@ def install(root):
     manifest=json.loads(Path('reports/phase2-manifest.json').read_text())
     for p in paths:manifest['/'+str(p.relative_to(r))]=hashlib.sha256(p.read_bytes()).hexdigest()
     Path('reports/phase2-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    load('chooser_overlay','scripts/install-chooser-overlay.py').install(root)
+
 def verify(root):
     # Original checks still validate all ten iOS4 icons before custom browser icon override.
     r=Path(root);desktop=r/'usr/share/applications/nexium-browser.desktop'

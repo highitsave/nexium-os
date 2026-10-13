@@ -1,4 +1,6 @@
 import sys
+from nexium_launchers import LauncherStore, ENGINES, make_url, chooser
+from PySide6.QtWidgets import QComboBox, QMessageBox
 from pathlib import Path
 from urllib.parse import quote_plus
 
@@ -29,9 +31,6 @@ from PySide6.QtWebEngineCore import (
 
 
 
-GOOGLE_HOME = "https://www.google.com"
-GOOGLE_SEARCH = "https://www.google.com/search?q="
-GOOGLE_ACCOUNT = "https://accounts.google.com"
 
 
 class NexiumLogo(QWidget):
@@ -233,258 +232,6 @@ class NexiumRequestInterceptor(QWebEngineUrlRequestInterceptor):
             info.block(True)
 
 
-class NexiumSearchPage(QWebEnginePage):
-    """
-    A Google-backed results page with Nexium-controlled presentation.
-
-    Google supplies the search results; Nexium injects a lightweight visual layer
-    so the results feel like a native Nexium search surface.
-    """
-
-    NEXIUM_CSS = r"""
-    (() => {
-      const styleId = 'nexium-search-style';
-      if (document.getElementById(styleId)) return;
-
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.textContent = `
-        html, body {
-          background: #ffffff !important;
-        }
-
-        body {
-          font-family: Arial, Helvetica, sans-serif !important;
-        }
-
-        /* Nexium top shell */
-        #nexium-search-shell {
-          position: sticky;
-          top: 0;
-          z-index: 2147483647;
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          padding: 12px 28px;
-          background: rgba(255,255,255,.96);
-          border-bottom: 1px solid #e8e2f2;
-          box-shadow: 0 1px 8px rgba(77, 50, 110, .08);
-          backdrop-filter: blur(12px);
-        }
-
-        #nexium-search-brand {
-          display: flex;
-          align-items: center;
-          gap: 9px;
-          color: #7048c8;
-          font-size: 20px;
-          font-weight: 700;
-          white-space: nowrap;
-        }
-
-        #nexium-search-dot {
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background:
-            radial-gradient(circle at 50% 8%, #b58cff 0 2px, transparent 3px),
-            radial-gradient(circle at 20% 35%, #b58cff 0 2px, transparent 3px),
-            radial-gradient(circle at 80% 35%, #b58cff 0 2px, transparent 3px),
-            radial-gradient(circle at 50% 50%, #b58cff 0 2px, transparent 3px),
-            radial-gradient(circle at 25% 72%, #b58cff 0 2px, transparent 3px),
-            radial-gradient(circle at 75% 72%, #b58cff 0 2px, transparent 3px);
-        }
-
-        #nexium-search-input {
-          flex: 1;
-          max-width: 720px;
-          border: 1px solid #ded7e9;
-          border-radius: 24px;
-          padding: 11px 18px;
-          outline: none;
-          font-size: 15px;
-          background: #faf9fc;
-          color: #202124;
-        }
-
-        #nexium-search-input:focus {
-          background: #fff;
-          border-color: #b58cff;
-          box-shadow: 0 0 0 3px rgba(181,140,255,.15);
-        }
-
-        #nexium-search-button {
-          border: 0;
-          border-radius: 20px;
-          padding: 10px 17px;
-          background: #eee5ff;
-          color: #6240a9;
-          font-weight: 600;
-          cursor: pointer;
-        }
-
-        /* Make Google's result content feel less like the default homepage. */
-        #searchform, .A6K0A {
-          max-width: 100% !important;
-        }
-
-        .MjjYud {
-          border-radius: 14px !important;
-          padding: 8px 10px !important;
-          margin: 4px 0 !important;
-          transition: background .15s ease;
-        }
-
-        .MjjYud:hover {
-          background: #faf8ff !important;
-        }
-      `;
-      document.head.appendChild(style);
-
-      const old = document.getElementById('nexium-search-shell');
-      if (old) old.remove();
-
-      const shell = document.createElement('div');
-      shell.id = 'nexium-search-shell';
-
-      const brand = document.createElement('div');
-      brand.id = 'nexium-search-brand';
-      brand.innerHTML = '<span id="nexium-search-dot"></span><span>Nexium Search</span>';
-
-      const input = document.createElement('input');
-      input.id = 'nexium-search-input';
-      input.value = new URLSearchParams(location.search).get('q') || '';
-      input.placeholder = 'Search the web with Nexium';
-
-      const button = document.createElement('button');
-      button.id = 'nexium-search-button';
-      button.textContent = 'Search';
-
-      const submit = () => {
-        const q = input.value.trim();
-        if (q) location.href =
-          'https://www.google.com/search?q=' + encodeURIComponent(q);
-      };
-
-      input.addEventListener('keydown', e => {
-        if (e.key === 'Enter') submit();
-      });
-      button.addEventListener('click', submit);
-
-      shell.appendChild(brand);
-      shell.appendChild(input);
-      shell.appendChild(button);
-
-      document.body.prepend(shell);
-    })();
-    """
-
-    def acceptNavigationRequest(self, url, nav_type, is_main_frame):
-        return super().acceptNavigationRequest(url, nav_type, is_main_frame)
-
-
-class NexiumTermsDialog(QWidget):
-    """Terms of Service screen shown before first use."""
-
-    accepted = Signal()
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Nexium Browser — Terms of Service")
-        self.setWindowModality(Qt.ApplicationModal)
-        self.setMinimumSize(720, 570)
-        self.setObjectName("terms")
-
-        root = QVBoxLayout(self)
-        root.setContentsMargins(34, 30, 34, 30)
-        root.setSpacing(14)
-
-        title_row = QHBoxLayout()
-        title_row.addWidget(NexiumLogo(self, 52))
-
-        title_box = QVBoxLayout()
-        title = QLabel("Nexium Browser")
-        title.setStyleSheet("font-size: 26px; font-weight: 700;")
-        subtitle = QLabel("Terms of Service")
-        subtitle.setStyleSheet("font-size: 14px; color: #77717f;")
-        title_box.addWidget(title)
-        title_box.addWidget(subtitle)
-        title_row.addLayout(title_box)
-        title_row.addStretch()
-        root.addLayout(title_row)
-
-        body = QLabel(
-            "<b>Welcome to Nexium Browser.</b><br><br>"
-            "By using Nexium Browser, you agree to use it lawfully and respect "
-            "the terms, policies, and intellectual-property rights of websites "
-            "you visit.<br><br>"
-            "Nexium Browser is provided as-is. Website content, accounts, search "
-            "results, and third-party services remain controlled by their "
-            "respective providers.<br><br>"
-            "Nexium Search uses Google to obtain web results while Nexium controls "
-            "the presentation layer. Search results may therefore be subject "
-            "to Google's availability and policies.<br><br>"
-            "Nexium Browser includes an optional built-in network filter intended "
-            "to block common advertising and tracking requests. It is not "
-            "guaranteed to block every advertisement, and websites may change "
-            "their delivery methods.<br><br>"
-            "Do not use Nexium Browser to violate applicable law, compromise "
-            "systems, abuse services, or infringe another person's rights."
-        )
-        body.setWordWrap(True)
-        body.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        root.addWidget(body, 1)
-
-        notice = QLabel(
-            "These terms are a project-level notice and are not legal advice."
-        )
-        notice.setStyleSheet("color: #8b8494; font-size: 12px;")
-        root.addWidget(notice)
-
-        buttons = QHBoxLayout()
-        buttons.addStretch()
-
-        decline = QPushButton("Exit")
-        decline.clicked.connect(QApplication.quit)
-
-        accept = QPushButton("I Agree")
-        accept.setObjectName("termsAccept")
-        accept.clicked.connect(self.accept_terms)
-
-        buttons.addWidget(decline)
-        buttons.addWidget(accept)
-        root.addLayout(buttons)
-
-        self.setStyleSheet("""
-            QWidget#terms {
-                background: #ffffff;
-                color: #202124;
-            }
-            QPushButton {
-                border: 0;
-                border-radius: 8px;
-                padding: 10px 20px;
-                background: #f1edf7;
-                color: #3c3150;
-            }
-            QPushButton:hover {
-                background: #e8dff5;
-            }
-            QPushButton#termsAccept {
-                background: #9c72e9;
-                color: white;
-                font-weight: 700;
-            }
-            QPushButton#termsAccept:hover {
-                background: #895bdc;
-            }
-        """)
-
-    def accept_terms(self):
-        self.accepted.emit()
-        self.close()
-
-
 class BrowserPage(QWidget):
     def __init__(self, url, profile):
         super().__init__()
@@ -496,19 +243,7 @@ class BrowserPage(QWidget):
         self.web.setPage(self.page)
 
         self.web.setUrl(QUrl(url))
-        self.web.loadFinished.connect(self.inject_nexium_search_ui)
         layout.addWidget(self.web)
-
-    def inject_nexium_search_ui(self, ok):
-        if not ok:
-            return
-
-        url = self.web.url().toString()
-        if "google.com/search" in url:
-            # Run the Nexium search presentation layer inside Google's result page.
-            self.web.page().runJavaScript(NexiumSearchPage.NEXIUM_CSS)
-
-
 
 class NexiumHome(QWidget):
     """Custom Nexium New Tab page."""
@@ -537,7 +272,7 @@ class NexiumHome(QWidget):
         self.theme_btn.clicked.connect(self.theme_callback)
         top.addWidget(self.theme_btn)
 
-        self.sign_in_btn = QPushButton("Sign in")
+        self.sign_in_btn = QPushButton("Browsers / Add site")
         self.sign_in_btn.clicked.connect(self.login_callback)
         top.addWidget(self.sign_in_btn)
 
@@ -590,10 +325,10 @@ class NexiumHome(QWidget):
         search_btn.clicked.connect(self.search_web)
         buttons.addWidget(search_btn)
 
-        google_btn = QPushButton("Open Google")
-        google_btn.setObjectName("homeButton")
-        google_btn.clicked.connect(lambda: self.navigate_callback(GOOGLE_HOME))
-        buttons.addWidget(google_btn)
+        search_home_btn = QPushButton("Open search engine")
+        search_home_btn.setObjectName("homeButton")
+        search_home_btn.clicked.connect(lambda: self.navigate_callback(make_url("")))
+        buttons.addWidget(search_home_btn)
 
         buttons.addStretch()
         root.addLayout(buttons)
@@ -608,9 +343,8 @@ class NexiumHome(QWidget):
 
     def open_shortcuts(self):
         menu = QMenu(self)
-        menu.addAction("Google", lambda: self.navigate_callback(GOOGLE_HOME))
-        menu.addAction("YouTube", lambda: self.navigate_callback("https://www.youtube.com"))
-        menu.addAction("Gmail", lambda: self.navigate_callback("https://mail.google.com"))
+        menu.addAction("DuckDuckGo", lambda: self.navigate_callback(make_url("")))
+        menu.addAction("Bing", lambda: self.navigate_callback("https://www.bing.com/"))
         menu.addSeparator()
         menu.addSeparator()
         menu.addAction("Terms of Service", self.show_terms)
@@ -626,30 +360,10 @@ class NexiumHome(QWidget):
         self.theme_btn.setText("☀ Theme" if dark_mode else "☾ Theme")
 
 
-def make_url(text):
-    text = text.strip()
-
-    if not text:
-        return GOOGLE_HOME
-
-    # Treat explicit schemes as URLs.
-    if "://" in text:
-        return text
-
-    # Localhost / IP addresses / domains without spaces.
-    if (
-        ("." in text and " " not in text)
-        or text.startswith("localhost")
-        or text.startswith("127.0.0.1")
-    ):
-        return "https://" + text
-
-    return GOOGLE_SEARCH + quote_plus(text)
-
-
 class NexiumBrowser(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.launchers = LauncherStore()
         self.dark_mode = False
         self.logged_in = False
         self.setWindowTitle("Nexium Browser")
@@ -715,9 +429,15 @@ class NexiumBrowser(QMainWindow):
         self.address.returnPressed.connect(self.navigate)
         nav_layout.addWidget(self.address, 1)
 
-        self.shortcuts_button = QPushButton("Shortcuts")
-        self.shortcuts_button.clicked.connect(self.show_shortcuts)
+        self.shortcuts_button = QPushButton("Browsers / Add site")
+        self.shortcuts_button.clicked.connect(self.show_chooser)
         nav_layout.addWidget(self.shortcuts_button)
+        self.search_engine = QComboBox()
+        self.search_engine.setObjectName("searchEngine")
+        self.search_engine.addItems(list(ENGINES))
+        self.search_engine.setCurrentText(self.launchers.engine)
+        self.search_engine.currentTextChanged.connect(self.change_engine)
+        nav_layout.addWidget(self.search_engine)
 
         self.theme_button = QPushButton("☾")
         self.theme_button.setToolTip("Toggle theme")
@@ -726,7 +446,7 @@ class NexiumBrowser(QMainWindow):
 
         self.sign_in = QPushButton("Sign in")
         self.sign_in.clicked.connect(self.sign_in_clicked)
-        nav_layout.addWidget(self.sign_in)
+        self.sign_in.hide()
 
         self.profile_button = QPushButton("●")
         self.profile_button.setObjectName("profile")
@@ -750,6 +470,13 @@ class NexiumBrowser(QMainWindow):
         self.apply_theme()
         self.add_home_tab()
 
+    def show_chooser(self):
+        return chooser(self)
+
+    def change_engine(self, engine):
+        try:self.launchers.set_engine(engine)
+        except OSError as e:QMessageBox.warning(self,"Could not save search engine",str(e))
+
     def make_tool_button(self, text, callback, tooltip):
         button = QToolButton()
         button.setText(text)
@@ -762,7 +489,7 @@ class NexiumBrowser(QMainWindow):
         home = NexiumHome(
             self.open_url,
             self.toggle_theme,
-            self.sign_in_clicked,
+            self.show_chooser,
             self.dark_mode,
         )
         index = self.tabs.addTab(home, "New Tab")
@@ -864,10 +591,9 @@ class NexiumBrowser(QMainWindow):
 
     def show_shortcuts(self):
         menu = QMenu(self)
-        menu.addAction("Google", lambda: self.open_url(GOOGLE_HOME))
+        menu.addAction("DuckDuckGo", lambda: self.open_url("https://duckduckgo.com/"))
         menu.addAction("Nexium Search", lambda: self.focus_address())
-        menu.addAction("YouTube", lambda: self.open_url("https://www.youtube.com"))
-        menu.addAction("Gmail", lambda: self.open_url("https://mail.google.com"))
+        menu.addAction("Bing", lambda: self.open_url("https://www.bing.com/"))
         menu.addSeparator()
         menu.addSeparator()
         ad_action = menu.addAction("Built-in ad/tracker blocking: ON")
@@ -885,11 +611,7 @@ class NexiumBrowser(QMainWindow):
         self.terms_dialog = dialog
 
     def sign_in_clicked(self):
-        # UI prototype: no credentials are collected.
-        self.logged_in = True
-        self.sign_in.hide()
-        self.profile_button.show()
-        self.open_url(GOOGLE_ACCOUNT)
+        self.show_chooser()
 
     def profile_clicked(self):
         menu = QMenu(self)
@@ -1150,6 +872,7 @@ def main():
             window = NexiumBrowser()
             window.show()
             app.nexium_window = window
+            if "--chooser" in sys.argv:window.show_chooser()
 
         boot.ready.connect(launch_browser)
 
