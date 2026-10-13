@@ -1,0 +1,96 @@
+name: Fix and commit Nexium browser source first
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/nexium-browser-source.yml]
+permissions:
+  contents: write
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download original and commit corrected renamed browser independently
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p browser/vendor reports/browser
+          python3 - <<'PY'
+          from pathlib import Path
+          import urllib.request, hashlib, ast, re, difflib, json
+          fid='1rJrcnw6-LslWIvP_4t6vml7BBNHIdkAG'
+          url='https://drive.usercontent.google.com/download?id='+fid+'&export=download&confirm=t'
+          original=urllib.request.urlopen(url, timeout=90).read()
+          text=original.decode('utf-8-sig')
+          ast.parse(text)
+          assert 'class NeoBrowser' in text and 'QWebEngineProfile.defaultProfile()' in text
+          Path('browser/vendor/neo_os_browser_v2.py').write_bytes(original)
+          fixed=text.replace('import sys\n','import sys\nfrom pathlib import Path\n',1)
+          old='        self.profile = QWebEngineProfile.defaultProfile()'
+          new='''        storage = Path.home() / ".local/share/nexium-browser"
+                  cache = Path.home() / ".cache/nexium-browser"
+                  storage.mkdir(parents=True, exist_ok=True)
+                  cache.mkdir(parents=True, exist_ok=True)
+                  self.profile = QWebEngineProfile("nexium", self)
+                  self.profile.setPersistentStoragePath(str(storage))
+                  self.profile.setCachePath(str(cache))
+                  self.profile.setPersistentCookiesPolicy(QWebEngineProfile.PersistentCookiesPolicy.ForcePersistentCookies)'''
+          new=new.replace('\n                  ','\n        ')
+          assert fixed.count(old)==1
+          fixed=fixed.replace(old,new)
+          fixed=fixed.replace('self.profile = QPushButton','self.profile_button = QPushButton')
+          for method in ['setObjectName','setToolTip','setFixedSize','clicked','hide','show','mapToGlobal','rect']:
+              fixed=fixed.replace('self.profile.'+method,'self.profile_button.'+method)
+          fixed=fixed.replace('nav_layout.addWidget(self.profile)','nav_layout.addWidget(self.profile_button)')
+          # Remove the non-functional shortcut control; retain all actual shortcuts.
+          lines=fixed.splitlines(keepends=True)
+          dead=[i for i,l in enumerate(lines) if 'Add shortcut' in l]
+          for i in reversed(dead):
+              if 'lambda' in lines[i]: del lines[i]
+              else:
+                  name=re.search(r'(\w+)\s*=.*Add shortcut',lines[i])
+                  assert name, 'Unrecognized Add shortcut control'
+                  variable=name[1]
+                  lines=[l for l in lines if not re.search(r'\b'+re.escape(variable)+r'\b',l)]
+          fixed=''.join(lines)
+          needle='    def sign_out(self):\n'
+          assert fixed.count(needle)==1
+          fixed=fixed.replace(needle,needle+'        self.profile.cookieStore().deleteAllCookies()\n        self.profile.clearHttpCache()\n',1)
+          fixed=fixed.replace('Neo','Nexium').replace('NEO','NEXIUM').replace('neo','nexium')
+          ast.parse(fixed)
+          assert 'self.profile = QPushButton' not in fixed
+          assert 'BrowserPage(url, self.profile)' in fixed
+          assert 'QWebEnginePage(profile, self.web)' in fixed
+          assert 'Neo' not in fixed and 'Add shortcut' not in fixed
+          Path('browser/nexium_browser.py').write_text(fixed)
+          diff=''.join(difflib.unified_diff(text.splitlines(True),fixed.splitlines(True),fromfile='neo_os_browser_v2.py',tofile='nexium_browser.py'))
+          Path('reports/browser/source.diff').write_text(diff)
+          audit='\n'.join(f'{i}: {l}' for i,l in enumerate(fixed.splitlines(),1) if 'self.profile' in l or 'QWebEnginePage(' in l or 'QWebEngineProfile(' in l)
+          Path('reports/browser/profile-audit.txt').write_text(audit+'\n')
+          sizes={name:{'bytes':Path(name).stat().st_size,'sha256':hashlib.sha256(Path(name).read_bytes()).hexdigest()} for name in ['browser/vendor/neo_os_browser_v2.py','browser/nexium_browser.py']}
+          Path('reports/browser/source-sizes.json').write_text(json.dumps(sizes,indent=2)+'\n')
+          print(diff); print(audit); print(json.dumps(sizes,indent=2))
+          print('PASS AST source compile; browser profile distinct from every widget reference')
+          PY
+          python3 -m py_compile browser/nexium_browser.py
+          rm -rf browser/__pycache__
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          mkdir -p tests/nexium-browser-source
+          cp reports/browser/* tests/nexium-browser-source/
+          git add browser tests/nexium-browser-source
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fix persistent Nexium browser profile, profile button, logout and dead shortcut'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/browser/source-commit.txt
+          { echo '## Source fix committed independently'; cat reports/browser/source-commit.txt reports/browser/source-sizes.json reports/browser/profile-audit.txt; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-source-fix
+          path: reports/browser/
+          if-no-files-found: error
