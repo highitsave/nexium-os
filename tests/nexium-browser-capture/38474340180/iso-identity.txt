@@ -1,0 +1,2 @@
+UNCHANGED ISO: 777256960 bytes; existing boot-preservation proof remains tied to identical SHA256
+33b84c29c6e16f277b41d91ca7846b14799ae97edeb2127234e8e511a0fc503a  output/nexium-os-1.2-ungoogled-amd64.iso

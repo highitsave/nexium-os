@@ -1,0 +1,30 @@
+{
+  "browser_gui_pass": true,
+  "windows": [
+    {
+      "id": "0x1600027",
+      "title": "Nexium Browser",
+      "view": {
+        "command": "xwininfo -id 0x1600027",
+        "exit": 0,
+        "output": "\nxwininfo: Window id: 0x1600027 \"Nexium Browser\"\n\n  Absolute upper-left X:  9\n  Absolute upper-left Y:  68\n  Relative upper-left X:  9\n  Relative upper-left Y:  38\n  Width: 1280\n  Height: 820\n  Depth: 24\n  Visual: 0x21\n  Visual Class: TrueColor\n  Border width: 0\n  Class: InputOutput\n  Colormap: 0x1600006 (installed)\n  Bit Gravity State: NorthWestGravity\n  Window Gravity State: NorthWestGravity\n  Backing Store State: NotUseful\n  Save Under State: no\n  Map State: IsViewable\n  Override Redirect State: no\n  Corners:  +9+68  --9+68  --9--88  +9--88\n  -geometry 1280x820+9+68\n\n"
+      },
+      "owner": {
+        "command": "xprop -id 0x1600027 _NET_WM_PID",
+        "exit": 0,
+        "output": "_NET_WM_PID(CARDINAL) = 977\n"
+      },
+      "pid": 977,
+      "width": 1280,
+      "height": 820
+    }
+  ],
+  "screenshot_width": 1271,
+  "screenshot_height": 732,
+  "sample_colors": 351,
+  "pixel_variance_sum": 7615.440941255316,
+  "ocr": "Newnab es ~\n\nShortcuts Theme Sign in\n\nNexium\n\nSearch the web with Nexium\n\nNexium Search Open Google\n",
+  "paint_pass": true,
+  "plank_running": true,
+  "sudo_exit": 0
+}

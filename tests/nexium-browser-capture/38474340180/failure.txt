@@ -1,0 +1,8 @@
+NEXIUM STDOUT/STDERR BEGIN
+synthetic-failure-log
+NEXIUM STDOUT/STDERR END
+Traceback (most recent call last):
+  File "/home/runner/work/nexium-os/nexium-os/scripts/assert-nexium-capture.py", line 8, in <module>
+    assert live.get('browser_gui_pass'), 'FAIL browser_gui_pass is false; no usable real browser window'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: FAIL browser_gui_pass is false; no usable real browser window
