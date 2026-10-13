@@ -1,0 +1,18 @@
+CHROMIUM AUDIT {"file": "/opt/ungoogled-chromium/chrome-wrapper", "kind": "launcher/environment", "sha256": "24c1cfddcd206a86281008e7eed38109344ef34cd88d61902a9befd520a5571c", "lines": [{"line": 61, "text": "Exec=$CHROME_WRAPPER %U"}, {"line": 145, "text": "        exec man \"$HERE/../../chrome/app/resources/manpage.1.in\" ;;"}, {"line": 153, "text": "exec $CMD_PREFIX \"$HERE/chrome\" \"$@\""}]}
+CHROMIUM AUDIT {"file": "/usr/bin/ungoogled-chromium", "kind": "launcher/environment", "sha256": "17c1be912e454cfab060a94d03b5e53d60b942b8d8f2fac6497bf5821bb4e0b8", "lines": [{"line": 5, "text": "exec /opt/ungoogled-chromium/chrome \"$@\""}]}
+CHROMIUM AUDIT {"file": "/usr/share/applications/chromium.desktop", "kind": "launcher/environment", "sha256": "f036123698f12f74525cc843ef51e8de62bbf61c1b06d385ff50c9ce88eb5b21", "lines": [{"line": 131, "text": "Exec=/usr/bin/chromium %U"}]}
+CHROMIUM AUDIT {"file": "/usr/share/applications/nexium-browser.desktop", "kind": "launcher/environment", "sha256": "72a28a8a63c889dbf822751996edf93b7fb7a0f470836e6327810eff45498486", "lines": [{"line": 4, "text": "Exec=/usr/bin/chromium"}]}
+CHROMIUM AUDIT {"file": "/usr/share/applications/ungoogled-chromium.desktop", "kind": "launcher/environment", "sha256": "b51c4f42187fb2daa78661f3c287a1278e5c1b0c4f733667f003573a0cfb548e", "lines": [{"line": 4, "text": "Exec=ungoogled-chromium %U"}]}
+ENTERPRISE PATHS: []
+CHROMIUM ENTRY: /usr/bin/ungoogled-chromium
+CHROMIUM RESOLVED: /usr/bin/ungoogled-chromium
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+PASS UNGOOGLED ELF UNCHANGED: 64fcb6e541d06980dca15286fb19e438c4b3ddbc8c3079358364431d3217c331
+
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+Installed native layer: 152 SHA256-tracked files; icon theme: NexiumIOS4
