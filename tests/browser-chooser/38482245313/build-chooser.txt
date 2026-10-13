@@ -1,0 +1,858 @@
+++ find source -name '*.iso' -print -quit
++ iso=source/nexium-os-1.2-ungoogled-amd64.iso
++ test -n source/nexium-os-1.2-ungoogled-amd64.iso
+++ stat -c%s source/nexium-os-1.2-ungoogled-amd64.iso
++ test 661454848 = 661454848
++ echo '9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5  source/nexium-os-1.2-ungoogled-amd64.iso'
++ sha256sum -c -
+source/nexium-os-1.2-ungoogled-amd64.iso: OK
++ cp source/nexium-os-1.2-ungoogled-amd64.iso work/orig.iso
++ xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain
++ xorriso -osirrox on -indev work/orig.iso -extract / work/original
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Copying of file objects from ISO image to disk filesystem is: Enabled
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 83.1g free
+Volume id    : 'NEXIUM_OS'
+xorriso : UPDATE :     306 files restored ( 624.0m) in 1 seconds = 472.5xD
+Extracted from ISO image: file '/'='/home/runner/work/nexium-os/nexium-os/work/original'
++ sudo unsquashfs -d work/root work/original/live/filesystem.squashfs
+Parallel unsquashfs: Using 4 processors
+24524 inodes (23862 blocks) to write
+
+[=/                                                          ]   940/48386   1%[=-                                                          ]   976/48386   2%[==-                                                         ]  1742/48386   3%[==\                                                         ]  1949/48386   4%[===/                                                        ]  2639/48386   5%[====-                                                       ]  3314/48386   6%[====\                                                       ]  4097/48386   8%[======|                                                     ]  5154/48386  10%[======/                                                     ]  5533/48386  11%[=======\                                                    ]  6036/48386  12%[=======|                                                    ]  6315/48386  13%[========/                                                   ]  7058/48386  14%[========\                                                   ]  7370/48386  15%[==========|                                                 ]  8859/48386  18%[============/                                               ] 10005/48386  20%[==============-                                             ] 11605/48386  23%[================\                                           ] 13202/48386  27%[================|                                           ] 13870/48386  28%[==================/                                         ] 14900/48386  30%[===================-                                        ] 16017/48386  33%[=====================\                                      ] 17736/48386  36%[=========================|                                  ] 20871/48386  43%[==========================/                                 ] 21409/48386  44%[==========================\                                 ] 21804/48386  45%[===========================\                                ] 22294/48386  46%[===========================-                                ] 22801/48386  47%[=============================\                              ] 24323/48386  50%[=================================|                          ] 27425/48386  56%[========================================/                   ] 33382/48386  68%[===================================================-        ] 42406/48386  87%[======================================================\     ] 44764/48386  92%[===========================================================\] 48386/48386 100%
+
+created 22752 files
+created 2709 directories
+created 1754 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+created 18 hardlinks
++ sudo cp -a work/root/etc/resolv.conf work/resolv.saved
++ sudo rm -f work/root/etc/resolv.conf
++ sudo cp /etc/resolv.conf work/root/etc/resolv.conf
++ '[' -e work/root/usr/sbin/policy-rc.d ']'
++ printf '#!/bin/sh\nexit 101\n'
++ sudo tee work/root/usr/sbin/policy-rc.d
+#!/bin/sh
+exit 101
++ sudo chmod +x work/root/usr/sbin/policy-rc.d
++ sudo mount -t proc proc work/root/proc
++ sudo mount --rbind /dev work/root/dev
++ sudo mount --make-rslave work/root/dev
++ sudo mount --bind /sys work/root/sys
++ trap cleanup EXIT
++ sudo python3 scripts/live-admin-network.py sources work/root
++ tee reports/firmware-sources.txt
+APT firmware components enabled before package install
++ sudo chroot work/root apt-get update
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://security.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Get:4 http://deb.debian.org/debian bookworm/non-free amd64 Packages [102 kB]
+Get:5 http://deb.debian.org/debian bookworm/non-free Translation-en [68.2 kB]
+Get:6 http://security.debian.org/debian-security bookworm-security/main amd64 Packages [349 kB]
+Get:7 http://security.debian.org/debian-security bookworm-security/non-free amd64 Packages [6296 B]
+Get:8 http://security.debian.org/debian-security bookworm-security/non-free Translation-en [5340 B]
+Fetched 621 kB in 0s (2118 kB/s)
+Reading package lists...
++ bash scripts/install-nexium-browser.sh
++ root=work/root
++ sudo cat work/root/etc/os-release
++ tee reports/browser/debian-base.txt
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Version}\t${Installed-Size}\n'
++ sudo chroot work/root apt-cache policy python3-pyside6 python3-pyside6.qtwebenginewidgets python3-pyside6.qtwebenginecore python3-pyqt6.qtwebengine libqt6webenginecore6 qt6-webengine
++ tee reports/browser/debian-pyside6-availability.txt
+python3-pyqt6.qtwebengine:
+  Installed: (none)
+  Candidate: 6.4.0-1
+  Version table:
+     6.4.0-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
+libqt6webenginecore6:
+  Installed: (none)
+  Candidate: 6.4.2-final+dfsg-1
+  Version table:
+     6.4.2-final+dfsg-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
++ sudo chroot work/root apt-cache search pyside6
++ tee reports/browser/pyside6-search.txt
+python3-qtpy - Abstraction layer for PySide2/PySide6/PyQt5/PyQt6 (Python 3)
+python3-sphinx-qt-documentation - Plugin for proper resolve intersphinx references for Qt elements
+python-superqt-doc - 'missing' widgets and components for PyQt/PySide - documentation
+python3-superqt - 'missing' widgets and components for PyQt/PySide
+++ sudo chroot work/root dpkg-query -W '-f=${Package}\n'
+++ grep -E '^(ungoogled-chromium|chromium)(-|$)'
++ pkgs=ungoogled-chromium
++ sudo du -sb work/root/opt/ungoogled-chromium
++ tee reports/browser/standalone-chromium-bytes.txt
+797546240	work/root/opt/ungoogled-chromium
++ '[' -n ungoogled-chromium ']'
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get purge -y ungoogled-chromium
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  adwaita-icon-theme at-spi2-common dconf-gsettings-backend dconf-service
+  gtk-update-icon-cache hicolor-icon-theme libatk-bridge2.0-0 libatk1.0-0
+  libatspi2.0-0 libavahi-client3 libavahi-common-data libavahi-common3
+  libcolord2 libcups2 libdconf1 libdouble-conversion3 libgtk-3-0
+  libgtk-3-common libharfbuzz-subset0 libminizip1 libnspr4 libnss3
+  libopenh264-7 libproc2-0 libwayland-cursor0 libwayland-egl1 libxcb-shape0
+  libxcomposite1 libxdamage1 libxinerama1 libxkbcommon0 libxnvctrl0 libxv1
+  libxxf86dga1 procps x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  ungoogled-chromium*
+0 upgraded, 0 newly installed, 1 to remove and 3 not upgraded.
+After this operation, 799 MB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 30588 files and directories currently installed.)
+Removing ungoogled-chromium (155.0.8059.39-1+nexium1) ...
++ sudo rm -rf work/root/opt/ungoogled-chromium
++ sudo rm -f work/root/usr/bin/chromium work/root/usr/bin/ungoogled-chromium
++ native='python3 python3-venv ca-certificates libglib2.0-0 libdbus-1-3 libfontconfig1 libfreetype6 libgl1 libegl1 libopengl0 libnss3 libnspr4 libxkbcommon0 libxkbcommon-x11-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 libdrm2 libgbm1 libasound2 libxcb1 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xfixes0 libxcb-xkb1 libx11-xcb1 libxrender1 libxext6 libx11-6'
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-venv ca-certificates libglib2.0-0 libdbus-1-3 libfontconfig1 libfreetype6 libgl1 libegl1 libopengl0 libnss3 libnspr4 libxkbcommon0 libxkbcommon-x11-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 libdrm2 libgbm1 libasound2 libxcb1 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xfixes0 libxcb-xkb1 libx11-xcb1 libxrender1 libxext6 libx11-6
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3 is already the newest version (3.11.2-1+b1).
+ca-certificates is already the newest version (20250419~deb12u1).
+libglib2.0-0 is already the newest version (2.74.6-2+deb12u9).
+libglib2.0-0 set to manually installed.
+libdbus-1-3 is already the newest version (1.14.10-1~deb12u1).
+libdbus-1-3 set to manually installed.
+libfontconfig1 is already the newest version (2.14.1-4).
+libfontconfig1 set to manually installed.
+libfreetype6 is already the newest version (2.12.1+dfsg-5+deb12u4).
+libfreetype6 set to manually installed.
+libgl1 is already the newest version (1.6.0-1).
+libgl1 set to manually installed.
+libegl1 is already the newest version (1.6.0-1).
+libnss3 is already the newest version (2:3.87.1-1+deb12u4).
+libnss3 set to manually installed.
+libnspr4 is already the newest version (2:4.35-1).
+libnspr4 set to manually installed.
+libxkbcommon0 is already the newest version (1.5.0-1).
+libxkbcommon0 set to manually installed.
+libxcomposite1 is already the newest version (1:0.4.5-1).
+libxcomposite1 set to manually installed.
+libxdamage1 is already the newest version (1:1.1.6-1).
+libxdamage1 set to manually installed.
+libxrandr2 is already the newest version (2:1.5.2-2+b1).
+libxrandr2 set to manually installed.
+libxfixes3 is already the newest version (1:6.0.0-2).
+libxfixes3 set to manually installed.
+libdrm2 is already the newest version (2.4.114-1+b1).
+libdrm2 set to manually installed.
+libgbm1 is already the newest version (22.3.6-1+deb12u2).
+libgbm1 set to manually installed.
+libasound2 is already the newest version (1.2.8-1+b1).
+libasound2 set to manually installed.
+libxcb1 is already the newest version (1.15-1).
+libxcb1 set to manually installed.
+libxcb-randr0 is already the newest version (1.15-1).
+libxcb-randr0 set to manually installed.
+libxcb-shape0 is already the newest version (1.15-1).
+libxcb-shape0 set to manually installed.
+libxcb-xfixes0 is already the newest version (1.15-1).
+libxcb-xfixes0 set to manually installed.
+libx11-xcb1 is already the newest version (2:1.8.4-2+deb12u2).
+libx11-xcb1 set to manually installed.
+libxrender1 is already the newest version (1:0.9.10-1.1).
+libxrender1 set to manually installed.
+libxext6 is already the newest version (2:1.3.4-1+b1).
+libxext6 set to manually installed.
+libx11-6 is already the newest version (2:1.8.4-2+deb12u2).
+libx11-6 set to manually installed.
+The following packages were automatically installed and are no longer required:
+  adwaita-icon-theme at-spi2-common dconf-gsettings-backend dconf-service
+  gtk-update-icon-cache hicolor-icon-theme libatk-bridge2.0-0 libatk1.0-0
+  libatspi2.0-0 libavahi-client3 libavahi-common-data libavahi-common3
+  libcolord2 libcups2 libdconf1 libdouble-conversion3 libgtk-3-0
+  libgtk-3-common libharfbuzz-subset0 libminizip1 libopenh264-7 libproc2-0
+  libwayland-cursor0 libwayland-egl1 libxinerama1 libxnvctrl0 libxv1
+  libxxf86dga1 procps x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  python3-distutils python3-lib2to3 python3-pip-whl python3-setuptools-whl
+  python3.11-venv
+The following NEW packages will be installed:
+  libopengl0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1
+  libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0 python3-distutils
+  python3-lib2to3 python3-pip-whl python3-setuptools-whl python3-venv
+  python3.11-venv
+0 upgraded, 14 newly installed, 0 to remove and 3 not upgraded.
+Need to get 3321 kB of archives.
+After this operation, 4969 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libxcb-image0 amd64 0.4.0-2 [22.9 kB]
+Get:2 http://security.debian.org/debian-security bookworm-security/main amd64 python3.11-venv amd64 3.11.2-6+deb12u9 [5896 B]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libxcb-render-util0 amd64 0.3.9-1+b1 [18.3 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libxcb-cursor0 amd64 0.1.4-1 [16.7 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libxcb-icccm4 amd64 0.4.1-1.1 [27.4 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libxcb-keysyms1 amd64 0.4.0-1+b2 [16.4 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libxcb-xkb1 amd64 1.15-1 [129 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libxkbcommon-x11-0 amd64 1.5.0-1 [15.6 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 python3-lib2to3 all 3.11.2-3 [76.3 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 python3-distutils all 3.11.2-3 [131 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 python3-pip-whl all 23.0.1+dfsg-1 [1717 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 python3-setuptools-whl all 66.1.1-1+deb12u2 [1112 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 python3-venv amd64 3.11.2-1+b1 [1200 B]
+Get:14 http://deb.debian.org/debian bookworm/main amd64 libopengl0 amd64 1.6.0-1 [30.6 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 3321 kB in 0s (64.3 MB/s)
+Selecting previously unselected package libxcb-image0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29910 files and directories currently installed.)
+Preparing to unpack .../00-libxcb-image0_0.4.0-2_amd64.deb ...
+Unpacking libxcb-image0:amd64 (0.4.0-2) ...
+Selecting previously unselected package libxcb-render-util0:amd64.
+Preparing to unpack .../01-libxcb-render-util0_0.3.9-1+b1_amd64.deb ...
+Unpacking libxcb-render-util0:amd64 (0.3.9-1+b1) ...
+Selecting previously unselected package libxcb-cursor0:amd64.
+Preparing to unpack .../02-libxcb-cursor0_0.1.4-1_amd64.deb ...
+Unpacking libxcb-cursor0:amd64 (0.1.4-1) ...
+Selecting previously unselected package libxcb-icccm4:amd64.
+Preparing to unpack .../03-libxcb-icccm4_0.4.1-1.1_amd64.deb ...
+Unpacking libxcb-icccm4:amd64 (0.4.1-1.1) ...
+Selecting previously unselected package libxcb-keysyms1:amd64.
+Preparing to unpack .../04-libxcb-keysyms1_0.4.0-1+b2_amd64.deb ...
+Unpacking libxcb-keysyms1:amd64 (0.4.0-1+b2) ...
+Selecting previously unselected package libxcb-xkb1:amd64.
+Preparing to unpack .../05-libxcb-xkb1_1.15-1_amd64.deb ...
+Unpacking libxcb-xkb1:amd64 (1.15-1) ...
+Selecting previously unselected package libxkbcommon-x11-0:amd64.
+Preparing to unpack .../06-libxkbcommon-x11-0_1.5.0-1_amd64.deb ...
+Unpacking libxkbcommon-x11-0:amd64 (1.5.0-1) ...
+Selecting previously unselected package python3-lib2to3.
+Preparing to unpack .../07-python3-lib2to3_3.11.2-3_all.deb ...
+Unpacking python3-lib2to3 (3.11.2-3) ...
+Selecting previously unselected package python3-distutils.
+Preparing to unpack .../08-python3-distutils_3.11.2-3_all.deb ...
+Unpacking python3-distutils (3.11.2-3) ...
+Selecting previously unselected package python3-pip-whl.
+Preparing to unpack .../09-python3-pip-whl_23.0.1+dfsg-1_all.deb ...
+Unpacking python3-pip-whl (23.0.1+dfsg-1) ...
+Selecting previously unselected package python3-setuptools-whl.
+Preparing to unpack .../10-python3-setuptools-whl_66.1.1-1+deb12u2_all.deb ...
+Unpacking python3-setuptools-whl (66.1.1-1+deb12u2) ...
+Selecting previously unselected package python3.11-venv.
+Preparing to unpack .../11-python3.11-venv_3.11.2-6+deb12u9_amd64.deb ...
+Unpacking python3.11-venv (3.11.2-6+deb12u9) ...
+Selecting previously unselected package python3-venv.
+Preparing to unpack .../12-python3-venv_3.11.2-1+b1_amd64.deb ...
+Unpacking python3-venv (3.11.2-1+b1) ...
+Selecting previously unselected package libopengl0:amd64.
+Preparing to unpack .../13-libopengl0_1.6.0-1_amd64.deb ...
+Unpacking libopengl0:amd64 (1.6.0-1) ...
+Setting up python3-setuptools-whl (66.1.1-1+deb12u2) ...
+Setting up python3-pip-whl (23.0.1+dfsg-1) ...
+Setting up libxcb-keysyms1:amd64 (0.4.0-1+b2) ...
+Setting up libxcb-render-util0:amd64 (0.3.9-1+b1) ...
+Setting up libxcb-icccm4:amd64 (0.4.1-1.1) ...
+Setting up libopengl0:amd64 (1.6.0-1) ...
+Setting up libxcb-xkb1:amd64 (1.15-1) ...
+Setting up libxcb-image0:amd64 (0.4.0-2) ...
+Setting up libxcb-cursor0:amd64 (0.1.4-1) ...
+Setting up libxkbcommon-x11-0:amd64 (1.5.0-1) ...
+Setting up python3-lib2to3 (3.11.2-3) ...
+Setting up python3-distutils (3.11.2-3) ...
+Setting up python3.11-venv (3.11.2-6+deb12u9) ...
+Setting up python3-venv (3.11.2-1+b1) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
++ sudo chroot work/root python3 -m venv /opt/nexium-browser/venv
++ sudo chroot work/root /opt/nexium-browser/venv/bin/pip install --only-binary=:all: --no-cache-dir PySide6
+Collecting PySide6
+  Downloading pyside6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (577 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 577.7/577.7 kB 16.0 MB/s eta 0:00:00
+Collecting PySide6_Essentials==6.12.0
+  Downloading pyside6_essentials-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (84.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.3/84.3 MB 312.0 MB/s eta 0:00:00
+Collecting PySide6_Addons==6.12.0
+  Downloading pyside6_addons-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (59.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.2/59.2 MB 329.5 MB/s eta 0:00:00
+Collecting PySide6_WebEngine==6.12.0.140
+  Downloading pyside6_webengine-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (116.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.7/116.7 MB 260.3 MB/s eta 0:00:00
+Collecting PySide6_Pdf==6.12.0.140
+  Downloading pyside6_pdf-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (2.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 378.9 MB/s eta 0:00:00
+Collecting shiboken6==6.12.0
+  Downloading shiboken6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (279 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 279.3/279.3 kB 377.3 MB/s eta 0:00:00
+Installing collected packages: shiboken6, PySide6_Essentials, PySide6_Pdf, PySide6_Addons, PySide6_WebEngine, PySide6
+Successfully installed PySide6-6.12.0 PySide6_Addons-6.12.0 PySide6_Essentials-6.12.0 PySide6_Pdf-6.12.0.140 PySide6_WebEngine-6.12.0.140 shiboken6-6.12.0
++ sudo chroot work/root /opt/nexium-browser/venv/bin/pip freeze
++ tee reports/browser/python-lock.txt
+PySide6==6.12.0
+PySide6_Addons==6.12.0
+PySide6_Essentials==6.12.0
+PySide6_Pdf==6.12.0.140
+PySide6_WebEngine==6.12.0.140
+shiboken6==6.12.0
++ sudo chroot work/root /opt/nexium-browser/venv/bin/python -c 'import PySide6; from PySide6.QtWebEngineWidgets import QWebEngineView; from PySide6.QtWebEngineCore import QWebEngineProfile,QWebEnginePage; print("PySide6",PySide6.__version__); print("PASS QTWEBENGINE IMPORTS")'
++ tee reports/browser/imports.txt
+PySide6 6.12.0
+PASS QTWEBENGINE IMPORTS
++ sudo du -sb work/root/opt/nexium-browser/venv
++ tee reports/browser/pyside6-footprint.txt
+716222983	work/root/opt/nexium-browser/venv
+++ sudo find work/root/opt/nexium-browser -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/libqxcb.so
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/libqxcb.so
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007f7e17c97000)
+	libQt6XcbQpa.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6XcbQpa.so.6 (0x00007f7e17bc9000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6Gui.so.6 (0x00007f7e17000000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007f7e17b3c000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6Core.so.6 (0x00007f7e16800000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f7e16fba000)
+	libxkbcommon-x11.so.0 => /lib/x86_64-linux-gnu/libxkbcommon-x11.so.0 (0x00007f7e17b2f000)
+	libxcb-cursor.so.0 => /lib/x86_64-linux-gnu/libxcb-cursor.so.0 (0x00007f7e17b28000)
+	libxcb-icccm.so.4 => /lib/x86_64-linux-gnu/libxcb-icccm.so.4 (0x00007f7e17b21000)
+	libxcb-util.so.1 => /lib/x86_64-linux-gnu/libxcb-util.so.1 (0x00007f7e16fb2000)
+	libxcb-image.so.0 => /lib/x86_64-linux-gnu/libxcb-image.so.0 (0x00007f7e16fac000)
+	libxcb-keysyms.so.1 => /lib/x86_64-linux-gnu/libxcb-keysyms.so.1 (0x00007f7e16400000)
+	libxcb-randr.so.0 => /lib/x86_64-linux-gnu/libxcb-randr.so.0 (0x00007f7e16f9b000)
+	libxcb-render-util.so.0 => /lib/x86_64-linux-gnu/libxcb-render-util.so.0 (0x00007f7e16000000)
+	libxcb-shm.so.0 => /lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007f7e16f96000)
+	libxcb-sync.so.1 => /lib/x86_64-linux-gnu/libxcb-sync.so.1 (0x00007f7e16f8e000)
+	libxcb-xfixes.so.0 => /lib/x86_64-linux-gnu/libxcb-xfixes.so.0 (0x00007f7e16f85000)
+	libxcb-render.so.0 => /lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007f7e16f77000)
+	libxcb-shape.so.0 => /lib/x86_64-linux-gnu/libxcb-shape.so.0 (0x00007f7e16f70000)
+	libxcb-xkb.so.1 => /lib/x86_64-linux-gnu/libxcb-xkb.so.1 (0x00007f7e167e3000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f7e167b9000)
+	libX11-xcb.so.1 => /lib/x86_64-linux-gnu/libX11-xcb.so.1 (0x00007f7e16f6b000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007f7e16677000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f7e15c00000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f7e16320000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f7e16657000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7e15e1e000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f7e15ac7000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007f7e16f64000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007f7e16641000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libQt6DBus.so.6 (0x00007f7e16245000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f7e16622000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f7e159fd000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f7e159b2000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007f7e158f9000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007f7e16211000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicui18n.so.73 (0x00007f7e15400000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicuuc.so.73 (0x00007f7e15000000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/plugins/platforms/../../lib/libicudata.so.73 (0x00007f7e13000000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007f7e1583d000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f7e17c99000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007f7e1661d000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f7e12c00000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f7e157a3000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f7e153aa000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f7e1576d000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007f7e16610000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f7e1537e000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f7e1660b000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f7e16604000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f7e15757000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f7e152ae000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007f7e1528b000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007f7e16204000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007f7e1527f000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f7e14eb9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f7e15250000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f7e1522a000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f7e14e91000)
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebEngineCore.so.6
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebEngineCore.so.6
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007f7a8bd9a000)
+	libQt6WebChannel.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6WebChannel.so.6 (0x00007f7a8bd51000)
+	libQt6Positioning.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Positioning.so.6 (0x00007f7a8bcac000)
+	libxcb-dri3.so.0 => /lib/x86_64-linux-gnu/libxcb-dri3.so.0 (0x00007f7a8bc9f000)
+	libnspr4.so => /lib/x86_64-linux-gnu/libnspr4.so (0x00007f7a8bc5d000)
+	libnss3.so => /lib/x86_64-linux-gnu/libnss3.so (0x00007f7a7f6a7000)
+	libnssutil3.so => /lib/x86_64-linux-gnu/libnssutil3.so (0x00007f7a7f675000)
+	libsmime3.so => /lib/x86_64-linux-gnu/libsmime3.so (0x00007f7a7f646000)
+	libgbm.so.1 => /lib/x86_64-linux-gnu/libgbm.so.1 (0x00007f7a7f635000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007f7a7f4f3000)
+	libXcomposite.so.1 => /lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007f7a8bc56000)
+	libXdamage.so.1 => /lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007f7a7f4ee000)
+	libXext.so.6 => /lib/x86_64-linux-gnu/libXext.so.6 (0x00007f7a7f4d7000)
+	libXfixes.so.3 => /lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007f7a7f4cf000)
+	libXrandr.so.2 => /lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007f7a7f4c2000)
+	libXtst.so.6 => /lib/x86_64-linux-gnu/libXtst.so.6 (0x00007f7a7f4ba000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f7a7f464000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f7a7f419000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f7a7f34d000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f7a7f321000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f7a7f2db000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f7a7f2b1000)
+	libasound.so.2 => /lib/x86_64-linux-gnu/libasound.so.2 (0x00007f7a7f1a8000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f7a7f189000)
+	libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007f7a7f159000)
+	libxkbfile.so.1 => /lib/x86_64-linux-gnu/libxkbfile.so.1 (0x00007f7a7f132000)
+	libQt6Quick.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Quick.so.6 (0x00007f7a7e800000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Gui.so.6 (0x00007f7a7dc00000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007f7a7f0ab000)
+	libQt6Qml.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Qml.so.6 (0x00007f7a7d400000)
+	libQt6Network.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Network.so.6 (0x00007f7a7d000000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6Core.so.6 (0x00007f7a7c800000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f7a7c400000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f7a7e720000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f7a7f087000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7a7d21e000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f7a8bd9c000)
+	libplc4.so => /lib/x86_64-linux-gnu/libplc4.so (0x00007f7a7f080000)
+	libplds4.so => /lib/x86_64-linux-gnu/libplds4.so (0x00007f7a7f07b000)
+	libdrm.so.2 => /lib/x86_64-linux-gnu/libdrm.so.2 (0x00007f7a7f065000)
+	libwayland-server.so.0 => /lib/x86_64-linux-gnu/libwayland-server.so.0 (0x00007f7a7f04f000)
+	libXrender.so.1 => /lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f7a7f040000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f7a7db30000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f7a7f00a000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007f7a7db23000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007f7a7f005000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f7a7c000000)
+	libQt6QmlMeta.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlMeta.so.6 (0x00007f7a7daf5000)
+	libQt6QmlModels.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlModels.so.6 (0x00007f7a7c6c8000)
+	libQt6QmlWorkerScript.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6QmlWorkerScript.so.6 (0x00007f7a7dadf000)
+	libQt6OpenGL.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6OpenGL.so.6 (0x00007f7a7c351000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007f7a7dac7000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f7a7c218000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libQt6DBus.so.6 (0x00007f7a7bf25000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007f7a7dac2000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007f7a7be6c000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007f7a7da8c000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007f7a7bdb0000)
+	libgssapi_krb5.so.2 => /lib/x86_64-linux-gnu/libgssapi_krb5.so.2 (0x00007f7a7cfad000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007f7a7cf8a000)
+	libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007f7a7cf79000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicui18n.so.73 (0x00007f7a7ba00000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicuuc.so.73 (0x00007f7a7b600000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/lib/libicudata.so.73 (0x00007f7a79600000)
+	libffi.so.8 => /lib/x86_64-linux-gnu/libffi.so.8 (0x00007f7a7d212000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f7a7da85000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007f7a7cf6d000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f7a7b8b9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f7a7c699000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f7a7c673000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f7a7c65d000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f7a7b81f000)
+	libkrb5.so.3 => /lib/x86_64-linux-gnu/libkrb5.so.3 (0x00007f7a7b526000)
+	libk5crypto.so.3 => /lib/x86_64-linux-gnu/libk5crypto.so.3 (0x00007f7a7c630000)
+	libcom_err.so.2 => /lib/x86_64-linux-gnu/libcom_err.so.2 (0x00007f7a7cf67000)
+	libkrb5support.so.0 => /lib/x86_64-linux-gnu/libkrb5support.so.0 (0x00007f7a7c622000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f7a7cf60000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f7a7bd88000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007f7a7c20b000)
+	libkeyutils.so.1 => /lib/x86_64-linux-gnu/libkeyutils.so.1 (0x00007f7a7c61b000)
++ for bin in $(sudo find "$root/opt/nexium-browser" -name QtWebEngineProcess -o -name libQt6WebEngineCore.so.6 -o -name libqxcb.so)
++ target=/opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/QtWebEngineProcess
++ sudo chroot work/root ldd /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/QtWebEngineProcess
++ tee -a reports/browser/loader.txt
+	linux-vdso.so.1 (0x00007fb53796c000)
+	libQt6WebEngineCore.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6WebEngineCore.so.6 (0x00007fb52b400000)
+	libQt6Quick.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Quick.so.6 (0x00007fb52aa00000)
+	libQt6OpenGL.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6OpenGL.so.6 (0x00007fb5378af000)
+	libQt6Gui.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Gui.so.6 (0x00007fb529e00000)
+	libGL.so.1 => /lib/x86_64-linux-gnu/libGL.so.1 (0x00007fb52b379000)
+	libQt6WebChannel.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6WebChannel.so.6 (0x00007fb537866000)
+	libQt6Qml.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Qml.so.6 (0x00007fb529600000)
+	libQt6Network.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Network.so.6 (0x00007fb529200000)
+	libQt6Positioning.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Positioning.so.6 (0x00007fb52b2d4000)
+	libQt6Core.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6Core.so.6 (0x00007fb528a00000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fb528600000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fb52a920000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fb52b2b4000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb52941e000)
+	libxcb-dri3.so.0 => /lib/x86_64-linux-gnu/libxcb-dri3.so.0 (0x00007fb53785d000)
+	libnspr4.so => /lib/x86_64-linux-gnu/libnspr4.so (0x00007fb52b272000)
+	libnss3.so => /lib/x86_64-linux-gnu/libnss3.so (0x00007fb529ca7000)
+	libnssutil3.so => /lib/x86_64-linux-gnu/libnssutil3.so (0x00007fb52b240000)
+	libsmime3.so => /lib/x86_64-linux-gnu/libsmime3.so (0x00007fb52b211000)
+	libgbm.so.1 => /lib/x86_64-linux-gnu/libgbm.so.1 (0x00007fb529c96000)
+	libX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x00007fb5288be000)
+	libXcomposite.so.1 => /lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007fb52b20c000)
+	libXdamage.so.1 => /lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007fb52b207000)
+	libXext.so.6 => /lib/x86_64-linux-gnu/libXext.so.6 (0x00007fb5291eb000)
+	libXfixes.so.3 => /lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007fb529c8e000)
+	libXrandr.so.2 => /lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007fb529411000)
+	libXtst.so.6 => /lib/x86_64-linux-gnu/libXtst.so.6 (0x00007fb529c86000)
+	libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007fb529195000)
+	libfontconfig.so.1 => /lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fb528873000)
+	libfreetype.so.6 => /lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fb528536000)
+	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fb529169000)
+	libxkbcommon.so.0 => /lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007fb52882d000)
+	libxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fb52850c000)
+	libasound.so.2 => /lib/x86_64-linux-gnu/libasound.so.2 (0x00007fb528403000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fb5283e4000)
+	libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fb5283b6000)
+	libxkbfile.so.1 => /lib/x86_64-linux-gnu/libxkbfile.so.1 (0x00007fb52838f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fb53796e000)
+	libQt6QmlMeta.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlMeta.so.6 (0x00007fb528363000)
+	libQt6QmlModels.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlModels.so.6 (0x00007fb52822b000)
+	libQt6QmlWorkerScript.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6QmlWorkerScript.so.6 (0x00007fb528215000)
+	libEGL.so.1 => /lib/x86_64-linux-gnu/libEGL.so.1 (0x00007fb5281ff000)
+	libglib-2.0.so.0 => /lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007fb5280c6000)
+	libQt6DBus.so.6 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libQt6DBus.so.6 (0x00007fb527feb000)
+	libgthread-2.0.so.0 => /lib/x86_64-linux-gnu/libgthread-2.0.so.0 (0x00007fb529164000)
+	libGLdispatch.so.0 => /lib/x86_64-linux-gnu/libGLdispatch.so.0 (0x00007fb527f32000)
+	libGLX.so.0 => /lib/x86_64-linux-gnu/libGLX.so.0 (0x00007fb527efe000)
+	libzstd.so.1 => /lib/x86_64-linux-gnu/libzstd.so.1 (0x00007fb527e42000)
+	libgssapi_krb5.so.2 => /lib/x86_64-linux-gnu/libgssapi_krb5.so.2 (0x00007fb527def000)
+	libbrotlidec.so.1 => /lib/x86_64-linux-gnu/libbrotlidec.so.1 (0x00007fb528820000)
+	libbrotlicommon.so.1 => /lib/x86_64-linux-gnu/libbrotlicommon.so.1 (0x00007fb527dcc000)
+	libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007fb527dbb000)
+	libicui18n.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicui18n.so.73 (0x00007fb527a00000)
+	libicuuc.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicuuc.so.73 (0x00007fb527600000)
+	libicudata.so.73 => /opt/nexium-browser/venv/lib/python3.11/site-packages/PySide6/Qt/libexec/../lib/libicudata.so.73 (0x00007fb525600000)
+	libplc4.so => /lib/x86_64-linux-gnu/libplc4.so (0x00007fb52915b000)
+	libplds4.so => /lib/x86_64-linux-gnu/libplds4.so (0x00007fb52881b000)
+	libdrm.so.2 => /lib/x86_64-linux-gnu/libdrm.so.2 (0x00007fb527da5000)
+	libwayland-server.so.0 => /lib/x86_64-linux-gnu/libwayland-server.so.0 (0x00007fb527d8f000)
+	libXrender.so.1 => /lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fb527d80000)
+	libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007fb527930000)
+	libpng16.so.16 => /lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fb5278fa000)
+	libXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x00007fb527d7b000)
+	libXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fb525200000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007fb527860000)
+	libkrb5.so.3 => /lib/x86_64-linux-gnu/libkrb5.so.3 (0x00007fb527526000)
+	libk5crypto.so.3 => /lib/x86_64-linux-gnu/libk5crypto.so.3 (0x00007fb527833000)
+	libcom_err.so.2 => /lib/x86_64-linux-gnu/libcom_err.so.2 (0x00007fb527d73000)
+	libkrb5support.so.0 => /lib/x86_64-linux-gnu/libkrb5support.so.0 (0x00007fb527d65000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fb527d5e000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fb527d59000)
+	libffi.so.8 => /lib/x86_64-linux-gnu/libffi.so.8 (0x00007fb527827000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007fb52781b000)
+	libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007fb5254b9000)
+	liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007fb5274f7000)
+	liblz4.so.1 => /lib/x86_64-linux-gnu/liblz4.so.1 (0x00007fb5274d1000)
+	libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fb5274bb000)
+	libkeyutils.so.1 => /lib/x86_64-linux-gnu/libkeyutils.so.1 (0x00007fb527d50000)
+	libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007fb527493000)
+	libmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x00007fb5254ac000)
++ grep -q 'not found' reports/browser/loader.txt
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Version}\t${Installed-Size}\n'
++ python3 -
+{
+  "baseline_iso_user_reported_bytes": 764084224,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 235915776,
+  "pyside6_venv_apparent_bytes": 716222983,
+  "native_package_delta_installed_bytes": 4969472,
+  "removed_packages_installed_bytes": 799125504,
+  "uncompressed_conservative_addition_without_removal": 1485276679,
+  "uncompressed_budget_with_package_removal": 686151175,
+  "important": "Installed footprint is NOT compressed ISO size. Only rebuilt ISO stat determines fit. Debian PyQt6 does not provide PySide6 modules; compatible pinned wheel lock is used.",
+  "added_or_changed": {
+    "libopengl0": {
+      "version": "1.6.0-1",
+      "installed_bytes": 224256,
+      "before_bytes": 0
+    },
+    "libxcb-cursor0": {
+      "version": "0.1.4-1",
+      "installed_bytes": 47104,
+      "before_bytes": 0
+    },
+    "libxcb-icccm4": {
+      "version": "0.4.1-1.1",
+      "installed_bytes": 59392,
+      "before_bytes": 0
+    },
+    "libxcb-image0": {
+      "version": "0.4.0-2",
+      "installed_bytes": 48128,
+      "before_bytes": 0
+    },
+    "libxcb-keysyms1": {
+      "version": "0.4.0-1+b2",
+      "installed_bytes": 39936,
+      "before_bytes": 0
+    },
+    "libxcb-render-util0": {
+      "version": "0.3.9-1+b1",
+      "installed_bytes": 45056,
+      "before_bytes": 0
+    },
+    "libxcb-xkb1": {
+      "version": "1.15-1",
+      "installed_bytes": 248832,
+      "before_bytes": 0
+    },
+    "libxkbcommon-x11-0": {
+      "version": "1.5.0-1",
+      "installed_bytes": 58368,
+      "before_bytes": 0
+    },
+    "python3-distutils": {
+      "version": "3.11.2-3",
+      "installed_bytes": 653312,
+      "before_bytes": 0
+    },
+    "python3-lib2to3": {
+      "version": "3.11.2-3",
+      "installed_bytes": 373760,
+      "before_bytes": 0
+    },
+    "python3-pip-whl": {
+      "version": "23.0.1+dfsg-1",
+      "installed_bytes": 1788928,
+      "before_bytes": 0
+    },
+    "python3-setuptools-whl": {
+      "version": "66.1.1-1+deb12u2",
+      "installed_bytes": 1347584,
+      "before_bytes": 0
+    },
+    "python3-venv": {
+      "version": "3.11.2-1+b1",
+      "installed_bytes": 6144,
+      "before_bytes": 0
+    },
+    "python3.11-venv": {
+      "version": "3.11.2-6+deb12u9",
+      "installed_bytes": 28672,
+      "before_bytes": 0
+    }
+  },
+  "removed": {
+    "ungoogled-chromium": {
+      "version": "155.0.8059.39-1+nexium1",
+      "installed_bytes": 799125504
+    }
+  },
+  "largest_remaining_packages": [
+    {
+      "name": "linux-image-6.1.0-53-amd64",
+      "bytes": 409793536
+    },
+    {
+      "name": "libllvm15",
+      "bytes": 117360640
+    },
+    {
+      "name": "firmware-iwlwifi",
+      "bytes": 84260864
+    },
+    {
+      "name": "firmware-amd-graphics",
+      "bytes": 82582528
+    },
+    {
+      "name": "firmware-atheros",
+      "bytes": 62461952
+    },
+    {
+      "name": "firmware-misc-nonfree",
+      "bytes": 52972544
+    },
+    {
+      "name": "firmware-libertas",
+      "bytes": 38969344
+    },
+    {
+      "name": "libicu72",
+      "bytes": 37038080
+    },
+    {
+      "name": "cpp-12",
+      "bytes": 34660352
+    },
+    {
+      "name": "libmfx1",
+      "bytes": 28002304
+    },
+    {
+      "name": "libgtk-3-common",
+      "bytes": 27140096
+    },
+    {
+      "name": "libgl1-mesa-dri",
+      "bytes": 25860096
+    },
+    {
+      "name": "libz3-4",
+      "bytes": 23313408
+    },
+    {
+      "name": "adwaita-icon-theme",
+      "bytes": 21400576
+    },
+    {
+      "name": "iso-codes",
+      "bytes": 20568064
+    }
+  ]
+}
++ bash scripts/measure-install-chooser.sh
+deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:3 http://security.debian.org/debian-security bookworm-security InRelease
+Get:4 https://brave-browser-apt-release.s3.brave.com stable InRelease [7567 B]
+Get:5 https://brave-browser-apt-release.s3.brave.com stable/main amd64 Packages [39.4 kB]
+Fetched 47.0 kB in 0s (160 kB/s)
+Reading package lists...
+Package: firefox-esr
+Version: 153.4.0esr-1~deb12u1
+Installed-Size: 301305
+Maintainer: Maintainers of Mozilla-related packages <team+pkg-mozilla@tracker.debian.org>
+Architecture: amd64
+Provides: gnome-www-browser, www-browser
+Depends: libasound2 (>= 1.0.16), libatk1.0-0 (>= 1.12.4), libc6 (>= 2.35), libcairo-gobject2 (>= 1.10.0), libcairo2 (>= 1.10.0), libdbus-1-3 (>= 1.9.14), libevent-2.1-7 (>= 2.1.8-stable), libffi8 (>= 3.4), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.10.1), libgcc-s1 (>= 4.2), libgdk-pixbuf-2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.39.90), libgtk-3-0 (>= 3.13.7), libnspr4 (>= 2:4.32~), libpango-1.0-0 (>= 1.14.0), libstdc++6 (>= 12), libvpx7 (>= 1.12.0), libx11-6, libx11-xcb1 (>= 2:1.8.4), libxcb-shm0, libxcb1, libxcomposite1 (>= 1:0.4.5), libxdamage1 (>= 1:1.1), libxext6, libxfixes3 (>= 1:5.0), libxrandr2 (>= 2:1.4.0), zlib1g (>= 1:1.2.3.4), fontconfig, procps, debianutils (>= 1.16)
+Suggests: fonts-stix | otf-stix, fonts-lmodern, libgssapi-krb5-2 | libkrb53, libcanberra0, pulseaudio
+Description-en: Mozilla Firefox web browser - Extended Support Release (ESR)
+ Firefox ESR is a powerful, extensible web browser with support for modern
+ web application technologies.
+Description-md5: 88ee196fd829d9218a763b4d498a6f6a
+Recommends: libavcodec63 | libavcodec-extra63 | libavcodec62 | libavcodec-extra62 | libavcodec61 | libavcodec-extra61 | libavcodec60 | libavcodec-extra60 | libavcodec59 | libavcodec-extra59 | libavcodec58 | libavcodec-extra58 | libavcodec57 | libavcodec-extra57 | libavcodec56 | libavcodec-extra56 | libavcodec55 | libavcodec-extra55 | libavcodec54 | libavcodec-extra54 | libavcodec53 | libavcodec-extra53
+Section: web
+Priority: optional
+Filename: pool/updates/main/f/firefox-esr/firefox-esr_153.4.0esr-1~deb12u1_amd64.deb
+Size: 79798392
+SHA256: a59e034759615e46d3b4071cd79f42642416865419319c0d2c2a35a559db5430
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0 libxv1 libxxf86dga1 x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libevent-2.1-7
+Suggested packages:
+  fonts-stix | otf-stix fonts-lmodern libcanberra0
+The following NEW packages will be installed:
+  firefox-esr libevent-2.1-7
+0 upgraded, 2 newly installed, 0 to remove and 3 not upgraded.
+Inst libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Inst firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Package: brave-browser
+Priority: optional
+Section: web
+Installed-Size: 481636
+Maintainer: Brave Software <support@brave.com>
+Architecture: amd64
+Version: 1.97.56
+Provides: www-browser
+Depends: brave-keyring, ca-certificates, fonts-liberation, libasound2 (>= 1.0.17), libatk-bridge2.0-0 (>= 2.5.3), libatk1.0-0 (>= 2.11.90), libatspi2.0-0 (>= 2.9.90), libc6 (>= 2.25), libcairo2 (>= 1.14.0), libcups2 (>= 1.7.0), libcurl3-gnutls | libcurl3-nss | libcurl4 | libcurl3, libdbus-1-3 (>= 1.9.14), libexpat1 (>= 2.1~beta3), libgbm1 (>= 17.1.0~rc2), libglib2.0-0 (>= 2.49.3), libgtk-3-0 (>= 3.9.10) | libgtk-4-1, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.35), libpango-1.0-0 (>= 1.14.0), libudev1 (>= 183), libvulkan1, libx11-6 (>= 2:1.4.99.1), libxcb1 (>= 1.9.2), libxcomposite1 (>= 1:0.4.4-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxkbcommon0 (>= 0.5.0), libxrandr2, wget, xdg-utils (>= 1.0.2)
+Pre-Depends: dpkg (>= 1.14.0)
+Filename: pool/main/b/brave-browser/brave-browser_1.97.56_amd64.deb
+Size: 150935868
+MD5sum: 2dd1878fc5b1a07e7a06fb3fbd6bf556
+SHA1: 05731b3c71c047fac0fa108f58753875c798ca4e
+SHA256: 30e4cb89db380567e6fcdaab7110a17d6250517e22860c6bdb02eadf8993b669
+SHA512: fea5bd2fd46bb7eb4cfcb3fc078cb72790890d3491b83de25632fa2d7407e60fd30c70420c66ee0f5ebe333cc5f15cd784ba61ae2ab49c0976091278a1a0dc9d
+Description: The web browser from Brave
+ Browse faster by blocking ads and trackers that violate your privacy and cost you time and money.
+Description-md5: b2cf5139d141e520416a7325bc3a7550
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  brave-keyring libvulkan1 wget
+Recommended packages:
+  mesa-vulkan-drivers | vulkan-icd
+The following NEW packages will be installed:
+  brave-browser brave-keyring libvulkan1 wget
+0 upgraded, 4 newly installed, 0 to remove and 3 not upgraded.
+Inst brave-keyring (1.20 Brave Browser:stable [all])
+Inst libvulkan1 (1.3.239.0-1 Debian:12.15/oldstable [amd64])
+Inst wget (1.21.3-1+deb12u1 Debian:12.15/oldstable [amd64])
+Inst brave-browser (1.97.56 Brave Browser:stable [amd64])
+Conf brave-keyring (1.20 Brave Browser:stable [all])
+Conf libvulkan1 (1.3.239.0-1 Debian:12.15/oldstable [amd64])
+Conf wget (1.21.3-1+deb12u1 Debian:12.15/oldstable [amd64])
+Conf brave-browser (1.97.56 Brave Browser:stable [amd64])
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  brave-keyring libevent-2.1-7 libvulkan1 wget
+Suggested packages:
+  fonts-stix | otf-stix fonts-lmodern libcanberra0
+Recommended packages:
+  mesa-vulkan-drivers | vulkan-icd
+The following NEW packages will be installed:
+  brave-browser brave-keyring firefox-esr libevent-2.1-7 libvulkan1 wget
+0 upgraded, 6 newly installed, 0 to remove and 3 not upgraded.
+Need to get 232 MB of archives.
+After this operation, 806 MB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 libevent-2.1-7 amd64 2.1.12-stable-8+deb12u1 [181 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libvulkan1 amd64 1.3.239.0-1 [116 kB]
+Get:3 http://security.debian.org/debian-security bookworm-security/main amd64 firefox-esr amd64 153.4.0esr-1~deb12u1 [79.8 MB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 wget amd64 1.21.3-1+deb12u1 [937 kB]
+Get:5 https://brave-browser-apt-release.s3.brave.com stable/main amd64 brave-keyring all 1.20 [8180 B]
+Get:6 https://brave-browser-apt-release.s3.brave.com stable/main amd64 brave-browser amd64 1.97.56 [151 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 232 MB in 1s (228 MB/s)
+Selecting previously unselected package brave-keyring.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 30122 files and directories currently installed.)
+Preparing to unpack .../0-brave-keyring_1.20_all.deb ...
+Unpacking brave-keyring (1.20) ...
+Selecting previously unselected package libvulkan1:amd64.
+Preparing to unpack .../1-libvulkan1_1.3.239.0-1_amd64.deb ...
+Unpacking libvulkan1:amd64 (1.3.239.0-1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../2-wget_1.21.3-1+deb12u1_amd64.deb ...
+Unpacking wget (1.21.3-1+deb12u1) ...
+Selecting previously unselected package brave-browser.
+Preparing to unpack .../3-brave-browser_1.97.56_amd64.deb ...
+Unpacking brave-browser (1.97.56) ...
+Selecting previously unselected package libevent-2.1-7:amd64.
+Preparing to unpack .../4-libevent-2.1-7_2.1.12-stable-8+deb12u1_amd64.deb ...
+Unpacking libevent-2.1-7:amd64 (2.1.12-stable-8+deb12u1) ...
+Selecting previously unselected package firefox-esr.
+Preparing to unpack .../5-firefox-esr_153.4.0esr-1~deb12u1_amd64.deb ...
+Adding 'diversion of /usr/bin/firefox to /usr/bin/firefox.real by firefox-esr'
+Unpacking firefox-esr (153.4.0esr-1~deb12u1) ...
+Setting up wget (1.21.3-1+deb12u1) ...
+Setting up brave-keyring (1.20) ...
+Setting up libevent-2.1-7:amd64 (2.1.12-stable-8+deb12u1) ...
+Setting up libvulkan1:amd64 (1.3.239.0-1) ...
+Setting up brave-browser (1.97.56) ...
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/x-www-browser (x-www-browser) in auto mode
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/gnome-www-browser (gnome-www-browser) in auto mode
+update-alternatives: using /usr/bin/brave-browser-stable to provide /usr/bin/brave-browser (brave-browser) in auto mode
+Setting up firefox-esr (153.4.0esr-1~deb12u1) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+  File "<stdin>", line 3, in read
+ValueError: invalid literal for int() with base 10: ''
++ cleanup
++ sudo umount -R work/root/tmp/.X11-unix
++ true
++ sudo umount -R work/root/proc
++ sudo umount -R work/root/sys
++ sudo umount -R work/root/dev

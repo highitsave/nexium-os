@@ -1,0 +1,5 @@
+PASS: 35 user-sheet crops; 105 PNG assets (original 136x136, 128x128, 64x64)
+SOURCE SHA256: e605261fa7bc18fb252c81da0eab26dd514c1e58ada019708d10b32f19bce8b8
+MAPPING: {"browser": "safari", "calls": "phone", "editor": "notes", "files": "utilities-folder", "messages": "messages", "monitor": "stocks", "settings": "settings", "terminal": "linen", "trash": "blank-gray", "vault": "cydia"}
+No bespoke icons drawn; Mac preview not used; Files/Terminal/Trash are documented sheet substitutes.
+
