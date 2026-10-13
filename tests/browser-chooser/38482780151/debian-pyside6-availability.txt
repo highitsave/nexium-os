@@ -1,0 +1,12 @@
+python3-pyqt6.qtwebengine:
+  Installed: (none)
+  Candidate: 6.4.0-1
+  Version table:
+     6.4.0-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
+libqt6webenginecore6:
+  Installed: (none)
+  Candidate: 6.4.2-final+dfsg-1
+  Version table:
+     6.4.2-final+dfsg-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages

@@ -1,0 +1,18 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libdouble-conversion3 libharfbuzz-subset0 libminizip1 libopenh264-7
+  libxnvctrl0 libxv1 libxxf86dga1 x11-utils xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libevent-2.1-7
+Suggested packages:
+  fonts-stix | otf-stix fonts-lmodern libcanberra0
+The following NEW packages will be installed:
+  firefox-esr libevent-2.1-7
+0 upgraded, 2 newly installed, 0 to remove and 3 not upgraded.
+Inst libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Inst firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libevent-2.1-7 (2.1.12-stable-8+deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf firefox-esr (153.4.0esr-1~deb12u1 Debian-Security:12/oldstable-security [amd64])

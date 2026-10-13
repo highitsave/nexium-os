@@ -1,0 +1,9 @@
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+Installed native layer: 152 SHA256-tracked files; icon theme: NexiumIOS4

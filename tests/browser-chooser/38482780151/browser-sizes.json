@@ -1,0 +1,57 @@
+{
+  "current_iso_bytes": 777256960,
+  "ceiling_bytes": 1000000000,
+  "headroom_bytes": 222743040,
+  "browsers": {
+    "firefox-esr": {
+      "version": "153.4.0esr-1~deb12u1",
+      "deb_package_bytes": 79798392,
+      "installed_bytes": 308536320,
+      "debian_metadata_installed_bytes": 308536320,
+      "filename": "pool/updates/main/f/firefox-esr/firefox-esr_153.4.0esr-1~deb12u1_amd64.deb"
+    },
+    "brave-browser": {
+      "version": "1.97.56",
+      "deb_package_bytes": 150935868,
+      "installed_bytes": 493195264,
+      "debian_metadata_installed_bytes": 493195264,
+      "filename": "pool/main/b/brave-browser/brave-browser_1.97.56_amd64.deb"
+    }
+  },
+  "added_or_changed": {
+    "brave-browser": {
+      "version": "1.97.56",
+      "installed_bytes": 493195264,
+      "previous_bytes": 0
+    },
+    "brave-keyring": {
+      "version": "1.20",
+      "installed_bytes": 0,
+      "previous_bytes": 0
+    },
+    "firefox-esr": {
+      "version": "153.4.0esr-1~deb12u1",
+      "installed_bytes": 308536320,
+      "previous_bytes": 0
+    },
+    "libevent-2.1-7": {
+      "version": "2.1.12-stable-8+deb12u1",
+      "installed_bytes": 445440,
+      "previous_bytes": 0
+    },
+    "libvulkan1": {
+      "version": "1.3.239.0-1",
+      "installed_bytes": 488448,
+      "previous_bytes": 0
+    },
+    "wget": {
+      "version": "1.21.3-1+deb12u1",
+      "installed_bytes": 3605504,
+      "previous_bytes": 0
+    }
+  },
+  "both_installed_delta_bytes": 806270976,
+  "caution": "DEB and installed sizes are not the compressed ISO delta. Fit is measured by rebuilding candidate ISO with xz and unchanged boot inputs.",
+  "existing_pyside6_venv_apparent_bytes": 716222983,
+  "previous_native_package_delta_bytes": 4969472
+}

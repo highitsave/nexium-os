@@ -1,0 +1,20 @@
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+PASS PYSIDE6 QTWEBENGINE IMPORTS
+PASS NEXIUM browser source, isolated Python, imports, and removal of standalone Chromium
+OUTPUT SQUASHFS: all 167 desktop/branding overlay files present and SHA256-identical
+DOCK files => /usr/bin/pcmanfm (real application)
+DOCK browser => /usr/local/bin/nexium-browser (real application)
+DOCK terminal => /usr/bin/xterm (real application)
+DOCK messages => /usr/local/bin/nexium-coming-soon Messages (honest coming-soon placeholder)
+DOCK calls => /usr/local/bin/nexium-coming-soon Calls (honest coming-soon placeholder)
+DOCK settings => /usr/local/bin/nexium-settings (real application)
+DOCK vault => /usr/local/bin/nexium-coming-soon Vault (honest coming-soon placeholder)
+DOCK editor => /usr/bin/mousepad (real application)
+DOCK monitor => /usr/bin/lxtask (real application)
+DOCK trash => /usr/bin/pcmanfm trash:/// (real application)
