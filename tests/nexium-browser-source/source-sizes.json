@@ -1,0 +1,10 @@
+{
+  "browser/vendor/neo_os_browser_v2.py": {
+    "bytes": 36401,
+    "sha256": "f177f4bc8fdc14bccac0d7ac46ca70159c0bf6ae090423965f235b9e989279d5"
+  },
+  "browser/nexium_browser.py": {
+    "bytes": 37167,
+    "sha256": "194c6dc9d6fcaf2be4829fb0e9fafabdd4a4d2653b3baa4279ff5fac49197330"
+  }
+}
