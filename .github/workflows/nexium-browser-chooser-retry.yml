@@ -1,0 +1,118 @@
+name: Complete fitting browser chooser with strict final ISO GUI proof
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/nexium-browser-chooser-retry.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: nexium-phase2
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair empty dpkg metadata and prepare retained chooser source
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools xorriso librsvg2-bin python3-yaml python3-pil xvfb x11-utils xdotool wmctrl scrot initramfs-tools-core qemu-system-x86 ffmpeg tesseract-ocr fonts-dejavu-core curl
+          mkdir -p reports/boot/frames reports/browser output work
+          python3 desktop/phase2.py --materialize
+          python3 scripts/prepare-ios4.py | tee reports/ios4-icons.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          # dpkg lists packages with residual configuration but no Installed-Size.
+          # Treat only that absent size as zero; never invent a browser package size.
+          for name in ['scripts/install-nexium-browser.sh','scripts/measure-install-chooser.sh']:
+              p=Path(name);s=p.read_text().replace('int(s)*1024','int(s or 0)*1024').replace('int(size)*1024','int(size or 0)*1024')
+              p.write_text(s)
+          # Ensure installer measurement covers any alternative loop variable spelling.
+          p=Path('scripts/install-nexium-browser.sh');s=p.read_text()
+          s=s.replace('int(fields[2])','int(fields[2] or 0)')
+          p.write_text(s)
+          # Document readiness only; do not add any missing documents.
+          import json
+          names=[p.name for p in Path('.').iterdir() if p.is_file()]
+          report={k:[n for n in names if n.upper().startswith(k)] for k in ['LICENSE','README','CONTRIBUTING']}
+          Path('reports/browser/open-source-readiness.json').write_text(json.dumps(report,indent=2)+'\n');print(report)
+          # Final test script imports deployed modules from its own directory.
+          p=Path('scripts/test-browser-chooser.py');s=p.read_text()
+          s=s.replace("sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'browser'))", "sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'browser'))\nsys.path.insert(0,str(Path(__file__).resolve().parent))")
+          p.write_text(s)
+          PY
+          python3 scripts/test-browser-chooser.py 2>&1 | tee reports/browser/chooser-model-tests.txt
+          python3 -m py_compile browser/nexium_launchers.py browser/nexium_browser.py scripts/nexium-phase2.py
+          bash -n scripts/build-browser-chooser.sh scripts/measure-install-chooser.sh scripts/test-chooser-in-root.sh
+          mkdir -p reports/negative-test
+          printf '%s\n' '{"browser_gui_pass":false,"browser_launch":{"stdout_stderr":"synthetic-failure-log"}}' > reports/negative-test/live-session.json
+          set +e
+          python3 scripts/assert-nexium-capture.py reports/negative-test 2>&1 | tee reports/negative-test/failure.txt
+          rc=$?
+          set -e
+          echo "FALSE_GUI_PIPELINE_EXIT=$rc" | tee reports/negative-test/result.txt
+          test "$rc" -ne 0
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add scripts/install-nexium-browser.sh scripts/measure-install-chooser.sh scripts/test-browser-chooser.py
+          if ! git diff --cached --quiet; then
+            git commit -m 'Handle residual dpkg package size rows without changing browser measurements'
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD | tee reports/source-commit.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexium-tab-1.2-ungoogled-iso
+          run-id: 38179706990
+          github-token: ${{ github.token }}
+          path: source
+      - name: Measure candidates and build largest fitting browser set preserving boot gates
+        run: |
+          set -euo pipefail
+          bash scripts/build-browser-chooser.sh 2>&1 | tee reports/build-chooser.txt
+      - name: Boot final ISO and enforce real dock-Exec painted Nexium window
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-nexium-browser.py 2>&1 | tee reports/boot-capture.txt
+      - name: Preserve final evidence even on failure
+        if: always()
+        run: |
+          set -euo pipefail
+          dest=tests/browser-chooser/${GITHUB_RUN_ID}
+          mkdir -p "$dest"
+          cp reports/browser/* reports/boot/*.json reports/boot/*.png reports/*.txt "$dest/" 2>/dev/null || true
+          cp reports/negative-test/result.txt "$dest/" 2>/dev/null || true
+          git config user.name Onx
+          git config user.email assistant@email.tomo.ai
+          git add "$dest"
+          if ! git diff --cached --quiet; then
+            git commit -m "Record final chooser measurement and strict GUI ${GITHUB_RUN_ID}"
+            git restore -- .github/workflows/phase2-build.yml
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          { echo '## Final fitting browser chooser'; cat reports/size.txt reports/iso-sha256.txt reports/browser/browser-sizes.json reports/browser/size-math.json reports/browser/fitting-set.json reports/browser/open-source-readiness.json reports/negative-test/result.txt reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-iso
+          path: |
+            output/nexium-os-1.2-ungoogled-amd64.iso
+            output/SHA256SUMS
+          compression-level: 0
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexium-browser-chooser-verification
+          path: reports/
+          if-no-files-found: error
