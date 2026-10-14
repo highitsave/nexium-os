@@ -16,74 +16,90 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
-      - name: Validate every workflow and prepare corrected login sources
+      - name: Validate committed sources and install build and VM tools
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y python3-yaml
+          sudo apt-get install -y python3-yaml python3-pil squashfs-tools xorriso initramfs-tools-core binutils qemu-system-x86 qemu-utils tesseract-ocr ffmpeg e2fsprogs file jq
           python3 - <<'PY' | tee /tmp/all-workflows.txt
-          import yaml,re,subprocess
-          from pathlib import Path
-          for p in sorted(Path('.github/workflows').glob('*.y*ml')):
-              d=yaml.safe_load(p.read_text());assert isinstance(d,dict) and isinstance(d.get('jobs'),dict),str(p);print('PASS YAML',p,flush=True)
-          d=yaml.safe_load(Path('.github/workflows/nexium-login-persistence.yml').read_text())
-          prepare=d['jobs']['final']['steps'][1]['run']
-          prepare=re.sub(r'^.*subprocess\.run\(.*\x27mask\x27,\x27nexium-kiosk.service\x27.*\n','',prepare,flags=re.M)
-          prepare=prepare.replace("assert (r/'etc/systemd/system/nexium-kiosk.service').is_symlink() and os.readlink(r/'etc/systemd/system/nexium-kiosk.service')=='/dev/null'", "assert not (r/'etc/systemd/system/graphical.target.wants/nexium-kiosk.service').exists()")
-          prepare=prepare.replace('LIVE_CONFIG_NOAUTOLOGIN="true"', 'LIVE_CONFIG_NOCOMPONENTS="user-setup,lightdm"\\nLIVE_CONFIG_NOAUTOLOGIN="true"')
-          prepare=prepare.replace('kiosk masked','kiosk disabled')
-          prepare=prepare.replace("('Welcome to Nexium OS' in text or 'Golden Gate' in text and 'Nexium login' not in text)", "('Welcome to Nexium OS' in text or time.monotonic()-login_at>30 and 'Nexium login' not in text)")
-          # Exact latest failure: ISO-extracted grub.cfg retains read-only mode.
-          # Stage a writable copy, then run the persistence-only patch without changing source ISO.
-          prepare=prepare.replace('cp work/original/boot/grub/grub.cfg work/persistence-grub.cfg', 'install -m 0644 work/original/boot/grub/grub.cfg work/persistence-grub.cfg')
-          subprocess.run(['bash','-euo','pipefail','-c',prepare],check=True)
-          Path('reports/workflow-validation.txt').write_text(Path('/tmp/all-workflows.txt').read_text())
+          import ast, pathlib, yaml
+          for p in sorted(pathlib.Path('.github/workflows').glob('*.y*ml')):
+              d=yaml.safe_load(p.read_text())
+              assert isinstance(d,dict) and isinstance(d.get('jobs'),dict), str(p)
+              print('PASS workflow',p)
+          for p in pathlib.Path('scripts').glob('*.py'):
+              ast.parse(p.read_text(),filename=str(p))
+          print('PASS committed Python sources parse')
           PY
+          bash -n scripts/build-login-persistence.sh scripts/build-browser-final.sh
+          test -f README.md && test -f LICENSE && test -f CONTRIBUTING.md
+          # Use the versioned scripts, never regenerate and overwrite bug fixes
+          # from the historical nexium-login-persistence.yml heredoc.
       - uses: actions/download-artifact@v4
         with:
-          name: nexium-tab-1.2-ungoogled-iso
-          run-id: 38179706990
+          name: nexium-os-browser-chooser-iso
+          path: output
           github-token: ${{ github.token }}
-          path: source
-      - uses: actions/download-artifact@v4
-        with:
-          name: nexium-browser-chooser-iso
+          repository: highitsave/nexium-os
           run-id: 38483512164
-          github-token: ${{ github.token }}
-          path: seed
       - name: Build selected Firefox plus login persistence with all boot checks
         run: |
           set -euo pipefail
-          bash scripts/build-login-persistence.sh 2>&1 | tee reports/build-login.txt
+          find output -maxdepth 2 -type f -printf '%f %s bytes\n'
+          mv output/nexium-os-1.2-ungoogled-amd64.iso /tmp/chooser-seed.iso
+          rm -f output/*.iso output/*.sha256
+          bash scripts/build-login-persistence.sh
       - name: Boot final image and verify painted greeter real reboot persistence and browser
         run: |
           set -euo pipefail
-          python3 scripts/capture-login-persistence.py 2>&1 | tee reports/boot-capture.txt
-      - name: Preserve actual final evidence even on failure
+          python3 scripts/capture-login-persistence.py
+      - name: Verify exact ISO size and SHA-256 before artifact upload
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee output/verified-iso.json
+          import pathlib, hashlib, json
+          p=pathlib.Path('output/nexium-os-1.2-ungoogled-amd64.iso')
+          size=p.stat().st_size
+          assert 0 < size < 1000000000, 'ISO exceeds authorized byte limit'
+          h=hashlib.sha256()
+          with p.open('rb') as f:
+              for b in iter(lambda:f.read(1024*1024), b''): h.update(b)
+          print(json.dumps({'name':p.name,'bytes':size,'sha256':h.hexdigest()},indent=2))
+          PY
+          sha256sum output/*.iso | tee output/final-iso.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexium-os-login-persistence-verified-iso
+          path: |
+            output/*.iso
+            output/*.sha256
+            output/verified-iso.json
+          if-no-files-found: error
+      - name: Upload diagnostics even when verification fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexium-final-login-persistence-evidence
+          path: |
+            reports/
+            /tmp/all-workflows.txt
+          if-no-files-found: error
+      - name: Commit runtime evidence without replacing source fixes
         if: always()
         run: |
           set -euo pipefail
-          mkdir -p reports
-          dest=tests/login-persistence/${GITHUB_RUN_ID}
+          git config user.name highitsave
+          git config user.email 195648961+highitsave@users.noreply.github.com
+          dest=tests/login-persistence/${{ github.run_id }}
           mkdir -p "$dest"
-          cp reports/boot/*.json reports/boot/*.png reports/browser/* reports/*.txt "$dest/" 2>/dev/null || true
-          git config user.name Onx
-          git config user.email assistant@email.tomo.ai
+          if [ -d reports/boot ]; then
+            cp reports/boot/*.{json,log,png} "$dest/" 2>/dev/null || true
+          fi
+          if [ -d reports/final ]; then cp -r reports/final "$dest/build"; fi
+          cp /tmp/all-workflows.txt "$dest/"
           git add "$dest"
-          if ! git diff --cached --quiet;then git commit -m "Record final login USB reboot persistence proof ${GITHUB_RUN_ID}";git pull --rebase origin main;git push origin HEAD:main;fi
-          { echo '## Final Nexium login USB persistence image';cat reports/source-commit.txt reports/size.txt reports/iso-sha256.txt reports/browser/shipped-browsers.json reports/boot/receipt.json reports/boot/browser-paint.json reports/boot/live-session.json 2>/dev/null || true; } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: nexium-login-persistence-iso
-          path: |
-            output/nexium-os-1.2-ungoogled-amd64.iso
-            output/SHA256SUMS
-          compression-level: 0
-          if-no-files-found: warn
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: nexium-login-persistence-verification
-          path: reports/
-          if-no-files-found: error
+          if ! git diff --cached --quiet; then
+            git commit -m 'Preserve Nexium login persistence runtime proof'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
