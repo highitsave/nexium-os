@@ -77,7 +77,7 @@ def boot_and_login(stage):
         time.sleep(2)
     raise AssertionError('FAIL greeter/login/desktop timeout '+stage)
 def terminal_script(name):
-    key('ctrl','alt','t');time.sleep(2)
+    key('ret');time.sleep(2);im,text=frame('dismiss-welcome');assert 'Welcome to Nexium OS' not in text,'FAIL first-login welcome dialog blocked keyboard shortcuts';key('meta_l','t');time.sleep(3)
     typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/"+name+"\").read())'");key('ret')
 try:
     boot_and_login('before-reboot')
