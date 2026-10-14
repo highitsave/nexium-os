@@ -27,7 +27,7 @@ cleanup(){ sudo umount -R work/root/proc 2>/dev/null || true;sudo umount -R work
 trap cleanup EXIT
 sudo chroot work/root dpkg-query -W -f='${Package}\t${Installed-Size}\n' > reports/browser/login-packages-before.tsv
 sudo chroot work/root apt-get update
-sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends lightdm lightdm-gtk-greeter live-boot live-config xdotool wmctrl scrot e2fsprogs util-linux
+sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends lightdm lightdm-gtk-greeter live-boot live-config xdotool wmctrl scrot e2fsprogs util-linux plymouth-label plymouth-themes
 sudo chroot work/root apt-get clean
 sudo chroot work/root dpkg-query -W -f='${Package}\t${Version}\t${Installed-Size}\n' > reports/browser/final-packages.tsv
 sudo python3 scripts/nexium-phase2.py --install work/root | tee reports/install.txt
@@ -35,6 +35,8 @@ sudo python3 scripts/install-login.py install work/root
 sudo python3 scripts/nexium-phase2.py --verify work/root | tee reports/preflight-desktop.txt
 sudo python3 scripts/install-login.py verify work/root | tee reports/login-verification.txt
 sudo chroot work/root plymouth-set-default-theme nexium-gold
+# Refuse to build an initrd missing the label plugin used by the painted splash.
+test -n "$(sudo find work/root/usr/lib -path '*/plymouth/label.so' -print -quit)"
 mapfile -t kernels < <(sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
 test "${#kernels[@]}" -eq 1
 sudo mkdir -p work/root/tmp/nexium-initrd
