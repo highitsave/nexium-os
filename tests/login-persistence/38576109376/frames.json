@@ -1,0 +1,1028 @@
+[
+  {
+    "frame": 0,
+    "stage": "before-reboot",
+    "elapsed": 1.53,
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) \u00a90:03.0 CAG\u00ae PCIZ.10 PnP PMM+BEFCBO00+BEFOBOOO CAOO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 1,
+    "stage": "before-reboot",
+    "elapsed": 7.57,
+    "ocr": "GNU GRUB version 2.06-13+debizuz\n\nNexium OS (safe graphics, for older computers)\nShut down\n\nUse the T and J keys to select which entry is highlighted.\nPress enter to boot the selected 0S, \u201ce\u2019 to edit the commands\n\nbefore booting or \u2018c\u2019 for a command-line.\n\n"
+  },
+  {
+    "frame": 2,
+    "stage": "before-reboot",
+    "elapsed": 10.21,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 3,
+    "stage": "before-reboot",
+    "elapsed": 14.03,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 4,
+    "stage": "before-reboot",
+    "elapsed": 16.37,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 5,
+    "stage": "before-reboot",
+    "elapsed": 20.47,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 6,
+    "stage": "before-reboot",
+    "elapsed": 22.71,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 7,
+    "stage": "before-reboot",
+    "elapsed": 25.12,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 8,
+    "stage": "before-reboot",
+    "elapsed": 27.51,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 9,
+    "stage": "before-reboot",
+    "elapsed": 29.73,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 10,
+    "stage": "before-reboot",
+    "elapsed": 32.28,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 11,
+    "stage": "before-reboot",
+    "elapsed": 36.86,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 12,
+    "stage": "before-reboot",
+    "elapsed": 39.39,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 13,
+    "stage": "before-reboot",
+    "elapsed": 42.37,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 14,
+    "stage": "before-reboot",
+    "elapsed": 44.94,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 15,
+    "stage": "before-reboot",
+    "elapsed": 47.35,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 16,
+    "stage": "before-reboot",
+    "elapsed": 49.66,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 17,
+    "stage": "before-reboot",
+    "elapsed": 63.22,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 18,
+    "stage": "before-reboot",
+    "elapsed": 65.61,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 19,
+    "stage": "before-reboot",
+    "elapsed": 68.61,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 20,
+    "stage": "before-reboot",
+    "elapsed": 71.86,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 21,
+    "stage": "before-reboot",
+    "elapsed": 75.04,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 22,
+    "stage": "before-reboot",
+    "elapsed": 77.31,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 23,
+    "stage": "before-reboot",
+    "elapsed": 80.93,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 24,
+    "stage": "before-reboot",
+    "elapsed": 83.81,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 25,
+    "stage": "before-reboot",
+    "elapsed": 92.95,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 26,
+    "stage": "before-reboot",
+    "elapsed": 95.35,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 27,
+    "stage": "before-reboot",
+    "elapsed": 97.72,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 28,
+    "stage": "before-reboot",
+    "elapsed": 104.1,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 29,
+    "stage": "before-reboot",
+    "elapsed": 106.26,
+    "ocr": ""
+  },
+  {
+    "frame": 30,
+    "stage": "before-reboot",
+    "elapsed": 108.4,
+    "ocr": ""
+  },
+  {
+    "frame": 31,
+    "stage": "before-reboot",
+    "elapsed": 110.56,
+    "ocr": ""
+  },
+  {
+    "frame": 32,
+    "stage": "before-reboot",
+    "elapsed": 112.71,
+    "ocr": ""
+  },
+  {
+    "frame": 33,
+    "stage": "before-reboot",
+    "elapsed": 114.87,
+    "ocr": ""
+  },
+  {
+    "frame": 34,
+    "stage": "before-reboot",
+    "elapsed": 117.02,
+    "ocr": ""
+  },
+  {
+    "frame": 35,
+    "stage": "before-reboot",
+    "elapsed": 119.16,
+    "ocr": ""
+  },
+  {
+    "frame": 36,
+    "stage": "before-reboot",
+    "elapsed": 121.3,
+    "ocr": ""
+  },
+  {
+    "frame": 37,
+    "stage": "before-reboot",
+    "elapsed": 123.44,
+    "ocr": ""
+  },
+  {
+    "frame": 38,
+    "stage": "before-reboot",
+    "elapsed": 125.6,
+    "ocr": ""
+  },
+  {
+    "frame": 39,
+    "stage": "before-reboot",
+    "elapsed": 127.75,
+    "ocr": ""
+  },
+  {
+    "frame": 40,
+    "stage": "before-reboot",
+    "elapsed": 129.95,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n18:14 \u00a9\n"
+  },
+  {
+    "frame": 41,
+    "stage": "before-reboot",
+    "elapsed": 136.89,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 42,
+    "stage": "before-reboot",
+    "elapsed": 142.62,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 43,
+    "stage": "before-reboot",
+    "elapsed": 148.63,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 44,
+    "stage": "before-reboot",
+    "elapsed": 150.96,
+    "ocr": "NEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 45,
+    "stage": "before-reboot",
+    "elapsed": 153.33,
+    "ocr": "Wed 14 Oct 18:14\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 46,
+    "stage": "before-reboot",
+    "elapsed": 161.27,
+    "ocr": "Wed 14 Oct 18:14\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 47,
+    "stage": "before-reboot",
+    "elapsed": 168.51,
+    "ocr": "Wed 14 Oct 18:14\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 48,
+    "stage": "before-reboot",
+    "elapsed": 183.96,
+    "ocr": "\u2018Welcome to Nexium OS Wed 14 Oct 18:15\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 49,
+    "stage": "dismiss-welcome",
+    "elapsed": 186.33,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 50,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 188.57,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 51,
+    "stage": "reboot-request",
+    "elapsed": 204.51,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 52,
+    "stage": "reboot-request",
+    "elapsed": 206.73,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 53,
+    "stage": "reboot-request",
+    "elapsed": 208.94,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 54,
+    "stage": "reboot-request",
+    "elapsed": 211.16,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 55,
+    "stage": "reboot-request",
+    "elapsed": 213.39,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 56,
+    "stage": "reboot-request",
+    "elapsed": 215.6,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 57,
+    "stage": "reboot-request",
+    "elapsed": 217.82,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 58,
+    "stage": "reboot-request",
+    "elapsed": 220.05,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 59,
+    "stage": "reboot-request",
+    "elapsed": 222.27,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 60,
+    "stage": "reboot-request",
+    "elapsed": 224.49,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 61,
+    "stage": "reboot-request",
+    "elapsed": 226.71,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 62,
+    "stage": "reboot-request",
+    "elapsed": 228.92,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 63,
+    "stage": "reboot-request",
+    "elapsed": 231.14,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 64,
+    "stage": "reboot-request",
+    "elapsed": 233.36,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 65,
+    "stage": "reboot-request",
+    "elapsed": 235.57,
+    "ocr": "\u20acB Wed 14 Oct 18:15\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 66,
+    "stage": "reboot-request",
+    "elapsed": 237.79,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 67,
+    "stage": "reboot-request",
+    "elapsed": 240.01,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 68,
+    "stage": "reboot-request",
+    "elapsed": 242.23,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 69,
+    "stage": "reboot-request",
+    "elapsed": 244.44,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 70,
+    "stage": "reboot-request",
+    "elapsed": 246.66,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 71,
+    "stage": "reboot-request",
+    "elapsed": 248.88,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 72,
+    "stage": "reboot-request",
+    "elapsed": 251.1,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 73,
+    "stage": "reboot-request",
+    "elapsed": 253.32,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 74,
+    "stage": "reboot-request",
+    "elapsed": 255.54,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 75,
+    "stage": "reboot-request",
+    "elapsed": 257.77,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 76,
+    "stage": "reboot-request",
+    "elapsed": 259.99,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 77,
+    "stage": "reboot-request",
+    "elapsed": 262.21,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 78,
+    "stage": "reboot-request",
+    "elapsed": 264.43,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 79,
+    "stage": "reboot-request",
+    "elapsed": 266.65,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 80,
+    "stage": "reboot-request",
+    "elapsed": 268.87,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 81,
+    "stage": "reboot-request",
+    "elapsed": 271.09,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 82,
+    "stage": "reboot-request",
+    "elapsed": 273.3,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 83,
+    "stage": "reboot-request",
+    "elapsed": 275.52,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 84,
+    "stage": "reboot-request",
+    "elapsed": 277.74,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 85,
+    "stage": "reboot-request",
+    "elapsed": 279.96,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 86,
+    "stage": "reboot-request",
+    "elapsed": 282.18,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 87,
+    "stage": "reboot-request",
+    "elapsed": 284.4,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 88,
+    "stage": "reboot-request",
+    "elapsed": 286.63,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 89,
+    "stage": "reboot-request",
+    "elapsed": 288.86,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 90,
+    "stage": "reboot-request",
+    "elapsed": 291.08,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 91,
+    "stage": "reboot-request",
+    "elapsed": 293.3,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 92,
+    "stage": "reboot-request",
+    "elapsed": 295.52,
+    "ocr": "\u20acB Wed 14 Oct 18:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 93,
+    "stage": "reboot-request",
+    "elapsed": 297.74,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 94,
+    "stage": "reboot-request",
+    "elapsed": 299.96,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 95,
+    "stage": "reboot-request",
+    "elapsed": 302.18,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 96,
+    "stage": "reboot-request",
+    "elapsed": 304.4,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 97,
+    "stage": "reboot-request",
+    "elapsed": 306.62,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 98,
+    "stage": "reboot-request",
+    "elapsed": 308.84,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 99,
+    "stage": "reboot-request",
+    "elapsed": 311.06,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 100,
+    "stage": "reboot-request",
+    "elapsed": 313.28,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 101,
+    "stage": "reboot-request",
+    "elapsed": 315.5,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 102,
+    "stage": "reboot-request",
+    "elapsed": 317.71,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 103,
+    "stage": "reboot-request",
+    "elapsed": 319.93,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 104,
+    "stage": "reboot-request",
+    "elapsed": 322.15,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 105,
+    "stage": "reboot-request",
+    "elapsed": 324.37,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 106,
+    "stage": "reboot-request",
+    "elapsed": 326.59,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 107,
+    "stage": "reboot-request",
+    "elapsed": 328.81,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 108,
+    "stage": "reboot-request",
+    "elapsed": 331.02,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 109,
+    "stage": "reboot-request",
+    "elapsed": 333.24,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 110,
+    "stage": "reboot-request",
+    "elapsed": 335.46,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 111,
+    "stage": "reboot-request",
+    "elapsed": 337.67,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 112,
+    "stage": "reboot-request",
+    "elapsed": 339.9,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 113,
+    "stage": "reboot-request",
+    "elapsed": 342.12,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 114,
+    "stage": "reboot-request",
+    "elapsed": 344.34,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 115,
+    "stage": "reboot-request",
+    "elapsed": 346.56,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 116,
+    "stage": "reboot-request",
+    "elapsed": 348.78,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 117,
+    "stage": "reboot-request",
+    "elapsed": 350.99,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 118,
+    "stage": "reboot-request",
+    "elapsed": 353.21,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 119,
+    "stage": "reboot-request",
+    "elapsed": 355.43,
+    "ocr": "\u20acB Wed 14 Oct 18:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 120,
+    "stage": "reboot-request",
+    "elapsed": 357.65,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 121,
+    "stage": "reboot-request",
+    "elapsed": 359.86,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 122,
+    "stage": "reboot-request",
+    "elapsed": 362.08,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 123,
+    "stage": "reboot-request",
+    "elapsed": 364.3,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 124,
+    "stage": "reboot-request",
+    "elapsed": 366.51,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 125,
+    "stage": "reboot-request",
+    "elapsed": 368.73,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 126,
+    "stage": "reboot-request",
+    "elapsed": 370.94,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 127,
+    "stage": "reboot-request",
+    "elapsed": 373.16,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 128,
+    "stage": "reboot-request",
+    "elapsed": 375.38,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 129,
+    "stage": "reboot-request",
+    "elapsed": 377.61,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 130,
+    "stage": "reboot-request",
+    "elapsed": 379.82,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 131,
+    "stage": "reboot-request",
+    "elapsed": 382.04,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 132,
+    "stage": "reboot-request",
+    "elapsed": 384.26,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 133,
+    "stage": "reboot-request",
+    "elapsed": 386.47,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 134,
+    "stage": "reboot-request",
+    "elapsed": 388.7,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 135,
+    "stage": "reboot-request",
+    "elapsed": 390.91,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 136,
+    "stage": "reboot-request",
+    "elapsed": 393.14,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 137,
+    "stage": "reboot-request",
+    "elapsed": 395.36,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 138,
+    "stage": "reboot-request",
+    "elapsed": 397.58,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 139,
+    "stage": "reboot-request",
+    "elapsed": 399.79,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 140,
+    "stage": "reboot-request",
+    "elapsed": 402.01,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 141,
+    "stage": "reboot-request",
+    "elapsed": 404.24,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 142,
+    "stage": "reboot-request",
+    "elapsed": 406.46,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 143,
+    "stage": "reboot-request",
+    "elapsed": 408.69,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 144,
+    "stage": "reboot-request",
+    "elapsed": 410.9,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 145,
+    "stage": "reboot-request",
+    "elapsed": 413.13,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 146,
+    "stage": "reboot-request",
+    "elapsed": 415.35,
+    "ocr": "\u20acB Wed 14 Oct 18:18\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 147,
+    "stage": "reboot-request",
+    "elapsed": 417.57,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 148,
+    "stage": "reboot-request",
+    "elapsed": 419.79,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 149,
+    "stage": "reboot-request",
+    "elapsed": 422.01,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 150,
+    "stage": "reboot-request",
+    "elapsed": 424.24,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 151,
+    "stage": "reboot-request",
+    "elapsed": 426.46,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 152,
+    "stage": "reboot-request",
+    "elapsed": 428.68,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 153,
+    "stage": "reboot-request",
+    "elapsed": 430.91,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 154,
+    "stage": "reboot-request",
+    "elapsed": 433.13,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 155,
+    "stage": "reboot-request",
+    "elapsed": 435.35,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 156,
+    "stage": "reboot-request",
+    "elapsed": 437.57,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 157,
+    "stage": "reboot-request",
+    "elapsed": 439.79,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 158,
+    "stage": "reboot-request",
+    "elapsed": 442.01,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 159,
+    "stage": "reboot-request",
+    "elapsed": 444.23,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 160,
+    "stage": "reboot-request",
+    "elapsed": 446.45,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 161,
+    "stage": "reboot-request",
+    "elapsed": 448.67,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 162,
+    "stage": "reboot-request",
+    "elapsed": 450.89,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 163,
+    "stage": "reboot-request",
+    "elapsed": 453.1,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 164,
+    "stage": "reboot-request",
+    "elapsed": 455.32,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 165,
+    "stage": "reboot-request",
+    "elapsed": 457.54,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 166,
+    "stage": "reboot-request",
+    "elapsed": 459.76,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 167,
+    "stage": "reboot-request",
+    "elapsed": 461.98,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 168,
+    "stage": "reboot-request",
+    "elapsed": 464.2,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 169,
+    "stage": "reboot-request",
+    "elapsed": 466.41,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 170,
+    "stage": "reboot-request",
+    "elapsed": 468.63,
+    "ocr": "\u20acB Wed 14 Oct 18:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  }
+]
