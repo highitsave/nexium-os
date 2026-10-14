@@ -26,16 +26,16 @@ jobs:
           from pathlib import Path
           for p in sorted(Path('.github/workflows').glob('*.y*ml')):
               d=yaml.safe_load(p.read_text());assert isinstance(d,dict) and isinstance(d.get('jobs'),dict),str(p);print('PASS YAML',p,flush=True)
-          # Reuse the authored source-generating step without token-pushing a workflow file.
           d=yaml.safe_load(Path('.github/workflows/nexium-login-persistence.yml').read_text())
           prepare=d['jobs']['final']['steps'][1]['run']
-          # Existing kiosk unit is retained for original source checks but disabled, not masked
-          # over a regular unit file. LightDM is the sole enabled graphical entry point.
           prepare=re.sub(r'^.*subprocess\.run\(.*\x27mask\x27,\x27nexium-kiosk.service\x27.*\n','',prepare,flags=re.M)
           prepare=prepare.replace("assert (r/'etc/systemd/system/nexium-kiosk.service').is_symlink() and os.readlink(r/'etc/systemd/system/nexium-kiosk.service')=='/dev/null'", "assert not (r/'etc/systemd/system/graphical.target.wants/nexium-kiosk.service').exists()")
           prepare=prepare.replace('LIVE_CONFIG_NOAUTOLOGIN="true"', 'LIVE_CONFIG_NOCOMPONENTS="user-setup,lightdm"\\nLIVE_CONFIG_NOAUTOLOGIN="true"')
           prepare=prepare.replace('kiosk masked','kiosk disabled')
           prepare=prepare.replace("('Welcome to Nexium OS' in text or 'Golden Gate' in text and 'Nexium login' not in text)", "('Welcome to Nexium OS' in text or time.monotonic()-login_at>30 and 'Nexium login' not in text)")
+          # Exact latest failure: ISO-extracted grub.cfg retains read-only mode.
+          # Stage a writable copy, then run the persistence-only patch without changing source ISO.
+          prepare=prepare.replace('cp work/original/boot/grub/grub.cfg work/persistence-grub.cfg', 'install -m 0644 work/original/boot/grub/grub.cfg work/persistence-grub.cfg')
           subprocess.run(['bash','-euo','pipefail','-c',prepare],check=True)
           Path('reports/workflow-validation.txt').write_text(Path('/tmp/all-workflows.txt').read_text())
           PY
