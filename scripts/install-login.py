@@ -6,7 +6,7 @@ def install(root):
     def put(name,text,mode=0o644):
         p=r/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text);p.chmod(mode);paths.append(p);return p
     put('usr/share/xsessions/nexium.desktop','[Desktop Entry]\nName=Nexium Golden Gate\nComment=Nexium Openbox desktop\nExec=/usr/local/lib/nexium/session\nType=Application\nDesktopNames=Openbox;\n')
-    put('etc/lightdm/lightdm.conf','[LightDM]\nrun-directory=/run/lightdm\n[Seat:*]\ngreeter-session=lightdm-gtk-greeter\nuser-session=nexium\nautologin-user=\nallow-guest=false\ngreeter-hide-users=false\n')
+    put('etc/lightdm/lightdm.conf','[LightDM]\nrun-directory=/run/lightdm\n[Seat:*]\ngreeter-session=lightdm-gtk-greeter\nuser-session=nexium\nautologin-user=\nallow-guest=false\ngreeter-hide-users=true\n')
     put('etc/lightdm/lightdm-gtk-greeter.conf','[greeter]\nbackground=/usr/share/backgrounds/nexium/greeter.png\ntheme-name=GoldenGate\nicon-theme-name=NexiumIOS4\nfont-name=DejaVu Sans 11\nindicators=~spacer;~clock;~power\nclock-format=%H:%M\nposition=50%,center 65%,center\nuser-background=false\n')
     put('etc/X11/default-display-manager','/usr/sbin/lightdm\n')
     put('etc/skel/.dmrc','[Desktop]\nSession=nexium\n');dm=put('home/nexium/.dmrc','[Desktop]\nSession=nexium\n')
