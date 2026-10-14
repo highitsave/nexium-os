@@ -43,7 +43,7 @@ cleanup
 sudo rm -f work/root/etc/resolv.conf work/root/usr/sbin/policy-rc.d
 sudo cp -a work/resolv.saved work/root/etc/resolv.conf
 if [ -e work/policy.saved ];then sudo cp -a work/policy.saved work/root/usr/sbin/policy-rc.d;fi
-cp work/original/boot/grub/grub.cfg work/persistence-grub.cfg
+install -m 0644 work/original/boot/grub/grub.cfg work/persistence-grub.cfg
 python3 scripts/persistence-grub.py work/persistence-grub.cfg | tee reports/grub-change.txt
 sudo mksquashfs work/root work/new.squashfs -noappend -comp xz -b 1048576 -Xdict-size 1048576 -Xbcj x86 -processors 2
 out=output/nexium-os-1.2-ungoogled-amd64.iso
