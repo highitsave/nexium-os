@@ -37,17 +37,23 @@ jobs:
           # from the historical nexium-login-persistence.yml heredoc.
       - uses: actions/download-artifact@v4
         with:
+          name: nexium-tab-1.2-ungoogled-iso
+          path: source
+          github-token: ${{ github.token }}
+          repository: highitsave/nexium-os
+          run-id: 38179706990
+      - uses: actions/download-artifact@v4
+        with:
           name: nexium-browser-chooser-iso
-          path: output
+          path: seed
           github-token: ${{ github.token }}
           repository: highitsave/nexium-os
           run-id: 38483512164
       - name: Build selected Firefox plus login persistence with all boot checks
         run: |
           set -euo pipefail
-          find output -maxdepth 2 -type f -printf '%f %s bytes\n'
-          mv output/nexium-os-1.2-ungoogled-amd64.iso /tmp/chooser-seed.iso
-          rm -f output/*.iso output/*.sha256
+          mkdir -p output reports work
+          find source seed -maxdepth 2 -type f -printf '%p %s bytes\n'
           bash scripts/build-login-persistence.sh
       - name: Boot final image and verify painted greeter real reboot persistence and browser
         run: |
