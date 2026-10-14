@@ -1,0 +1,248 @@
+[
+  {
+    "frame": 0,
+    "stage": "before-reboot",
+    "elapsed": 1.23,
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) \u00a90:03.0 CAG\u00ae PCIZ.10 PnP PMM+BEFCBO00+BEFOBOOO CAOO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 1,
+    "stage": "before-reboot",
+    "elapsed": 4.04,
+    "ocr": "GNU GRUB version 2.06-13+debizuz\n\nNexium OS (safe graphics, for older computers)\nShut down\n\nUse the T and J keys to select which entry is highlighted.\nPress enter to boot the selected 0S, \u201ce\u2019 to edit the commands\nbefore booting or \u2018c\u2019 for a command-line.\n\nThe highlighted entry will be executed automatically in 3s.\n\n"
+  },
+  {
+    "frame": 2,
+    "stage": "before-reboot",
+    "elapsed": 6.24,
+    "ocr": ""
+  },
+  {
+    "frame": 3,
+    "stage": "before-reboot",
+    "elapsed": 8.3,
+    "ocr": ""
+  },
+  {
+    "frame": 4,
+    "stage": "before-reboot",
+    "elapsed": 10.36,
+    "ocr": ""
+  },
+  {
+    "frame": 5,
+    "stage": "before-reboot",
+    "elapsed": 12.43,
+    "ocr": ""
+  },
+  {
+    "frame": 6,
+    "stage": "before-reboot",
+    "elapsed": 14.56,
+    "ocr": ""
+  },
+  {
+    "frame": 7,
+    "stage": "before-reboot",
+    "elapsed": 16.67,
+    "ocr": ""
+  },
+  {
+    "frame": 8,
+    "stage": "before-reboot",
+    "elapsed": 22.66,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 9,
+    "stage": "before-reboot",
+    "elapsed": 25.44,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 10,
+    "stage": "before-reboot",
+    "elapsed": 28.76,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 11,
+    "stage": "before-reboot",
+    "elapsed": 31.08,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 12,
+    "stage": "before-reboot",
+    "elapsed": 33.4,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 13,
+    "stage": "before-reboot",
+    "elapsed": 41.07,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 14,
+    "stage": "before-reboot",
+    "elapsed": 44.91,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 15,
+    "stage": "before-reboot",
+    "elapsed": 47.08,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 16,
+    "stage": "before-reboot",
+    "elapsed": 51.74,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 17,
+    "stage": "before-reboot",
+    "elapsed": 54.01,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 18,
+    "stage": "before-reboot",
+    "elapsed": 56.14,
+    "ocr": ""
+  },
+  {
+    "frame": 19,
+    "stage": "before-reboot",
+    "elapsed": 58.25,
+    "ocr": ""
+  },
+  {
+    "frame": 20,
+    "stage": "before-reboot",
+    "elapsed": 60.35,
+    "ocr": ""
+  },
+  {
+    "frame": 21,
+    "stage": "before-reboot",
+    "elapsed": 62.45,
+    "ocr": ""
+  },
+  {
+    "frame": 22,
+    "stage": "before-reboot",
+    "elapsed": 64.57,
+    "ocr": ""
+  },
+  {
+    "frame": 23,
+    "stage": "before-reboot",
+    "elapsed": 66.71,
+    "ocr": ""
+  },
+  {
+    "frame": 24,
+    "stage": "before-reboot",
+    "elapsed": 68.83,
+    "ocr": ""
+  },
+  {
+    "frame": 25,
+    "stage": "before-reboot",
+    "elapsed": 70.98,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n02:57 \u00a9\n"
+  },
+  {
+    "frame": 26,
+    "stage": "before-reboot",
+    "elapsed": 78.06,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 27,
+    "stage": "before-reboot",
+    "elapsed": 80.95,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 28,
+    "stage": "before-reboot",
+    "elapsed": 91.28,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 29,
+    "stage": "before-reboot",
+    "elapsed": 93.66,
+    "ocr": "Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 30,
+    "stage": "before-reboot",
+    "elapsed": 97.88,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 31,
+    "stage": "before-reboot",
+    "elapsed": 100.18,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 02:58\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 32,
+    "stage": "before-reboot",
+    "elapsed": 115.5,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 02:58\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 33,
+    "stage": "dismiss-welcome",
+    "elapsed": 117.82,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 34,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 120.0,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 35,
+    "stage": "terminal-ready",
+    "elapsed": 128.31,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 36,
+    "stage": "terminal-failure",
+    "elapsed": 128.49,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 37,
+    "stage": "diagnostic-root-before",
+    "elapsed": 128.66,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 38,
+    "stage": "diagnostic-root-menu",
+    "elapsed": 131.17,
+    "ocr": "NEXIUM-OS\n\nGOLDEN GATE\n\nNexium Messages (Coming soon)\nNexium Calls (Coming soon)\nSettings\n\nNEXIUM VAULT (Coming soon)\nText Editor\n\nSystem Monitor\n\nTrash\n\nWelcome\n\nSystem Information\n\nB 09 out\n\nThu 15 Oct 02:58\n\n"
+  },
+  {
+    "frame": 39,
+    "stage": "diagnostic-terminal-launch",
+    "elapsed": 133.83,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 40,
+    "stage": "diagnostic-terminal-painted",
+    "elapsed": 140.63,
+    "ocr": "\u20acB Thu 15 Oct 02:58\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  }
+]
