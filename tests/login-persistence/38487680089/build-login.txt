@@ -1,0 +1,275 @@
+++ find source -name '*.iso' -print -quit
++ base=source/nexium-os-1.2-ungoogled-amd64.iso
+++ find seed -name '*.iso' -print -quit
++ seed=seed/nexium-os-1.2-ungoogled-amd64.iso
+++ stat -c%s source/nexium-os-1.2-ungoogled-amd64.iso
++ test 661454848 -eq 661454848
++ echo '9a1cfad24c2f06a5a94eea73a89f0f495c5e045a4287cf4435f2940c1a1507f5  source/nexium-os-1.2-ungoogled-amd64.iso'
++ sha256sum -c -
+source/nexium-os-1.2-ungoogled-amd64.iso: OK
+++ stat -c%s seed/nexium-os-1.2-ungoogled-amd64.iso
++ test 862846976 -eq 862846976
++ echo 'e6e23037bb041db61e175c449ce8bd7f2d444e84a848d7cb285d3bb8b02af243  seed/nexium-os-1.2-ungoogled-amd64.iso'
++ sha256sum -c -
+seed/nexium-os-1.2-ungoogled-amd64.iso: OK
++ cp source/nexium-os-1.2-ungoogled-amd64.iso work/orig.iso
++ xorriso -indev work/orig.iso -report_el_torito plain -report_system_area plain
++ xorriso -osirrox on -indev work/orig.iso -extract / work/original
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Copying of file objects from ISO image to disk filesystem is: Enabled
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 319738 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'work/orig.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 319706 data blocks,  624m data, 82.3g free
+Volume id    : 'NEXIUM_OS'
+xorriso : UPDATE :     306 files restored ( 624.0m) in 1 seconds = 472.5xD
+Extracted from ISO image: file '/'='/home/runner/work/nexium-os/nexium-os/work/original'
++ xorriso -osirrox on -indev seed/nexium-os-1.2-ungoogled-amd64.iso -extract / work/seed
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Copying of file objects from ISO image to disk filesystem is: Enabled
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     306 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 418075 * 2048 , 12288 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev 'seed/nexium-os-1.2-ungoogled-amd64.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR grub2-mbr cyl-align-off
+Media summary: 1 session, 418043 data blocks,  816m data, 81.7g free
+Volume id    : 'NEXIUM_OS'
+xorriso : UPDATE :     306 files restored ( 816.1m) in 1 seconds = 617.9xD
+Extracted from ISO image: file '/'='/home/runner/work/nexium-os/nexium-os/work/seed'
++ sudo unsquashfs -d work/root work/seed/live/filesystem.squashfs
+Parallel unsquashfs: Using 4 processors
+37746 inodes (37000 blocks) to write
+
+[=/                                                          ]  1398/74746   1%[=\                                                          ]  1840/74746   2%[=\                                                          ]  2323/74746   3%[======/                                                     ]  8648/74746  11%[=======-                                                    ]  9004/74746  12%[==========\                                                 ] 13300/74746  17%[===========|                                                ] 14149/74746  18%[===========/                                                ] 14632/74746  19%[===========/                                                ] 15054/74746  20%[============-                                               ] 15958/74746  21%[=============|                                              ] 16911/74746  22%[=============/                                              ] 17720/74746  23%[==============\                                             ] 18162/74746  24%[===============|                                            ] 19564/74746  26%[================/                                           ] 20709/74746  27%[=================-                                          ] 21954/74746  29%[==================\                                         ] 23427/74746  31%[===================|                                        ] 24301/74746  32%[===================/                                        ] 24857/74746  33%[====================-                                       ] 25987/74746  34%[=====================\                                      ] 26724/74746  35%[======================|                                     ] 27907/74746  37%[=========================/                                  ] 31816/74746  42%[==========================\                                 ] 33156/74746  44%[==========================-                                 ] 33832/74746  45%[===========================-                                ] 34386/74746  46%[============================\                               ] 36565/74746  48%[================================|                           ] 41610/74746  55%[=================================/                          ] 42029/74746  56%[========================================-                   ] 51670/74746  69%[==============================================-             ] 58722/74746  78%[==================================================|         ] 63664/74746  85%[======================================================/     ] 69340/74746  92%[=======================================================-    ] 70930/74746  94%[===========================================================-] 74746/74746 100%
+
+created 35429 files
+created 4029 directories
+created 2299 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+created 18 hardlinks
++ sudo cp -a work/root/etc/resolv.conf work/resolv.saved
++ sudo rm work/root/etc/resolv.conf
++ sudo cp /etc/resolv.conf work/root/etc/resolv.conf
++ '[' -e work/root/usr/sbin/policy-rc.d ']'
++ printf '#!/bin/sh\nexit 101\n'
++ sudo tee work/root/usr/sbin/policy-rc.d
+#!/bin/sh
+exit 101
++ sudo chmod +x work/root/usr/sbin/policy-rc.d
++ sudo mount -t proc proc work/root/proc
++ sudo mount --rbind /dev work/root/dev
++ sudo mount --make-rslave work/root/dev
++ sudo mount --bind /sys work/root/sys
++ trap cleanup EXIT
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Installed-Size}\n'
++ sudo chroot work/root apt-get update
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:3 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:4 https://brave-browser-apt-release.s3.brave.com stable InRelease
+Reading package lists...
++ sudo chroot work/root env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends lightdm lightdm-gtk-greeter live-boot live-config xdotool wmctrl scrot e2fsprogs util-linux
+Reading package lists...
+Building dependency tree...
+Reading state information...
+live-boot is already the newest version (1:20230131+deb12u1).
+e2fsprogs is already the newest version (1.47.0-2+b2).
+util-linux is already the newest version (2.38.1-5+deb12u3).
+The following packages were automatically installed and are no longer required:
+  brave-keyring libdouble-conversion3 libharfbuzz-subset0 libminizip1
+  libopenh264-7 libvulkan1 libxnvctrl0 xdg-utils
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  liblightdm-gobject-1-0 libxdo3 libxklavier16 live-config-systemd
+Suggested packages:
+  accountsservice upower xserver-xephyr
+Recommended packages:
+  xserver-xorg desktop-base policykit-1 iproute2 | iproute live-config-doc
+  live-tools locales | locales-all user-setup
+The following NEW packages will be installed:
+  liblightdm-gobject-1-0 libxdo3 libxklavier16 lightdm lightdm-gtk-greeter
+  live-config live-config-systemd scrot wmctrl xdotool
+0 upgraded, 10 newly installed, 0 to remove and 3 not upgraded.
+Need to get 596 kB of archives.
+After this operation, 2311 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libxklavier16 amd64 5.4-4 [48.2 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 liblightdm-gobject-1-0 amd64 1.26.0-8 [63.5 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libxdo3 amd64 1:3.20160805.1-5 [33.8 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 lightdm-gtk-greeter amd64 2.0.8-2+b1 [102 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 lightdm amd64 1.26.0-8 [174 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 live-config-systemd all 11.0.3+nmu1 [4932 B]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 live-config all 11.0.3+nmu1 [16.3 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 scrot amd64 1.8.1-1 [75.9 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 wmctrl amd64 1.07-7+b1 [21.5 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 xdotool amd64 1:3.20160805.1-5 [55.6 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 596 kB in 0s (2231 kB/s)
+Selecting previously unselected package libxklavier16:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 37741 files and directories currently installed.)
+Preparing to unpack .../0-libxklavier16_5.4-4_amd64.deb ...
+Unpacking libxklavier16:amd64 (5.4-4) ...
+Selecting previously unselected package liblightdm-gobject-1-0:amd64.
+Preparing to unpack .../1-liblightdm-gobject-1-0_1.26.0-8_amd64.deb ...
+Unpacking liblightdm-gobject-1-0:amd64 (1.26.0-8) ...
+Selecting previously unselected package libxdo3:amd64.
+Preparing to unpack .../2-libxdo3_1%3a3.20160805.1-5_amd64.deb ...
+Unpacking libxdo3:amd64 (1:3.20160805.1-5) ...
+Selecting previously unselected package lightdm-gtk-greeter.
+Preparing to unpack .../3-lightdm-gtk-greeter_2.0.8-2+b1_amd64.deb ...
+Unpacking lightdm-gtk-greeter (2.0.8-2+b1) ...
+Selecting previously unselected package lightdm.
+Preparing to unpack .../4-lightdm_1.26.0-8_amd64.deb ...
+Unpacking lightdm (1.26.0-8) ...
+Selecting previously unselected package live-config-systemd.
+Preparing to unpack .../5-live-config-systemd_11.0.3+nmu1_all.deb ...
+Unpacking live-config-systemd (11.0.3+nmu1) ...
+Selecting previously unselected package live-config.
+Preparing to unpack .../6-live-config_11.0.3+nmu1_all.deb ...
+Unpacking live-config (11.0.3+nmu1) ...
+Selecting previously unselected package scrot.
+Preparing to unpack .../7-scrot_1.8.1-1_amd64.deb ...
+Unpacking scrot (1.8.1-1) ...
+Selecting previously unselected package wmctrl.
+Preparing to unpack .../8-wmctrl_1.07-7+b1_amd64.deb ...
+Unpacking wmctrl (1.07-7+b1) ...
+Selecting previously unselected package xdotool.
+Preparing to unpack .../9-xdotool_1%3a3.20160805.1-5_amd64.deb ...
+Unpacking xdotool (1:3.20160805.1-5) ...
+Setting up libxklavier16:amd64 (5.4-4) ...
+Setting up wmctrl (1.07-7+b1) ...
+Setting up libxdo3:amd64 (1:3.20160805.1-5) ...
+Setting up liblightdm-gobject-1-0:amd64 (1.26.0-8) ...
+Setting up live-config-systemd (11.0.3+nmu1) ...
+Created symlink /etc/systemd/system/basic.target.wants/live-config.service → /lib/systemd/system/live-config.service.
+Setting up scrot (1.8.1-1) ...
+Setting up lightdm-gtk-greeter (2.0.8-2+b1) ...
+update-alternatives: using /usr/share/xgreeters/lightdm-gtk-greeter.desktop to provide /usr/share/xgreeters/lightdm-greeter.desktop (lightdm-greeter) in auto mode
+Setting up lightdm (1.26.0-8) ...
+Adding group `lightdm' (GID 109) ...
+Done.
+Adding system user `lightdm' (UID 102) ...
+Adding new user `lightdm' (UID 102) with group `lightdm' ...
+Creating home directory `/var/lib/lightdm' ...
+usermod: no changes
+usermod: no changes
+Running in chroot, ignoring request.
+invoke-rc.d: policy-rc.d denied execution of reload.
+Setting up xdotool (1:3.20160805.1-5) ...
+Setting up live-config (11.0.3+nmu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
++ sudo chroot work/root apt-get clean
++ sudo chroot work/root dpkg-query -W '-f=${Package}\t${Version}\t${Installed-Size}\n'
++ sudo python3 scripts/nexium-phase2.py --install work/root
++ tee reports/install.txt
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+Installed native layer: 152 SHA256-tracked files; icon theme: NexiumIOS4
++ sudo python3 scripts/install-login.py install work/root
+Removed "/home/runner/work/nexium-os/nexium-os/work/root/etc/systemd/system/graphical.target.wants/nexium-kiosk.service".
+Synchronizing state of lightdm.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install --root=/home/runner/work/nexium-os/nexium-os/work/root enable lightdm
++ sudo python3 scripts/nexium-phase2.py --verify work/root
++ tee reports/preflight-desktop.txt
+PASS CHROMIUM GUARD: 2 preferences without localhost/127.0.0.1; ZERO enterprise policy directories/files or initial/master preferences
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-nexium-live-admin: parsed OK
+/etc/sudoers.d/README: parsed OK
+PASS ADMIN: nexium /usr/bin/sudo -n true; sudo group; validated 0440 NOPASSWD drop-in
+PASS NETWORK: firmware package set installed; NetworkManager enabled and ifupdown interfaces managed. Physical Lenovo adapter is not accessible to this cloud build.
+PASS PYSIDE6 QTWEBENGINE IMPORTS
+PASS NEXIUM browser source, isolated Python, imports, and removal of standalone Chromium
+OUTPUT SQUASHFS: all 177 desktop/branding overlay files present and SHA256-identical
+DOCK files => /usr/bin/pcmanfm (real application)
+DOCK browser => /usr/local/bin/nexium-browser (real application)
+DOCK terminal => /usr/bin/xterm (real application)
+DOCK messages => /usr/local/bin/nexium-coming-soon Messages (honest coming-soon placeholder)
+DOCK calls => /usr/local/bin/nexium-coming-soon Calls (honest coming-soon placeholder)
+DOCK settings => /usr/local/bin/nexium-settings (real application)
+DOCK vault => /usr/local/bin/nexium-coming-soon Vault (honest coming-soon placeholder)
+DOCK editor => /usr/bin/mousepad (real application)
+DOCK monitor => /usr/bin/lxtask (real application)
+DOCK trash => /usr/bin/pcmanfm trash:/// (real application)
+PASS original ten pins plus all installed chooser/browser pins: ['01-files.dockitem', '02-browser.dockitem', '03-terminal.dockitem', '04-messages.dockitem', '05-calls.dockitem', '06-settings.dockitem', '07-vault.dockitem', '08-editor.dockitem', '09-monitor.dockitem', '10-trash.dockitem', '11-chooser.dockitem', '11-firefox-choice.dockitem']
+Output desktop: Openbox / Plank / Tint2 / PCManFM / Xterm; Plymouth retained
+ICON THEME: NexiumIOS4
+ICON files => ios4-utilities-folder 64px and 128px PNG verified
+ICON browser => ios4-safari 64px and 128px PNG verified
+ICON terminal => ios4-linen 64px and 128px PNG verified
+ICON messages => ios4-messages 64px and 128px PNG verified
+ICON calls => ios4-phone 64px and 128px PNG verified
+ICON settings => ios4-settings 64px and 128px PNG verified
+ICON vault => ios4-cydia 64px and 128px PNG verified
+ICON editor => ios4-notes 64px and 128px PNG verified
+ICON monitor => ios4-stocks 64px and 128px PNG verified
+ICON trash => ios4-blank-gray 64px and 128px PNG verified
+iOS4: user-authorized sheet crops integrated; Mac preview not used; unmapped icons inherit Adwaita
+Boot theme: active nexium-gold cream made by TOMO!; regenerated initrd verified separately
+No physical boot/hardware test performed; launcher resolution is not full hardware verification
+PASS actual on-disk Nexium browser launcher and custom Nexium icon; full final manifest SHA256 checked
++ sudo python3 scripts/install-login.py verify work/root
++ tee reports/login-verification.txt
+PASS LightDM greeter enabled, kiosk disabled, normal nexium login; / union template; branded greeter
++ sudo chroot work/root plymouth-set-default-theme nexium-gold
++ mapfile -t kernels
+++ sudo find -L work/root/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n'
++ test 1 -eq 1
++ sudo mkdir -p work/root/tmp/nexium-initrd
++ sudo chroot work/root update-initramfs -c -k 6.1.0-53-amd64 -b /tmp/nexium-initrd
++ tee reports/initrd-regeneration.txt
+update-initramfs: Generating /tmp/nexium-initrd/initrd.img-6.1.0-53-amd64
+W: plymouth: The plugin label.so is missing, the selected theme might not work as expected.
+W: plymouth: You might want to install the plymouth-themes package to fix this.
+live-boot: core filesystems dm-verity devices utils udev blockdev dns.
++ sudo cp work/root/tmp/nexium-initrd/initrd.img-6.1.0-53-amd64 work/new.initrd
++ sudo rm -rf work/root/tmp/nexium-initrd
++ cleanup
++ sudo umount -R work/root/proc
++ sudo umount -R work/root/dev
++ sudo umount -R work/root/sys
++ sudo rm -f work/root/etc/resolv.conf work/root/usr/sbin/policy-rc.d
++ sudo cp -a work/resolv.saved work/root/etc/resolv.conf
++ '[' -e work/policy.saved ']'
++ cp work/original/boot/grub/grub.cfg work/persistence-grub.cfg
++ python3 scripts/persistence-grub.py work/persistence-grub.cfg
++ tee reports/grub-change.txt
+Traceback (most recent call last):
+  File "/home/runner/work/nexium-os/nexium-os/scripts/persistence-grub.py", line 16, in <module>
+    p=Path(sys.argv[1]);p.write_bytes(patch(p.read_bytes()))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1038, in write_bytes
+    with self.open(mode='wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'work/persistence-grub.cfg'
++ cleanup
++ sudo umount -R work/root/proc
++ true
++ sudo umount -R work/root/dev
++ true
++ sudo umount -R work/root/sys
++ true
