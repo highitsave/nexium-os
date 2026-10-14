@@ -1,0 +1,1 @@
+PASS LightDM greeter enabled, kiosk disabled, normal nexium login; / union template; branded greeter

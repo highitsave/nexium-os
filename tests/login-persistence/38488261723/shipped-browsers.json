@@ -1,0 +1,11 @@
+{
+  "shipped": [
+    "Nexium Browser",
+    "Firefox"
+  ],
+  "search_default": "DuckDuckGo",
+  "search_options": [
+    "DuckDuckGo",
+    "Bing"
+  ]
+}

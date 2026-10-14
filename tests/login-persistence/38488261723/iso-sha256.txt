@@ -1,0 +1,1 @@
+53e5f7dc9e87c8f345e41c80dfd98855b296f36788b25f41531eca812ec2ad0b  output/nexium-os-1.2-ungoogled-amd64.iso
