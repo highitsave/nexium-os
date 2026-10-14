@@ -1,5 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
+# Every output parent must exist before any redirect, tee, or image write.
+mkdir -p output work reports/browser reports/boot reports/final
 base=$(find source -name '*.iso' -print -quit)
 seed=$(find seed -name '*.iso' -print -quit)
 test "$(stat -c%s "$base")" -eq 661454848
