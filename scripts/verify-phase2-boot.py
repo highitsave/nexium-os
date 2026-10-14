@@ -1,5 +1,7 @@
 import pathlib, hashlib, re, json, os, subprocess
 P=pathlib.Path
+import importlib.util
+spec=importlib.util.spec_from_file_location("persistence_grub","scripts/persistence-grub.py");pg=importlib.util.module_from_spec(spec);spec.loader.exec_module(pg)
 a,b=P('work/original'),P('work/final')
 old=P('reports/original-boot.txt').read_text(); new=P('reports/final-boot.txt').read_text()
 def schema(text):
@@ -52,13 +54,17 @@ bootpaths=[P('/'+v.split(':',1)[1].split()[-1].lstrip('/')) for v in old.splitli
 for name,p in originals.items():
     if name==P('live/initrd.img') or name.suffix=='.squashfs' or name.name in ['boot.catalog','boot.cat']: continue
     x,y=p.read_bytes(),rebuilt[name].read_bytes()
+    if name==P("boot/grub/grub.cfg"):
+        assert y==pg.patch(x), "GRUB changed beyond authorized persistence parameter"
+        print("PASS GRUB: ONLY persistence added to live linux entries; every other byte unchanged")
+        continue
     if x!=y:
         assert P('/'+str(name)) in bootpaths, 'Unexpected payload change: '+str(name)
         for start,end in [(8,64),(2548,2556)]:
             x=x[:start]+bytes(end-start)+x[end:]; y=y[:start]+bytes(end-start)+y[end:]
         assert x==y, 'Boot image differs beyond required address/checksum patches: '+str(name)
         print('Boot address/checksum relocation only:',name)
-for n in ['live/vmlinuz','boot/grub/grub.cfg']:
+for n in ['live/vmlinuz']:
     assert originals[P(n)].read_bytes()==rebuilt[P(n)].read_bytes()
     print('UNCHANGED:', '/'+n)
 print('VALID ISO9660: NEXIUM_OS; original boot catalog, BIOS/UEFI and GRUB2 isohybrid MBR structure verified; original MBR boot code identical')

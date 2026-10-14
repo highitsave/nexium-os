@@ -12,3 +12,5 @@ Open an issue explaining the problem, affected commit/image and evidence, or sub
 - Preserve third-party copyright/license notices. Do not contribute proprietary assets without distribution rights. Describe provenance and applicable licenses for artwork/vendor sources.
 
 Contributions to original project code are under the MIT License unless explicitly agreed otherwise. This does not override third-party licensing. Do not publish releases or contact users from automated workflows without project authorization.
+
+Login/persistence changes must retain the original boot structures and exact persistence-only GRUB delta check. Require captured branded greeter before and after reboot, normal-user login, a changed boot ID and persistent marker on labeled storage. Never describe live credentials or passwordless sudo as hardened security. Do not run the destructive partition formatter on a user's drive during CI; use a disposable virtual disk.

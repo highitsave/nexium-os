@@ -1,0 +1,18 @@
+#!/bin/sh
+# Format ONLY an already-created second partition; never repartition or touch an ISO.
+set -eu
+if [ "$(id -u)" -ne 0 ] || [ "$#" -ne 2 ] || [ "$2" != --format-this-partition ]; then
+  echo 'Usage: sudo nexium-persistence-setup /dev/sdX2 --format-this-partition' >&2
+  echo 'WARNING: destroys all data on that partition. Create unused second partition first.' >&2
+  exit 2
+fi
+part=$1
+[ -b "$part" ] || { echo 'Not a block device' >&2; exit 2; }
+[ "$(lsblk -dn -o TYPE "$part")" = part ] || { echo 'Refusing whole disks' >&2; exit 2; }
+case "$(lsblk -dn -o PARTN "$part")" in 2) ;; *) echo 'Refusing anything except partition 2' >&2; exit 2;; esac
+[ -z "$(lsblk -dn -o MOUNTPOINT "$part")" ] || { echo 'Partition is mounted; refusing' >&2; exit 2; }
+size=$(blockdev --getsize64 "$part");[ "$size" -ge 268435456 ] || { echo 'Need at least 256 MiB persistence storage' >&2; exit 2; }
+mkfs.ext4 -F -L persistence "$part"
+dir=$(mktemp -d);trap 'umount "$dir" 2>/dev/null || true; rmdir "$dir"' EXIT
+mount "$part" "$dir";printf '/ union\n' > "$dir/persistence.conf";sync;umount "$dir"
+echo 'Created ext4 label persistence with / union. Reboot with the persistence-enabled live entry.'
