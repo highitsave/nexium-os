@@ -21,12 +21,37 @@ data={'marker':'NEXIUM_PERSISTENCE_PROOF','boot_id_before':boot,'uid':os.getuid(
 urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/persistence-before.json',data=json.dumps(data,indent=2).encode(),method='POST')).read()
 subprocess.run(['sudo','-n','systemctl','reboot'],check=True)
 '''
+# Failure-only guest diagnostics. This does not satisfy or replace any proof gate.
+diagnostic=r'''import os,json,urllib.request,subprocess,pwd
+from pathlib import Path
+assert os.getuid()!=0 and pwd.getpwuid(os.getuid()).pw_name=='nexium', 'diagnostics require normal nexium user'
+data={'uid':os.getuid(),'home':str(Path.home()),'commands':[]}
+env=os.environ.copy();env.update(DISPLAY=':0',XAUTHORITY=str(Path.home()/'.Xauthority'))
+commands=[
+    'id; loginctl list-sessions; loginctl session-status',
+    'ps -eo user,pid,args',
+    'ls -l /usr/bin/xterm /usr/bin/openbox /usr/bin/openbox-session /tmp/.X11-unix; stat "$HOME/.Xauthority"',
+    'cat "$HOME/.config/openbox/rc.xml"; cat "$HOME/.config/openbox/autostart"',
+    'tail -n 200 "$HOME/.xsession-errors"; journalctl --user -b --no-pager -n 200',
+    'xprop -root _NET_SUPPORTING_WM_CHECK _NET_ACTIVE_WINDOW; xmodmap -pm; setxkbmap -query',
+    "xterm -display :0 -e /bin/sh -c 'echo NEXIUMDIAGNOSTIC; sleep 5'",
+]
+for command in commands:
+    try:
+        r=subprocess.run(command,shell=True,capture_output=True,text=True,env=env,timeout=20)
+        record={'command':command,'exit':r.returncode,'stdout':r.stdout,'stderr':r.stderr}
+    except subprocess.TimeoutExpired as e:
+        record={'command':command,'timeout':20,'stdout':(e.stdout or b'').decode(errors='replace') if isinstance(e.stdout,bytes) else e.stdout,'stderr':(e.stderr or b'').decode(errors='replace') if isinstance(e.stderr,bytes) else e.stderr}
+    data['commands'].append(record)
+urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/terminal-diagnostic.json',data=json.dumps(data,indent=2).encode(),method='POST'),timeout=10).read()
+'''
+compile(diagnostic,'failure-only-guest-diagnostic','exec')
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        body=pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else write.encode() if self.path=='/write.py' else probe.encode()
+        body=pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else write.encode() if self.path=='/write.py' else diagnostic.encode() if self.path=='/diagnostic.py' else probe.encode()
         self.send_response(200);self.end_headers();self.wfile.write(body)
     def do_POST(self):
-        name=self.path.strip('/') if self.path in ['/browser-window.png','/persistence-before.json'] else 'live-session.json'
+        name=self.path.strip('/') if self.path in ['/browser-window.png','/persistence-before.json','/terminal-diagnostic.json'] else 'live-session.json'
         (O/name).write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
         self.send_response(200);self.end_headers();self.wfile.write(b'OK')
 server=http.server.HTTPServer(('0.0.0.0',8888),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -53,6 +78,8 @@ def typed(value):
 entries=[];greeters=[];splash=[];desktop=[]
 def frame(stage):
     n=len(entries);qmp('screendump',{'filename':'/tmp/login-frame.ppm'});im=Image.open('/tmp/login-frame.ppm').convert('RGB');file=F/f'frame-{n:04d}.png';im.save(file)
+    # Keep each stage's actual latest paint in the top-level committed evidence.
+    im.save(O/(stage+'-latest.png'))
     text=subprocess.run(['tesseract',str(file),'stdout'],capture_output=True,text=True).stdout
     e={'frame':n,'stage':stage,'elapsed':round(time.monotonic()-started,2),'ocr':text};entries.append(e)
     if 'TOMO' in text.upper():splash.append(e);im.save(O/'cream-splash.png')
@@ -102,6 +129,27 @@ try:
     assert receipt['cream_splash_pass'] and receipt['plank_running'] and receipt['sudo_exit']==0 and receipt['browser_gui_pass']
     subprocess.run(['python3','scripts/assert-nexium-capture.py',str(O)],check=True)
     print('PASS FINAL LOGIN, USB PERSISTENCE AFTER REAL REBOOT, CHOOSER RESTARTS AND REAL NEXIUM PAINT',flush=True)
+except AssertionError as original:
+    (O/'failure.txt').write_text(str(original)+'\n')
+    # Diagnose an already failed shortcut from tty2; never continue the proof via tty.
+    if str(original)=='FAIL Super+T did not open terminal':
+        try:
+            frame('terminal-failure')
+            key('ctrl','alt','f2');time.sleep(5);im,text=frame('diagnostic-console')
+            assert 'login:' in text.lower(), 'diagnostic tty2 login prompt not painted'
+            typed('nexium');key('ret');time.sleep(3);typed('nexium');key('ret');time.sleep(5)
+            typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/diagnostic.py\").read())'");key('ret')
+            for _ in range(60):
+                if (O/'terminal-diagnostic.json').exists():break
+                time.sleep(2)
+            assert (O/'terminal-diagnostic.json').exists(), 'diagnostic guest report not received'
+            print('FAILURE-ONLY GUEST DIAGNOSTICS BEGIN',flush=True)
+            print((O/'terminal-diagnostic.json').read_text(),flush=True)
+            print('FAILURE-ONLY GUEST DIAGNOSTICS END',flush=True)
+        except Exception as diagnostic_error:
+            (O/'diagnostic-error.txt').write_text(repr(diagnostic_error)+'\n')
+            print('FAILURE-ONLY DIAGNOSTICS UNAVAILABLE: '+repr(diagnostic_error),flush=True)
+    raise
 finally:
     if p.poll() is None:
         qmp('quit');p.wait(timeout=30)
