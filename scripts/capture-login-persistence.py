@@ -22,27 +22,55 @@ urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/persistence-
 subprocess.run(['sudo','-n','systemctl','reboot'],check=True)
 '''
 # Failure-only guest diagnostics. This does not satisfy or replace any proof gate.
-diagnostic=r'''import os,json,urllib.request,subprocess,pwd
+diagnostic=r'''import os,json,urllib.request,subprocess,pwd,ctypes,threading,time
 from pathlib import Path
 assert os.getuid()!=0 and pwd.getpwuid(os.getuid()).pw_name=='nexium', 'diagnostics require normal nexium user'
-data={'uid':os.getuid(),'home':str(Path.home()),'commands':[]}
-env=os.environ.copy();env.update(DISPLAY=':0',XAUTHORITY=str(Path.home()/'.Xauthority'))
+data={'uid':os.getuid(),'home':str(Path.home()),'environment':dict(os.environ),'commands':[],'key_samples':[]}
+env=os.environ.copy()
+# Use the actual graphical terminal's DISPLAY and authority, not a guessed display.
+assert env.get('DISPLAY'), 'diagnostic terminal has no DISPLAY'
+x=ctypes.CDLL('libX11.so.6')
+x.XOpenDisplay.argtypes=[ctypes.c_char_p];x.XOpenDisplay.restype=ctypes.c_void_p
+x.XStringToKeysym.argtypes=[ctypes.c_char_p];x.XStringToKeysym.restype=ctypes.c_ulong
+x.XKeysymToKeycode.argtypes=[ctypes.c_void_p,ctypes.c_ulong];x.XKeysymToKeycode.restype=ctypes.c_ubyte
+x.XQueryKeymap.argtypes=[ctypes.c_void_p,ctypes.c_char_p]
+x.XCloseDisplay.argtypes=[ctypes.c_void_p]
+d=x.XOpenDisplay(env['DISPLAY'].encode());assert d, 'cannot open actual X display'
+names=['Super_L','Control_L','Alt_L','t','F2']
+codes={n:int(x.XKeysymToKeycode(d,x.XStringToKeysym(n.encode()))) for n in names}
+data['x_keycodes']=codes
+stop=threading.Event()
+def sample():
+    last=None;begin=time.monotonic()
+    while not stop.is_set():
+        buf=ctypes.create_string_buffer(32);x.XQueryKeymap(d,buf)
+        pressed=[n for n,c in codes.items() if c and buf.raw[c//8] & (1 << (c%8))]
+        if pressed!=last:
+            data['key_samples'].append({'elapsed':round(time.monotonic()-begin,3),'pressed':pressed});last=pressed
+        time.sleep(.005)
+t=threading.Thread(target=sample);t.start()
+urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/diagnostic-ready.json',data=json.dumps({'display':env['DISPLAY'],'keycodes':codes}).encode(),method='POST'),timeout=10).read()
 commands=[
     'id; loginctl list-sessions; loginctl session-status',
     'ps -eo user,pid,args',
-    'ls -l /usr/bin/xterm /usr/bin/openbox /usr/bin/openbox-session /tmp/.X11-unix; stat "$HOME/.Xauthority"',
-    'cat "$HOME/.config/openbox/rc.xml"; cat "$HOME/.config/openbox/autostart"',
+    'printf "PATH=%s\\n" "$PATH"; command -v xterm; command -v openbox; command -v openbox-session; ls -l /usr/bin/xterm /usr/bin/openbox /usr/bin/openbox-session /tmp/.X11-unix',
+    'xprop -root _OB_CONFIG_FILE _OB_VERSION _NET_SUPPORTING_WM_CHECK _NET_ACTIVE_WINDOW; wm=$(xprop -root _NET_SUPPORTING_WM_CHECK | grep -o "0x[0-9a-fA-F]*" | head -n1); if test -n "$wm"; then xprop -id "$wm" _NET_WM_NAME WM_CLASS; fi',
+    'cat "$HOME/.config/openbox/rc.xml"; cat "$HOME/.config/openbox/autostart"; for pid in $(pgrep -u "$(id -u)" -x openbox); do tr "\\0" " " < /proc/$pid/cmdline; echo; tr "\\0" "\\n" < /proc/$pid/environ | grep -E "^(HOME|PATH|DISPLAY|XDG_CONFIG_HOME|XDG_CURRENT_DESKTOP)="; done',
     'tail -n 200 "$HOME/.xsession-errors"; journalctl --user -b --no-pager -n 200',
-    'xprop -root _NET_SUPPORTING_WM_CHECK _NET_ACTIVE_WINDOW; xmodmap -pm; setxkbmap -query',
-    "xterm -display :0 -e /bin/sh -c 'echo NEXIUMDIAGNOSTIC; sleep 5'",
+    'xmodmap -pm; setxkbmap -query; xwininfo -root -tree',
+    "xterm -e /bin/sh -c 'echo NEXIUMDIAGNOSTIC; sleep 5'",
 ]
-for command in commands:
-    try:
-        r=subprocess.run(command,shell=True,capture_output=True,text=True,env=env,timeout=20)
-        record={'command':command,'exit':r.returncode,'stdout':r.stdout,'stderr':r.stderr}
-    except subprocess.TimeoutExpired as e:
-        record={'command':command,'timeout':20,'stdout':(e.stdout or b'').decode(errors='replace') if isinstance(e.stdout,bytes) else e.stdout,'stderr':(e.stderr or b'').decode(errors='replace') if isinstance(e.stderr,bytes) else e.stderr}
-    data['commands'].append(record)
+try:
+    for command in commands:
+        try:
+            r=subprocess.run(command,shell=True,capture_output=True,text=True,env=env,timeout=20)
+            record={'command':command,'exit':r.returncode,'stdout':r.stdout,'stderr':r.stderr}
+        except subprocess.TimeoutExpired as e:
+            record={'command':command,'timeout':20,'stdout':(e.stdout or b'').decode(errors='replace') if isinstance(e.stdout,bytes) else e.stdout,'stderr':(e.stderr or b'').decode(errors='replace') if isinstance(e.stderr,bytes) else e.stderr}
+        data['commands'].append(record)
+    time.sleep(15)
+finally:
+    stop.set();t.join();x.XCloseDisplay(d)
 urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/terminal-diagnostic.json',data=json.dumps(data,indent=2).encode(),method='POST'),timeout=10).read()
 '''
 compile(diagnostic,'failure-only-guest-diagnostic','exec')
@@ -51,7 +79,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         body=pathlib.Path('scripts/chooser-live-test.py').read_bytes() if self.path=='/chooser-test.py' else write.encode() if self.path=='/write.py' else diagnostic.encode() if self.path=='/diagnostic.py' else probe.encode()
         self.send_response(200);self.end_headers();self.wfile.write(body)
     def do_POST(self):
-        name=self.path.strip('/') if self.path in ['/browser-window.png','/persistence-before.json','/terminal-diagnostic.json'] else 'live-session.json'
+        name=self.path.strip('/') if self.path in ['/browser-window.png','/persistence-before.json','/terminal-diagnostic.json','/diagnostic-ready.json'] else 'live-session.json'
         (O/name).write_bytes(self.rfile.read(int(self.headers['Content-Length'])))
         self.send_response(200);self.end_headers();self.wfile.write(b'OK')
 server=http.server.HTTPServer(('0.0.0.0',8888),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -67,7 +95,12 @@ def qmp(ex,args=None):
     stream.write((json.dumps({'execute':ex,'arguments':args or {}})+'\n').encode())
     while True:
         r=json.loads(stream.readline())
-        if 'return' in r or 'error' in r:assert 'error' not in r, 'FAIL QMP command rejected: '+json.dumps({'command':ex,'arguments':args or {},'response':r});return r
+        if 'return' in r or 'error' in r:
+            if ex in ['send-key','input-send-event']:
+                with (O/'qmp-inputs.jsonl').open('a') as log:
+                    log.write(json.dumps({'elapsed':round(time.monotonic()-started,3),'command':ex,'arguments':args or {},'response':r})+'\n')
+            assert 'error' not in r, 'FAIL QMP command rejected: '+json.dumps({'command':ex,'arguments':args or {},'response':r})
+            return r
 qmp('qmp_capabilities')
 def key(*codes):
     qmp('send-key',{'keys':[{'type':'qcode','data':c} for c in codes],'hold-time':40});time.sleep(.12)
@@ -106,6 +139,43 @@ def boot_and_login(stage):
 def terminal_script(name):
     key('ret');time.sleep(2);im,text=frame('dismiss-welcome');w,h=im.size;qmp('input-send-event',{'events':[{'type':'abs','data':{'axis':'x','value':int((w-44)*32767/w)}},{'type':'abs','data':{'axis':'y','value':int((h*0.69)*32767/h)}},{'type':'btn','data':{'button':'left','down':True}},{'type':'btn','data':{'button':'left','down':False}}]});time.sleep(2);im,text=frame('dismiss-welcome-clicked');assert 'Nexium login' not in text and 'Welcome to Nexium OS' not in text,'FAIL welcome OK click did not close modal or returned to greeter';key('meta_l','t');time.sleep(3);typed('echo NEXIUMTERMINALREADY');key('ret');time.sleep(2);im,text=frame('terminal-ready');assert 'NEXIUMTERMINALREADY' in text.upper(), 'FAIL Super+T did not open terminal';time.sleep(3)
     typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/"+name+"\").read())'");key('ret')
+def diagnostic_pointer_terminal():
+    # Pointer-only recovery for diagnostics: unlike tty2 it does not require a modifier chord.
+    # The failed original proof stays failed even if this paints a working terminal.
+    import csv,io
+    im,text=frame('diagnostic-root-before');w,h=im.size
+    def click(x,y,button):
+        qmp('input-send-event',{'events':[{'type':'abs','data':{'axis':'x','value':int(x*32767/w)}},{'type':'abs','data':{'axis':'y','value':int(y*32767/h)}}]})
+        qmp('input-send-event',{'events':[{'type':'btn','data':{'button':button,'down':True}}]});time.sleep(.3)
+        qmp('input-send-event',{'events':[{'type':'btn','data':{'button':button,'down':False}}]});time.sleep(2)
+    click(w/2,h/2,'right');im,text=frame('diagnostic-root-menu')
+    tsv=subprocess.run(['tesseract',str(O/'diagnostic-root-menu-latest.png'),'stdout','--psm','11','tsv'],check=True,capture_output=True,text=True).stdout
+    matches=[r for r in csv.DictReader(io.StringIO(tsv),delimiter='\t') if r.get('text','').strip().lower()=='terminal']
+    assert len(matches)==1, 'diagnostic pointer root menu did not paint exactly one Terminal item: '+text
+    r=matches[0];click(int(r['left'])+int(r['width'])/2,int(r['top'])+int(r['height'])/2,'left')
+    frame('diagnostic-terminal-launch');typed('echo NEXIUMDIAGNOSTICTERMINAL');key('ret');time.sleep(3)
+    im,text=frame('diagnostic-terminal-painted')
+    assert 'NEXIUMDIAGNOSTICTERMINAL' in text.upper(), 'diagnostic pointer terminal did not paint executed marker: '+text
+    typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/diagnostic.py\").read())'");key('ret')
+    for _ in range(30):
+        if (O/'diagnostic-ready.json').exists():break
+        frame('diagnostic-report-start');time.sleep(2)
+    assert (O/'diagnostic-ready.json').exists(), 'diagnostic X key sampler not ready'
+    # Compare existing short send-key chord with explicit staggered down/up while X samples actual keys.
+    key('meta_l','t');time.sleep(2)
+    for code in ['meta_l','t']:
+        qmp('input-send-event',{'events':[{'type':'key','data':{'down':True,'key':{'type':'qcode','data':code}}}]});time.sleep(.5)
+    time.sleep(1)
+    for code in ['t','meta_l']:
+        qmp('input-send-event',{'events':[{'type':'key','data':{'down':False,'key':{'type':'qcode','data':code}}}]});time.sleep(.5)
+    frame('diagnostic-input-observation')
+    for _ in range(60):
+        if (O/'terminal-diagnostic.json').exists():break
+        frame('diagnostic-report-wait');time.sleep(2)
+    assert (O/'terminal-diagnostic.json').exists(), 'diagnostic guest report not received'
+    print('FAILURE-ONLY GUEST DIAGNOSTICS BEGIN',flush=True)
+    print((O/'terminal-diagnostic.json').read_text(),flush=True)
+    print('FAILURE-ONLY GUEST DIAGNOSTICS END',flush=True)
 try:
     boot_and_login('before-reboot')
     terminal_script('write.py')
@@ -131,21 +201,11 @@ try:
     print('PASS FINAL LOGIN, USB PERSISTENCE AFTER REAL REBOOT, CHOOSER RESTARTS AND REAL NEXIUM PAINT',flush=True)
 except AssertionError as original:
     (O/'failure.txt').write_text(str(original)+'\n')
-    # Diagnose an already failed shortcut from tty2; never continue the proof via tty.
+    # Recover only to collect evidence, never continue the proof after the failed shortcut.
     if str(original)=='FAIL Super+T did not open terminal':
         try:
             frame('terminal-failure')
-            key('ctrl','alt','f2');time.sleep(5);im,text=frame('diagnostic-console')
-            assert 'login:' in text.lower(), 'diagnostic tty2 login prompt not painted'
-            typed('nexium');key('ret');time.sleep(3);typed('nexium');key('ret');time.sleep(5)
-            typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/diagnostic.py\").read())'");key('ret')
-            for _ in range(60):
-                if (O/'terminal-diagnostic.json').exists():break
-                time.sleep(2)
-            assert (O/'terminal-diagnostic.json').exists(), 'diagnostic guest report not received'
-            print('FAILURE-ONLY GUEST DIAGNOSTICS BEGIN',flush=True)
-            print((O/'terminal-diagnostic.json').read_text(),flush=True)
-            print('FAILURE-ONLY GUEST DIAGNOSTICS END',flush=True)
+            diagnostic_pointer_terminal()
         except Exception as diagnostic_error:
             (O/'diagnostic-error.txt').write_text(repr(diagnostic_error)+'\n')
             print('FAILURE-ONLY DIAGNOSTICS UNAVAILABLE: '+repr(diagnostic_error),flush=True)
