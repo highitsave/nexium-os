@@ -77,7 +77,7 @@ def boot_and_login(stage):
         time.sleep(2)
     raise AssertionError('FAIL greeter/login/desktop timeout '+stage)
 def terminal_script(name):
-    key('meta_l','t');time.sleep(6)
+    key('ctrl','alt','t');time.sleep(2)
     typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/"+name+"\").read())'");key('ret')
 try:
     boot_and_login('before-reboot')
