@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Terminal
-Exec=/usr/bin/xterm
+Exec=/usr/bin/xterm -e /bin/sh
 Icon=ios4-linen
 Terminal=false
 Categories=Utility;
