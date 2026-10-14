@@ -67,8 +67,8 @@ def boot_and_login(stage):
             greeter={'stage':stage,'width':im.width,'height':im.height,'variance':sum(ImageStat.Stat(im).var),'ocr':text}
             assert im.width>=800 and im.height>=600 and greeter['variance']>50
             im.save(O/f'greeter-{stage}.png');greeters.append(greeter)
-            # GTK greeter selects the sole normal user and focuses its password box.
-            typed('nexium');key('ret');logged=True;login_at=time.monotonic()
+            # Greeter explicitly requests the normal user's username, then password.
+            typed('nexium');key('ret');time.sleep(3);typed('nexium');key('ret');logged=True;login_at=time.monotonic()
         if logged and ('Welcome to Nexium OS' in text or time.monotonic()-login_at>30 and 'Nexium login' not in text):
             time.sleep(15);im,text=frame(stage);im.save(O/f'desktop-{stage}.png');desktop.append(stage);return
         if logged and time.monotonic()-login_at>40 and 'Nexium login' in text and retry<1:
