@@ -31,7 +31,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.send_response(200);self.end_headers();self.wfile.write(b'OK')
 server=http.server.HTTPServer(('0.0.0.0',8888),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
 iso=str(pathlib.Path('output/nexium-os-1.2-ungoogled-amd64.iso').resolve())
-cmd=['qemu-system-x86_64','-machine','pc','-accel','tcg,thread=multi','-cpu','max','-smp','2','-m','3072','-boot','order=d,menu=on','-cdrom',iso,'-vga','std','-display','none','-nic','user,model=e1000','-device','qemu-xhci,id=xhci','-drive','if=none,id=usbdata,format=raw,file='+str(pathlib.Path('work/persistence-disk.img').resolve()),'-device','usb-storage,drive=usbdata','-qmp','unix:/tmp/login-qmp.sock,server=on,wait=off','-serial','file:'+str(O/'serial.log'),'-rtc','base=utc']
+cmd=['qemu-system-x86_64','-machine','pc','-accel','tcg,thread=multi','-cpu','max','-smp','2','-m','3072','-boot','order=d,menu=on','-cdrom',iso,'-vga','std','-display','none','-nic','user,model=e1000','-device','qemu-xhci,id=xhci','-device','usb-tablet,bus=xhci.0','-drive','if=none,id=usbdata,format=raw,file='+str(pathlib.Path('work/persistence-disk.img').resolve()),'-device','usb-storage,drive=usbdata','-qmp','unix:/tmp/login-qmp.sock,server=on,wait=off','-serial','file:'+str(O/'serial.log'),'-rtc','base=utc']
 (O/'qemu-invocation.json').write_text(json.dumps(cmd,indent=2)+'\n');started=time.monotonic();p=subprocess.Popen(cmd,stderr=(O/'qemu-stderr.log').open('w'))
 sock=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
 for _ in range(60):
@@ -77,7 +77,7 @@ def boot_and_login(stage):
         time.sleep(2)
     raise AssertionError('FAIL greeter/login/desktop timeout '+stage)
 def terminal_script(name):
-    key('ret');time.sleep(2);im,text=frame('dismiss-welcome');w,h=im.size;qmp('input-send-event',{'events':[{'type':'rel','data':{'axis':'x','value':int((w-44)*32767/w)}},{'type':'rel','data':{'axis':'y','value':int((h-8)*32767/h)}},{'type':'btn','data':{'button':'left','down':True}},{'type':'btn','data':{'button':'left','down':False}}]});time.sleep(2);im,text=frame('dismiss-welcome-clicked');assert 'Nexium login' not in text,'FAIL welcome OK click returned to greeter';key('meta_l','t');time.sleep(3);typed('echo NEXIUMTERMINALREADY');key('ret');time.sleep(2);im,text=frame('terminal-ready');assert 'NEXIUMTERMINALREADY' in text.upper(), 'FAIL Super+T did not open terminal';time.sleep(3)
+    key('ret');time.sleep(2);im,text=frame('dismiss-welcome');w,h=im.size;qmp('input-send-event',{'events':[{'type':'abs','data':{'axis':'x','value':int((w-44)*32767/w)}},{'type':'abs','data':{'axis':'y','value':int((h-8)*32767/h)}},{'type':'btn','data':{'button':'left','down':True}},{'type':'btn','data':{'button':'left','down':False}}]});time.sleep(2);im,text=frame('dismiss-welcome-clicked');assert 'Nexium login' not in text and 'Welcome to Nexium OS' not in text,'FAIL welcome OK click did not close modal or returned to greeter';key('meta_l','t');time.sleep(3);typed('echo NEXIUMTERMINALREADY');key('ret');time.sleep(2);im,text=frame('terminal-ready');assert 'NEXIUMTERMINALREADY' in text.upper(), 'FAIL Super+T did not open terminal';time.sleep(3)
     typed("python3 -c 'import urllib.request;exec(urllib.request.urlopen(\"http://10.0.2.2:8888/"+name+"\").read())'");key('ret')
 try:
     boot_and_login('before-reboot')
