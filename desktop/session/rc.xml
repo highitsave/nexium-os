@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc">
- <theme><name>GoldenGate</name><titleLayout>NLIMC</titleLayout><keepBorder>yes</keepBorder><font place="ActiveWindow"><name>Sans</name><size>10</size><weight>Bold</weight></font></theme>
- <desktops><number>2</number><firstdesk>1</firstdesk></desktops>
- <focus><focusNew>yes</focusNew><followMouse>no</followMouse></focus>
- <placement><policy>Smart</policy><center>yes</center></placement>
- <keyboard>
-  <keybind key="A-Tab"><action name="NextWindow"/></keybind>
-  <keybind key="A-S-Tab"><action name="PreviousWindow"/></keybind>
-  <keybind key="A-F4"><action name="Close"/></keybind>
-  <keybind key="W-e"><action name="Execute"><command>pcmanfm</command></action></keybind>
-  <keybind key="W-t"><action name="Execute"><command>xterm</command></action></keybind>
-  <keybind key="W-s"><action name="Execute"><command>nexium-settings</command></action></keybind>
-  <keybind key="W-space"><action name="ShowMenu"><menu>root-menu</menu></action></keybind>
-  <keybind key="A-F10"><action name="ToggleMaximize"/></keybind>
- </keyboard>
- <mouse>
-  <context name="Titlebar"><mousebind button="Left" action="Drag"><action name="Move"/></mousebind><mousebind button="Left" action="DoubleClick"><action name="ToggleMaximize"/></mousebind><mousebind button="Right" action="Press"><action name="ShowMenu"><menu>client-menu</menu></action></mousebind></context>
-  <context name="Frame"><mousebind button="A-Left" action="Drag"><action name="Move"/></mousebind><mousebind button="A-Right" action="Drag"><action name="Resize"/></mousebind></context>
-  <context name="Desktop"><mousebind button="Right" action="Press"><action name="ShowMenu"><menu>root-menu</menu></action></mousebind></context>
-  <context name="Close"><mousebind button="Left" action="Click"><action name="Close"/></mousebind></context>
-  <context name="Iconify"><mousebind button="Left" action="Click"><action name="Iconify"/></mousebind></context>
-  <context name="Maximize"><mousebind button="Left" action="Click"><action name="ToggleMaximize"/></mousebind></context>
- </mouse>
- <menu><file>menu.xml</file><hideDelay>200</hideDelay></menu>
- <applications><application class="Plank"><decor>no</decor><skip_taskbar>yes</skip_taskbar></application></applications>
+   <theme><name>GoldenGate</name><titleLayout>NLIMC</titleLayout><keepBorder>yes</keepBorder><font place="ActiveWindow"><name>Sans</name><size>10</size><weight>Bold</weight></font></theme>
+   <desktops><number>2</number><firstdesk>1</firstdesk></desktops>
+   <focus><focusNew>yes</focusNew><followMouse>no</followMouse></focus>
+   <placement><policy>Smart</policy><center>yes</center></placement>
+   <keyboard>
+        <keybind key="A-Tab"><action name="NextWindow"/></keybind>
+        <keybind key="A-S-Tab"><action name="PreviousWindow"/></keybind>
+        <keybind key="A-F4"><action name="Close"/></keybind>
+        <keybind key="W-e"><action name="Execute"><command>pcmanfm</command></action></keybind>
+        <keybind key="W-t"><action name="Execute"><command>xterm -e /bin/sh</command></action></keybind>
+        <keybind key="W-s"><action name="Execute"><command>nexium-settings</command></action></keybind>
+        <keybind key="W-space"><action name="ShowMenu"><menu>root-menu</menu></action></keybind>
+        <keybind key="A-F10"><action name="ToggleMaximize"/></keybind>
+   </keyboard>
+   <mouse>
+        <context name="Titlebar"><mousebind button="Left" action="Drag"><action name="Move"/></mousebind><mousebind button="Left" action="DoubleClick"><action name="ToggleMaximize"/></mousebind><mousebind button="Right" action="Press"><action name="ShowMenu"><menu>client-menu</menu></action></mousebind></context>
+        <context name="Frame"><mousebind button="A-Left" action="Drag"><action name="Move"/></mousebind><mousebind button="A-Right" action="Drag"><action name="Resize"/></mousebind></context>
+        <context name="Desktop"><mousebind button="Right" action="Press"><action name="ShowMenu"><menu>root-menu</menu></action></mousebind></context>
+        <context name="Close"><mousebind button="Left" action="Click"><action name="Close"/></mousebind></context>
+        <context name="Iconify"><mousebind button="Left" action="Click"><action name="Iconify"/></mousebind></context>
+        <context name="Maximize"><mousebind button="Left" action="Click"><action name="ToggleMaximize"/></mousebind></context>
+   </mouse>
+   <menu><file>menu.xml</file><hideDelay>200</hideDelay></menu>
+   <applications><application class="Plank"><decor>no</decor><skip_taskbar>yes</skip_taskbar></application></applications>
 </openbox_config>
