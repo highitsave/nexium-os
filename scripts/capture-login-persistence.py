@@ -42,14 +42,14 @@ def qmp(ex,args=None):
     stream.write((json.dumps({'execute':ex,'arguments':args or {}})+'\n').encode())
     while True:
         r=json.loads(stream.readline())
-        if 'return' in r or 'error' in r:return r
+        if 'return' in r or 'error' in r:assert 'error' not in r, 'FAIL QMP command rejected: '+json.dumps({'command':ex,'arguments':args or {},'response':r});return r
 qmp('qmp_capabilities')
 def key(*codes):
     qmp('send-key',{'keys':[{'type':'qcode','data':c} for c in codes],'hold-time':40});time.sleep(.12)
 chars={' ':'spc','-':'minus','.':'dot',"'":'apostrophe','/':'slash',';':'semicolon',':':('shift','semicolon'),'(':('shift','9'),')':('shift','0'),'"':('shift','apostrophe')}
 def typed(value):
     for c in value:
-        mapped=chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
+        mapped=('shift',c.lower()) if 'A'<=c<='Z' else chars.get(c,c);key(*(mapped if isinstance(mapped,tuple) else [mapped]))
 entries=[];greeters=[];splash=[];desktop=[]
 def frame(stage):
     n=len(entries);qmp('screendump',{'filename':'/tmp/login-frame.ppm'});im=Image.open('/tmp/login-frame.ppm').convert('RGB');file=F/f'frame-{n:04d}.png';im.save(file)
