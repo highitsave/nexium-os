@@ -37,7 +37,7 @@ jobs:
           # from the historical nexium-login-persistence.yml heredoc.
       - uses: actions/download-artifact@v4
         with:
-          name: nexium-os-browser-chooser-iso
+          name: nexium-browser-chooser-iso
           path: output
           github-token: ${{ github.token }}
           repository: highitsave/nexium-os
