@@ -8,11 +8,16 @@ probe=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assi
 software="os.environ.update({'GALLIUM_DRIVER':'softpipe','QT_QUICK_BACKEND':'software','QT_OPENGL':'software','QTWEBENGINE_CHROMIUM_FLAGS':'--disable-gpu'})\n"
 probe=probe.replace("data={'environment':",software+"data={'environment':",1)
 before="data['environment']['test_vm_rendering']='softpipe, Qt software, WebEngine disable-gpu; sandbox remains enabled'\ndata['persistence_reboot_pass']=open(os.path.expanduser('~/.nexium-persistence-check')).read()=='NEXIUM_PERSISTENCE_PROOF\\n' and open('/proc/sys/kernel/random/boot_id').read().strip()!=open(os.path.expanduser('~/.nexium-previous-boot-id')).read().strip()\ndata['live_cmdline']=open('/proc/cmdline').read()\ndata['persistence_mounts']=command('findmnt; lsblk -f')\ndata['login_status']=command('systemctl is-active lightdm; loginctl list-sessions; id')\nassert data['persistence_reboot_pass'] and 'persistence' in data['live_cmdline']\n"
+before += "import pathlib\ntokens=pathlib.Path('/proc/cmdline').read_text().split()\nassert not ('persistence' in tokens and 'nopersistence' in tokens), 'FAIL conflicting persistence and nopersistence kernel tokens'\nassert tokens.count('persistence')==1 and 'nopersistence' not in tokens, 'FAIL persistence-only kernel cmdline required'\n"
 probe=probe.replace("data['sudo_noninteractive']=",before+"data['sudo_noninteractive']=",1)
 compile(probe,'post-reboot-guest-probe','exec')
 write=r'''import os,json,urllib.request,subprocess
 from pathlib import Path
 assert os.getuid()!=0
+import pathlib
+tokens=pathlib.Path('/proc/cmdline').read_text().split()
+assert not ('persistence' in tokens and 'nopersistence' in tokens), 'FAIL conflicting persistence and nopersistence kernel tokens'
+assert tokens.count('persistence')==1 and 'nopersistence' not in tokens, 'FAIL persistence-only kernel cmdline required'
 Path.home().joinpath('.nexium-persistence-check').write_text('NEXIUM_PERSISTENCE_PROOF\n')
 boot=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
 Path.home().joinpath('.nexium-previous-boot-id').write_text(boot)
