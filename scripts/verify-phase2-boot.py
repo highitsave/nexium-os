@@ -56,7 +56,7 @@ for name,p in originals.items():
     x,y=p.read_bytes(),rebuilt[name].read_bytes()
     if name==P("boot/grub/grub.cfg"):
         assert y==pg.patch(x), "GRUB changed beyond authorized persistence parameter"
-        print("PASS GRUB: ONLY persistence added to live linux entries; every other byte unchanged")
+        print("PASS GRUB: ONLY nopersistence veto removed and persistence appended; every other byte unchanged")
         continue
     if x!=y:
         assert P('/'+str(name)) in bootpaths, 'Unexpected payload change: '+str(name)
