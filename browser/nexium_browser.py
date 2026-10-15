@@ -441,7 +441,109 @@ class NexiumBrowser(QMainWindow):
 
         self.theme_button = QPushButton("☾")
         self.theme_button.setToolTip("Toggle theme")
-        self.theme_button.clicked.connect(self.toggle_theme)
+        self.theme_button.clicked.connect(self.toggle_theme)class NexiumTermsDialog(QWidget):
+    """Terms of Service screen shown before first use."""
+
+    accepted = Signal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Nexium Browser — Terms of Service")
+        self.setWindowModality(Qt.ApplicationModal)
+        self.setMinimumSize(720, 570)
+        self.setObjectName("terms")
+
+        root = QVBoxLayout(self)
+        root.setContentsMargins(34, 30, 34, 30)
+        root.setSpacing(14)
+
+        title_row = QHBoxLayout()
+        title_row.addWidget(NexiumLogo(self, 52))
+
+        title_box = QVBoxLayout()
+        title = QLabel("Nexium Browser")
+        title.setStyleSheet("font-size: 26px; font-weight: 700;")
+        subtitle = QLabel("Terms of Service")
+        subtitle.setStyleSheet("font-size: 14px; color: #77717f;")
+        title_box.addWidget(title)
+        title_box.addWidget(subtitle)
+        title_row.addLayout(title_box)
+        title_row.addStretch()
+        root.addLayout(title_row)
+
+        body = QLabel(
+            "<b>Welcome to Nexium Browser.</b><br><br>"
+            "By using Nexium Browser, you agree to use it lawfully and respect "
+            "the terms, policies, and intellectual-property rights of websites "
+            "you visit.<br><br>"
+            "Nexium Browser is provided as-is. Website content, accounts, search "
+            "results, and third-party services remain controlled by their "
+            "respective providers.<br><br>"
+            "Search engines can be selected in the browser. DuckDuckGo is the "
+            "default; Bing is also available. Search results and availability "
+            "are controlled by their respective providers.<br><br>"
+            "Nexium Browser includes an optional built-in network filter intended "
+            "to block common advertising and tracking requests. It is not "
+            "guaranteed to block every advertisement, and websites may change "
+            "their delivery methods.<br><br>"
+            "Do not use Nexium Browser to violate applicable law, compromise "
+            "systems, abuse services, or infringe another person's rights."
+        )
+        body.setWordWrap(True)
+        body.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        root.addWidget(body, 1)
+
+        notice = QLabel(
+            "These terms are a project-level notice and are not legal advice."
+        )
+        notice.setStyleSheet("color: #8b8494; font-size: 12px;")
+        root.addWidget(notice)
+
+        buttons = QHBoxLayout()
+        buttons.addStretch()
+
+        decline = QPushButton("Exit")
+        decline.clicked.connect(QApplication.quit)
+
+        accept = QPushButton("I Agree")
+        accept.setObjectName("termsAccept")
+        accept.clicked.connect(self.accept_terms)
+
+        buttons.addWidget(decline)
+        buttons.addWidget(accept)
+        root.addLayout(buttons)
+
+        self.setStyleSheet("""
+            QWidget#terms {
+                background: #ffffff;
+                color: #202124;
+            }
+            QPushButton {
+                border: 0;
+                border-radius: 8px;
+                padding: 10px 20px;
+                background: #f1edf7;
+                color: #3c3150;
+            }
+            QPushButton:hover {
+                background: #e8dff5;
+            }
+            QPushButton#termsAccept {
+                background: #9c72e9;
+                color: white;
+                font-weight: 700;
+            }
+            QPushButton#termsAccept:hover {
+                background: #895bdc;
+            }
+        """)
+
+    def accept_terms(self):
+        self.accepted.emit()
+        self.close()
+
+
+class BrowserPage(QWidget):
         nav_layout.addWidget(self.theme_button)
 
         self.sign_in = QPushButton("Sign in")
