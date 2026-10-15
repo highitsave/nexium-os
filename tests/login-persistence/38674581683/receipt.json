@@ -1,0 +1,29 @@
+{
+  "iso_bytes": 869400576,
+  "iso_sha256": "da534fe157e833b8fc2ec6db8365effed381c16e84f6a68b5cd5281a23071c9a",
+  "greeter_paint_pass": true,
+  "greeters": [
+    {
+      "stage": "before-reboot",
+      "width": 1280,
+      "height": 800,
+      "variance": 674.8134963637888,
+      "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n07:22 \u00a9\n"
+    },
+    {
+      "stage": "after-reboot",
+      "width": 1280,
+      "height": 800,
+      "variance": 674.4849483499155,
+      "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n03:27 \u00a9\n"
+    }
+  ],
+  "persistence_reboot_pass": true,
+  "chooser_restart_pass": true,
+  "browser_gui_pass": false,
+  "cream_splash_pass": true,
+  "plank_running": true,
+  "sudo_exit": 0,
+  "wall_elapsed_seconds": 692.08,
+  "test_kind": "HEADLESS QEMU BIOS, virtual USB persistence; NOT PHYSICAL HARDWARE"
+}

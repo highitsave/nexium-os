@@ -1,0 +1,980 @@
+[
+  {
+    "frame": 0,
+    "stage": "before-reboot",
+    "elapsed": 1.35,
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) \u00a90:03.0 CAG\u00ae PCIZ.10 PnP PMM+BEFCBO00+BEFOBOOO CAOO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 1,
+    "stage": "before-reboot",
+    "elapsed": 8.04,
+    "ocr": "GNU GRUB version 2.06-13+debizuz\n\n"
+  },
+  {
+    "frame": 2,
+    "stage": "before-reboot",
+    "elapsed": 10.48,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 3,
+    "stage": "before-reboot",
+    "elapsed": 13.79,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 4,
+    "stage": "before-reboot",
+    "elapsed": 16.69,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 5,
+    "stage": "before-reboot",
+    "elapsed": 19.07,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 6,
+    "stage": "before-reboot",
+    "elapsed": 25.34,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 7,
+    "stage": "before-reboot",
+    "elapsed": 28.73,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 8,
+    "stage": "before-reboot",
+    "elapsed": 33.43,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 9,
+    "stage": "before-reboot",
+    "elapsed": 35.69,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 10,
+    "stage": "before-reboot",
+    "elapsed": 46.01,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 11,
+    "stage": "before-reboot",
+    "elapsed": 48.33,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 12,
+    "stage": "before-reboot",
+    "elapsed": 50.62,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 13,
+    "stage": "before-reboot",
+    "elapsed": 52.94,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 14,
+    "stage": "before-reboot",
+    "elapsed": 55.31,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 15,
+    "stage": "before-reboot",
+    "elapsed": 58.26,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 16,
+    "stage": "before-reboot",
+    "elapsed": 61.65,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 17,
+    "stage": "before-reboot",
+    "elapsed": 64.15,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 18,
+    "stage": "before-reboot",
+    "elapsed": 68.53,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 19,
+    "stage": "before-reboot",
+    "elapsed": 71.2,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 20,
+    "stage": "before-reboot",
+    "elapsed": 73.53,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 21,
+    "stage": "before-reboot",
+    "elapsed": 78.52,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 22,
+    "stage": "before-reboot",
+    "elapsed": 88.28,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 23,
+    "stage": "before-reboot",
+    "elapsed": 91.25,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 24,
+    "stage": "before-reboot",
+    "elapsed": 93.79,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 25,
+    "stage": "before-reboot",
+    "elapsed": 97.11,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 26,
+    "stage": "before-reboot",
+    "elapsed": 100.87,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 27,
+    "stage": "before-reboot",
+    "elapsed": 103.54,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 28,
+    "stage": "before-reboot",
+    "elapsed": 109.13,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 29,
+    "stage": "before-reboot",
+    "elapsed": 117.31,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 30,
+    "stage": "before-reboot",
+    "elapsed": 120.34,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 31,
+    "stage": "before-reboot",
+    "elapsed": 125.05,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 32,
+    "stage": "before-reboot",
+    "elapsed": 130.59,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 33,
+    "stage": "before-reboot",
+    "elapsed": 133.18,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 34,
+    "stage": "before-reboot",
+    "elapsed": 136.04,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 35,
+    "stage": "before-reboot",
+    "elapsed": 138.22,
+    "ocr": ""
+  },
+  {
+    "frame": 36,
+    "stage": "before-reboot",
+    "elapsed": 140.4,
+    "ocr": ""
+  },
+  {
+    "frame": 37,
+    "stage": "before-reboot",
+    "elapsed": 142.59,
+    "ocr": ""
+  },
+  {
+    "frame": 38,
+    "stage": "before-reboot",
+    "elapsed": 144.79,
+    "ocr": ""
+  },
+  {
+    "frame": 39,
+    "stage": "before-reboot",
+    "elapsed": 146.98,
+    "ocr": ""
+  },
+  {
+    "frame": 40,
+    "stage": "before-reboot",
+    "elapsed": 149.17,
+    "ocr": ""
+  },
+  {
+    "frame": 41,
+    "stage": "before-reboot",
+    "elapsed": 151.35,
+    "ocr": ""
+  },
+  {
+    "frame": 42,
+    "stage": "before-reboot",
+    "elapsed": 153.55,
+    "ocr": ""
+  },
+  {
+    "frame": 43,
+    "stage": "before-reboot",
+    "elapsed": 155.81,
+    "ocr": ""
+  },
+  {
+    "frame": 44,
+    "stage": "before-reboot",
+    "elapsed": 158.08,
+    "ocr": ""
+  },
+  {
+    "frame": 45,
+    "stage": "before-reboot",
+    "elapsed": 160.28,
+    "ocr": ""
+  },
+  {
+    "frame": 46,
+    "stage": "before-reboot",
+    "elapsed": 162.55,
+    "ocr": ""
+  },
+  {
+    "frame": 47,
+    "stage": "before-reboot",
+    "elapsed": 164.81,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n07:22 \u00a9\n"
+  },
+  {
+    "frame": 48,
+    "stage": "before-reboot",
+    "elapsed": 173.17,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 49,
+    "stage": "before-reboot",
+    "elapsed": 175.56,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 50,
+    "stage": "before-reboot",
+    "elapsed": 183.53,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 51,
+    "stage": "before-reboot",
+    "elapsed": 185.97,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 52,
+    "stage": "before-reboot",
+    "elapsed": 188.56,
+    "ocr": "NEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 53,
+    "stage": "before-reboot",
+    "elapsed": 194.61,
+    "ocr": "Thu 15 Oct 07:22\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 54,
+    "stage": "before-reboot",
+    "elapsed": 199.33,
+    "ocr": "Thu 15 Oct 07:23,\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 55,
+    "stage": "before-reboot",
+    "elapsed": 207.1,
+    "ocr": "Thu 15 Oct 07:23,\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 56,
+    "stage": "before-reboot",
+    "elapsed": 222.62,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 07:23,\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 57,
+    "stage": "dismiss-welcome",
+    "elapsed": 225.06,
+    "ocr": "\u20acB Thu 15 Oct 07:23\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 58,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 227.35,
+    "ocr": "\u20acB Thu 15 Oct 07:23\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 59,
+    "stage": "terminal-ready",
+    "elapsed": 237.63,
+    "ocr": "eW Xsh @!) Thu 15 Oct 07:23\nxX sh - GO x\n$ echo NEXIUMTERMINALREADY\nNEXTUNTERMINALREADY\n$f\nLs\n4 Ww ae I = lea. 4\n| | oe\nX | | Ss || | ~ >\n\n[Js\n\n~\u20ac LJ 2 ec\n\nThu 15 Oct 07:23\n\n-\n\no\n\nx\n\n*X sh\n\n$ echo NEXIUMTERMINALREADY\n\nBeg ATER TNACRERDY\n\n| io\n\n\u00ae\n\n&\n\n\u201cA\n\nwt\n\nhe\n\n\"|\n\n| |\n\na -~\n\nPage\n"
+  },
+  {
+    "frame": 60,
+    "stage": "reboot-request",
+    "elapsed": 254.3,
+    "ocr": "Thu 15 Oct 07:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIs python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 61,
+    "stage": "reboot-request",
+    "elapsed": 258.37,
+    "ocr": "Thu 15 Oct 07:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIs python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 62,
+    "stage": "after-reboot",
+    "elapsed": 287.43,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 63,
+    "stage": "after-reboot",
+    "elapsed": 290.43,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 64,
+    "stage": "after-reboot",
+    "elapsed": 292.75,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 65,
+    "stage": "after-reboot",
+    "elapsed": 295.01,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 66,
+    "stage": "after-reboot",
+    "elapsed": 297.37,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 67,
+    "stage": "after-reboot",
+    "elapsed": 307.44,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 68,
+    "stage": "after-reboot",
+    "elapsed": 309.99,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 69,
+    "stage": "after-reboot",
+    "elapsed": 312.59,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 70,
+    "stage": "after-reboot",
+    "elapsed": 314.95,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 71,
+    "stage": "after-reboot",
+    "elapsed": 318.42,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 72,
+    "stage": "after-reboot",
+    "elapsed": 321.79,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 73,
+    "stage": "after-reboot",
+    "elapsed": 324.12,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 74,
+    "stage": "after-reboot",
+    "elapsed": 328.05,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 75,
+    "stage": "after-reboot",
+    "elapsed": 332.33,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 76,
+    "stage": "after-reboot",
+    "elapsed": 336.47,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 77,
+    "stage": "after-reboot",
+    "elapsed": 338.74,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 78,
+    "stage": "after-reboot",
+    "elapsed": 355.1,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 79,
+    "stage": "after-reboot",
+    "elapsed": 358.41,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 80,
+    "stage": "after-reboot",
+    "elapsed": 367.44,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 81,
+    "stage": "after-reboot",
+    "elapsed": 369.74,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 82,
+    "stage": "after-reboot",
+    "elapsed": 372.31,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 83,
+    "stage": "after-reboot",
+    "elapsed": 374.61,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 84,
+    "stage": "after-reboot",
+    "elapsed": 376.89,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 85,
+    "stage": "after-reboot",
+    "elapsed": 380.33,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 86,
+    "stage": "after-reboot",
+    "elapsed": 384.6,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 87,
+    "stage": "after-reboot",
+    "elapsed": 387.18,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 88,
+    "stage": "after-reboot",
+    "elapsed": 393.92,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 89,
+    "stage": "after-reboot",
+    "elapsed": 399.62,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 90,
+    "stage": "after-reboot",
+    "elapsed": 401.98,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 91,
+    "stage": "after-reboot",
+    "elapsed": 412.66,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 92,
+    "stage": "after-reboot",
+    "elapsed": 415.21,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 93,
+    "stage": "after-reboot",
+    "elapsed": 419.47,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 94,
+    "stage": "after-reboot",
+    "elapsed": 422.15,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 95,
+    "stage": "after-reboot",
+    "elapsed": 426.23,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 96,
+    "stage": "after-reboot",
+    "elapsed": 428.63,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 97,
+    "stage": "after-reboot",
+    "elapsed": 431.42,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 98,
+    "stage": "after-reboot",
+    "elapsed": 434.57,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 99,
+    "stage": "after-reboot",
+    "elapsed": 436.97,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 100,
+    "stage": "after-reboot",
+    "elapsed": 439.16,
+    "ocr": ""
+  },
+  {
+    "frame": 101,
+    "stage": "after-reboot",
+    "elapsed": 441.33,
+    "ocr": ""
+  },
+  {
+    "frame": 102,
+    "stage": "after-reboot",
+    "elapsed": 443.51,
+    "ocr": ""
+  },
+  {
+    "frame": 103,
+    "stage": "after-reboot",
+    "elapsed": 445.69,
+    "ocr": ""
+  },
+  {
+    "frame": 104,
+    "stage": "after-reboot",
+    "elapsed": 447.87,
+    "ocr": ""
+  },
+  {
+    "frame": 105,
+    "stage": "after-reboot",
+    "elapsed": 450.05,
+    "ocr": ""
+  },
+  {
+    "frame": 106,
+    "stage": "after-reboot",
+    "elapsed": 452.23,
+    "ocr": ""
+  },
+  {
+    "frame": 107,
+    "stage": "after-reboot",
+    "elapsed": 454.42,
+    "ocr": ""
+  },
+  {
+    "frame": 108,
+    "stage": "after-reboot",
+    "elapsed": 456.6,
+    "ocr": ""
+  },
+  {
+    "frame": 109,
+    "stage": "after-reboot",
+    "elapsed": 458.87,
+    "ocr": ""
+  },
+  {
+    "frame": 110,
+    "stage": "after-reboot",
+    "elapsed": 461.06,
+    "ocr": ""
+  },
+  {
+    "frame": 111,
+    "stage": "after-reboot",
+    "elapsed": 463.25,
+    "ocr": ""
+  },
+  {
+    "frame": 112,
+    "stage": "after-reboot",
+    "elapsed": 465.49,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n03:27 \u00a9\n"
+  },
+  {
+    "frame": 113,
+    "stage": "after-reboot",
+    "elapsed": 473.02,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 114,
+    "stage": "after-reboot",
+    "elapsed": 475.4,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 115,
+    "stage": "after-reboot",
+    "elapsed": 481.56,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 116,
+    "stage": "after-reboot",
+    "elapsed": 495.01,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 117,
+    "stage": "after-reboot",
+    "elapsed": 497.65,
+    "ocr": "Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 118,
+    "stage": "after-reboot",
+    "elapsed": 500.08,
+    "ocr": "Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 119,
+    "stage": "after-reboot",
+    "elapsed": 503.48,
+    "ocr": "Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 120,
+    "stage": "after-reboot",
+    "elapsed": 518.77,
+    "ocr": "\u20acB Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 121,
+    "stage": "dismiss-welcome",
+    "elapsed": 521.22,
+    "ocr": "\u20acB Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 122,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 523.5,
+    "ocr": "\u20acB Thu 15 Oct 03:28\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 123,
+    "stage": "terminal-ready",
+    "elapsed": 533.83,
+    "ocr": "e Cl Xsh @! Thu 15 Oct 03:28\nX sh - 5 x\n$ echo NEXTIUNTERMINALREADY\nNEXIUMTERMINALREADY\n$i\nLs\no & Sae8 CE\n. ; ; is\n1O} L } | | Ss || | ~ n>\n\n[Js\n\n~\u20ac LJ 2 ec\n\nThu 15 Oct 03:28\n\n-\n\no\n\nx\n\n*X sh\n\n$ echo NEXIUMTERMINALREADY\n\nBeg ATER TNACRERDY\n\n| io\n\n\u00ae\n\n&\n\n\u201cA\n\nwt\n\nhe\n\n\"|\n\n| |\n\na -~\n\nPage\n"
+  },
+  {
+    "frame": 124,
+    "stage": "post-reboot-gui",
+    "elapsed": 551.71,
+    "ocr": "Thu 15 Oct 03:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 125,
+    "stage": "post-reboot-gui",
+    "elapsed": 554.73,
+    "ocr": "Thu 15 Oct 03:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 126,
+    "stage": "post-reboot-gui",
+    "elapsed": 561.15,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 127,
+    "stage": "post-reboot-gui",
+    "elapsed": 563.51,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 128,
+    "stage": "post-reboot-gui",
+    "elapsed": 570.97,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 129,
+    "stage": "post-reboot-gui",
+    "elapsed": 574.45,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 130,
+    "stage": "post-reboot-gui",
+    "elapsed": 576.84,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 131,
+    "stage": "post-reboot-gui",
+    "elapsed": 579.19,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 132,
+    "stage": "post-reboot-gui",
+    "elapsed": 582.55,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 133,
+    "stage": "post-reboot-gui",
+    "elapsed": 585.01,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 134,
+    "stage": "post-reboot-gui",
+    "elapsed": 587.52,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 135,
+    "stage": "post-reboot-gui",
+    "elapsed": 590.75,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 136,
+    "stage": "post-reboot-gui",
+    "elapsed": 594.67,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 137,
+    "stage": "post-reboot-gui",
+    "elapsed": 597.18,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 138,
+    "stage": "post-reboot-gui",
+    "elapsed": 603.72,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 139,
+    "stage": "post-reboot-gui",
+    "elapsed": 607.72,
+    "ocr": "Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 140,
+    "stage": "post-reboot-gui",
+    "elapsed": 610.35,
+    "ocr": "B Xs Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 141,
+    "stage": "post-reboot-gui",
+    "elapsed": 613.49,
+    "ocr": "B Xs Thu 15 Oct 03:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 142,
+    "stage": "post-reboot-gui",
+    "elapsed": 616.41,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 143,
+    "stage": "post-reboot-gui",
+    "elapsed": 624.66,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 144,
+    "stage": "post-reboot-gui",
+    "elapsed": 627.69,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 145,
+    "stage": "post-reboot-gui",
+    "elapsed": 632.69,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 146,
+    "stage": "post-reboot-gui",
+    "elapsed": 635.3,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 147,
+    "stage": "post-reboot-gui",
+    "elapsed": 638.7,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 148,
+    "stage": "post-reboot-gui",
+    "elapsed": 642.05,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 149,
+    "stage": "post-reboot-gui",
+    "elapsed": 645.01,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 150,
+    "stage": "post-reboot-gui",
+    "elapsed": 650.96,
+    "ocr": "ee xX PE inexium Browser (@ Thu 1s oct 03:30\n\nNexium Browser =\n\nNews ns -\n\nNexium Browser chooser - ox\n\ntuts \u20ac Theme Browsers / Add site\n\n(XK sh wT\n\nIS echo NEXIUNTERNINALREADY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\nNexium Search Open search engine\n\n"
+  },
+  {
+    "frame": 151,
+    "stage": "post-reboot-gui",
+    "elapsed": 654.73,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nde\n\n"
+  },
+  {
+    "frame": 152,
+    "stage": "post-reboot-gui",
+    "elapsed": 657.17,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nde\n\n"
+  },
+  {
+    "frame": 153,
+    "stage": "post-reboot-gui",
+    "elapsed": 663.62,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\nde\n\n"
+  },
+  {
+    "frame": 154,
+    "stage": "post-reboot-gui",
+    "elapsed": 667.51,
+    "ocr": "@ Thu 15 Oct 03:30\n\nNexium Browser cho...\n\n\u20ac@ Xs [Einexium Browser =\n(Nexium Br\nNeve ns -\nBrowsers / Add site\n\n1 Nexium Browser chooser\n\u2018uts Theme\n\nde\n\nNexium Search Open search engine\n"
+  },
+  {
+    "frame": 155,
+    "stage": "post-reboot-gui",
+    "elapsed": 670.71,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\ndy th\n1-1) md t-ut:\n\ntual\n\n"
+  },
+  {
+    "frame": 156,
+    "stage": "post-reboot-gui",
+    "elapsed": 674.5,
+    "ocr": "B Xs Thu 15 Oct 03:30\n\ndy th\n1-1) md t-ut:\n\ntual\n\n"
+  },
+  {
+    "frame": 157,
+    "stage": "post-reboot-gui",
+    "elapsed": 679.23,
+    "ocr": "B Xs Thu 15 Oct 03:31\n\ndy th\n1-1) md t-ut:\n\ntual\n\n"
+  },
+  {
+    "frame": 158,
+    "stage": "post-reboot-gui",
+    "elapsed": 681.75,
+    "ocr": "Thu 15 Oct 03:31\n\nndor For de patibility P|\n\nds Bi\n\nand DuckD\n\n"
+  },
+  {
+    "frame": 159,
+    "stage": "post-reboot-gui",
+    "elapsed": 684.1,
+    "ocr": "Thu 15 Oct 03:31\n\nndor For de patibility P|\n\nds Bi\n\nand DuckD\n\n"
+  },
+  {
+    "frame": 160,
+    "stage": "post-reboot-gui",
+    "elapsed": 686.41,
+    "ocr": "Thu 15 Oct 03:31\n\nndor For de patibility P|\n\nds Bi\n\nand DuckD\n\n"
+  },
+  {
+    "frame": 161,
+    "stage": "post-reboot-gui",
+    "elapsed": 688.91,
+    "ocr": "Thu 15 Oct 03:31\n\nndor For de patibility P|\n\nds Bi\n\nand DuckD\n\n"
+  },
+  {
+    "frame": 162,
+    "stage": "final",
+    "elapsed": 691.23,
+    "ocr": "Thu 15 Oct 03:31\n\nt)2\\n\n\u2018um_br n main()\\n\n\nall last):\\n_ File\ndule\\n\u201d main()'n\n\n"
+  }
+]
