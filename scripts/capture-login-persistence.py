@@ -113,8 +113,7 @@ def frame(stage):
     n=len(entries);qmp('screendump',{'filename':'/tmp/login-frame.ppm'});im=Image.open('/tmp/login-frame.ppm').convert('RGB');file=F/f'frame-{n:04d}.png';im.save(file)
     # Keep each stage's actual latest paint in the top-level committed evidence.
     im.save(O/(stage+'-latest.png'))
-    ocrfile=F/f'ocr-frame-{n:04d}.png';im.resize((im.width*3,im.height*3),Image.Resampling.LANCZOS).save(ocrfile) if stage=='terminal-ready' else None;text='
-'.join(subprocess.run(['tesseract',str(ocrfile if stage=='terminal-ready' else file),'stdout']+(['--psm',psm] if stage=='terminal-ready' else []),capture_output=True,text=True).stdout for psm in (('6','11') if stage=='terminal-ready' else ('3',)))
+    ocrfile=F/f'ocr-frame-{n:04d}.png';im.resize((im.width*3,im.height*3),Image.Resampling.LANCZOS).save(ocrfile) if stage=='terminal-ready' else None;text=chr(10).join(subprocess.run(['tesseract',str(ocrfile if stage=='terminal-ready' else file),'stdout']+(['--psm',psm] if stage=='terminal-ready' else []),capture_output=True,text=True).stdout for psm in (('6','11') if stage=='terminal-ready' else ('3',)))
     e={'frame':n,'stage':stage,'elapsed':round(time.monotonic()-started,2),'ocr':text};entries.append(e)
     if 'TOMO' in text.upper():splash.append(e);im.save(O/'cream-splash.png')
     (O/'frames.json').write_text(json.dumps(entries,indent=2))
