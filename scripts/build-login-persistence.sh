@@ -32,41 +32,7 @@ sudo chroot work/root apt-get clean
 sudo chroot work/root dpkg-query -W -f='${Package}\t${Version}\t${Installed-Size}\n' > reports/browser/final-packages.tsv
 sudo python3 scripts/nexium-phase2.py --install work/root | tee reports/install.txt
 sudo python3 scripts/install-login.py install work/root
-# Diagnostic observer: GUI launch failed even through the painted root menu in #19.
-# Run a silent normal-user observer so evidence does not depend on a working xterm.
-# No terminal launch, input injection, proof bypass, or change to any success gate.
-# QEMU-only and temporary: remove this diagnostic layer before publishing the final ISO.
-sudo python3 - <<'PY'
-import ast,pathlib,hashlib,json,os
-root=pathlib.Path('work/root')
-tree=ast.parse(pathlib.Path('scripts/capture-login-persistence.py').read_text())
-source=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='diagnostic' for t in n.targets))
-old="    \"xterm -e /bin/sh -c 'echo NEXIUMDIAGNOSTIC; sleep 5'\","
-assert source.count(old)==1, 'FAIL observer must not open any terminal before the original gate'
-source=source.replace(old,"    'xterm -version; ldd /usr/bin/xterm; dpkg-query -W xterm libx11-6 libxft2 libutempter0; ls -l /dev/ptmx /dev/pts; mount | grep devpts',")
-post="urllib.request.urlopen(urllib.request.Request('http://10.0.2.2:8888/terminal-diagnostic.json',data=json.dumps(data,indent=2).encode(),method='POST'),timeout=10).read()"
-assert source.count("        data['commands'].append(record)")==1
-source=source.replace("        data['commands'].append(record)","        data['commands'].append(record)\n        "+post)
-assert source.count('    time.sleep(15)')==1
-source=source.replace('    time.sleep(15)','    for _ in range(180):\n        '+post+'\n        time.sleep(1)')
-# QEMU DMI guard avoids contacting any host from a physical desktop.
-preamble="import pathlib,sys\nif pathlib.Path('/sys/class/dmi/id/sys_vendor').read_text().strip()!='QEMU': sys.exit(0)\n"
-source=preamble+source
-compile(source,'silent-vm-session-observer','exec')
-p=root/'usr/local/lib/nexium/vm-session-observer.py';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(source);p.chmod(0o644)
-manifest_path=pathlib.Path('reports/phase2-manifest.json')
-manifest=json.loads(manifest_path.read_text())
-manifest['/usr/local/lib/nexium/vm-session-observer.py']=hashlib.sha256(p.read_bytes()).hexdigest()
-account=next(line.split(':') for line in (root/'etc/passwd').read_text().splitlines() if line.startswith('nexium:'))
-for base in ['etc/skel','home/nexium']:
-    p=root/base/'.config/openbox/autostart'
-    text=p.read_text();assert 'vm-session-observer' not in text
-    p.write_text(text+'\n/usr/bin/python3 /usr/local/lib/nexium/vm-session-observer.py > "$HOME/.nexium-vm-observer.log" 2>&1 &\n')
-    if base=='home/nexium':os.chown(p,int(account[2]),int(account[3]))
-    manifest['/'+str(p.relative_to(root))]=hashlib.sha256(p.read_bytes()).hexdigest()
-manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
-print('PASS compiled silent normal-user QEMU observer; no terminal launch; all original proof gates untouched')
-PY
+# Clean final source: no temporary QEMU observer or guest autostart layer.
 sudo python3 scripts/nexium-phase2.py --verify work/root | tee reports/preflight-desktop.txt
 sudo python3 scripts/install-login.py verify work/root | tee reports/login-verification.txt
 sudo chroot work/root plymouth-set-default-theme nexium-gold
