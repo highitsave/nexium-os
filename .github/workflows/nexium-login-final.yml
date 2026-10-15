@@ -19,7 +19,7 @@ jobs:
       - name: Validate committed sources and install build and VM tools
         run: |
           set -euo pipefail
-          sudo apt-get update
+          mapfile -d '' python_sources < <(find scripts -type f -name '*.py' -print0); ((${#python_sources[@]} > 0)) || { echo "ERROR: no Python scripts found under scripts/" >&2; exit 1; }; export PYTHONPYCACHEPREFIX="${RUNNER_TEMP:-/tmp}/nexium-pycache"; echo "MANDATORY compile gate: ${#python_sources[@]} Python scripts"; python3 -m py_compile "${python_sources[@]}"; echo "PASS: all Python scripts compile"; sudo apt-get update
           sudo apt-get install -y python3-yaml python3-pil squashfs-tools xorriso initramfs-tools-core binutils qemu-system-x86 qemu-utils tesseract-ocr ffmpeg e2fsprogs file jq
           python3 - <<'PY' | tee /tmp/all-workflows.txt
           import ast, pathlib, yaml
@@ -94,7 +94,7 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
-          git config user.name highitsave
+          mapfile -d '' python_sources < <(find scripts -type f -name '*.py' -print0); ((${#python_sources[@]} > 0)) || { echo "ERROR: no Python scripts found before evidence commit" >&2; exit 1; }; export PYTHONPYCACHEPREFIX="${RUNNER_TEMP:-/tmp}/nexium-pycache"; echo "Pre-evidence compile gate: ${#python_sources[@]} Python scripts"; python3 -m py_compile "${python_sources[@]}"; echo "PASS: all Python scripts compile before evidence commit"; git config user.name highitsave
           git config user.email 195648961+highitsave@users.noreply.github.com
           dest=tests/login-persistence/${{ github.run_id }}
           mkdir -p "$dest"
