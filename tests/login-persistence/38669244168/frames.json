@@ -1,0 +1,3146 @@
+[
+  {
+    "frame": 0,
+    "stage": "before-reboot",
+    "elapsed": 1.18,
+    "ocr": "SeaBIOS (version 1.16.3-debian-1.16.3-2)\n\niPXE (https://ipxe org) \u00a90:03.0 CAG\u00ae PCIZ.10 PnP PMM+BEFCBO00+BEFOBOOO CAOO\n\nPress ESC for boot menu.\n"
+  },
+  {
+    "frame": 1,
+    "stage": "before-reboot",
+    "elapsed": 7.58,
+    "ocr": "GNU GRUB version 2.06-13+debizuz\n\nNexium OS (safe graphics, for older computers)\nShut down\n\nUse the T and J keys to select which entry is highlighted.\nPress enter to boot the selected 0S, \u201ce\u2019 to edit the commands\n\nbefore booting or \u2018c\u2019 for a command-line.\nThe highlig\n\n"
+  },
+  {
+    "frame": 2,
+    "stage": "before-reboot",
+    "elapsed": 9.98,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 3,
+    "stage": "before-reboot",
+    "elapsed": 13.1,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 4,
+    "stage": "before-reboot",
+    "elapsed": 16.33,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 5,
+    "stage": "before-reboot",
+    "elapsed": 21.88,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 6,
+    "stage": "before-reboot",
+    "elapsed": 24.1,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 7,
+    "stage": "before-reboot",
+    "elapsed": 26.57,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 8,
+    "stage": "before-reboot",
+    "elapsed": 30.51,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 9,
+    "stage": "before-reboot",
+    "elapsed": 35.52,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 10,
+    "stage": "before-reboot",
+    "elapsed": 37.79,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 11,
+    "stage": "before-reboot",
+    "elapsed": 43.29,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 12,
+    "stage": "before-reboot",
+    "elapsed": 45.51,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 13,
+    "stage": "before-reboot",
+    "elapsed": 48.51,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 14,
+    "stage": "before-reboot",
+    "elapsed": 51.03,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 15,
+    "stage": "before-reboot",
+    "elapsed": 53.3,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 16,
+    "stage": "before-reboot",
+    "elapsed": 55.96,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 17,
+    "stage": "before-reboot",
+    "elapsed": 58.18,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 18,
+    "stage": "before-reboot",
+    "elapsed": 60.28,
+    "ocr": ""
+  },
+  {
+    "frame": 19,
+    "stage": "before-reboot",
+    "elapsed": 62.38,
+    "ocr": ""
+  },
+  {
+    "frame": 20,
+    "stage": "before-reboot",
+    "elapsed": 64.49,
+    "ocr": ""
+  },
+  {
+    "frame": 21,
+    "stage": "before-reboot",
+    "elapsed": 66.59,
+    "ocr": ""
+  },
+  {
+    "frame": 22,
+    "stage": "before-reboot",
+    "elapsed": 68.73,
+    "ocr": ""
+  },
+  {
+    "frame": 23,
+    "stage": "before-reboot",
+    "elapsed": 70.83,
+    "ocr": ""
+  },
+  {
+    "frame": 24,
+    "stage": "before-reboot",
+    "elapsed": 72.93,
+    "ocr": ""
+  },
+  {
+    "frame": 25,
+    "stage": "before-reboot",
+    "elapsed": 75.07,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n06:16 \u00a9\n"
+  },
+  {
+    "frame": 26,
+    "stage": "before-reboot",
+    "elapsed": 82.69,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 27,
+    "stage": "before-reboot",
+    "elapsed": 84.82,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 28,
+    "stage": "before-reboot",
+    "elapsed": 87.07,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 29,
+    "stage": "before-reboot",
+    "elapsed": 89.41,
+    "ocr": "Thu 15 Oct 06:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 30,
+    "stage": "before-reboot",
+    "elapsed": 103.45,
+    "ocr": "Thu 15 Oct 06:16\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 31,
+    "stage": "before-reboot",
+    "elapsed": 105.76,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 06:16\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 32,
+    "stage": "before-reboot",
+    "elapsed": 121.06,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 06:17\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 33,
+    "stage": "dismiss-welcome",
+    "elapsed": 123.38,
+    "ocr": "\u20acB Thu 15 Oct 06:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 34,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 125.55,
+    "ocr": "\u20acB Thu 15 Oct 06:17\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 35,
+    "stage": "terminal-ready",
+    "elapsed": 135.05,
+    "ocr": "e Cl Xsh @! Thu 15 Oct 06:17\nX sh - 5 x\n$ echo NEXTIUNTERMINALREADY\nNEXIUMTERMINALREADY\n$i\nLs\no & Sae8 CE\n. ; ; is\n1O} L } | | Ss || | ~ n>\n\n[Js\n\n~\u20ac LJ 2 ec\n\nThu 15 Oct 06:17\n\n-\n\no\n\nx\n\n*X sh\n\n$ echo NEXIUMTERMINALREADY\n\nBeg ATER TNACRERDY\n\n| io\n\n\u00ae\n\n&\n\n\u201cA\n\nwt\n\nhe\n\n\"|\n\n| |\n\na -~\n\nPage\n"
+  },
+  {
+    "frame": 36,
+    "stage": "reboot-request",
+    "elapsed": 153.75,
+    "ocr": "Thu 15 Oct 06:17\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIs python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 37,
+    "stage": "after-reboot",
+    "elapsed": 176.1,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 38,
+    "stage": "after-reboot",
+    "elapsed": 179.18,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 39,
+    "stage": "after-reboot",
+    "elapsed": 185.76,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 40,
+    "stage": "after-reboot",
+    "elapsed": 188.65,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 41,
+    "stage": "after-reboot",
+    "elapsed": 192.69,
+    "ocr": "Booting Nexium 0S\u201d\n"
+  },
+  {
+    "frame": 42,
+    "stage": "after-reboot",
+    "elapsed": 195.74,
+    "ocr": "Booting \u201cNexium 0S\"\n"
+  },
+  {
+    "frame": 43,
+    "stage": "after-reboot",
+    "elapsed": 198.59,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 44,
+    "stage": "after-reboot",
+    "elapsed": 202.96,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 45,
+    "stage": "after-reboot",
+    "elapsed": 205.26,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 46,
+    "stage": "after-reboot",
+    "elapsed": 207.66,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 47,
+    "stage": "after-reboot",
+    "elapsed": 209.97,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 48,
+    "stage": "after-reboot",
+    "elapsed": 212.71,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 49,
+    "stage": "after-reboot",
+    "elapsed": 214.89,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 50,
+    "stage": "after-reboot",
+    "elapsed": 217.97,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 51,
+    "stage": "after-reboot",
+    "elapsed": 221.16,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 52,
+    "stage": "after-reboot",
+    "elapsed": 223.43,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 53,
+    "stage": "after-reboot",
+    "elapsed": 231.75,
+    "ocr": "Nexium OS\n\nmade by TOMO!\n"
+  },
+  {
+    "frame": 54,
+    "stage": "after-reboot",
+    "elapsed": 233.87,
+    "ocr": ""
+  },
+  {
+    "frame": 55,
+    "stage": "after-reboot",
+    "elapsed": 235.96,
+    "ocr": ""
+  },
+  {
+    "frame": 56,
+    "stage": "after-reboot",
+    "elapsed": 238.06,
+    "ocr": ""
+  },
+  {
+    "frame": 57,
+    "stage": "after-reboot",
+    "elapsed": 240.16,
+    "ocr": ""
+  },
+  {
+    "frame": 58,
+    "stage": "after-reboot",
+    "elapsed": 242.3,
+    "ocr": ""
+  },
+  {
+    "frame": 59,
+    "stage": "after-reboot",
+    "elapsed": 244.4,
+    "ocr": ""
+  },
+  {
+    "frame": 60,
+    "stage": "after-reboot",
+    "elapsed": 246.53,
+    "ocr": "Nexium login\n\nGolden Gate\n\nLS\n\ni}\n\nEnter your password\n\nCancel Log In\n\n06:19 \u00a9\n"
+  },
+  {
+    "frame": 61,
+    "stage": "after-reboot",
+    "elapsed": 253.83,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 62,
+    "stage": "after-reboot",
+    "elapsed": 256.06,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 63,
+    "stage": "after-reboot",
+    "elapsed": 259.82,
+    "ocr": "Nexium login\n\nGolden Gate\n"
+  },
+  {
+    "frame": 64,
+    "stage": "after-reboot",
+    "elapsed": 262.16,
+    "ocr": "Thu 15 Oct 06:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 65,
+    "stage": "after-reboot",
+    "elapsed": 264.64,
+    "ocr": "Thu 15 Oct 06:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 66,
+    "stage": "after-reboot",
+    "elapsed": 269.01,
+    "ocr": "Thu 15 Oct 06:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 67,
+    "stage": "after-reboot",
+    "elapsed": 273.39,
+    "ocr": "\u20acB Thu 15 Oct 06:19\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 68,
+    "stage": "after-reboot",
+    "elapsed": 275.69,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 06:19\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 69,
+    "stage": "after-reboot",
+    "elapsed": 291.01,
+    "ocr": "\u2018Welcome to Nexium OS Thu 15 Oct 06:20\n\nAA oa N\n\nWelcome to Nexium 0S \u2014 Golden Gate desktop.\n\n4 Welcome to Nexium oS\n\nYour bottom dock opens native applications. Right-click the desktop or press Super+Space for the launcher. Super+E opens Files; Super+T opens Terminal; Alt+Tab switches windows.\nMessages, Calls and NEXIUM VAULT are coming soon, not functioning communication or package clients. Mac icons are pending actual pack files: standard fallbacks are in use.\n\nThis is a live system: without persistence, changes in HOME disappear after reboot. The session does not automatically install to or change your internal disks. Native terminal\nadministration still requires care.\n\nUse System Information in the top panel for actual system details.\n\nok\n\nNEXIUM-OS\n\nOLDEN GATE \u2018\n\n"
+  },
+  {
+    "frame": 70,
+    "stage": "dismiss-welcome",
+    "elapsed": 293.32,
+    "ocr": "\u20acB Thu 15 Oct 06:20\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 71,
+    "stage": "dismiss-welcome-clicked",
+    "elapsed": 295.49,
+    "ocr": "\u20acB Thu 15 Oct 06:20\n\nNEXIUM-OS\n\nGOLDEN GATE\n\n"
+  },
+  {
+    "frame": 72,
+    "stage": "terminal-ready",
+    "elapsed": 304.98,
+    "ocr": "e Cl Xsh @! Thu 15 Oct 06:20\nX sh - 5 x\n$ echo NEXTIUNTERMINALREADY\nNEXIUMTERMINALREADY\n$i\nLs\no & Sae8 CE\n. ; ; is\n1O} L } | | Ss || | ~ n>\n\n[Js\n\n~\u20ac LJ 2 ec\n\nThu 15 Oct 06:20\n\n-\n\no\n\nx\n\n*X sh\n\n$ echo NEXIUMTERMINALREADY\n\nBeg ATER TNACRERDY\n\n| io\n\n\u00ae\n\n&\n\n\u201cA\n\nwt\n\nhe\n\n\"|\n\n| |\n\na -~\n\nPage\n"
+  },
+  {
+    "frame": 73,
+    "stage": "post-reboot-gui",
+    "elapsed": 321.32,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\n1s python3 ~c \u2018inport urllib.req\n\nus\" )oread())\"\n\n"
+  },
+  {
+    "frame": 74,
+    "stage": "post-reboot-gui",
+    "elapsed": 323.5,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 75,
+    "stage": "post-reboot-gui",
+    "elapsed": 325.68,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 76,
+    "stage": "post-reboot-gui",
+    "elapsed": 327.86,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 77,
+    "stage": "post-reboot-gui",
+    "elapsed": 330.04,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 78,
+    "stage": "post-reboot-gui",
+    "elapsed": 332.21,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 79,
+    "stage": "post-reboot-gui",
+    "elapsed": 334.4,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 80,
+    "stage": "post-reboot-gui",
+    "elapsed": 336.58,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 81,
+    "stage": "post-reboot-gui",
+    "elapsed": 338.76,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 82,
+    "stage": "post-reboot-gui",
+    "elapsed": 340.94,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 83,
+    "stage": "post-reboot-gui",
+    "elapsed": 343.13,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 84,
+    "stage": "post-reboot-gui",
+    "elapsed": 345.31,
+    "ocr": "Thu 15 Oct 06:20\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 85,
+    "stage": "post-reboot-gui",
+    "elapsed": 347.5,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 86,
+    "stage": "post-reboot-gui",
+    "elapsed": 349.68,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 87,
+    "stage": "post-reboot-gui",
+    "elapsed": 351.86,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 88,
+    "stage": "post-reboot-gui",
+    "elapsed": 354.05,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 89,
+    "stage": "post-reboot-gui",
+    "elapsed": 356.23,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 90,
+    "stage": "post-reboot-gui",
+    "elapsed": 358.41,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 91,
+    "stage": "post-reboot-gui",
+    "elapsed": 360.6,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 92,
+    "stage": "post-reboot-gui",
+    "elapsed": 362.78,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 93,
+    "stage": "post-reboot-gui",
+    "elapsed": 364.97,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 94,
+    "stage": "post-reboot-gui",
+    "elapsed": 367.17,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 95,
+    "stage": "post-reboot-gui",
+    "elapsed": 369.36,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 96,
+    "stage": "post-reboot-gui",
+    "elapsed": 371.54,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 97,
+    "stage": "post-reboot-gui",
+    "elapsed": 373.73,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 98,
+    "stage": "post-reboot-gui",
+    "elapsed": 375.92,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 99,
+    "stage": "post-reboot-gui",
+    "elapsed": 378.11,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 100,
+    "stage": "post-reboot-gui",
+    "elapsed": 380.3,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 101,
+    "stage": "post-reboot-gui",
+    "elapsed": 382.48,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 102,
+    "stage": "post-reboot-gui",
+    "elapsed": 384.67,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 103,
+    "stage": "post-reboot-gui",
+    "elapsed": 386.87,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 104,
+    "stage": "post-reboot-gui",
+    "elapsed": 389.05,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 105,
+    "stage": "post-reboot-gui",
+    "elapsed": 391.24,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 106,
+    "stage": "post-reboot-gui",
+    "elapsed": 393.47,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 107,
+    "stage": "post-reboot-gui",
+    "elapsed": 395.65,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 108,
+    "stage": "post-reboot-gui",
+    "elapsed": 397.84,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 109,
+    "stage": "post-reboot-gui",
+    "elapsed": 400.03,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 110,
+    "stage": "post-reboot-gui",
+    "elapsed": 402.21,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 111,
+    "stage": "post-reboot-gui",
+    "elapsed": 404.4,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 112,
+    "stage": "post-reboot-gui",
+    "elapsed": 406.59,
+    "ocr": "Thu 15 Oct 06:21\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 113,
+    "stage": "post-reboot-gui",
+    "elapsed": 408.78,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 114,
+    "stage": "post-reboot-gui",
+    "elapsed": 410.96,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 115,
+    "stage": "post-reboot-gui",
+    "elapsed": 413.14,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 116,
+    "stage": "post-reboot-gui",
+    "elapsed": 415.33,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 117,
+    "stage": "post-reboot-gui",
+    "elapsed": 417.51,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 118,
+    "stage": "post-reboot-gui",
+    "elapsed": 419.7,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 119,
+    "stage": "post-reboot-gui",
+    "elapsed": 421.88,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 120,
+    "stage": "post-reboot-gui",
+    "elapsed": 424.07,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 121,
+    "stage": "post-reboot-gui",
+    "elapsed": 426.28,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 122,
+    "stage": "post-reboot-gui",
+    "elapsed": 428.47,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 123,
+    "stage": "post-reboot-gui",
+    "elapsed": 430.65,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 124,
+    "stage": "post-reboot-gui",
+    "elapsed": 432.83,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 125,
+    "stage": "post-reboot-gui",
+    "elapsed": 435.02,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 126,
+    "stage": "post-reboot-gui",
+    "elapsed": 437.2,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 127,
+    "stage": "post-reboot-gui",
+    "elapsed": 439.39,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 128,
+    "stage": "post-reboot-gui",
+    "elapsed": 441.57,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 129,
+    "stage": "post-reboot-gui",
+    "elapsed": 443.76,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 130,
+    "stage": "post-reboot-gui",
+    "elapsed": 445.94,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 131,
+    "stage": "post-reboot-gui",
+    "elapsed": 448.14,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 132,
+    "stage": "post-reboot-gui",
+    "elapsed": 450.33,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 133,
+    "stage": "post-reboot-gui",
+    "elapsed": 452.51,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 134,
+    "stage": "post-reboot-gui",
+    "elapsed": 454.69,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 135,
+    "stage": "post-reboot-gui",
+    "elapsed": 456.87,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 136,
+    "stage": "post-reboot-gui",
+    "elapsed": 459.05,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 137,
+    "stage": "post-reboot-gui",
+    "elapsed": 461.24,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 138,
+    "stage": "post-reboot-gui",
+    "elapsed": 463.41,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 139,
+    "stage": "post-reboot-gui",
+    "elapsed": 465.59,
+    "ocr": "Thu 15 Oct 06:22\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 140,
+    "stage": "post-reboot-gui",
+    "elapsed": 467.77,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 141,
+    "stage": "post-reboot-gui",
+    "elapsed": 469.95,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 142,
+    "stage": "post-reboot-gui",
+    "elapsed": 472.13,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 143,
+    "stage": "post-reboot-gui",
+    "elapsed": 474.31,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 144,
+    "stage": "post-reboot-gui",
+    "elapsed": 476.49,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 145,
+    "stage": "post-reboot-gui",
+    "elapsed": 478.67,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 146,
+    "stage": "post-reboot-gui",
+    "elapsed": 480.85,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 147,
+    "stage": "post-reboot-gui",
+    "elapsed": 483.02,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 148,
+    "stage": "post-reboot-gui",
+    "elapsed": 485.21,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 149,
+    "stage": "post-reboot-gui",
+    "elapsed": 487.39,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 150,
+    "stage": "post-reboot-gui",
+    "elapsed": 489.56,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 151,
+    "stage": "post-reboot-gui",
+    "elapsed": 491.74,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 152,
+    "stage": "post-reboot-gui",
+    "elapsed": 493.93,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 153,
+    "stage": "post-reboot-gui",
+    "elapsed": 496.11,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 154,
+    "stage": "post-reboot-gui",
+    "elapsed": 498.29,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 155,
+    "stage": "post-reboot-gui",
+    "elapsed": 500.47,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 156,
+    "stage": "post-reboot-gui",
+    "elapsed": 502.65,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 157,
+    "stage": "post-reboot-gui",
+    "elapsed": 504.82,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 158,
+    "stage": "post-reboot-gui",
+    "elapsed": 507.0,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 159,
+    "stage": "post-reboot-gui",
+    "elapsed": 509.18,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 160,
+    "stage": "post-reboot-gui",
+    "elapsed": 511.37,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 161,
+    "stage": "post-reboot-gui",
+    "elapsed": 513.54,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 162,
+    "stage": "post-reboot-gui",
+    "elapsed": 515.72,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 163,
+    "stage": "post-reboot-gui",
+    "elapsed": 517.94,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 164,
+    "stage": "post-reboot-gui",
+    "elapsed": 520.12,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 165,
+    "stage": "post-reboot-gui",
+    "elapsed": 522.3,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 166,
+    "stage": "post-reboot-gui",
+    "elapsed": 524.48,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 167,
+    "stage": "post-reboot-gui",
+    "elapsed": 526.67,
+    "ocr": "Thu 15 Oct 06:23\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 168,
+    "stage": "post-reboot-gui",
+    "elapsed": 528.85,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 169,
+    "stage": "post-reboot-gui",
+    "elapsed": 531.03,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 170,
+    "stage": "post-reboot-gui",
+    "elapsed": 533.21,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 171,
+    "stage": "post-reboot-gui",
+    "elapsed": 535.39,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 172,
+    "stage": "post-reboot-gui",
+    "elapsed": 537.57,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 173,
+    "stage": "post-reboot-gui",
+    "elapsed": 539.75,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 174,
+    "stage": "post-reboot-gui",
+    "elapsed": 541.93,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 175,
+    "stage": "post-reboot-gui",
+    "elapsed": 544.11,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 176,
+    "stage": "post-reboot-gui",
+    "elapsed": 546.3,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 177,
+    "stage": "post-reboot-gui",
+    "elapsed": 548.48,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 178,
+    "stage": "post-reboot-gui",
+    "elapsed": 550.66,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 179,
+    "stage": "post-reboot-gui",
+    "elapsed": 552.84,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 180,
+    "stage": "post-reboot-gui",
+    "elapsed": 555.02,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 181,
+    "stage": "post-reboot-gui",
+    "elapsed": 557.2,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 182,
+    "stage": "post-reboot-gui",
+    "elapsed": 559.38,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 183,
+    "stage": "post-reboot-gui",
+    "elapsed": 561.56,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 184,
+    "stage": "post-reboot-gui",
+    "elapsed": 563.74,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 185,
+    "stage": "post-reboot-gui",
+    "elapsed": 565.91,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 186,
+    "stage": "post-reboot-gui",
+    "elapsed": 568.09,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 187,
+    "stage": "post-reboot-gui",
+    "elapsed": 570.27,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 188,
+    "stage": "post-reboot-gui",
+    "elapsed": 572.45,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 189,
+    "stage": "post-reboot-gui",
+    "elapsed": 574.63,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 190,
+    "stage": "post-reboot-gui",
+    "elapsed": 576.81,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 191,
+    "stage": "post-reboot-gui",
+    "elapsed": 579.0,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 192,
+    "stage": "post-reboot-gui",
+    "elapsed": 581.17,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 193,
+    "stage": "post-reboot-gui",
+    "elapsed": 583.36,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 194,
+    "stage": "post-reboot-gui",
+    "elapsed": 585.54,
+    "ocr": "Thu 15 Oct 06:24\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 195,
+    "stage": "post-reboot-gui",
+    "elapsed": 587.71,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 196,
+    "stage": "post-reboot-gui",
+    "elapsed": 589.89,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 197,
+    "stage": "post-reboot-gui",
+    "elapsed": 592.08,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 198,
+    "stage": "post-reboot-gui",
+    "elapsed": 594.26,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 199,
+    "stage": "post-reboot-gui",
+    "elapsed": 596.43,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 200,
+    "stage": "post-reboot-gui",
+    "elapsed": 598.61,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 201,
+    "stage": "post-reboot-gui",
+    "elapsed": 600.79,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 202,
+    "stage": "post-reboot-gui",
+    "elapsed": 602.97,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 203,
+    "stage": "post-reboot-gui",
+    "elapsed": 605.15,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 204,
+    "stage": "post-reboot-gui",
+    "elapsed": 607.34,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 205,
+    "stage": "post-reboot-gui",
+    "elapsed": 609.52,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 206,
+    "stage": "post-reboot-gui",
+    "elapsed": 611.7,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 207,
+    "stage": "post-reboot-gui",
+    "elapsed": 613.88,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 208,
+    "stage": "post-reboot-gui",
+    "elapsed": 616.06,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 209,
+    "stage": "post-reboot-gui",
+    "elapsed": 618.23,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 210,
+    "stage": "post-reboot-gui",
+    "elapsed": 620.41,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 211,
+    "stage": "post-reboot-gui",
+    "elapsed": 622.59,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 212,
+    "stage": "post-reboot-gui",
+    "elapsed": 624.77,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 213,
+    "stage": "post-reboot-gui",
+    "elapsed": 626.95,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 214,
+    "stage": "post-reboot-gui",
+    "elapsed": 629.13,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 215,
+    "stage": "post-reboot-gui",
+    "elapsed": 631.31,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 216,
+    "stage": "post-reboot-gui",
+    "elapsed": 633.49,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 217,
+    "stage": "post-reboot-gui",
+    "elapsed": 635.66,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 218,
+    "stage": "post-reboot-gui",
+    "elapsed": 637.84,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 219,
+    "stage": "post-reboot-gui",
+    "elapsed": 640.02,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 220,
+    "stage": "post-reboot-gui",
+    "elapsed": 642.2,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 221,
+    "stage": "post-reboot-gui",
+    "elapsed": 644.38,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 222,
+    "stage": "post-reboot-gui",
+    "elapsed": 646.57,
+    "ocr": "Thu 15 Oct 06:25\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 223,
+    "stage": "post-reboot-gui",
+    "elapsed": 648.74,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 224,
+    "stage": "post-reboot-gui",
+    "elapsed": 650.92,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 225,
+    "stage": "post-reboot-gui",
+    "elapsed": 653.1,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 226,
+    "stage": "post-reboot-gui",
+    "elapsed": 655.28,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 227,
+    "stage": "post-reboot-gui",
+    "elapsed": 657.46,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 228,
+    "stage": "post-reboot-gui",
+    "elapsed": 659.64,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 229,
+    "stage": "post-reboot-gui",
+    "elapsed": 661.82,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 230,
+    "stage": "post-reboot-gui",
+    "elapsed": 664.0,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 231,
+    "stage": "post-reboot-gui",
+    "elapsed": 666.21,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 232,
+    "stage": "post-reboot-gui",
+    "elapsed": 668.4,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 233,
+    "stage": "post-reboot-gui",
+    "elapsed": 670.58,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 234,
+    "stage": "post-reboot-gui",
+    "elapsed": 672.75,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 235,
+    "stage": "post-reboot-gui",
+    "elapsed": 674.93,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 236,
+    "stage": "post-reboot-gui",
+    "elapsed": 677.11,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 237,
+    "stage": "post-reboot-gui",
+    "elapsed": 679.3,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 238,
+    "stage": "post-reboot-gui",
+    "elapsed": 681.48,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 239,
+    "stage": "post-reboot-gui",
+    "elapsed": 683.66,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 240,
+    "stage": "post-reboot-gui",
+    "elapsed": 685.84,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 241,
+    "stage": "post-reboot-gui",
+    "elapsed": 688.02,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 242,
+    "stage": "post-reboot-gui",
+    "elapsed": 690.2,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 243,
+    "stage": "post-reboot-gui",
+    "elapsed": 692.38,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 244,
+    "stage": "post-reboot-gui",
+    "elapsed": 694.55,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 245,
+    "stage": "post-reboot-gui",
+    "elapsed": 696.73,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 246,
+    "stage": "post-reboot-gui",
+    "elapsed": 698.92,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 247,
+    "stage": "post-reboot-gui",
+    "elapsed": 701.1,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 248,
+    "stage": "post-reboot-gui",
+    "elapsed": 703.27,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 249,
+    "stage": "post-reboot-gui",
+    "elapsed": 705.45,
+    "ocr": "Thu 15 Oct 06:26\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 250,
+    "stage": "post-reboot-gui",
+    "elapsed": 707.64,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 251,
+    "stage": "post-reboot-gui",
+    "elapsed": 709.81,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 252,
+    "stage": "post-reboot-gui",
+    "elapsed": 711.99,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 253,
+    "stage": "post-reboot-gui",
+    "elapsed": 714.18,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 254,
+    "stage": "post-reboot-gui",
+    "elapsed": 716.35,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 255,
+    "stage": "post-reboot-gui",
+    "elapsed": 718.53,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 256,
+    "stage": "post-reboot-gui",
+    "elapsed": 720.71,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 257,
+    "stage": "post-reboot-gui",
+    "elapsed": 722.89,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 258,
+    "stage": "post-reboot-gui",
+    "elapsed": 725.08,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 259,
+    "stage": "post-reboot-gui",
+    "elapsed": 727.26,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 260,
+    "stage": "post-reboot-gui",
+    "elapsed": 729.44,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 261,
+    "stage": "post-reboot-gui",
+    "elapsed": 731.62,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 262,
+    "stage": "post-reboot-gui",
+    "elapsed": 733.8,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 263,
+    "stage": "post-reboot-gui",
+    "elapsed": 735.99,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 264,
+    "stage": "post-reboot-gui",
+    "elapsed": 738.16,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 265,
+    "stage": "post-reboot-gui",
+    "elapsed": 740.35,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 266,
+    "stage": "post-reboot-gui",
+    "elapsed": 742.53,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 267,
+    "stage": "post-reboot-gui",
+    "elapsed": 744.71,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 268,
+    "stage": "post-reboot-gui",
+    "elapsed": 746.89,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 269,
+    "stage": "post-reboot-gui",
+    "elapsed": 749.07,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 270,
+    "stage": "post-reboot-gui",
+    "elapsed": 751.25,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 271,
+    "stage": "post-reboot-gui",
+    "elapsed": 753.43,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 272,
+    "stage": "post-reboot-gui",
+    "elapsed": 755.62,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 273,
+    "stage": "post-reboot-gui",
+    "elapsed": 757.8,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 274,
+    "stage": "post-reboot-gui",
+    "elapsed": 759.98,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 275,
+    "stage": "post-reboot-gui",
+    "elapsed": 762.16,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 276,
+    "stage": "post-reboot-gui",
+    "elapsed": 764.37,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 277,
+    "stage": "post-reboot-gui",
+    "elapsed": 766.56,
+    "ocr": "Thu 15 Oct 06:27\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 278,
+    "stage": "post-reboot-gui",
+    "elapsed": 768.74,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 279,
+    "stage": "post-reboot-gui",
+    "elapsed": 770.92,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 280,
+    "stage": "post-reboot-gui",
+    "elapsed": 773.1,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 281,
+    "stage": "post-reboot-gui",
+    "elapsed": 775.28,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 282,
+    "stage": "post-reboot-gui",
+    "elapsed": 777.46,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 283,
+    "stage": "post-reboot-gui",
+    "elapsed": 779.64,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 284,
+    "stage": "post-reboot-gui",
+    "elapsed": 781.81,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 285,
+    "stage": "post-reboot-gui",
+    "elapsed": 783.99,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 286,
+    "stage": "post-reboot-gui",
+    "elapsed": 786.18,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 287,
+    "stage": "post-reboot-gui",
+    "elapsed": 788.37,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 288,
+    "stage": "post-reboot-gui",
+    "elapsed": 790.55,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 289,
+    "stage": "post-reboot-gui",
+    "elapsed": 792.73,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 290,
+    "stage": "post-reboot-gui",
+    "elapsed": 794.91,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 291,
+    "stage": "post-reboot-gui",
+    "elapsed": 797.09,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 292,
+    "stage": "post-reboot-gui",
+    "elapsed": 799.27,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 293,
+    "stage": "post-reboot-gui",
+    "elapsed": 801.45,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 294,
+    "stage": "post-reboot-gui",
+    "elapsed": 803.63,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 295,
+    "stage": "post-reboot-gui",
+    "elapsed": 805.81,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 296,
+    "stage": "post-reboot-gui",
+    "elapsed": 807.99,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 297,
+    "stage": "post-reboot-gui",
+    "elapsed": 810.17,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 298,
+    "stage": "post-reboot-gui",
+    "elapsed": 812.35,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 299,
+    "stage": "post-reboot-gui",
+    "elapsed": 814.54,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 300,
+    "stage": "post-reboot-gui",
+    "elapsed": 816.71,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 301,
+    "stage": "post-reboot-gui",
+    "elapsed": 818.89,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 302,
+    "stage": "post-reboot-gui",
+    "elapsed": 821.08,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 303,
+    "stage": "post-reboot-gui",
+    "elapsed": 823.26,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 304,
+    "stage": "post-reboot-gui",
+    "elapsed": 825.43,
+    "ocr": "Thu 15 Oct 06:28\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 305,
+    "stage": "post-reboot-gui",
+    "elapsed": 827.61,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 306,
+    "stage": "post-reboot-gui",
+    "elapsed": 829.79,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 307,
+    "stage": "post-reboot-gui",
+    "elapsed": 831.97,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 308,
+    "stage": "post-reboot-gui",
+    "elapsed": 834.15,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 309,
+    "stage": "post-reboot-gui",
+    "elapsed": 836.33,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 310,
+    "stage": "post-reboot-gui",
+    "elapsed": 838.51,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 311,
+    "stage": "post-reboot-gui",
+    "elapsed": 840.7,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 312,
+    "stage": "post-reboot-gui",
+    "elapsed": 842.88,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 313,
+    "stage": "post-reboot-gui",
+    "elapsed": 845.06,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 314,
+    "stage": "post-reboot-gui",
+    "elapsed": 847.24,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 315,
+    "stage": "post-reboot-gui",
+    "elapsed": 849.42,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 316,
+    "stage": "post-reboot-gui",
+    "elapsed": 851.59,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 317,
+    "stage": "post-reboot-gui",
+    "elapsed": 853.77,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 318,
+    "stage": "post-reboot-gui",
+    "elapsed": 855.95,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 319,
+    "stage": "post-reboot-gui",
+    "elapsed": 858.13,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 320,
+    "stage": "post-reboot-gui",
+    "elapsed": 860.32,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 321,
+    "stage": "post-reboot-gui",
+    "elapsed": 862.5,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 322,
+    "stage": "post-reboot-gui",
+    "elapsed": 864.68,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 323,
+    "stage": "post-reboot-gui",
+    "elapsed": 866.86,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 324,
+    "stage": "post-reboot-gui",
+    "elapsed": 869.04,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 325,
+    "stage": "post-reboot-gui",
+    "elapsed": 871.22,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 326,
+    "stage": "post-reboot-gui",
+    "elapsed": 873.4,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 327,
+    "stage": "post-reboot-gui",
+    "elapsed": 875.58,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 328,
+    "stage": "post-reboot-gui",
+    "elapsed": 877.76,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 329,
+    "stage": "post-reboot-gui",
+    "elapsed": 879.94,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 330,
+    "stage": "post-reboot-gui",
+    "elapsed": 882.12,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 331,
+    "stage": "post-reboot-gui",
+    "elapsed": 884.3,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 332,
+    "stage": "post-reboot-gui",
+    "elapsed": 886.49,
+    "ocr": "Thu 15 Oct 06:29\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 333,
+    "stage": "post-reboot-gui",
+    "elapsed": 888.67,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 334,
+    "stage": "post-reboot-gui",
+    "elapsed": 890.85,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 335,
+    "stage": "post-reboot-gui",
+    "elapsed": 893.03,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 336,
+    "stage": "post-reboot-gui",
+    "elapsed": 895.21,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 337,
+    "stage": "post-reboot-gui",
+    "elapsed": 897.39,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 338,
+    "stage": "post-reboot-gui",
+    "elapsed": 899.57,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 339,
+    "stage": "post-reboot-gui",
+    "elapsed": 901.75,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 340,
+    "stage": "post-reboot-gui",
+    "elapsed": 903.92,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 341,
+    "stage": "post-reboot-gui",
+    "elapsed": 906.1,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 342,
+    "stage": "post-reboot-gui",
+    "elapsed": 908.28,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 343,
+    "stage": "post-reboot-gui",
+    "elapsed": 910.46,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 344,
+    "stage": "post-reboot-gui",
+    "elapsed": 912.64,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 345,
+    "stage": "post-reboot-gui",
+    "elapsed": 914.82,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 346,
+    "stage": "post-reboot-gui",
+    "elapsed": 917.0,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 347,
+    "stage": "post-reboot-gui",
+    "elapsed": 919.18,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 348,
+    "stage": "post-reboot-gui",
+    "elapsed": 921.36,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 349,
+    "stage": "post-reboot-gui",
+    "elapsed": 923.55,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 350,
+    "stage": "post-reboot-gui",
+    "elapsed": 925.73,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 351,
+    "stage": "post-reboot-gui",
+    "elapsed": 927.91,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 352,
+    "stage": "post-reboot-gui",
+    "elapsed": 930.09,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 353,
+    "stage": "post-reboot-gui",
+    "elapsed": 932.27,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 354,
+    "stage": "post-reboot-gui",
+    "elapsed": 934.46,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 355,
+    "stage": "post-reboot-gui",
+    "elapsed": 936.64,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 356,
+    "stage": "post-reboot-gui",
+    "elapsed": 938.82,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 357,
+    "stage": "post-reboot-gui",
+    "elapsed": 941.0,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 358,
+    "stage": "post-reboot-gui",
+    "elapsed": 943.2,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 359,
+    "stage": "post-reboot-gui",
+    "elapsed": 945.38,
+    "ocr": "Thu 15 Oct 06:30\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 360,
+    "stage": "post-reboot-gui",
+    "elapsed": 947.56,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 361,
+    "stage": "post-reboot-gui",
+    "elapsed": 949.74,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 362,
+    "stage": "post-reboot-gui",
+    "elapsed": 951.92,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 363,
+    "stage": "post-reboot-gui",
+    "elapsed": 954.1,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 364,
+    "stage": "post-reboot-gui",
+    "elapsed": 956.28,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 365,
+    "stage": "post-reboot-gui",
+    "elapsed": 958.47,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 366,
+    "stage": "post-reboot-gui",
+    "elapsed": 960.65,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 367,
+    "stage": "post-reboot-gui",
+    "elapsed": 962.83,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 368,
+    "stage": "post-reboot-gui",
+    "elapsed": 965.01,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 369,
+    "stage": "post-reboot-gui",
+    "elapsed": 967.19,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 370,
+    "stage": "post-reboot-gui",
+    "elapsed": 969.37,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 371,
+    "stage": "post-reboot-gui",
+    "elapsed": 971.55,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 372,
+    "stage": "post-reboot-gui",
+    "elapsed": 973.73,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 373,
+    "stage": "post-reboot-gui",
+    "elapsed": 975.91,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 374,
+    "stage": "post-reboot-gui",
+    "elapsed": 978.09,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 375,
+    "stage": "post-reboot-gui",
+    "elapsed": 980.27,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 376,
+    "stage": "post-reboot-gui",
+    "elapsed": 982.45,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 377,
+    "stage": "post-reboot-gui",
+    "elapsed": 984.63,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 378,
+    "stage": "post-reboot-gui",
+    "elapsed": 986.81,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 379,
+    "stage": "post-reboot-gui",
+    "elapsed": 988.99,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 380,
+    "stage": "post-reboot-gui",
+    "elapsed": 991.17,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 381,
+    "stage": "post-reboot-gui",
+    "elapsed": 993.35,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 382,
+    "stage": "post-reboot-gui",
+    "elapsed": 995.53,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 383,
+    "stage": "post-reboot-gui",
+    "elapsed": 997.71,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 384,
+    "stage": "post-reboot-gui",
+    "elapsed": 999.89,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 385,
+    "stage": "post-reboot-gui",
+    "elapsed": 1002.07,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 386,
+    "stage": "post-reboot-gui",
+    "elapsed": 1004.25,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 387,
+    "stage": "post-reboot-gui",
+    "elapsed": 1006.44,
+    "ocr": "Thu 15 Oct 06:31\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 388,
+    "stage": "post-reboot-gui",
+    "elapsed": 1008.62,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 389,
+    "stage": "post-reboot-gui",
+    "elapsed": 1010.8,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 390,
+    "stage": "post-reboot-gui",
+    "elapsed": 1012.98,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 391,
+    "stage": "post-reboot-gui",
+    "elapsed": 1015.16,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 392,
+    "stage": "post-reboot-gui",
+    "elapsed": 1017.34,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 393,
+    "stage": "post-reboot-gui",
+    "elapsed": 1019.52,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 394,
+    "stage": "post-reboot-gui",
+    "elapsed": 1021.7,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 395,
+    "stage": "post-reboot-gui",
+    "elapsed": 1023.88,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 396,
+    "stage": "post-reboot-gui",
+    "elapsed": 1026.06,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 397,
+    "stage": "post-reboot-gui",
+    "elapsed": 1028.24,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 398,
+    "stage": "post-reboot-gui",
+    "elapsed": 1030.42,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 399,
+    "stage": "post-reboot-gui",
+    "elapsed": 1032.6,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 400,
+    "stage": "post-reboot-gui",
+    "elapsed": 1034.78,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 401,
+    "stage": "post-reboot-gui",
+    "elapsed": 1036.96,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 402,
+    "stage": "post-reboot-gui",
+    "elapsed": 1039.14,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 403,
+    "stage": "post-reboot-gui",
+    "elapsed": 1041.32,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 404,
+    "stage": "post-reboot-gui",
+    "elapsed": 1043.5,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 405,
+    "stage": "post-reboot-gui",
+    "elapsed": 1045.67,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 406,
+    "stage": "post-reboot-gui",
+    "elapsed": 1047.85,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 407,
+    "stage": "post-reboot-gui",
+    "elapsed": 1050.03,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 408,
+    "stage": "post-reboot-gui",
+    "elapsed": 1052.21,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 409,
+    "stage": "post-reboot-gui",
+    "elapsed": 1054.38,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 410,
+    "stage": "post-reboot-gui",
+    "elapsed": 1056.56,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 411,
+    "stage": "post-reboot-gui",
+    "elapsed": 1058.74,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 412,
+    "stage": "post-reboot-gui",
+    "elapsed": 1060.93,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 413,
+    "stage": "post-reboot-gui",
+    "elapsed": 1063.11,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 414,
+    "stage": "post-reboot-gui",
+    "elapsed": 1065.29,
+    "ocr": "Thu 15 Oct 06:32\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 415,
+    "stage": "post-reboot-gui",
+    "elapsed": 1067.47,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 416,
+    "stage": "post-reboot-gui",
+    "elapsed": 1069.67,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 417,
+    "stage": "post-reboot-gui",
+    "elapsed": 1071.85,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 418,
+    "stage": "post-reboot-gui",
+    "elapsed": 1074.03,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 419,
+    "stage": "post-reboot-gui",
+    "elapsed": 1076.22,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 420,
+    "stage": "post-reboot-gui",
+    "elapsed": 1078.4,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 421,
+    "stage": "post-reboot-gui",
+    "elapsed": 1080.58,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 422,
+    "stage": "post-reboot-gui",
+    "elapsed": 1082.76,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 423,
+    "stage": "post-reboot-gui",
+    "elapsed": 1084.94,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 424,
+    "stage": "post-reboot-gui",
+    "elapsed": 1087.12,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 425,
+    "stage": "post-reboot-gui",
+    "elapsed": 1089.3,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 426,
+    "stage": "post-reboot-gui",
+    "elapsed": 1091.48,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 427,
+    "stage": "post-reboot-gui",
+    "elapsed": 1093.66,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 428,
+    "stage": "post-reboot-gui",
+    "elapsed": 1095.84,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 429,
+    "stage": "post-reboot-gui",
+    "elapsed": 1098.02,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 430,
+    "stage": "post-reboot-gui",
+    "elapsed": 1100.2,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 431,
+    "stage": "post-reboot-gui",
+    "elapsed": 1102.38,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 432,
+    "stage": "post-reboot-gui",
+    "elapsed": 1104.59,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 433,
+    "stage": "post-reboot-gui",
+    "elapsed": 1106.78,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 434,
+    "stage": "post-reboot-gui",
+    "elapsed": 1108.96,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 435,
+    "stage": "post-reboot-gui",
+    "elapsed": 1111.15,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 436,
+    "stage": "post-reboot-gui",
+    "elapsed": 1113.33,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 437,
+    "stage": "post-reboot-gui",
+    "elapsed": 1115.51,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 438,
+    "stage": "post-reboot-gui",
+    "elapsed": 1117.69,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 439,
+    "stage": "post-reboot-gui",
+    "elapsed": 1119.87,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 440,
+    "stage": "post-reboot-gui",
+    "elapsed": 1122.05,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 441,
+    "stage": "post-reboot-gui",
+    "elapsed": 1124.23,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 442,
+    "stage": "post-reboot-gui",
+    "elapsed": 1126.41,
+    "ocr": "Thu 15 Oct 06:33\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 443,
+    "stage": "post-reboot-gui",
+    "elapsed": 1128.59,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 444,
+    "stage": "post-reboot-gui",
+    "elapsed": 1130.76,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 445,
+    "stage": "post-reboot-gui",
+    "elapsed": 1132.94,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 446,
+    "stage": "post-reboot-gui",
+    "elapsed": 1135.12,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 447,
+    "stage": "post-reboot-gui",
+    "elapsed": 1137.3,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 448,
+    "stage": "post-reboot-gui",
+    "elapsed": 1139.48,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 449,
+    "stage": "post-reboot-gui",
+    "elapsed": 1141.66,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 450,
+    "stage": "post-reboot-gui",
+    "elapsed": 1143.84,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 451,
+    "stage": "post-reboot-gui",
+    "elapsed": 1146.02,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 452,
+    "stage": "post-reboot-gui",
+    "elapsed": 1148.2,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 453,
+    "stage": "post-reboot-gui",
+    "elapsed": 1150.38,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 454,
+    "stage": "post-reboot-gui",
+    "elapsed": 1152.56,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 455,
+    "stage": "post-reboot-gui",
+    "elapsed": 1154.74,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 456,
+    "stage": "post-reboot-gui",
+    "elapsed": 1156.92,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 457,
+    "stage": "post-reboot-gui",
+    "elapsed": 1159.1,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 458,
+    "stage": "post-reboot-gui",
+    "elapsed": 1161.28,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 459,
+    "stage": "post-reboot-gui",
+    "elapsed": 1163.46,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 460,
+    "stage": "post-reboot-gui",
+    "elapsed": 1165.64,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 461,
+    "stage": "post-reboot-gui",
+    "elapsed": 1167.81,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 462,
+    "stage": "post-reboot-gui",
+    "elapsed": 1169.99,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 463,
+    "stage": "post-reboot-gui",
+    "elapsed": 1172.16,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 464,
+    "stage": "post-reboot-gui",
+    "elapsed": 1174.34,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 465,
+    "stage": "post-reboot-gui",
+    "elapsed": 1176.51,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 466,
+    "stage": "post-reboot-gui",
+    "elapsed": 1178.69,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 467,
+    "stage": "post-reboot-gui",
+    "elapsed": 1180.86,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 468,
+    "stage": "post-reboot-gui",
+    "elapsed": 1183.04,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 469,
+    "stage": "post-reboot-gui",
+    "elapsed": 1185.21,
+    "ocr": "Thu 15 Oct 06:34\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 470,
+    "stage": "post-reboot-gui",
+    "elapsed": 1187.38,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 471,
+    "stage": "post-reboot-gui",
+    "elapsed": 1189.56,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 472,
+    "stage": "post-reboot-gui",
+    "elapsed": 1191.74,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 473,
+    "stage": "post-reboot-gui",
+    "elapsed": 1193.91,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 474,
+    "stage": "post-reboot-gui",
+    "elapsed": 1196.08,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 475,
+    "stage": "post-reboot-gui",
+    "elapsed": 1198.26,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 476,
+    "stage": "post-reboot-gui",
+    "elapsed": 1200.44,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 477,
+    "stage": "post-reboot-gui",
+    "elapsed": 1202.61,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 478,
+    "stage": "post-reboot-gui",
+    "elapsed": 1204.79,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 479,
+    "stage": "post-reboot-gui",
+    "elapsed": 1206.96,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 480,
+    "stage": "post-reboot-gui",
+    "elapsed": 1209.14,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 481,
+    "stage": "post-reboot-gui",
+    "elapsed": 1211.32,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 482,
+    "stage": "post-reboot-gui",
+    "elapsed": 1213.49,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 483,
+    "stage": "post-reboot-gui",
+    "elapsed": 1215.67,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 484,
+    "stage": "post-reboot-gui",
+    "elapsed": 1217.85,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 485,
+    "stage": "post-reboot-gui",
+    "elapsed": 1220.03,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 486,
+    "stage": "post-reboot-gui",
+    "elapsed": 1222.2,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 487,
+    "stage": "post-reboot-gui",
+    "elapsed": 1224.38,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 488,
+    "stage": "post-reboot-gui",
+    "elapsed": 1226.56,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 489,
+    "stage": "post-reboot-gui",
+    "elapsed": 1228.73,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 490,
+    "stage": "post-reboot-gui",
+    "elapsed": 1230.9,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 491,
+    "stage": "post-reboot-gui",
+    "elapsed": 1233.08,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 492,
+    "stage": "post-reboot-gui",
+    "elapsed": 1235.25,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 493,
+    "stage": "post-reboot-gui",
+    "elapsed": 1237.45,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 494,
+    "stage": "post-reboot-gui",
+    "elapsed": 1239.63,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 495,
+    "stage": "post-reboot-gui",
+    "elapsed": 1241.81,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 496,
+    "stage": "post-reboot-gui",
+    "elapsed": 1243.99,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 497,
+    "stage": "post-reboot-gui",
+    "elapsed": 1246.16,
+    "ocr": "Thu 15 Oct 06:35\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 498,
+    "stage": "post-reboot-gui",
+    "elapsed": 1248.33,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 499,
+    "stage": "post-reboot-gui",
+    "elapsed": 1250.5,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 500,
+    "stage": "post-reboot-gui",
+    "elapsed": 1252.68,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 501,
+    "stage": "post-reboot-gui",
+    "elapsed": 1254.85,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 502,
+    "stage": "post-reboot-gui",
+    "elapsed": 1257.02,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 503,
+    "stage": "post-reboot-gui",
+    "elapsed": 1259.2,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 504,
+    "stage": "post-reboot-gui",
+    "elapsed": 1261.37,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 505,
+    "stage": "post-reboot-gui",
+    "elapsed": 1263.54,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 506,
+    "stage": "post-reboot-gui",
+    "elapsed": 1265.72,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 507,
+    "stage": "post-reboot-gui",
+    "elapsed": 1267.89,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 508,
+    "stage": "post-reboot-gui",
+    "elapsed": 1270.06,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 509,
+    "stage": "post-reboot-gui",
+    "elapsed": 1272.23,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 510,
+    "stage": "post-reboot-gui",
+    "elapsed": 1274.4,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 511,
+    "stage": "post-reboot-gui",
+    "elapsed": 1276.57,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 512,
+    "stage": "post-reboot-gui",
+    "elapsed": 1278.75,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 513,
+    "stage": "post-reboot-gui",
+    "elapsed": 1280.93,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 514,
+    "stage": "post-reboot-gui",
+    "elapsed": 1283.1,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 515,
+    "stage": "post-reboot-gui",
+    "elapsed": 1285.27,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 516,
+    "stage": "post-reboot-gui",
+    "elapsed": 1287.45,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 517,
+    "stage": "post-reboot-gui",
+    "elapsed": 1289.62,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 518,
+    "stage": "post-reboot-gui",
+    "elapsed": 1291.8,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 519,
+    "stage": "post-reboot-gui",
+    "elapsed": 1293.97,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 520,
+    "stage": "post-reboot-gui",
+    "elapsed": 1296.15,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 521,
+    "stage": "post-reboot-gui",
+    "elapsed": 1298.32,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 522,
+    "stage": "post-reboot-gui",
+    "elapsed": 1300.49,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  },
+  {
+    "frame": 523,
+    "stage": "final",
+    "elapsed": 1302.67,
+    "ocr": "Thu 15 Oct 06:36\n\nNEXIUMTERNINALREALY\nNEXTUNTERNINALREADY\nIS python\u2019 ~c \u2018import urllib.real\n\n"
+  }
+]
