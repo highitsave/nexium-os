@@ -45,7 +45,7 @@ jobs:
           \t\techo "$ssd" > .build/start-stop-daemon.path
           '''
           remove = '''\t\t# Restore only the recorded diversion; never delete its saved executable.
-          \t\tssd="$(cat .build/start-stop-daemon.path)"
+          \t\tif [ -f .build/start-stop-daemon.path ]; then ssd="$(cat .build/start-stop-daemon.path)"
           \t\tcase "$ssd" in
           \t\t\t/sbin/start-stop-daemon|/usr/sbin/start-stop-daemon) ;;
           \t\t\t*) Echo_error "Invalid saved start-stop-daemon path"; exit 1 ;;
@@ -58,9 +58,9 @@ jobs:
           \t\t\tEcho_error "Refusing to remove an unverified start-stop-daemon shim"
           \t\t\texit 1
           \t\tfi
-          \t\trm "chroot$ssd"
-          \t\tChroot chroot dpkg-divert --rename --quiet --remove "$ssd"
-          \t\trm .build/start-stop-daemon.path
+          \t\trm "chroot$ssd" || true
+          \t\tChroot chroot dpkg-divert --rename --quiet --remove "$ssd" || true
+          \t\trm -f .build/start-stop-daemon.path || true; fi
           '''
           patched = original
           for start, end, replacement, expected in (
