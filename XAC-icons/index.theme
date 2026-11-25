@@ -1,0 +1,11 @@
+[Icon Theme]
+Name=XAC-icons
+Comment=Original XAC Golden Gate cream and gold squircle icons
+Inherits=hicolor
+Directories=scalable/apps
+
+[scalable/apps]
+Size=128
+Type=Scalable
+MinSize=16
+MaxSize=512
