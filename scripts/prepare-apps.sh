@@ -130,7 +130,7 @@ fi
 apt-cache policy firefox-esr firefox chromium chromium-browser > reports/browser-origins.txt
 apt-cache show firefox chromium-browser >> reports/browser-origins.txt 2>/dev/null || true
 resolve chromium || true
-for pkg in librewolf brave-browser telegram-desktop signal-desktop element-desktop network-manager openssh-client xorg xdg-utils; do
+for pkg in librewolf brave-browser telegram-desktop  network-manager openssh-client xorg xdg-utils; do
   resolve "$pkg" || true
 done
 
