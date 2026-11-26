@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg
+      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg isolinux syslinux-common
       - name: Repair the live-build start-stop-daemon diversion
         run: |
           sudo python3 - <<'PY'
@@ -121,7 +121,7 @@ jobs:
           script.write_text(patched)
           print('Diversion repair applied; shell syntax and merged-/usr safety tests passed.')
           PY
-      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false --memtest false --syslinux-theme live-build && test "$(grep -c 'tar xfz .*gfxboot-theme-ubuntu' /usr/lib/live/build/lb_binary_syslinux)" -eq 2 && sudo sed -i '/tar xfz .*gfxboot-theme-ubuntu/s/.*tar xfz.*/                :/' /usr/lib/live/build/lb_binary_syslinux && sh -n /usr/lib/live/build/lb_binary_syslinux
+      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false --memtest false --syslinux-theme live-build && test "$(grep -c 'tar xfz .*gfxboot-theme-ubuntu' /usr/lib/live/build/lb_binary_syslinux)" -eq 2 && sudo sed -i '/tar xfz .*gfxboot-theme-ubuntu/s/.*tar xfz.*/                :/' /usr/lib/live/build/lb_binary_syslinux && sh -n /usr/lib/live/build/lb_binary_syslinux && sudo rm -f /usr/share/live/build/bootloaders/isolinux/isolinux.bin /usr/share/live/build/bootloaders/isolinux/vesamenu.c32 && sudo install -m 644 /usr/lib/ISOLINUX/isolinux.bin /usr/share/live/build/bootloaders/isolinux/isolinux.bin && sudo install -m 644 /usr/lib/syslinux/modules/bios/vesamenu.c32 /usr/share/live/build/bootloaders/isolinux/vesamenu.c32
       - run: printf 'LB_BOOTSTRAP_INCLUDE="gnupg"\n' >> config/bootstrap
       - name: Keep signature tooling installed inside the build chroot
         run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot && echo initramfs-tools >> config/package-lists/nexium-build-tools.list.chroot
