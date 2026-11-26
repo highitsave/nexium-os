@@ -1,0 +1,45 @@
+name: Stage verified Nexium ISO
+on:
+  workflow_run:
+    workflows: [Build Nexium ISO]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Build Nexium ISO run ID
+        required: true
+        type: string
+permissions:
+  actions: read
+  contents: write
+jobs:
+  stage:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RUN_ID: ${{ inputs.run_id || github.event.workflow_run.id }}
+    steps:
+      - name: Verify successful build and stage downloadable ISO
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          info=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID")
+          echo "$info" | jq -e '.name == "Build Nexium ISO" and .head_branch == "main" and .status == "completed" and .conclusion == "success"' >/dev/null
+          head_sha=$(echo "$info" | jq -r .head_sha)
+          mkdir iso
+          gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name nexium-iso --dir iso
+          cd iso
+          file=live-image-amd64.hybrid.iso
+          test -f "$file"
+          size=$(stat -c '%s' "$file")
+          test "$size" -gt 0 && test "$size" -lt 1000000000
+          sha256sum "$file" | tee SHA256SUMS
+          printf '%s\n' "$size" | tee ISO_SIZE_BYTES
+          tag="transfer-$RUN_ID"
+          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$head_sha" --prerelease --title "Temporary ISO transfer $RUN_ID" --notes "Verified ISO from successful Build Nexium ISO run $RUN_ID."
+          fi
+          gh release upload "$tag" "$file" SHA256SUMS ISO_SIZE_BYTES --repo "$GITHUB_REPOSITORY" --clobber
