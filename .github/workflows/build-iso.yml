@@ -121,10 +121,10 @@ jobs:
           script.write_text(patched)
           print('Diversion repair applied; shell syntax and merged-/usr safety tests passed.')
           PY
-      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false --memtest false --bootloaders grub-efi
+      - run: lb config --mode ubuntu --distribution jammy --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe" --linux-flavours generic --linux-packages "linux-image" --initramfs casper --apt-recommends false --memtest false --syslinux-theme live-build && test "$(grep -c 'tar xfz .*gfxboot-theme-ubuntu' /usr/lib/live/build/lb_binary_syslinux)" -eq 2 && sudo sed -i '/tar xfz .*gfxboot-theme-ubuntu/s/.*tar xfz.*/                :/' /usr/lib/live/build/lb_binary_syslinux && sh -n /usr/lib/live/build/lb_binary_syslinux
       - run: printf 'LB_BOOTSTRAP_INCLUDE="gnupg"\n' >> config/bootstrap
       - name: Keep signature tooling installed inside the build chroot
-        run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot
+        run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot && echo initramfs-tools >> config/package-lists/nexium-build-tools.list.chroot
       - name: Resolve and prepare the app set for Ubuntu jammy
         run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
       - name: Prepare binary vendor keyrings for the build chroot
