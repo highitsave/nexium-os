@@ -1,9 +1,5 @@
 name: Stage verified Nexium ISO
 on:
-  workflow_run:
-    workflows: [Build Nexium ISO]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       run_id:
