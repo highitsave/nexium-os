@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg isolinux syslinux-common
+      - run: sudo apt-get update && sudo apt-get install -y live-build gnupg isolinux syslinux-common syslinux-utils xorriso
       - name: Repair the live-build start-stop-daemon diversion
         run: |
           sudo python3 - <<'PY'
@@ -126,7 +126,7 @@ jobs:
       - name: Keep signature tooling installed inside the build chroot
         run: printf 'gnupg\n' > config/package-lists/nexium-build-tools.list.chroot && echo initramfs-tools >> config/package-lists/nexium-build-tools.list.chroot
       - name: Resolve and prepare the app set for Ubuntu jammy
-        run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh
+        run: docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash scripts/prepare-apps.sh && sudo sed -i '/^\(chromium\|librewolf\|brave-browser\|telegram-desktop\)$/d' config/package-lists/nexium-apps.list.chroot && sudo rm -f config/packages.chroot/discord.deb config/packages.chroot/ungoogled-chromium.deb && cat config/package-lists/nexium-apps.list.chroot
       - name: Prepare binary vendor keyrings for the build chroot
         run: |
           sudo bash <<'SH'
@@ -209,7 +209,7 @@ jobs:
             test ! -e .build/start-stop-daemon.path
             echo 'Nexium chroot validation passed: archives install, hacks, archives remove, dpkg remove.'
           else
-            sudo lb build
+            sudo lb build && iso=live-image-amd64.hybrid.iso && test -f "$iso" && size=$(stat -c %s "$iso") && echo "ISO bytes $size" && test "$size" -lt 1000000000 && sha256sum "$iso"
           fi
       - uses: actions/upload-artifact@v4
         if: ${{ !inputs.validate_only }}
