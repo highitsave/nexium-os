@@ -209,7 +209,7 @@ jobs:
             test ! -e .build/start-stop-daemon.path
             echo 'Nexium chroot validation passed: archives install, hacks, archives remove, dpkg remove.'
           else
-            sudo lb build && iso=live-image-amd64.hybrid.iso && test -f "$iso" && size=$(stat -c %s "$iso") && echo "ISO bytes $size" && test "$size" -lt 1000000000 && sha256sum "$iso"
+            test "$(grep -c 'MKSQUASHFS_OPTIONS=.*-no-progress' /usr/lib/live/build/lb_binary_rootfs)" -eq 1 && sudo sed -i '/MKSQUASHFS_OPTIONS=.*-no-progress/a\MKSQUASHFS_OPTIONS="${MKSQUASHFS_OPTIONS} -comp xz"' /usr/lib/live/build/lb_binary_rootfs && sh -n /usr/lib/live/build/lb_binary_rootfs && sudo lb build && sudo mv binary.hybrid.iso live-image-amd64.hybrid.iso && iso=live-image-amd64.hybrid.iso && test -f "$iso" && size=$(stat -c %s "$iso") && echo "ISO bytes $size" && test "$size" -lt 1000000000 && sha256sum "$iso"
           fi
       - uses: actions/upload-artifact@v4
         if: ${{ !inputs.validate_only }}
